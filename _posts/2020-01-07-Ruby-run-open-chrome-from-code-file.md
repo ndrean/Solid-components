@@ -12,6 +12,10 @@ a_string = my_result.to_s
 File.open("a_string.html", "w") { |file| file.puts html_string}
 %x( open -a 'Firefox' example.html )
 ```
+or
+```ruby
+system("open -a 'Firefox' example.html")
+```
 
 #Example
 Say my Ruby code file is `test.rb` where:
@@ -20,7 +24,7 @@ a_string = %( <h1>Hello </h1> )
 
 File.open("a_file.html", "w") { |file| file.puts a_string}
 
-%x[ open -a 'Firefox' a_file.html ]
+%x( open -a 'Firefox' a_file.html )
 ```
 then running `ruby test.rb` will open the browser and display:
 <h1> Hello </h1>
