@@ -40,7 +40,7 @@ require 'erb'
 template = %( <!DOCTYPE html> <html> <body> <%= yield %> </body> </html> )
 
 ```
-Define the partial you want to pass to `yield` as the string:
+Define the partial you want to pass to `yield`:
 ```ruby
 partial = %(
     <h1>Hello <%= name %> </h1>
@@ -50,7 +50,9 @@ partial = %(
       <% end %>
     </ul>
 ```
+
 Define a lambda with params `'name','messages'` and let `binding` pass them to `.result` on the object `ERB.new(partial)` and this lambda will by called by `set_partial.call(my_name, my_messages)`
+
 
 ```ruby
 set_partial = ->(name,messages) { ERB.new(partial).result(binding) }
@@ -63,6 +65,8 @@ def set_binding
 end
 ```
 
+Then:
+
 ```ruby
 obj = ERB.new(template)
 
@@ -72,11 +76,14 @@ messages = [ "Ligne 1", "Ligne 2" ]
 view = obj.result( set_binding { set_partial.call( name, messages ) } )
 
 ```
+
 and save this in a file and render it with Google Chrome
+
 ```ruby
 File.open("my_app.html", "w") { |file| file.puts view }
 %x[ open -a 'Google Chrome' my_app.html ]
 ```
+
 so that the browser opens and renders:
     
 <h1> Hello ERB from yield </h1>
