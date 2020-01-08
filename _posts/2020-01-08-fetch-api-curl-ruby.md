@@ -4,12 +4,11 @@ title: Fetch API with curl and Ruby
 ---
 
 ## Use `curl`from console to fetch from an API
-To fetch info from an API from the console we can use `curl`. For example:
 ```
 > curl -s https://api.github.com/users/ndrean" 
 ```
 ## Use `curl` in `Ruby` code file to fetch from an API
-This can also be run from inside a Ruby file with `system`or `%x("")` and output into the console:
+Run the code from inside a Ruby file with `system`or `%x("")` and output into the console:
 ```ruby
 system(curl -s https://api.github.com/users/ndrean" )
 ```
