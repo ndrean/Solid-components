@@ -11,6 +11,7 @@ template = %(
   <!DOCTYPE html>
     <html>
       <body>
+        Hello
           <%= yield %>
       </body>
     </html>
@@ -28,7 +29,7 @@ File.open("my_layout.html", "w") { |file| file.puts layout }
 ```
 The browser opens and renders:
 <p>
-    <%= yield %>
+    Hello <%= yield %>
 <p>
   
 # A step further:
