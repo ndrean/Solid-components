@@ -27,7 +27,7 @@ require 'open-uri'
 response = open("https://api.github.com/users/ndrean").read
 ```
 then
-
+```ruby
 require 'json'
 data = JSON.parse(response.body)
 puts data['name']
