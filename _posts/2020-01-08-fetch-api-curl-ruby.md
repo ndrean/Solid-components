@@ -52,5 +52,5 @@ gives Neven DREAN
 ```ruby
 file = File.read('data.json')
 data = JSON.parse(file)
-data['login']
+puts data['login']
 ```
