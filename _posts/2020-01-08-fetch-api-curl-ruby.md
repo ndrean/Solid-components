@@ -47,10 +47,10 @@ puts data['name']
 ```
 gives Neven DREAN
 
-## Read a `.json` file and parse it to a `hash`
+## Read  `.json` file and parse it to a `hash`
 
 ```ruby
 file = File.read('data.json')
-data = JSON.parse(file
+data = JSON.parse(file)
 data['login']
 ```
