@@ -11,7 +11,7 @@ template = %(
   <!DOCTYPE html>
     <html>
       <body>
-         <h1>Hello <%= name %></h1>
+         <h3>Hello <%= name %></h3>
           <ul>
             <% messages.each do |message| %>
               <li><%= message %></li>
@@ -35,7 +35,7 @@ File.open("my_layout.html", "w") { |file| file.puts layout }
 %x[ open -a 'Google Chrome' my_layout.html ]
 ```
 The browser opens and renders:
-<h1> Hello ERB</h1>
+<h3> Hello ERB</h3>
 <ul>
   <li> Ligne 1 </li>
   <li> Ligne 2 </li>
@@ -54,7 +54,7 @@ template = %( <!DOCTYPE html> <html> <body> <%= yield %> </body> </html> )
 Define the partial you want to pass to `yield`:
 ```ruby
 partial = %(
-    <h1>Hello <%= name %> </h1>
+    <h3>Hello <%= name %> </h3>
     <ul>
       <% messages.each do |message| %>
         <li><%= message %></li>
@@ -97,7 +97,7 @@ File.open("my_app.html", "w") { |file| file.puts view }
 
 so that the browser opens and renders:
     
-<h1> Hello ERB from yield </h1>
+<h3> Hello ERB from yield </h3>
 <ul>
   <li> Ligne 3 </li>
   <li> Ligne 4 </li>
