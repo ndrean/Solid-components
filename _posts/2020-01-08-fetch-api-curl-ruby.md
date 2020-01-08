@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Fetch API with curl and Ruby
+---
 
 Say we want to get info from an API, then from the console we can use `curl`. For example,
 ```> curl -s https://api.github.com/users/ndrean" ```
