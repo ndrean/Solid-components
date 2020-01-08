@@ -32,7 +32,7 @@ response = Net::HTTP.get_response(uri)
 ```
 Then `response.body`contains the data (and `response.code` the header).
 
-## Use gem `open-uri` in `Ruby` code file to fetch directly the `response.body` from API:
+## Use gem `open-uri` in `Ruby` code file to fetch from an API:
 ```ruby
 require 'open-uri'
 response = open("https://api.github.com/users/ndrean").read
