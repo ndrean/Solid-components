@@ -2,14 +2,14 @@
 layout: post
 title: Ruby - How to run a shell command  from a Ruby  file
 ---
-Inside my test.rb Ruby code file, if I want to render the file example.html on Chrome or Firefox, then I add this line:
-```ruby
 
+```ruby
 %x[ open -a 'Google Chrome' example.html ]
 %x[ open -a 'Firefox' example.html ]
 ```
 
-Example: say my Ruby code file is test_erb.rb where:
+#Example
+Say my Ruby code file is `test_erb.rb` where:
 ```ruby
 require "erb"
 
@@ -29,7 +29,7 @@ string_layout = %(
     </body>
   </html>)
 
-name = "mon premier ERB"
+name = "ERB"
 messages = [ "Ligne 1", "Ligne 2" ]
 
 obj = ERB.new(string_layout)
