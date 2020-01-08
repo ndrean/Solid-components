@@ -22,7 +22,7 @@ system(curl -s https://api.github.com/users/ndrean > data.json" )
 %x(open -a 'Google Chrome"  data.json )
 ```
 
-# Use class `net/http` from Ruby code file with `get_response`
+## Use class `net/http` from Ruby code file with `get_response`
 Use the standard class  `uri + net/http` to get the response as a `String`:
 ```ruby
 require 'net/http'
@@ -32,12 +32,12 @@ response = Net::HTTP.get_response(uri)
 ```
 Then `response.body`contains the data (and `response.code` the header).
 
-# Use gem `open-uri` in `Ruby` code file to fetch directly the `response.body` from API:
+## Use gem `open-uri` in `Ruby` code file to fetch directly the `response.body` from API:
 ```ruby
 require 'open-uri'
 response = open("https://api.github.com/users/ndrean").read
 ```
-# Parse the `string` response to a `hash` with the gem `json`:
+## Parse the `string` response to a `hash` with the gem `json`:
 The `response`can be viewed in the console but we need to parse it to dig into it:
 ```ruby
 require 'json'
@@ -47,7 +47,7 @@ puts data['name']
 ```
 gives Neven DREAN
 
-# Read a `.json` file and parse it to a `hash`
+## Read a `.json` file and parse it to a `hash`
 
 ```ruby
 File.open('data.json', 'w') {|file| file < data }
