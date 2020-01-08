@@ -21,7 +21,7 @@ template = %(
     </html>
 )
 ```
-and define an object `ERB.new(template)` and use the method `.result` (of  class `String`) with `binding``is that this object will use the context, namely `'name'`and `'messages'`.
+and define an object `ERB.new(template)` and use the method `.result` (of  class `String`) with `binding`. The context will be `'name'`and `'messages'`.
 
 ```ruby
 name = 'ERB'
