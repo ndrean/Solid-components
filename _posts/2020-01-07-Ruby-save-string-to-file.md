@@ -1,13 +1,9 @@
 ---
 layout: post
-title: Ruby - How to run save a string  into  file
+title: Ruby - How to save a string  into  file
 ---
-If I want to save the string 'html_string' into a file named 'layout.html', then:
+If I want to save the string 'a_string' into a file named 'a_file.html', then:
 
 ```ruby
-File.open("layout.html", "w") { |file| file << html_string}
-```
-and render it in Chrome:
-```ruby
-%x[ open -a 'Google Chrome' example.html ]
+File.open("a_file.txt", "w") { |file| file << a_string}
 ```
