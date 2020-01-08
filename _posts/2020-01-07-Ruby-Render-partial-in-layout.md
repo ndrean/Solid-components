@@ -75,7 +75,7 @@ view = obj.result( set_binding { set_partial.call( name, messages ) } )
 and save this in a file and render it with Google Chrome
 ```ruby
 File.open("my_app.html", "w") { |file| file.puts view }
-%x[ open -a 'Google Chrome' app.html ]
+%x[ open -a 'Google Chrome' my_app.html ]
 ```
 so that the browser opens and renders:
     
