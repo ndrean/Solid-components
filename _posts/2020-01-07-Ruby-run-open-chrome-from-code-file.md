@@ -22,7 +22,7 @@ Say my Ruby code file is `test.rb` where:
 ```ruby
 a_string = %( <h1>Hello </h1> )
 
-File.open("a_file.html", "w") { |file| file.puts a_string}
+File.open("a_file.html", "w") { |file| file << a_string}
 
 %x( open -a 'Firefox' a_file.html )
 ```
