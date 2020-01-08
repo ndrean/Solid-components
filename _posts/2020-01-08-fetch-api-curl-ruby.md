@@ -3,7 +3,7 @@ layout: post
 title: Fetch API with curl and Ruby
 ---
 
-## Use  `curl`from console to fetch from an API
+## Use  `curl` from console to fetch from an API
 ```
 > curl -s https://api.github.com/users/ndrean" 
 ```
