@@ -4,7 +4,7 @@ layout: post
 title: Ruby - How to render partial in an .erb layout
 ---
 
-## First setp:
+# First step:
 `require 'erb'` and define the template:
 ```ruby
 template = %(
@@ -31,7 +31,7 @@ The browser opens and renders:
     <%= yield %>
 <p>
   
-## A step further:
+# A step further:
 Insert a partial into the yield
 
 ```ruby
