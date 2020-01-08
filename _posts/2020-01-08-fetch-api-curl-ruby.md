@@ -50,6 +50,7 @@ gives Neven DREAN
 ## Read a `.json` file and parse it to a `hash`
 
 ```ruby
-File.open('data.json', 'w') {|file| file < data }
-%x( open -a 'Firefox' data.json)
+file = File.read('data.json')
+data = JSON.parse(file
+data['login']
 ```
