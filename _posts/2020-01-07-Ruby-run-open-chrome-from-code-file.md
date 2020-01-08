@@ -12,9 +12,13 @@ a_string = my_result.to_s
 File.open("a_string.html", "w") { |file| file.puts html_string}
 %x( open -a 'Firefox' example.html )
 ```
-or
+or with system("")
 ```ruby
 system("open -a 'Firefox' example.html")
+```
+or with backticks ``
+```ruby
+`open -a 'Firefox' example.html`
 ```
 
 #Example
