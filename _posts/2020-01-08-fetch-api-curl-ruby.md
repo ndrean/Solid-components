@@ -1,35 +1,45 @@
 ---
 layout: post
-title: Fetch API with curl and Ruby
+title: Fetch API with `curl` and `Ruby`
 ---
 
+# Use `curl`from console or in Ruby code file to fetch from API:
 To fetch info from an API from the console we can use `curl`. For example:
 ```
 > curl -s https://api.github.com/users/ndrean" 
 ```
 
-This can be run from inside a Ruby file with:
+This can also be run from inside a Ruby file with `system`or `%x("")` and output into the console:
 ```ruby
 system(curl -s https://api.github.com/users/ndrean" )
 ```
-To capture the data with a Ruby file:
+
+or redict into a browser by sending this output into a file and rendering it.
+```ruby
+system(curl -s https://api.github.com/users/ndrean > data.json" )
+%x("open -a 'Google Chrome"  data.json )
+```
+
+# Use class `net/http` from Ruby code file:
+We can use the standard class  `uri + net/http` to get the response as a `String`:
 ```ruby
 require 'net/http'
 require 'uri'
-
 uri = URI.parse("https://api.github.com/users/ndrean")
 response = Net::HTTP.get_response(uri)
-
 ```
-or
+Then `response.body`contains the data (and `response.code` the header).
+
+# Use gems in Ruby code file to fetch directly the `response.body` from API:
 ```ruby
 require 'open-uri'
 response = open("https://api.github.com/users/ndrean").read
 ```
-then
+# Parse the `string` response to a `hash` with the gem `json`:
+The `response`can be viewed in the console but we need to parse it to dig into it:
 ```ruby
 require 'json'
-data = JSON.parse(response.body)
+data = JSON.parse(response)
 puts data['name']
 
 ```
