@@ -11,16 +11,23 @@ template = %(
   <!DOCTYPE html>
     <html>
       <body>
-        Hello
-          <%= yield %>
+         <h1>Hello <%= name %></h1>
+          <ul>
+            <% messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
       </body>
     </html>
 )
 ```
-and define an object `ERB.new(template)` and use the method `.result` (of  class `String`)
+and define an object `ERB.new(template)` and use the method `.result` (of  class `String`) with `binding``is that this object will use the context, namely `'name'`and `'messages'`.
 
 ```ruby
-layout = ERB.new(template).result
+name = 'ERB'
+messages = ['ligne 1', 'ligne 2']
+
+layout = ERB.new(template).result(binding)
 ```
 Then save this into a file and render it with Google Chrome or Firefox by
 ```ruby
@@ -28,9 +35,12 @@ File.open("my_layout.html", "w") { |file| file.puts layout }
 %x[ open -a 'Google Chrome' my_layout.html ]
 ```
 The browser opens and renders:
-<p>
-    Hello <%= yield %>
-<p>
+<h1> Hello ERB</h1>
+<ul>
+  <li> Ligne 1 </li>
+  <li> Ligne 2 </li>
+</ul>
+
   
 # A step further:
 Insert a partial into the yield
@@ -72,7 +82,7 @@ Then:
 obj = ERB.new(template)
 
 name = "ERB from yield"
-messages = [ "Ligne 1", "Ligne 2" ]
+messages = [ "Ligne 3", "Ligne 4" ]
 
 view = obj.result( set_binding { set_partial.call( name, messages ) } )
 
@@ -89,6 +99,6 @@ so that the browser opens and renders:
     
 <h1> Hello ERB from yield </h1>
 <ul>
-  <li> Ligne 1 </li>
-  <li> Ligne 2 </li>
+  <li> Ligne 3 </li>
+  <li> Ligne 4 </li>
 </ul>
