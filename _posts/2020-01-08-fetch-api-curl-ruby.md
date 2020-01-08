@@ -8,12 +8,15 @@ title: Fetch API with curl and Ruby
 > curl -s https://api.github.com/users/ndrean" 
 ```
 ## Use `curl` in `Ruby` code file to fetch from an API
-Run the code from inside a Ruby file with `system("xx")`or `%x(xx)` or with backticks ``"xx"``and output into the console:
+Run the code from inside a Ruby file with `system("xx")`or `%x(xx)` or with backticks and output:
+### into the console:
 ```ruby
 system(curl -s https://api.github.com/users/ndrean" )
+`curl -s https://api.github.com/users/ndrean`
+%x("curl -s https://api.github.com/users/ndrean")
 ```
-
-or redict into a browser by sending this output into a file and rendering it.
+### redirect into a brower
+by sending this output into a file and rendering it.
 ```ruby
 system(curl -s https://api.github.com/users/ndrean > data.json" )
 %x("open -a 'Google Chrome"  data.json )
