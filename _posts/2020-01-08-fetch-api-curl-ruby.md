@@ -12,7 +12,7 @@ This can be run from inside a Ruby file with:
 ```ruby
 system(curl -s https://api.github.com/users/ndrean" )
 ```
-To capture the data, best is to:
+To capture the data with a Ruby file:
 ```ruby
 require 'net/http'
 require 'uri'
@@ -20,9 +20,17 @@ require 'uri'
 uri = URI.parse("https://api.github.com/users/ndrean")
 response = Net::HTTP.get_response(uri)
 
+```
+or
+```ruby
+require 'open-uri'
+response = open("https://api.github.com/users/ndrean").read
+```
+then
+
 require 'json'
 data = JSON.parse(response.body)
-ptus data['name']
+puts data['name']
 
 ```
 gives Neven DREAN
