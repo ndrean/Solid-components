@@ -25,9 +25,18 @@ class Teacher
 end
 
 
-student = Student.new('Bugs Bunny')
+student = Student.new('Le Wagon')
 puts student.tell_name
 
 teacher = Teacher.new(student)
 puts teacher.ask_student_name
+```
+will output:
+```
+The sender is: Student
+Le Wagon
+The asker object is : Teacher
+The sender is: Student
+Le Wagon
+```
 ```
