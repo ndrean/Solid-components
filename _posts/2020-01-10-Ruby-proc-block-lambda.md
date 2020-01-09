@@ -9,7 +9,7 @@ A block is a peice of code enclosed by `{ something }` or `do something  end` pa
 def show
   puts 'Hi '
   yield if block_given?
-  puts "never printed"
+  puts "after yield"
 end
 
 puts show { 'from yield'}
@@ -20,7 +20,7 @@ def show
 end
 puts show { |name| "#{name} from yield"}
  ```
- which returns 'Hi from yield' and 'Hi John from yield'.
+ which returns 'Hi', 'from yield','after yield'  and 'Hi', 'John from yield','after yield'.
  
  ! Remember to use double quotes "" when interpolating.
  
