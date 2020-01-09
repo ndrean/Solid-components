@@ -4,11 +4,12 @@ title: Ruby, Examples with proc, lambda, block, yield
 ---
 
 ## blocks passed through `yield`
-A block is a peice of code enclosed by `{ something }` or `do something  end` passed or executed by a method. These blocks cannot be assigned to variables. A method can accept only one block. Blocks can accept arguments. We use `if block_given?`against exceptions   if a block is not given. The program won't stop in this case.
+A block is a peice of code enclosed by `{ something }` or `do something  end` passed or executed by a method. These blocks cannot be assigned to variables. A method can accept only one block. Blocks can accept arguments. We use `if block_given?`against exceptions   if a block is not given. The program won't stop in this case. The method stops after the call of `yield`.
 ```ruby
 def show
   puts 'Hi '
   yield if block_given?
+  puts "never printed"
 end
 
 puts show { 'from yield'}
