@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Javascript - Loop through object with  for   of
+title: Javascript - Loop through object  'for of'
 ---
 
 We use the `keys`of an object (obtained as an array with `Object.keys(myObject)` and iterate with `for of` on this array `keys`. We also have `Object.entries(myObject)`  which destructurates the object and returns an array of array.
