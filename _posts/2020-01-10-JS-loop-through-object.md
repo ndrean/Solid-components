@@ -10,19 +10,19 @@ Note : We don't use `for  in` as this loops through all the properties  of an ob
 ```javascript
 const obj = { a: 1, b: 2, c: 3,  d: 4 }
 ```
-## To access to a particular element of an objet:
+### To access to a particular element of an objet:
 we have `obj.a` or equivalently `obj['a']`that returns the value `1`.
 
-## To get all the keys:
+### To get all the keys:
 `Object.keys(obj)` (or rather `console.log(Object.keys(obj))`) returns the array of keys `[ 'a', 'b', 'c', 'd' ]`
 
-## to get all the values:
+### To get all the values:
 `Object.values(obj)` returns the array of values `[ 1, 2, 3, 4 ]`
 
-## to get an array `[key,value]`:
+### To get an array `[key,value]`:
 `Object.entries(obj)` returns the array of arrays `[ [ 'a', 1 ], [ 'b', 2 ], [ 'c', 3 ], [ 'd', 4 ] ]`.
 
-## Example:
+## Example of loop through JS object:
 All three examples return the same result.
 ```javascript
 for (const key of Object.keys(obj)) {
