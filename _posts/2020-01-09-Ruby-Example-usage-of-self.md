@@ -3,6 +3,7 @@ layout: post
 title: Ruby, self in action
 ---
 
+
 ```ruby
 class Student
   def initialize(name)
@@ -33,7 +34,9 @@ puts student.tell_name
 teacher = Teacher.new(student)
 puts teacher.ask_student_name
 ```
+
 will output:
+
 ```
 The sender is: Student
 Le Wagon
