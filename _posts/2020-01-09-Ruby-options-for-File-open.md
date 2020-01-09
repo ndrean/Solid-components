@@ -4,6 +4,7 @@ title: Ruby, option for File.open
 ---
 
 Mode |  Meaning
+------------ | -------------
 
 "r"  |  Read-only, starts at beginning of file  (default mode).
 
