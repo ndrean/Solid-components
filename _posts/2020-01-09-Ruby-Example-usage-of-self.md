@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Ruby: `self`in action
+---
+
 ```ruby
 class Student
   def initialize(name)
