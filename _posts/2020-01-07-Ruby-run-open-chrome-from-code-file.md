@@ -10,11 +10,9 @@ open -a 'Firefox' example.html
 ```
 
 ## from a Ruby code file:
-Within a Ruby file, to render a result into a browser instead of a puts, first save the result `a_string = my_result.to_s` into a file `example.html`, then render with `%x()`:
+To display a file into the browser from a Ruby file, you can use `%x()` or backticks or `system("")`:
 
 ```ruby
-a_string = my_result.to_s
-File.open("example.html", "w") { |file| file << a_string}
 %x( open -a 'Firefox' example.html )
 ```
 or with system("")
