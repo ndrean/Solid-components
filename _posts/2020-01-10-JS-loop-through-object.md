@@ -23,6 +23,7 @@ we have `obj.a` or equivalently `obj['a']`that returns the value `1`.
 `Object.entries(obj)` returns the array of arrays `[ [ 'a', 1 ], [ 'b', 2 ], [ 'c', 3 ], [ 'd', 4 ] ]`.
 
 ## Example:
+All three examples return the same result.
 ```javascript
 for (const key of Object.keys(obj)) {
   console.log(`${key} = ${obj[key]}`);
@@ -32,8 +33,9 @@ for (const key of Object.keys(obj)) {
 for (const [k,v] of Object.entries(obj)) {
   console.log(`${k} = ${v}`)
 }
-
-
+```
+We can also loop  by counting:
+```javascript
 l = Object.keys(obj).length
 for (i = 0; i < l; i++) {
   console.log(`${Object.keys(obj)[i]} = ${Object.values(obj)[i]}`)
