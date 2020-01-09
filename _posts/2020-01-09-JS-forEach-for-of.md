@@ -44,3 +44,21 @@ let sum = 0;
   });
 }
 ```
+
+```javascript
+const obj = { a: 1, b: 2, c: 3,  d: 4 }
+
+for (let elem in obj) {
+  console.log( obj[elem] )
+}
+
+for (let elem in obj) {
+  console.log(`${elem} = ${obj[elem]}`);
+}
+
+l = Object.keys(obj).length
+for (i = 0; i < l; i++) {
+  console.log(`${Object.keys(obj)[i]} = ${Object.values(obj)[i]}`)
+}
+```
+  
