@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Ruby, option for File.open
+title: Ruby, options for File.open
 ---
+
 
 Mode |  Meaning
 -----| --------
