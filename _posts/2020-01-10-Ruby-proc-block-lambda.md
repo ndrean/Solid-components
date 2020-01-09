@@ -115,5 +115,4 @@ x=5
 -> { x += 15 }.call
 
 ```
-## proc
-Two ways to write, `Proc.new { |i| i}`   or `proc { |i| i }`.
+
