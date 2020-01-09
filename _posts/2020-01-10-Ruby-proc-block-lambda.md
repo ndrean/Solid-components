@@ -5,7 +5,7 @@ title: Ruby, Examples with proc, lambda, block, yield
 
 ## blocks
 A block is a peice of code enclosed by `{ something }` or `do something  end` passed or executed by a method. These blocks cannot be assigned to variables. A method can accept only one block. Blocks can accept arguments.
-``ruby
+```ruby
 def show
   puts 'Hi '
   yield
