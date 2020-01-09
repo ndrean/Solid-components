@@ -34,7 +34,8 @@ function isSumGreaterThan(array, max) {
 ```
 
 The problem is that "return true" doesn’t return from isSumGreaterThan(); it only returns from the closure we’re passing to forEach. To make that work using functional iteration in Javascript -- or in most true functional languages, for that matter! -- we have to switch from forEach to an entirely different method of Array:
-```javacsript
+
+```javascript
 function isSumGreaterThan(array, max) {
 let sum = 0;
  return array.some((x) => {
