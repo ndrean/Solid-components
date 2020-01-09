@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ruby, `self`in action
+title: Ruby, `self` in action
 ---
 
 ```ruby
