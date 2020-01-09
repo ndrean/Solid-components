@@ -48,7 +48,7 @@ puts time_it(5) { |i| puts i  ** 2 }
 will will measure the time to ouptut 5 times the number 3*2=6  and return "Execution time: 1.8e-05 secs
 
 ## `&block`
-Unlike yield, we can pass a block several times to a method, and we have to declare the usage it with the `&` when the block is defined on-line with the call of the method.
+Unlike yield, we can pass a block several times to a method, and we have to declare the usage it with the `&` when the block is defined inline with the call of the method. The ampersand `&`convert it to a `proc`.
  ```ruby
  def show(i  ,&block)
   puts block.call(i) if block_given?
@@ -86,9 +86,9 @@ time_it(10) { |i| puts i**2 }
   and  output 10 times 25.
  
 ## Example
-The `map`method applies a block to each element of an enumerable object and collects the values. For example, we pass the named block (as a symbol here)  `:even? = {|n| n.even?}` to the method `map`:
+The `map`method applies a block to each element of an enumerable object and collects the values. For example, we pass the block  `{|n| n.even?}` to teach element of an array with `map`, then Ruby let's us use `:even?` as `&:even?`is converted into a block.
 ```ruby
-[1,2,3].map(&:even) 
+[1,2,3].map(&:even?)
 ```
 returns 'false,true,false'.
 ## lambdas
