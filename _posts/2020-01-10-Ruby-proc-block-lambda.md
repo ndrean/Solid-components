@@ -54,15 +54,14 @@ which return 9,36,81.
  We can save a block as a `proc`   by `my_proc = Proc.new { |i| i**2 }`   or simply `my_proc = proc { |i| i**2 }`.
  We can then pass use this proc to a method as an argument.
  ```ruby
- def calc( i,a_proc )
+ def calc(i,a_proc )
   a_proc.call(i)
   a_proc.call(i*2)
  end
- calc(3) , my_proc)
+ calc(3, my_proc)
  ```
  will return 16,64.
- 
- 
+  
  One typical example is the timer
  ```ruby
  def time_it(n=1)
