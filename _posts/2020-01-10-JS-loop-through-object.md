@@ -14,13 +14,13 @@ const obj = { a: 1, b: 2, c: 3,  d: 4 }
 we have `obj.a` or equivalently `obj['a']`that returns the value `1`.
 
 ## To get all the keys:
-`console.log(Object.keys(obj))` that returns the array of keys `[ 'a', 'b', 'c', 'd' ]`
+`Object.keys(obj)` (or rather `console.log(Object.keys(obj))`) returns the array of keys `[ 'a', 'b', 'c', 'd' ]`
 
 ## to get all the values:
-`console.log(Object.values(obj))` that returns the array of values `[ 1, 2, 3, 4 ]`
+`Object.values(obj)` returns the array of values `[ 1, 2, 3, 4 ]`
 
 ## to get an array `[key,value]`:
-`console.log(Object.entries(obj))` returns the destructared array of arrays `[ [ 'a', 1 ], [ 'b', 2 ], [ 'c', 3 ], [ 'd', 4 ] ]`.
+`Object.entries(obj)` returns the array of arrays `[ [ 'a', 1 ], [ 'b', 2 ], [ 'c', 3 ], [ 'd', 4 ] ]`.
 
 ## Example:
 ```javascript
