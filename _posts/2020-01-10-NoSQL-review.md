@@ -1,5 +1,5 @@
 ---
-layout:post
+layout: post
 title: NoSQL databqse review
 ---
 https://blog.resellerclub.com/the-what-why-and-how-of-nosql-databases/
