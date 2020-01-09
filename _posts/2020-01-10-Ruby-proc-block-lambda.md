@@ -20,6 +20,7 @@ end
 puts show { |name| "#{name} from yield"}
  ```
  which returns 'Hi from yield' and 'Hi John from yield'.
+ ! Remember to use double quotes "" when interpolating.
  
  We can pass a block to a method, while we have to declare this with the `&`, and can  use it several times.
  ```ruby
