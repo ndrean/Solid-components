@@ -3,7 +3,7 @@ layout: post
 title: Ruby, Examples with proc, lambda, block, yield
 ---
 
-## blocks passed through `yield`
+## Blocks passed through `yield`
 A block is a peice of code enclosed by `{ something }` or `do something  end` passed or executed by a method. These blocks cannot be assigned to variables. A method can accept only one block. Blocks can accept arguments. We use `if block_given?`against exceptions   if a block is not given. The program won't stop in this case. The method stops after the call of `yield`.
 ```ruby
 def show
@@ -24,7 +24,7 @@ puts show { |name| "#{name} from yield"}
  
  ! Remember to use double quotes "" when interpolating.
  
- ## `yield`returns value
+ ## The  `yield`returns value
  ```ruby
  def show
   value = yield
@@ -34,7 +34,7 @@ show { 'Tom' }
  ```
  returns 'Hi Tom'.
  
- ## `n.times { yield(arg) }`
+ ## Use multiple yields with `n.times { yield(arg) }`
  One way to reuse the yield is described in this example:
  ```ruby
  def time_it(n=1)
@@ -47,7 +47,7 @@ puts time_it(5) { |i| puts i  ** 2 }
 ```
 will will measure the time to ouptut 5 times the number 3*2=6  and return "Execution time: 1.8e-05 secs
 
-## `&block`
+## Inline blocks with `&block`
 Unlike yield, we can pass a block several times to a method, and we have to declare the usage it with the `&` when the block is defined inline with the call of the method. The ampersand `&`convert it to a `proc`.
  ```ruby
  def show(i  ,&block)
