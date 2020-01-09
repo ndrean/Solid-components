@@ -7,8 +7,10 @@ Mode |  Meaning
 ------------ | -------------
 
 "r"  |  Read-only, starts at beginning of file  (default mode).
+------------ | -------------
 
 "r+" |  Read-write, starts at beginning of file.
+------------ | -------------
 
 "w"  |  Write-only, truncates existing file to zero length or creates a new file for writing.
 
