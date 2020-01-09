@@ -24,6 +24,15 @@ puts show { |name| "#{name} from yield"}
  
  ! Remember to use double quotes "" when interpolating.
  
+ ## `yield`returns value
+ ```ruby
+ def show
+  value = yield
+  puts "Hi #{yield}"
+end
+show { 'Tom' }
+ ```
+ returns 'Hi Tom'.
  
  ## `n.times { yield(arg) }`
  One way to reuse the yield is described in this example:
@@ -51,6 +60,8 @@ puts show(3) { |i|  i**2 }
 ```
 which return 9,36,81.  
 
+Blocks are mostly used on enumerators. For example, `['a','b','c'].each { |l| l.upcase }`.
+
 ## Named blocks as `proc`
  We can save a block as a `proc`   by `my_proc = Proc.new { |i| i**2 }`   or simply `my_proc = proc { |i| i**2 }`.
  We can then pass use this proc to a method as an argument.
@@ -74,6 +85,12 @@ time_it(10) { |i| puts i**2 }
  ```
   and  output 10 times 25.
  
+## Example
+The `map`method applies a block to each element of an enumerable object and collects the values. For example, we pass the named block (as a symbol here)  `:even? = {|n| n.even?}` to the method `map`:
+```ruby
+[1,2,3].map(&:even) 
+```
+returns 'false,true,false'.
 ## lambdas
 A lambda can be put into a variable, and then use `.call`to use it. Two ways to write:
 - `lambda { puts 2 }.call`,
