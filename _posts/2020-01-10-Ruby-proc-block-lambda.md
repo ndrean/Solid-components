@@ -3,8 +3,11 @@ layout: post
 title: Ruby, Examples with proc, lambda, block, yield
 ---
 
-## two ways to write lambdas
-A lambda can be put into a variable, and then use `.call`to use it. On can write `l = lambda { puts 2 }.call` or  ` -> { puts 2 }.call`. All the following examples return 20 (we need `return`   to be able to use the output).
+## lambdas
+A lambda can be put into a variable, and then use `.call`to use it. Two ways to write:
+- `lambda { puts 2 }.call`,
+- ` -> { puts 2 }.call`
+All the following examples return 20 (we need `return`   to be able to use the output).
 
 ```ruby
 l =  -> { puts 20 }
