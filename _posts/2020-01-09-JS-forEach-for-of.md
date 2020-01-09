@@ -1,7 +1,6 @@
-
 ---
 layout: post
-title: JS- forEach vs for of
+title: JS, forEach vs for of
 ---
 
 Suppose we want to write a Javascript function that efficiently checks whether the running sum of numbers in an array ever exceeds some maximum:
