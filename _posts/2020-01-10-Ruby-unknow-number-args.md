@@ -9,3 +9,7 @@ The method `reduce`combines all elements of enum by applying a binary operation,
 def sum(*args)
   args.reduce { |sum, n| sum + n }
 end
+```
+so `sum(1,2,3)` returns `6`. 
+
+We could alos have used `(1..3).reduce(&:+)`  in this case.
