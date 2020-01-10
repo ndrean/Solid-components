@@ -12,19 +12,21 @@ def show
   puts "after yield"
 end
 
-puts show { 'from yield'}
+show { 'from yield'}
 
 def show
   puts 'Hi '
   yield('John') if block_given?
 end
-puts show { |name| "#{name} from yield"}
+show { |name| "#{name} from yield"}
  ```
- which returns 'Hi', 'from yield','after yield'  and 'Hi', 'John from yield','after yield'.
+ which returns `'Hi', 'from yield','after yield'`  and `'Hi', 'John from yield','after yield'`.
  
  ! Remember to use double quotes "" when interpolating.
  
- ## The  `yield`returns value
+ 
+ ## The  `yield` returns values
+ 
  ```ruby
  def show
   value = yield
@@ -34,7 +36,9 @@ show { 'Tom' }
  ```
  returns 'Hi Tom'.
  
+ 
  ## Use multiple yields with `n.times { yield(arg) }`
+ 
  One way to reuse the yield is described in this example:
  ```ruby
  def time_it(n=1)
@@ -45,10 +49,13 @@ end
 
 puts time_it(5) { |i| puts i  ** 2 }
 ```
-will will measure the time to ouptut 5 times the number 3*2=6  and return "Execution time: 1.8e-05 secs
+will will measure the time to ouptut 5 times the number `3*2=6`  and returns `"Execution time: 1.8e-05 secs`
+
 
 ## Inline blocks with `&block`
+
 Unlike yield, we can pass a block several times to a method, and we have to declare the usage it with the `&` when the block is defined inline with the call of the method. The ampersand `&`convert it to a `proc`.
+
  ```ruby
  def show(i  ,&block)
   puts block.call(i) if block_given?
@@ -62,7 +69,9 @@ which return 9,36,81.
 
 Blocks are mostly used on enumerators. For example, `['a','b','c'].each { |l| l.upcase }`.
 
+
 ## Named blocks as `proc`
+
  We can save a block as a `proc`   by `my_proc = Proc.new { |i| i**2 }`   or simply `my_proc = proc { |i| i**2 }`.
  We can then pass use this proc to a method as an argument.
  ```ruby
@@ -90,7 +99,8 @@ The `map`method applies a block to each element of an enumerable object and coll
 ```ruby
 [1,2,3].map(&:even?)
 ```
-returns 'false,true,false'.
+returns `'false,true,false'`.
+
 ## lambdas
 A lambda can be put into a variable, and then use `.call`to use it. Two ways to write:
 - `lambda { puts 2 }.call`,
