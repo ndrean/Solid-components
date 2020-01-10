@@ -3,7 +3,8 @@ layout: post
 title: JS, rest parameter to use an unknow number of arguments
 ---
 
-## Rest parameter syntax
+## Rest parameter syntax `...args`
+
 The rest parameter syntax allows us to represent an indefinite number of arguments as an array.
 
 ```javacsript
