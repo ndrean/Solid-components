@@ -155,6 +155,7 @@ say_hi(hi)
 returns 'hi'.
 
 - pass the named block already called to a method, and yield it.
+
 ```ruby
 hi = Proc.new { puts "hi" }
 
@@ -163,9 +164,11 @@ def say_hi
 end
 say_hi {hi.call}
 ```
+
 returns 'hi'.
 
 ### Example
+
 ```ruby
 my_proc = proc {  'Bonjour' }
 my_lambda = ->{ 'Hola' }
@@ -179,13 +182,16 @@ end
 
 say_hi(my_proc, my_lambda,'John') {  |name|  puts "hello #{name}" }
 ```
+
 returns 'hello John, Bonjour there, Hola there, hello'.
+
 
 ### lambdas
 A special kind of `proc` is `lambda` and is declared using `-> { my code }` (or `lambda { my code }`).
 Lambdas can be save in variables, accept arguments. In this case, an error is thrown if the arguments are missing, like a regular method.
 
-All of the following examples return 20 
+All of the following examples return 20:
+
 ```ruby
 l =  -> { puts 20 }
 l.call
@@ -206,6 +212,7 @@ puts -> { x += 15 }.call
 ## TODO: difference `proc` and `lambda`.
 A lambda throws an error is  a wrong number of arguments is given, but not a `proc`.
 If you return from a `proc`, then the method will stop, whilst a lambda will continue.
+
 ```ruby
 def call_proc
   puts Proc.new { return 1 }.call
@@ -219,6 +226,7 @@ def call_proc
 end
 puts call_proc
 ```
+
 returns respectively '1' and '2, after proc'.
 
 ## Scope of variables
@@ -233,4 +241,5 @@ n   = 1
 my_proc = Proc.new { puts n + 1 }
 my_proc.call
 ```
+
 We would expect '50' but it returns '1', thus the `proc` carries with it values like local variables and methods from the context where it was defined.
