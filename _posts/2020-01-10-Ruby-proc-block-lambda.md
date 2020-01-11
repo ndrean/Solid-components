@@ -4,10 +4,10 @@ title: Ruby, Examples with proc, lambda, block, yield
 ---
 
 ## Block
-A block is a piece of code enclosed by curly braces `{ some code }` or enclosed by `do ...end`  as `do some code  end` when you have multiline. Blocks passed or executed by a method. 
+A block is a piece of code enclosed by curly braces `{ some code }` or enclosed by `do ...end`  when you have multiline. Blocks passed or executed by a method. 
 
-The bloc `{ |n| puts n }`  has `|n|` as arugment and `puts n` as body. The following code
-```Ruby
+The bloc `{ |n| puts n }`  has `|n|` as argument and `puts n` as body. The following code
+```ruby
 [1,2,3].each { |n| puts n }
 ```
 will return 1,2,3.
