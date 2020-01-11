@@ -4,6 +4,7 @@ title: JS, forEach vs for of
 ---
 ## Rest parameter syntax
 The rest parameter syntax allows us to represent an indefinite number of arguments as an array.
+
 ```javacsript
 function sum(...theArgs) {
   return theArgs.reduce((previous, current) => {
@@ -15,6 +16,7 @@ returns   `10`  for `sum(1,2,3,4)`
 
 
 ## Example with `for..of`with rest parameter syntax `...args`
+
 ```javascript
 function avg(...args) {
   let sum = 0;
