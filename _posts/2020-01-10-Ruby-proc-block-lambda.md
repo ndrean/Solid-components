@@ -28,9 +28,7 @@ end
 returns `a,1,b,4` and `1,4,3,16`.
 
 ### how to use a block
-Blocks can't be saved into a variable unless we declare the block as a `proc` object (see bellow).
-
-Blocks don't run by themselves. The block 'my_block' can't be used as `my_block.call` outside a method. They have to be used within a method.
+Blocks can't be saved into a variable unless we declare the block as a `proc` object (see bellow). Thus blocks don't run by themselves. They have to be used within a method.
 
 A method can accept only one block, but the block can be called several times.
 
