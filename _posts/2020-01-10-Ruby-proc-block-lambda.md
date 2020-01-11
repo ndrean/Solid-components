@@ -4,15 +4,15 @@ title: Ruby, Examples with proc, lambda, block, yield
 ---
 
 ## Block
-A block is a piece of code enclosed by curly braces `{ some code }` or enclosed by `do ...end`  when you have multiline. Blocks passed or executed by a method. 
+A block is a piece of code enclosed by curly braces `{ some code }` or enclosed by `do ...end`  when you have multiline. Blocks are passed and executed by a method. 
 
-The bloc `{ |n| puts n }`  has `|n|` as argument and `puts n` as body. The following code
+The following well known code is a block passed to the method `.each`applied to the enumerable object array:
 ```ruby
-[1,2,3].each { |n| puts n }
+[1,2,3].each { |n| puts n if n.even?}
 ```
-will return 1,2,3.
+will return 1,2,3. The bloc `{ |n| puts n }`  has `|n|` as argument and `puts n` as body. 
 
-Blocks can have multiple arguments defined between pipes `|arg1, arg2|`.
+Blocks can have multiple arguments defined between pipes `|arg1, arg2|`. 
 ```Ruby
 {a:1, b:2}.each do |k,v|
   puts k
@@ -25,7 +25,7 @@ end
 end
 
 ```
-returns `a,1,b,4` and `1,4,3,16`.
+returns respectively `a,1,b,4` and `1,4,3,16`.
 
 ### How to use a block
 Blocks can't be saved into a variable unless we declare the block as a `proc` object (see bellow). Thus blocks don't run by themselves. They have to be used within a method.
@@ -34,39 +34,45 @@ A method can accept only one block, but the block can be called several times.
 
 We have two ways to use a block within a method:
 - keyword `yield`. You append an inline  block code at the end of a method when calling the method: the block will be run within the method where the `yield` keyword is declared
-- ampersand `&`. You add an additional argument `&my_bloc` to a method and call `my_block.call`  within the method.
+- ampersand `&`. You pass an additional argument `&my_bloc` to a method, call `my_block.call`  within the method and declare an inline block when calling the method.
 
 
 ```Ruby
 def show_bloc
-  puts 'Hi '
+  puts 'before yield '
   yield
   puts "after yield"
 end
 
-show { puts 'from yield' }
+show_block { puts 'from the yield' }
 ```
-returns `'Hi', 'from yield','after yield'`.
+returns `'before yield', 'from the yield','after yield'`.
 
 ```Ruby
 def show_bloc(&my_block)
   my_block.call
-  puts "there"
 end
 show_bloc { puts "Hello" }
 ```
-returns 'Hello, there'.
+returns 'Hello'.
 
-### Methods accept a unique block, and can it them multiple times.
-A method can accept only one block, but the block can be called several times.
+The `map`method applies a block to each element of an enumerable object and collects the values. For example, we pass the block  `{|n| n.even?}` to each element of an array with `map`. Since Ruby let's us use `:even?` instead, then we can write:
+```ruby
+[1,2,3].map(&:even?)
+```
+returns `'false,true,false'`.
+
+
+### Methods accept a unique block, but can use it multiple times.
+A method can accept only ONE inline block, but the block can be called several times.
 ```Ruby
-def show_if_bloc(n, &block)
+def show_multiple_blocs(n, &block)
   puts n
   block.call 
   yield
   yield
 end
-show_if_bloc(3) { puts "there" }
+show_multiple_blocs(3) { puts "there" }
 ```
 returns '3,there, there, there'.
 
@@ -77,7 +83,6 @@ def show_if_bloc(word, &block)
   puts word
   block.call if block_given?
   yield if block_given?
-  yield if block_given?
   puts "ok"
 end
 show_bloc("Hi")
@@ -85,7 +90,6 @@ show_if_bloc("Hi) { puts "there" }
 ```
 will return respectively 'Hi, ok' and 'Hi, there, there, ok'.
 
-Note:  methods accept only ONE block.
 
 ### Blocks can accept arguments.
 Note: Remember to use double quotes " " when interpolating.
@@ -94,23 +98,21 @@ You can pass an argument to a block, and the argument is declared within pipes `
 def show
   puts 'Hi '
   yield('John') if block_given?
-  yield('John again') if block_given?
 end
 show { |name| puts "#{name} from yield"}
  ```
- returns `'Hi', 'John from yield','again John from yield', 'after yield'`.
+ returns `'Hi', 'John from yield'.
  
   ```ruby
- def time_it(n=1)
+ def time(m=1, x=0, n=1)
     start_time = Time.now
-    n.times  { yield(3) } 
+    m.times { yield(x,n) }
     puts "Execution time: #{ Time.now - start_time } secs."
 end
-
-puts time_it(5) { |i| puts i  ** 2 }
+puts time(5,2,10) { |x,i| puts x  ** i }
 ```
-will will measure the time to ouptut 5 times the number `3*2=6`  and returns `"Execution time: 1.8e-05 secs`
- 
+will measure the time to ouptut 5 times the number `2**10=1024`  and returns `"Execution time: 2e-05 secs`
+
 ### The  `yield` returns values
 The block will return the last line.
  ```ruby
@@ -126,37 +128,33 @@ end
  returns 'Hi Jim'.
 
 
-## Inline blocks passed to a method with `&block`
-
-The ampersand `&`converts the block to a `proc`.
-
-Example: we pass the block `{ |i| i**2 }` 
-
- ```ruby
- def calc_powers(i  ,&block)
-  puts block.call(i) if block_given?
-  puts block.call(i*2) if block_given?
-  puts block.call(i*3) if block_given?
-end
-calc_powers(3) { |i|  i**2 }
-```
-which return 9,36,81.  
-
-Blocks are mostly used on enumerators. For example, `['a','b','c'].each { |l| l.upcase }`.
-
-
-
-
 
 
 ## Class `Proc`
 A block of code can be saved into a variable by defining this block as a new instance of the class `Proc`. A `proc` can be called with the method `.call`. To do so, we use `my_proc = Proc.new { my code }` or simply `my_proc = proc {my code }`.
 
+The ampersand `&`converts the block to a `proc`.
+
 Note: `{ puts "hi" }.call` raises an error whilst `Proc new { puts "hi" }.call` returns 'hi'.
 
-A special kind of `proc` is `lambda` and is declared using `-> { my code }` (or `lambda { my code }`).
+### Example
+```ruby
+my_proc = proc {  'Bonjour' }
+my_lambda = ->{ 'Hola' }
+hello = proc { puts "hello" }
+
+def say_hi(*blocs, name)
+  yield(name) if block_given?
+  blocs.each {|bloc| puts bloc.call + ' there'}
+  yield if block_given?
+end
+
+say_hi(my_proc, my_lambda,'John') {  |name|  puts "hello #{name}" }
+```
+returns 'hello John, Bonjour there, Hola there, hello'.
 
 ### lambdas
+A special kind of `proc` is `lambda` and is declared using `-> { my code }` (or `lambda { my code }`).
 Lambads can be save in variables, accept arguments. In this case, an error is thrown if the arguments are missing, like a regular method. We need `return` to be able to use the output.
 
 All of the following examples return 20 
@@ -185,13 +183,19 @@ returns 9.
 
 
 
-###  Class `Proc`
+##  Class `Proc`
 A lambda is a special case of the class `Proc`. A `proc` object is a block of code than can be called by the method `.call`. It is declared by `Proc.new { my code }`  or simply `proc do my code end`.
 
+```Ruby
+def powered_to(n)
+  proc { |x| x**n }
+end
+puts powered(3).call(2)
+```
+returns `2**3 = 8`.
 
-We can save a proc into a varaible. 
 
-### pass a `proc`to a method
+We can save a proc into a variable. We declare a bloc as an argument to the method, and `bloc.call` inside the method to execute it. There is no need of the `&` here.
 ```ruby
 hi = Proc.new { puts "hi" }
 
@@ -202,41 +206,3 @@ end
 say_hi(hi)
 ```
 returns 'hi'.
-
-```Ruby
-def power(n)
-  proc { |x| x**n }
-end
-puts power(3).call(2)
-```
-returns `2**3 = 8`.
-
-puts power(3).call(2)
-
- 
- ```ruby
- def calc(i,a_proc )
-  a_proc.call(i)
-  a_proc.call(i*2)
- end
- calc(3, my_proc)
- ```
- will return 16,64.
-  
- One typical example is the timer
- ```ruby
- def time_it(n=1)
-    start_time = Time.now
-    n.times { yield(5) } if block_given?
-    puts "Execution time: #{ Time.now - start_time } secs."
-end
-time_it(10) { |i| puts i**2 }
- ```
-  and  output 10 times 25.
- 
-## Example
-The `map`method applies a block to each element of an enumerable object and collects the values. For example, we pass the block  `{|n| n.even?}` to teach element of an array with `map`, then Ruby let's us use `:even?` as `&:even?`is converted into a block.
-```ruby
-[1,2,3].map(&:even?)
-```
-returns `'false,true,false'`.
