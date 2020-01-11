@@ -27,14 +27,16 @@ end
 ```
 returns respectively `a,1,b,4` and `1,4,3,16`.
 
-### How to use a block
+### How to use a block: `yield` and `&
 Blocks can't be saved into a variable unless we declare the block as a `proc` object (see bellow). Thus blocks don't run by themselves. They have to be used within a method.
 
 A method can accept only one block, but the block can be called several times.
 
 We have two ways to use a block within a method:
 - keyword `yield`. You append an inline  block code at the end of a method when calling the method: the block will be run within the method where the `yield` keyword is declared
-- ampersand `&`. You pass an additional argument `&my_bloc` to a method, call `my_block.call`  within the method and declare an inline block when calling the method. The work of `&`is to convert a block to a `proc` object (see bellow).
+- ampersand `&`. You pass an additional argument `&my_bloc` to a method, call `my_block.call`  within the method and declare an inline block when calling the method. 
+
+Note: the work of `&`is to convert a block to a `proc` object (see bellow), and conversely, to convert a `proc`into a block (see the example  with methods on enumerables).
 
 
 ```ruby
@@ -142,7 +144,7 @@ A `proc` can be run with the method `.call`. In other words, a `proc`is a block 
 
 
 To use `my_proc`, we have the two same ways as previously seen:
-- declare a bloc as an argument to the method, and call it inside the method to execute it. There is no need of the `&` here since we already created a `proc` object, and the ampersand work it precisely to convert a block to a `proc` object.
+- declare a bloc as an argument to the method, and call it inside the method to execute it. When the method doesn't apply to an enumerable, there is no need of the `&` here since we already created a `proc` object, and the ampersand work it precisely to convert a block to a `proc` object. However, if it applies to an enumerable, then we need to 'ampersand' the `proc`  to convert to a block because such methods like `each`, `select`, `map` don't expect arguments.
 
 ```ruby
 hi = Proc.new { puts "hi" }
@@ -185,6 +187,13 @@ say_hi(my_proc, my_lambda,'John') {  |name|  puts "hello #{name}" }
 
 returns 'hello John, Bonjour there, Hola there, hello'.
 
+### The converse `&`
+
+To illustrate this, we define a `proc` that returns `true`if a number is a multiple of 3. The method `select`returns the elements of an enumerable when the block returns `true`. We can't therefor select only multiples of 3 within a range by this method. We can't pass  the `proc`as such methods don't accept arguments; we thus pass the block, so we have to use `&multiple`. 
+```ruby
+multiples_of_3 = Proc.new { |n| n % 3 == 0 } 
+(1..100).to_a.select(&multiples_of_3)
+```
 
 ### lambdas
 A special kind of `proc` is `lambda` and is declared using `-> { my code }` (or `lambda { my code }`).
