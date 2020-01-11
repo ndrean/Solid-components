@@ -131,16 +131,16 @@ end
 
 
 ## Class `Proc`
-A block of code can be saved into a variable by defining this block as a new instance of the class `Proc`. A `proc` can be called with the method `.call`. To do so, we use `my_proc = Proc.new { my code }` or simply `my_proc = proc {my code }`.
-In other words, a `proc`is a block container that can be used by calling it with `.call`, or used by a method.
+A block of code can be saved into a variable by defining this block as a new instance of the class `Proc`.  To do so, we use `my_proc = Proc.new { my code }` or simply `my_proc = proc {my code }`. We can save a proc object into a variable `my_proc = proc { puts "hi" }`.
+
+A `proc` can be run with the method `.call`. In other words, a `proc`is a block container that can be used by calling it with `.call`, or used by a method.
 
 
-Note: `{ puts "hi" }.call` raises an error whilst `Proc.new { puts "hi" }.call` returns 'hi'.
+ `{ puts "hi" }.call` raises an error whilst `Proc.new { puts "hi" }.call` returns 'hi'.
 
-We can save a proc into a variable `my_proc = proc { puts "hi" }`.
 
 To use `my_proc`, we have the two same ways as previously seen:
-- declare a bloc as an argument to the method, and call it inside the method to execute it. There is no need of the `&` here since we already created a `proc` object, and the ampersand work it precisely to convert a block to a `proc`.
+- declare a bloc as an argument to the method, and call it inside the method to execute it. There is no need of the `&` here since we already created a `proc` object, and the ampersand work it precisely to convert a block to a `proc` object.
 ```ruby
 hi = Proc.new { puts "hi" }
 
@@ -151,7 +151,7 @@ say_hi(hi)
 ```
 returns 'hi'.
 
-- pass the named block to a method, and yield it.
+- pass the named block already called to a method, and yield it.
 ```ruby
 hi = Proc.new { puts "hi" }
 
@@ -180,7 +180,7 @@ returns 'hello John, Bonjour there, Hola there, hello'.
 
 ### lambdas
 A special kind of `proc` is `lambda` and is declared using `-> { my code }` (or `lambda { my code }`).
-Lambads can be save in variables, accept arguments. In this case, an error is thrown if the arguments are missing, like a regular method. We need `return` to be able to use the output.
+Lambdas can be save in variables, accept arguments. In this case, an error is thrown if the arguments are missing, like a regular method.
 
 All of the following examples return 20 
 ```ruby
@@ -200,20 +200,25 @@ x=5
 puts -> { x += 15 }.call
 ```
 
-
-##  Class `Proc`
-A lambda is a special case of the class `Proc`. A `proc` object is a block of code than can be called by the method `.call`. It is declared by `Proc.new { my code }`  or simply `proc do my code end`. The ampserand `&`does the conversion block->proc inline.
-
-```Ruby
-def powered_to(n)
-  proc { |x| x**n }
+## TODO: difference `proc` and `lambda`.
+A lambda throws an error is  a wrong number of arguments is given, but not a `proc`.
+If you return from a `proc`, then the method will stop, whilst a lambda will continue.
+```ruby
+def call_proc
+  puts Proc.new { return 1 }.call
+  puts "after proc"
 end
-puts powered(3).call(2)
+puts call_proc
+
+def call_proc
+  puts -> { return 2 }.call
+  puts "after proc"
+end
+puts call_proc
 ```
-returns `2**3 = 8`.
+returns respectively '1' and '2, after proc'.
 
-
-## Scope
+## Scope of variables
 
 ```ruby
 def call_proc(my_proc)
@@ -225,4 +230,4 @@ n   = 1
 my_proc = Proc.new { puts n + 1 }
 my_proc.call
 ```
-We would expect '50' but it returns '1', thus the proc carries with it values like local variables and methods from the context where it was defined.
+We would expect '50' but it returns '1', thus the `proc` carries with it values like local variables and methods from the context where it was defined.
