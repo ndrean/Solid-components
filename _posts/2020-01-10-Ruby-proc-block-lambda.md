@@ -13,7 +13,7 @@ The following well known code is a block passed to the method `.each`applied to 
 will return 1,2,3. The bloc `{ |n| puts n }`  has `|n|` as argument and `puts n` as body. 
 
 Blocks can have multiple arguments defined between pipes `|arg1, arg2|`. 
-```Ruby
+```ruby
 {a:1, b:2}.each do |k,v|
   puts k
   puts v**2
@@ -37,7 +37,7 @@ We have two ways to use a block within a method:
 - ampersand `&`. You pass an additional argument `&my_bloc` to a method, call `my_block.call`  within the method and declare an inline block when calling the method. The work of `&`is to convert a block to a `proc` object (see bellow).
 
 
-```Ruby
+```ruby
 def show_bloc
   puts 'before yield '
   yield
@@ -65,7 +65,7 @@ returns `'false,true,false'`.
 
 ### Methods accept a unique block, but can use it multiple times.
 A method can accept only ONE inline block, but the block can be called several times.
-```Ruby
+```ruby
 def show_multiple_blocs(n, &block)
   puts n
   block.call 
@@ -78,7 +78,7 @@ returns '3,there, there, there'.
 
 ### `if block_given?`
 If a  method  uses `yield`  or `.call`   with no block given, this raises an exception. You have to use use `if block_given?` to prevent this. The program won't stop when we use `if block_given?` and this line will simply be skipped.
-```Ruby
+```ruby
 def show_if_bloc(word, &block)
   puts word
   block.call if block_given?
@@ -94,7 +94,7 @@ will return respectively 'Hi, ok' and 'Hi, there, there, ok'.
 ### Blocks can accept arguments.
 Note: Remember to use double quotes " " when interpolating.
 You can pass an argument to a block, and the argument is declared within pipes `|` within the code block.
-```Ruby
+```ruby
 def show
   puts 'Hi '
   yield('John') if block_given?
