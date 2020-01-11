@@ -4,7 +4,7 @@ title: Ruby, Examples with proc, lambda, block, yield
 ---
 
 ## Block
-A block is a piece of code enclosed by `{ some code }` or `do some code  end` passed or executed by a method. A method can accept only one block, but the block can be called several times.
+A block is a piece of code enclosed by curly braces `{ some code }` or enclosed by `do ...end`  as `do some code  end`. passed or executed by a method. A method can accept only one block, but the block can be called several times.
 Blocks don't run by themselves unless   you use the method `.call` as `{ some code }.call`.
 
 A block can be saved in a variable as `my_block = { some code }`.
