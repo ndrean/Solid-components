@@ -1,6 +1,6 @@
 ---
 layout: post
-title: JS, forEach vs for of
+title: Javascript, forEach vs for of
 ---
 ## Rest parameter syntax
 The rest parameter syntax allows us to represent an indefinite number of arguments as an array.
