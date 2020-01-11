@@ -220,7 +220,7 @@ puts -> { x += 15 }.call
 
 ## TODO: difference `proc` and `lambda`.
 A lambda throws an error is  a wrong number of arguments is given, but not a `proc`.
-If you return from a `proc`, then the method will stop, whilst a lambda will continue.
+If you return from a `proc`, then the method will stop, whilst a lambda will continue. A lambda gives back the hand to the method if the lambda returns whilst not the  proc.
 
 ```ruby
 def call_proc
