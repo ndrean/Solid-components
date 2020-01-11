@@ -34,7 +34,7 @@ A method can accept only one block, but the block can be called several times.
 
 We have two ways to use a block within a method:
 - keyword `yield`. You append an inline  block code at the end of a method when calling the method: the block will be run within the method where the `yield` keyword is declared
-- ampersand `&`. You pass an additional argument `&my_bloc` to a method, call `my_block.call`  within the method and declare an inline block when calling the method.
+- ampersand `&`. You pass an additional argument `&my_bloc` to a method, call `my_block.call`  within the method and declare an inline block when calling the method. The work of `&`is to convert a block to a `proc` object (see bellow).
 
 
 ```Ruby
@@ -132,10 +132,35 @@ end
 
 ## Class `Proc`
 A block of code can be saved into a variable by defining this block as a new instance of the class `Proc`. A `proc` can be called with the method `.call`. To do so, we use `my_proc = Proc.new { my code }` or simply `my_proc = proc {my code }`.
+In other words, a `proc`is a block container that can be used by calling it with `.call`, or used by a method.
 
-The ampersand `&`converts the block to a `proc`.
 
-Note: `{ puts "hi" }.call` raises an error whilst `Proc new { puts "hi" }.call` returns 'hi'.
+Note: `{ puts "hi" }.call` raises an error whilst `Proc.new { puts "hi" }.call` returns 'hi'.
+
+We can save a proc into a variable `my_proc = proc { puts "hi" }`.
+
+To use `my_proc`, we have the two same ways as previously seen:
+- declare a bloc as an argument to the method, and call it inside the method to execute it. There is no need of the `&` here since we already created a `proc` object, and the ampersand work it precisely to convert a block to a `proc`.
+```ruby
+hi = Proc.new { puts "hi" }
+
+def say_hi(bloc)
+    bloc.call
+end
+say_hi(hi)
+```
+returns 'hi'.
+
+- pass the named block to a method, and yield it.
+```ruby
+hi = Proc.new { puts "hi" }
+
+def say_hi
+    yield
+end
+say_hi {hi.call}
+```
+returns 'hi'.
 
 ### Example
 ```ruby
@@ -175,16 +200,9 @@ x=5
 puts -> { x += 15 }.call
 ```
 
-```Ruby
-square = -> (x) { x**2 }
-square(3)
-```
-returns 9.
-
-
 
 ##  Class `Proc`
-A lambda is a special case of the class `Proc`. A `proc` object is a block of code than can be called by the method `.call`. It is declared by `Proc.new { my code }`  or simply `proc do my code end`.
+A lambda is a special case of the class `Proc`. A `proc` object is a block of code than can be called by the method `.call`. It is declared by `Proc.new { my code }`  or simply `proc do my code end`. The ampserand `&`does the conversion block->proc inline.
 
 ```Ruby
 def powered_to(n)
@@ -195,14 +213,16 @@ puts powered(3).call(2)
 returns `2**3 = 8`.
 
 
-We can save a proc into a variable. We declare a bloc as an argument to the method, and `bloc.call` inside the method to execute it. There is no need of the `&` here.
-```ruby
-hi = Proc.new { puts "hi" }
+## Scope
 
-def say_hi(bloc)
-    bloc.call
+```ruby
+def call_proc(my_proc)
+  n = 50
+  puts my_proc.call
 end
 
-say_hi(hi)
+n   = 1
+my_proc = Proc.new { puts n + 1 }
+my_proc.call
 ```
-returns 'hi'.
+We would expect '50' but it returns '1', thus the proc carries with it values like local variables and methods from the context where it was defined.
