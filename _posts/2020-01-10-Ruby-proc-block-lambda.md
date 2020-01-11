@@ -49,8 +49,8 @@ show { puts 'from yield' }
 returns `'Hi', 'from yield','after yield'`.
 
 ```Ruby
-def show_bloc(&block)
-  block.call
+def show_bloc(&my_block)
+  my_block.call
   puts "there"
 end
 show_bloc { puts "Hello" }
