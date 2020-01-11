@@ -27,7 +27,7 @@ end
 ```
 returns `a,1,b,4` and `1,4,3,16`.
 
-### how to use a block
+### How to use a block
 Blocks can't be saved into a variable unless we declare the block as a `proc` object (see bellow). Thus blocks don't run by themselves. They have to be used within a method.
 
 A method can accept only one block, but the block can be called several times.
@@ -57,7 +57,7 @@ show_bloc { puts "Hello" }
 ```
 returns 'Hello, there'.
 
-### Methods accept a unique block, and can them multiple times.
+### Methods accept a unique block, and can it them multiple times.
 A method can accept only one block, but the block can be called several times.
 ```Ruby
 def show_if_bloc(n, &block)
