@@ -78,6 +78,7 @@ returns '3,there, there, there'.
 
 ### `if block_given?`
 If a  method  uses `yield`  or `.call`   with no block given, this raises an exception. You have to use use `if block_given?` to prevent this. The program won't stop when we use `if block_given?` and this line will simply be skipped.
+
 ```ruby
 def show_if_bloc(word, &block)
   puts word
@@ -93,6 +94,7 @@ will return respectively 'Hi, ok' and 'Hi, there, there, ok'.
 
 ### Blocks can accept arguments.
 Note: Remember to use double quotes " " when interpolating.
+
 You can pass an argument to a block, and the argument is declared within pipes `|` within the code block.
 ```ruby
 def show
@@ -141,6 +143,7 @@ A `proc` can be run with the method `.call`. In other words, a `proc`is a block 
 
 To use `my_proc`, we have the two same ways as previously seen:
 - declare a bloc as an argument to the method, and call it inside the method to execute it. There is no need of the `&` here since we already created a `proc` object, and the ampersand work it precisely to convert a block to a `proc` object.
+
 ```ruby
 hi = Proc.new { puts "hi" }
 
