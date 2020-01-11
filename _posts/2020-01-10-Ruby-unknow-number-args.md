@@ -11,6 +11,6 @@ def sum(*args)
   args.reduce { |sum, n| sum + n }
 end
 ```
-so `sum(1,2,3)` returns `6`. 
+so that we can do `sum(1,2)` or `sum(1,2,3,4)` that returns respectively `3` and  `6`. 
 
-We could also have used `(1..3).reduce(&:+)`  in this case.
+Note: we could also have used `(1..4).reduce(&:+)`  in this case.
