@@ -119,3 +119,6 @@ node.remove() |	Remove node
 
 ### `nextElementSibling`
 The method `nextElementSibling`   gives acces to the next  HTML sibling element if exists (otherwise, it returns `null`). The method `previousElementSibling`  also exists.
+
+## Modify attributes and classes
+
