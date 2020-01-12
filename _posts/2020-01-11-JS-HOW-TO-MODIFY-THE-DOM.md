@@ -64,7 +64,7 @@ createTextNode() |	Create a new text node
 node.textContent | 	Get or set the text content of an element node
 node.innerHTML |	Get or set the HTML content of an element
 
-### `elt.textContent` and `elt.appendChild(document.createTextNode())` and `innerHTML`.
+### Differences between `elt.textContent` and `elt.appendChild(document.createTextNode())` and `innerHTML`.
 
 The property `textContent` renders the full content of `Node` objects and the property `innerHTML` returns the visible content of HTML elements. For example, if we create a paragraph `p = document.createElement('p')`, then both the method `createTextNode(text)` with `appendChild`  and `p.innerHTML(text)` will render raw text: if  `text = '<ul><li> A point </li></ul>'`, we will see the text, not the 'normal 'bullet point' which is rendered by `innerHTML`.
 
@@ -99,6 +99,8 @@ We use the method `insertAdjacentHTML`
 <'/p>
 <'!-- afterend -->
 
+The method `elt.childElementCount`  counts the number of children  of an element (the length of the  HTML collection). We have the method `firstElementChild`  and `lastElementChild` and the selector `nth-child(i)` where `i<elt.childElementCount`.
+
 
 `const ul = document.querySelector('ul')`
 `const li = document.createElement('li')`
@@ -115,6 +117,5 @@ Method |	Description
 node.removeChild() | 	Remove child node
 node.remove() |	Remove node
 
-`elt.childElementCount`  counts the number of children  of an element (the length of the  HTML collection). We have the method `firstElementChild`  and `lastElementChild` and the selector `nth-child(i)` where `i<elt.childElementCount`.
-
+### `nextElementSibling`
 The method `nextElementSibling`   gives acces to the next  HTML sibling element if exists (otherwise, it returns `null`). The method `previousElementSibling`  also exists.
