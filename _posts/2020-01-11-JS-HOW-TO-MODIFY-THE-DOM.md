@@ -91,11 +91,11 @@ We use the method `insertAdjacentHTML`
     'beforeend': Just inside the targetElement, after its last child.
     'afterend': After the targetElement itself.
     
-    <!-- beforebegin -->
+<!-- beforebegin -->
 <'p>
-  <!-- afterbegin -->
+<!-- afterbegin -->
   some text
-  <!-- beforeend -->
+<!-- beforeend -->
 <'/p>
 <!-- afterend -->
 
