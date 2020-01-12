@@ -12,9 +12,9 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-p
 -> React Router: handling navigation in a React application
 -> Bootstrap (needs jquery, popper)
 
-  `yarn add react-router-dom bootstrap jquery popper.js`
+    yarn add react-router-dom bootstrap jquery popper.js
 
-  `rails g controller Homepage index`
+  `Rails g controller Homepage index`
 
 Running this command generates the following files:
 A `homepage_controller.rb` file for receiving all homepage-related requests. This file contains the index action you specified in the command.
@@ -32,7 +32,8 @@ By doing this, you will ensure that the contents of index.html.erb do not interf
 You will configure Rails to use React on the frontend of the application, instead of its template engine. This will allow you to take advantage of React rendering to create a more visually appealing homepage. Rails, with the help of the `Webpacker` gem, bundles all your JavaScript code into packs. These can be found in the packs directory at `app/javascript/packs`. You can link these packs in Rails views using the `javascript_pack_tag` helper, and you can link stylesheets imported into the packs using the `stylesheet_pack_tag` helper. To create an entry point to your React environment, you will add one of these packs to your application layout.
 
 -> Rename the file:
-  `mv app/javascript/packs/hello_react.jsx ~app/javascript/packs/Index.jsx`
+
+  mv app/javascript/packs/hello_react.jsx ~app/javascript/packs/Index.jsx
 
 Adding the JavaScript pack to your application’s header makes all your JavaScript code available and executes the code in 
 your Index.jsx file on the page whenever you run the app. Along with the JavaScript pack, you also added a meta viewport tag
@@ -334,10 +335,259 @@ Create a `Recipes.jsx` file in the `app/javascript/components` directory:
 
     `nano app/javascript/components/Recipes.jsx`
 
-Once the file is open, import the React and Link modules into it by adding the following lines to the file:
+Once the file is open, import the React and Link modules into it by adding the following lines to the file: we create a `Recipes` class that extends the `React.Component` class:
 
 ```jsx
 import React from "react";
 import { Link } from "react-router-dom";
 
+class Recipes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipes: []
+    };
+  }
+  componentDidMount() {
+    const url = "/api/v1/recipes/index";
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => this.setState({ recipes: response }))
+      .catch(() => this.props.history.push("/"));
+  }
+  render() {
+    const { recipes } = this.state;
+    const allRecipes = recipes.map((recipe, index) => (
+      <div key={index} className="col-md-6 col-lg-4">
+        <div className="card mb-4">
+          <img
+            src={recipe.image}
+            className="card-img-top"
+            alt={`${recipe.name} image`}
+          />
+          <div className="card-body">
+            <h5 className="card-title">{recipe.name}</h5>
+            <Link to={`/recipe/${recipe.id}`} className="btn custom-button">
+              View Recipe
+            </Link>
+          </div>
+        </div>
+      </div>
+    ));
+    const noRecipe = (
+      <div className="vw-100 vh-50 d-flex align-items-center justify-content-center">
+        <h4>
+          No recipes yet. Why not <Link to="/new_recipe">create one</Link>
+        </h4>
+      </div>
+    );
+
+    return (
+      <>
+        <section className="jumbotron jumbotron-fluid text-center">
+          <div className="container py-5">
+            <h1 className="display-4">Recipes for every occasion</h1>
+            <p className="lead text-muted">
+              We’ve pulled together our most popular recipes, our latest
+              additions, and our editor’s picks, so there’s sure to be something
+              tempting for you to try.
+            </p>
+          </div>
+        </section>
+        <div className="py-5">
+          <main className="container">
+            <div className="text-right mb-3">
+              <Link to="/recipe" className="btn custom-button">
+                Create New Recipe
+              </Link>
+            </div>
+            <div className="row">
+              {recipes.length > 0 ? allRecipes : noRecipe}
+            </div>
+            <Link to="/" className="btn btn-link">
+              Home
+            </Link>
+          </main>
+        </div>
+      </>
+    );
+  }
+}
+
+}
+export default Recipes;-
+
 ```
+- Inside the 'constructor', we are initializing a state object that holds the state of your recipes, which on initialization is an empty array (`[]`).
+- add a componentDidMount method in the Recipe class. The componentDidMount method is a React lifecycle method that is called immediately after a component is mounted. In this lifecycle method, you will make a call to fetch all your recipes. 
+- In your componentDidMount method, you made an HTTP call to fetch all recipes using the Fetch API. If the response is successful, the application saves the array of recipes to the recipe state. If there’s an error, it will redirect the user to the homepage.
+- Finally, add a render method in the Recipe class. The render method holds the React elements that will be evaluated and displayed on the browser page when a component is rendered. In this case, the render method will render cards of recipes from the component state. 
+
+Tthe next step is to create a route for it. Open the front-end route file located at `app/javascript/routes/Index.jsx` so that the file is now:
+```jsx
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "../components/Home";
+import Recipes from "../components/Recipes"; <-
+
+export default (
+  <Router>
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/recipes" exact component={Recipes} /> <-
+    </Switch>
+  </Router>
+);
+```
+
+We create a second component to view individual recipes. Create a `Recipe.jsx` file in the `app/javascript/components` directory. As with the Recipes component, import the React and Link modules by adding the following lines:
+
+```jsx
+import React from "react";
+import { Link } from "react-router-dom";
+```
+
+Next create a `Recipe` class that extends `React.Component` class by adding the class:
+
+```jsx
+class Recipe extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { recipe: { ingredients: "" } };
+
+    this.addHtmlEntities = this.addHtmlEntities.bind(this);
+  }
+}
+
+export default Recipe;
+```
+Like with your `Recipes` component, in the 'constructor', you initialized a state object that holds the state of a recipe. You also bound an `addHtmlEntities` method to this so it can be accessible within the component. The `addHtmlEntities` method will be used to replace character entities with HTML entities in the component.
+
+In order to find a particular recipe, your application needs the `id` of the recipe. This means your `Recipe` component expects an `id` `param`. You can access this via the `props` passed into the component.
+
+Next, add a `componentDidMount` method where you will access the `id` `param` from the match key of the `props` object. Once you get the `id`, you will then make an HTTP request to fetch the recipe. Add the following highlighted lines to your file:
+
+```jsx
+class Recipe extends React.Component {
+  [...]
+  }
+componentDidMount() {
+    const {
+      match: {
+        params: { id }
+      }
+    } = this.props;
+
+    const url = `/api/v1/show/${id}`;
+
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => this.setState({ recipe: response }))
+      .catch(() => this.props.history.push("/recipes"));
+  }
+```
+In the `componentDidMount` method, using object destructuring, you get the `id` `param` from the `props` object, then using the Fetch API, you make a HTTP request to fetch the recipe that owns the `id` and save it to the component state using the `setState` method. If the recipe does not exist, the app redirects the user to the recipes page.
+
+
+Now add the addHtmlEntities method, which takes a string and replaces all escaped opening and closing brackets with their HTML entities. This will help us convert whatever escaped character was saved in your recipe instruction:
+
+```jsx
+  addHtmlEntities(str) {
+    return String(str)
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">");
+  }
+```
+
+Finally, add a `render` method that gets the recipe from the state and renders it on the page. To do this, add the following highlighted lines:
+```jsx
+  render() {
+    const { recipe } = this.state;
+    let ingredientList = "No ingredients available";
+
+    if (recipe.ingredients.length > 0) {
+      ingredientList = recipe.ingredients
+        .split(",")
+        .map((ingredient, index) => (
+          <li key={index} className="list-group-item">
+            {ingredient}
+          </li>
+        ));
+    }
+    const recipeInstruction = this.addHtmlEntities(recipe.instruction);
+
+    return (
+      <div className="">
+        <div className="hero position-relative d-flex align-items-center justify-content-center">
+          <img
+            src={recipe.image}
+            alt={`${recipe.name} image`}
+            className="img-fluid position-absolute"
+          />
+          <div className="overlay bg-dark position-absolute" />
+          <h1 className="display-4 position-relative text-white">
+            {recipe.name}
+          </h1>
+        </div>
+        <div className="container py-5">
+          <div className="row">
+            <div className="col-sm-12 col-lg-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Ingredients</h5>
+                {ingredientList}
+              </ul>
+            </div>
+            <div className="col-sm-12 col-lg-7">
+              <h5 className="mb-2">Preparation Instructions</h5>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: `${recipeInstruction}`
+                }}
+              />
+            </div>
+            <div className="col-sm-12 col-lg-2">
+              <button type="button" className="btn btn-danger">
+                Delete Recipe
+              </button>
+            </div>
+          </div>
+          <Link to="/recipes" className="btn btn-link">
+            Back to recipes
+          </Link>
+        </div>
+      </div>
+    );
+  }
+```
+In this `render` method, you split your comma separated ingredients into an array and mapped over it, creating a list of ingredients. If there are no ingredients, the app displays a message that says 'No ingredients available'. It also displays the recipe image as a hero image, adds a delete recipe button next to the recipe instruction, and adds a button that links back to the recipes page.
+
+To view the Recipe component on a page, add it to your routes file. Open your route file `app/javascript/routes/Index.jsx` to edit:
+
+```jsx
+  import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "../components/Home";
+import Recipes from "../components/Recipes";
+import Recipe from "../components/Recipe";
+
+export default (
+  <Router>
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/recipes" exact component={Recipes} />
+      <Route path="/recipe/:id" exact component={Recipe} />
+    </Switch>
+  </Router>
+);
+```
+In this route file, you imported your `Recipe` component and added a route for it. Its route has an `:id` `param` that will be replaced by the `id` of the recipe you want to view.
