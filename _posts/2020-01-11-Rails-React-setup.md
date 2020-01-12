@@ -5,16 +5,17 @@ title: Rails React setup
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-project-with-a-react-frontend
 
-  `rails new rails_react_recipe -d=postgresql -T --webpack=react --skip-coffee`
+    `rails new rails_react_recipe -d=postgresql -T --webpack=react --skip-coffee`
   
-  `rails db:create`
+    `rails db:create`
 
 -> React Router: handling navigation in a React application
+
 -> Bootstrap (needs jquery, popper)
 
-    yarn add react-router-dom bootstrap jquery popper.js
+    `yarn add react-router-dom bootstrap jquery popper.js`
 
-  `Rails g controller Homepage index`
+    `Rails g controller Homepage index`
 
 Running this command generates the following files:
 A `homepage_controller.rb` file for receiving all homepage-related requests. This file contains the index action you specified in the command.
