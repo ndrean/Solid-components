@@ -92,16 +92,17 @@ We use the method `insertAdjacentHTML`
     'afterend': After the targetElement itself.
     
     <!-- beforebegin -->
-<p>
+<'p>
   <!-- afterbegin -->
-  foo
+  some text
   <!-- beforeend -->
-</p>
+<'/p>
 <!-- afterend -->
 
 
 `const ul = document.querySelector('ul')`
 `const li = document.createElement('li')`
+
 Property/Method |	Description | Example
 ----------------|-------------|--------
 node.appendChild('tag') |	Add a node as the last child of a parent element | `ul.appendChild(li)`
