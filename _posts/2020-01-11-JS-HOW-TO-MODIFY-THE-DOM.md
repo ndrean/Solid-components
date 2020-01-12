@@ -3,6 +3,18 @@ layout: post
 title: Javascript, how to modifiy the DOM
 ---
 
+## CSS selectors
+
+- `document.getElementById('my_id')`
+- `document.querySelector('.a_class')`
+- `document.querySelector('#an_id')`
+- `document.querySelectorAll('.a_class')`.
+
+We have advanced selectors:
+- `p#an_id`   (paragraph with `id = an_id`)
+- `p > .an_id` (for any child of a paragraph whose `id`  is 'an_id') .... 
+- TODO
+
 
 ## Create new Nodes
 
@@ -15,16 +27,11 @@ node.innerHTML |	Get or set the HTML content of an element
 
 ### `elt.textContent` and `elt.appendChild(document.createTextNode())` and `innerHTML`.
 
-The property `textContent` renders the full content of `Node` objects and the property `innerHTML returns the visible content
-of HTML elements. For example, if we create a paragraph `p = document.createElement('p')`, then `p.innerHTML = '<ul><li> Un point </li></ul>'`
-will render a 'normal' bullet point' whilst `p.textContent`  will render plain text, namely '<ul><li> Un point </li></ul>'.
+The property `textContent` renders the full content of `Node` objects and the property `innerHTML` returns the visible content of HTML elements. For example, if we create a paragraph `p = document.createElement('p')`, then both the method `createTextNode(text)` with `appendChild`  and `p.innerHTML(text)` will render raw text: if  `text = '<ul><li> A point </li></ul>'`, we will see the text, not the 'normal 'bullet point' which is rendered by `innerHTML`.
 
-If we add some raw text inside an element, then `textContent`is prefered to `innerHTML` to avoid XSS.
+Setting the property `elt.textContent` or `innerHTML` will erase everything, whilst `elt.appendChild(document.createTextNode())` will append to the existing text. 
 
-The method `createTextNode()` with `appendChild`  wills also render plain text. However, setting the property `myParagraph.textContent = "some text"`
-will erase everything, whilst `myParagraph.appendChild(document.createTextNode(" continues"))` will append 'continue' to the existing text. 
-To insert text, one can use the property `textContent` or `innerHTML` or the method `createTextNode` . 
-
+If we just add some raw text inside an element, then `textContent`is prefered to `innerHTML` to avoid XSS.
 
 ```javascript
 const par = document.CreateElement('p')
@@ -38,11 +45,14 @@ document.body.appendChild(par)
 
 ## Insert Nodes in the DOM
 
-Property/Method |	Description
-----------------|--------------
-node.appendChild() |	Add a node as the last child of a parent element
-node.insertBefore() |	Insert a node into the parent element before a specified sibling node
-node.replaceChild() |	Replace an existing node with a new node
+`const ul = document.querySelector('ul')`
+`const li = document.createElement('li')`
+
+Property/Method |	Description | Example
+----------------|-------------|--------
+node.appendChild('tag') |	Add a node as the last child of a parent element | `ul.appendChild(li)`
+node.insertBefore() |	Insert a node into the parent element before a specified sibling node | `ul.insertBefore(li, ul.firstElementChild)`
+node.replaceChild() |	Replace an existing node with a new node | `ul.replaceChild(li, ul.children[1])`
 
 
 Method |	Description
