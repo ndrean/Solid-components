@@ -5,24 +5,27 @@ title: Rails React setup
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-project-with-a-react-frontend
 
-    `rails new rails_react_recipe -d=postgresql -T --webpack=react --skip-coffee`
+    rails new rails_react_recipe -d=postgresql -T --webpack=react --skip-coffee
+    
+then create the PosgreSQL database with:
   
-    `rails db:create`
+    rails db:create
+
 
 -> React Router: handling navigation in a React application
 
 -> Bootstrap (needs jquery, popper)
 
-    `yarn add react-router-dom bootstrap jquery popper.js`
+    yarn add react-router-dom bootstrap jquery popper.js
 
-    `Rails g controller Homepage index`
+    Rails g controller Homepage index
 
 Running this command generates the following files:
-A `homepage_controller.rb` file for receiving all homepage-related requests. This file contains the index action you specified in the command.
-A `homepage.js` file for adding any JavaScript behavior related to the Homepage controller.
-A `homepage.scss` file for adding styles related to the Homepage controller.
-A `homepage_helper.rb` file for adding helper methods related to the Homepage controller.
-An `index.html.erb` file which is the view page for rendering anything related to the homepage.
+-   a `homepage_controller.rb` file for receiving all homepage-related requests. This file contains the index action you specified in the command.
+- a `homepage.js` file for adding any JavaScript behavior related to the Homepage controller.
+- a `homepage.scss` file for adding styles related to the Homepage controller.
+- a `homepage_helper.rb` file for adding helper methods related to the Homepage controller.
+- an `index.html.erb` file which is the view page for rendering anything related to the homepage.
 
 Rails also adds a get route for your homepage updates your routes file which is located at `config/routes.rb`.
 -> replace `get 'homepage/index'` with `root to: 'homepage#index'`.
