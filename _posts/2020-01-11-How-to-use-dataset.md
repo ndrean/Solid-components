@@ -7,7 +7,7 @@ title: HTML, Dataset, how to use with Javascript and CSS
 
   `<p id=1, data-test-id = "1" data-test2= 2>  Hello </p>`
 
-Anything prefiexd with `data-` will be a dataset.
+Anything prefixed with `data-` will be a dataset.
 
 ### Create dataset
 
