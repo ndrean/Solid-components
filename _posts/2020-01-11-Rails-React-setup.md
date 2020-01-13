@@ -7,10 +7,11 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-p
 
     rails new rails_react_recipe -d=postgresql -T --webpack=react --skip-coffee
     
-then create the PosgreSQL database with:
+then connect to a PosgreSQL database with:
   
     rails db:create
 
+The database.yml file found in `config/database.yml` contains database details like database name for different development environments. Rails specifies a database name for the different development environments by appending an underscore (_) followed by the environment name to your app’s name. You can always change any environment database name to whatever you prefer.
 
 -> React Router: handling navigation in a React application
 
