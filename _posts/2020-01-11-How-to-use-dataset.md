@@ -27,10 +27,10 @@ To access a particular one, we do `par.dataset.testId`  (snake-case replaced by 
 We can dynamically to the following
 ```javascript
 <script>
-const newpar = document.createElement('p')
-document.body.appendChild(newpar)
-newpar.setAttribute('data-counter', 3)
-newpar.innerHTML = "This is paragraph number" + " " + par.dataset.counter
+const newPar = document.createElement('p')
+document.body.appendChild(newPar)
+newPar.setAttribute('data-counter', 3)
+newPar.innerHTML = "This is paragraph number" + " " + newPar.dataset.counter
 </script>
 ```
 and render <p> This is paragraph number 3 </p>
