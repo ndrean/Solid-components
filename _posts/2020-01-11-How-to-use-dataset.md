@@ -37,7 +37,7 @@ and render <p> This is paragraph number 3 </p>
 
 ### Modify dataset
 
-We simply do `newpar.dataset.counter = 4`.
+We simply do `newPar.dataset.counter = 4`.
 
-We can remove a `dataset`  by the method `removeAttribute`. For example,  `newpar.removeAttribute('data-counter')
+We can remove a `dataset`  by the method `removeAttribute`. For example,  `newPar.removeAttribute('data-counter')
 
