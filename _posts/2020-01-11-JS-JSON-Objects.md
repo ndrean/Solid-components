@@ -23,6 +23,7 @@ const user = {
 
 ```
 and we can do `user.lastName`  or `user.fullName()`.
+
 Note: using `fullName : function() { [..] }` is also valid.
 
  ## JSON
