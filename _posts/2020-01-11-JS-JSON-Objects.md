@@ -23,7 +23,7 @@ const user = {
 
 ```
 and we can do `user.lastName`  or `user.fullName()`.
-Note: using `fullName : function() { ...` is also valid.
+Note: using `fullName : function() { [..] }` is also valid.
 
  ## JSON
  It is a format for sharing data. Files have the extension `.json`. The format is curly braces with pairs of `"keys" : "values"` where `values`  can be a nested 
