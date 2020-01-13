@@ -40,12 +40,28 @@ newPar.innerHTML = "This is paragraph number" + " " + newPar.dataset.counter
 ```
 and render <p> This is paragraph number 3 </p>
 
-### Access via CSS
-The `content` CSS property replaces an element with a generated value. We read the dataset value by `attr()`. We can  make the dataset appear ``::before`  or `::after` a selected tag.
-Suppose we have `<p id=1  data-p=2> My paragraph </p>`.  We can define the CSS property:
+### Display dataset via CSS
+The `content` CSS property replaces an element with a generated value. We use the method `attr()` to read the dataset so that . We can  make the dataset appear ``::before`  or `::after` a selected tag.
+Suppose we have the following 2 paragraphs:
+  `<p id=1  data-p=10> My first paragraph </p>`
+  `<p id=2 data-p=20> My second paragraph </p>` 
+  
+We can use the CSS property `::after`  or `::before` to display the attribute read by the method `attr()` respectively after and before the `innerHTML` of the paragraph. We can also use the data-value for conditionnal CSS.
 
+when we define the style:
+ 
 ```css
-p::after { content: attr('data-p'); color:  red; }
+p::after { content: attr('data-p') }
+p:hover[data-p=1] { font-weight: bold; }
   ```
- <p> My paragraph <span style="font-size:20px;">2</span></p>
+  
+so that we print the value of the dataset as:
+  
+ <p> My first paragraph <strong>1</strong></p>
+ <p> My second paragraph <strong>2</strong></p>
+ 
+ which changes to bold when hovered over the first paragraph: 
+ 
+ <p><strong> My first paragraph 2</strong></p> 
+ <p> My second paragraph <strong>2</strong></p>
 
