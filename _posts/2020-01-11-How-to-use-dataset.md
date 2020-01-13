@@ -45,8 +45,8 @@ The `content` CSS property replaces an element with a generated value. We use th
 
 For example, suppose we have the following 2 paragraphs:
 
-`<p > id=1  data-p=10> My first paragraph </p>`
-`<p > id=2 data-p=20> My second paragraph </p>`
+`<p > id=1  data-p=10 data-val='%'> My first result: </p>`
+`<p > id=2 data-p=20 data-val='%'> My second result: </p>`
 
 When we define the style:
  
@@ -65,8 +65,7 @@ We can also use the data-value for conditionnal CSS. Let's define:
 ```css
 p:hover[data-p=1] { font-weight: bold; }
   ```
-  
-so that the paragraph with data value `data-p=1`    changes to bold when hovered:
+(no need to declare `content` this way) so that the paragraph with data value `data-p=1` changes to bold when hovered:
  
  <p><strong> My first paragraph 2</strong></p> 
  <p> My second paragraph <strong>2</strong></p>
