@@ -13,8 +13,8 @@ https://www.digitalocean.com/community/tutorials/how-to-work-with-json-in-javasc
 
 ```javascript
 const user = {
-    firstName: "Sammy",
-    lastName : "Shark",
+    firstName: "James",
+    lastName : "Brown",
     alive    : false,
     fullName() {
        return this.firstName + " " + this.lastName;
