@@ -9,7 +9,15 @@ title: HTML, Dataset, how to use with Javascript and CSS
 
 Anything prefixed with `data-` will be a dataset.
 
-### Create dataset
+### Reading & write dataset
+
+We can do `par.dataset` that will return `<p data-test-id = "1" data-test2= 2  data-new="new value">`.
+
+To access a particular one, we do `par.dataset.testId`  (snake-case replaced by camelCase) and `par.dataset.test2` and `par.dataset.new`.
+
+To change a `dataset`, we do `par.dataset.testId = 10`.
+
+### Create & remove dataset
 
 
 - writting directly into a HTML file. We can store data in an HTML file writting `<p id=1, data-test-id = "1" data-test2= 2>  Hello </p>`
@@ -17,11 +25,8 @@ Anything prefixed with `data-` will be a dataset.
 - dynamically creating with Javascript: we select this paragraph with `const par = document.getElementById('1')` and we can add a `dataset` by
   `par.setAttribute('data-new','new value')`
   
-### Reading dataset
+ We can remove a `dataset`  by the method `removeAttribute`. For example,  `par.removeAttribute('data-new')
 
-We can do `par.dataset` that will return `<p data-test-id = "1" data-test2= 2  data-new="new value">`.
-
-To access a particular one, we do `par.dataset.testId`  (snake-case replaced by camelCase) and `par.dataset.test2` and `par.dataset.new`.
 
 ### Example
 We can dynamically to the following
@@ -35,9 +40,4 @@ newPar.innerHTML = "This is paragraph number" + " " + newPar.dataset.counter
 ```
 and render <p> This is paragraph number 3 </p>
 
-### Modify dataset
-
-We simply do `newPar.dataset.counter = 4`.
-
-We can remove a `dataset`  by the method `removeAttribute`. For example,  `newPar.removeAttribute('data-counter')
-
+### Access via CSS
