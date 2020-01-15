@@ -8,7 +8,7 @@ title: Javascript, how to select and modifiy the DOM
 https://flukeout.github.io/?utm_source=lewagon.com
 
 The method `document.querySelector()` returns the first element found when we select elements of the DOM:
-- `*`stands for everything
+- `*` stands for everything
 - by tag (`div`)
 - by id (`#red`),
 - by class (`.btn`)  or psuedo-class (`a:hover`)
@@ -25,16 +25,41 @@ The method `document.querySelector()` returns the first element found when we se
 - attribute starts with: `a[href^="https"]`
 - attribute contains `a[href*="oogle"]`
 
-The method `document.querySelectorAll('.a_class')` returns all found.
+## Access selected elements in Javascript
 
-We also have `document.getElementById('my_id')` which returns the first found.
+- `document.querySelector('.class1')` returns the first found, and `querySelectorAll('.class1')`  returns them all. We have to put `.class1`  and `#my_id` with this method.
 
-We have advanced selectors:
-- `p#an_id`   (paragraph with `id = an_id`)
-- `p > .an_id` (for any child of a paragraph whose `id`  is 'an_id') .... 
-- TODO
+- `document.getElementById('my_id')` which returns the first found (since we are looking for `id`,  no need to specifiy `#my_id`).
+
+
 
 ### Example `nth-of-type()`
+
+If we have the following HTML file:
+
+    <table id="score">
+      <thead>
+        <tr>
+          <th>Test
+          <th>Result
+      <tfoot>
+        <tr>
+          <th>Average
+          <td>82%
+      <tbody>
+        <tr>
+          <td>A
+          <td>87%
+        <tr>
+          <td>B
+          <td>78%
+        <tr>
+          <td>C
+          <td>81%
+    </table>
+
+which displays as:
+
 <table id="score">
   <thead>
     <tr>
@@ -56,7 +81,7 @@ We have advanced selectors:
       <td>81%
 </table>
 
-`document.querySelectorAll("#score>tbody>tr>td:nth-of-type("1")` returns an array `[A,B,C]` and ``document.querySelectorAll("#score>tbody>tr>td:nth-of-type("2")` returns the array `[ 87%, 78%, 81% ]`.
+then `document.querySelectorAll("#score>tbody>tr>td:nth-of-type("1")` returns an array `[A,B,C]` and `document.querySelectorAll("#score>tbody>tr>td:nth-of-type("2")` returns the array `[ 87%, 78%, 81% ]`.
 
 
 ## Create new Nodes
@@ -95,13 +120,13 @@ We use the method `insertAdjacentHTML`
     'beforeend': Just inside the targetElement, after its last child.
     'afterend': After the targetElement itself.
     
-<'!-- beforebegin -->
-<'p>
-<'!-- afterbegin -->
-  some text
-<'!-- beforeend -->
-<'/p>
-<'!-- afterend -->
+    <!-- beforebegin -->
+    <'p>
+    <!-- afterbegin -->
+      some text
+    <!-- beforeend -->
+    </p>
+    <!-- afterend -->
 
 The method `elt.childElementCount`  counts the number of children  of an element (the length of the  HTML collection). We have the method `firstElementChild`  and `lastElementChild` and the selector `nth-child(i)` where `i<elt.childElementCount`.
 
