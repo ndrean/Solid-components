@@ -1,25 +1,29 @@
 ---
 layout: post
-title: Javascript, how to modifiy the DOM
+title: Javascript, how to select and modifiy the DOM
 ---
 
 ## CSS selectors
 
+https://flukeout.github.io/?utm_source=lewagon.com
+
 The method `document.querySelector()` returns the first element found when we select elements of the DOM:
+- `*`stands for everything
 - by tag (`div`)
-- by id (`#btn_red`),
+- by id (`#red`),
 - by class (`.btn`)  or psuedo-class (`a:hover`)
 - with both class `(".class1.class2")`
-- mixed: `li` with class1 with `("li.class1")`
-- Inside: descendants with class2 of parents with class1:  `(".class1 .class2")`
-- Inside: `li` descendants inside a `div`: `("div li")`,
-- AND: search for paragraphs and  links with `("p,a")`,
-- Direct childs with `("div > li")`
-- for first childs `("p:first-child")`
-
+- mixed: `li` with `.class1` and `#red` with `("li.class1#red")`
+- descendants: all `a`  inside `p` with 'space': `("p a")`
+- everythin inside an element, `(p *)`
+- AND: with the comma ',' : all `p`   with class1 is `("p,.class 1")`,
+- every adjacent sibling (first direct descendant of the type) with '+':  `(p + li)` 
+- all direct childs with `("ul > li")`  returns all the `li`
+- for nth child `("ul:nth-child(2)")` returns the second `li` child
 - by attribute: `("p[color=blue]")` for  <p style="color:blue;">
-- class ends with:  a[href$=".pdf"]
- - starts with: a[href^="https"]
+- attribute ends with:  `a[href$=".pdf"]`
+- attribute starts with: `a[href^="https"]`
+- attribute contains `a[href*="oogle"]`
 
 The method `document.querySelectorAll('.a_class')` returns all found.
 
