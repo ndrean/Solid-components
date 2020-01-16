@@ -63,43 +63,77 @@ input:checked + label { background-color: white;}
 /* select all labels immediately following an input with property NOT checked */
 input:not(:checked) + label { background-color: lightgrey; }
 
+body {
+    background: #eee;
+    min-height: 100vh;
+    box-sizing: border-box; /* pour que le padding et bordure n'augmentent plus la largeur */
+    padding-top: 10vh;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande",
+    sans-serif;
+    margin: 0 auto;
+}
 
-
+.container {
+    display:flex;
+    justify-content:center;
+    min-width: 300px;
+ }
 
 label { 
     padding: 10px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    margin: 0px;
-    font-weight: bold;;
+    font-weight: bold;
+    position:relative;
+    top: -5px; /*   just for fun */
 }
 
 .textbox { 
     background-color: white;
     padding: 1rem;
+    width: 60vw;
+    min-width: 300px ;
 }
 
 ```
     
 
 ```
-<!-- start by default with label 1 -->
-<!-- group the checkoxes with same name -->
-<input type="radio" name="radiobutton" id="tab-1" checked />
-<label for="tab-1">Tab one</label>
+<!-- create a container to center the .bar div -->
+<div class="container">
 
-<input type="radio" name="radiobutton" id="tab-2" />
-<label for="tab-2">Tab two</label>
+    <!-- create a second div to isolate from the centering of a .container -->
+    <div class="bar">
+    
+        <!-- start by default with label 1 -->
+        <!-- group the checkoxes with same name -->
+        <input type="radio" name="radiobutton" id="tab-1" checked />
+        <label for="tab-1">Tab one</label>
 
-<input type="radio" name="radiobutton" id="tab-3" />
-<label for="tab-3">Tab three</label>
+        <input type="radio" name="radiobutton" id="tab-2" />
+        <label for="tab-2">Tab two</label>
 
-<!-- give all divs a .textbox to select them after a label -->
-<!--  give every div a unique .content-i for indivual display when input is checked -->
-<div class="textbox content-1">1: Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, provident?     </div>
-<div class="textbox content-2">2: Lorem ipsum dolor sit amet consectetur adipisicing elit. In, minus.               </div>
-<div class="textbox content-3">3: Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, cupiditate! </div>
- 
+        <input type="radio" name="radiobutton" id="tab-3" />
+        <label for="tab-3">Tab three</label>
+
+
+        <!-- give all divs a .textbox to select them after a label -->
+        <!--  give every div a unique .content-i for indivual display the matching textbox
+        with   the checked input-i -->
+        
+        <div class="textbox content-1">
+            1: Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, provident?
+        </div>
+        <div class="textbox content-2">
+            2: Lorem ipsum dolor sit amet consectetur adipisicing elit. In, minus.
+        </div>
+        <div class="textbox content-3">
+            3: Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, cupiditate!
+        </div>
+        
+    </div>
+</div>
+
 ```
     
     
