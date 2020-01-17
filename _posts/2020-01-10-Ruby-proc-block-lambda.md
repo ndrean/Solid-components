@@ -4,9 +4,10 @@ title: Ruby, Examples with proc, lambda, block, yield
 ---
 
 ## Block
+
 A block is a piece of code enclosed by curly braces `{ some code }` or enclosed by `do ...end`  when you have multiline. Blocks are passed and executed by a method. 
 
-The following well known code is a block passed to the method `.each`applied to the enumerable object array:
+The following well known code is a block passed to the method `.each` applied to the enumerable object array:
 ```ruby
 [1,2,3].each { |n| puts n if n.even?}
 ```
@@ -36,7 +37,7 @@ We have two ways to use a block within a method:
 - keyword `yield`. You append an inline  block code at the end of a method when calling the method: the block will be run within the method where the `yield` keyword is declared
 - ampersand `&`. You pass an additional argument `&my_bloc` to a method, call `my_block.call`  within the method and declare an inline block when calling the method. 
 
-Note: the work of `&`is to convert a block to a `proc` object (see bellow), and conversely, to convert a `proc`into a block (see the example  with methods on enumerables).
+Note: the work of `&` is to convert a block to a `proc` object (see bellow), and conversely, to convert a `proc` into a block (see the example  with methods on enumerables).
 
 
 ```ruby
@@ -50,7 +51,7 @@ show_block { puts 'from the yield' }
 ```
 returns `'before yield', 'from the yield','after yield'`.
 
-```Ruby
+```ruby
 def show_bloc(&my_block)
   my_block.call
 end
@@ -58,11 +59,8 @@ show_bloc { puts "Hello" }
 ```
 returns 'Hello'.
 
-The `map`method applies a block to each element of an enumerable object and collects the values. For example, we pass the block  `{|n| n.even?}` to each element of an array with `map`. Since Ruby let's us use `:even?` instead, then we can write:
-```ruby
-[1,2,3].map(&:even?)
-```
-returns `'false,true,false'`.
+The `map` method applies a block to each element of an enumerable object and collects the values. For example, we pass the block  `{ |n| n.even? }` to each element of an array with `map`. Since Ruby let's us use `:even?` instead, then we can write 
+` [1,2,3].map(&:even?) ` whichs returns `'false,true,false'`.
 
 
 ### Methods accept a unique block, but can use it multiple times.
