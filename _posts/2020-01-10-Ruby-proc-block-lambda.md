@@ -9,9 +9,11 @@ A block is a piece of code enclosed by curly braces `{ some code }` or enclosed 
 
 The following well known code is a block passed to the method `.each` applied to the enumerable object array:
 ```ruby
-[1,2,3].each { |n| puts n if n.even?}
+irb> [1,2,3].each { |n| puts n if n.even?}
+
+=> 2
 ```
-will return 1,2,3. The bloc `{ |n| puts n }`  has `|n|` as argument and `puts n` as body. 
+The bloc `{ |n| puts n }`  has `|n|` as argument and `puts n` as body. 
 
 Blocks can have multiple arguments defined between pipes `|arg1, arg2|`. 
 ```ruby
@@ -47,17 +49,24 @@ def show_bloc
   puts "after yield"
 end
 
-show_block { puts 'from the yield' }
+irb> show_block { puts 'from the yield' }
+
+'before yield'
+'from the yield'
+'after yield'
 ```
-returns `'before yield', 'from the yield','after yield'`.
+
 
 ```ruby
 def show_bloc(&my_block)
   my_block.call
 end
-show_bloc { puts "Hello" }
+
+irb> show_bloc { puts "Hello" }
+
+'Hello'
 ```
-returns 'Hello'.
+
 
 The `map` method applies a block to each element of an enumerable object and collects the values. For example, we pass the block  `{ |n| n.even? }` to each element of an array with `map`. Since Ruby let's us use `:even?` instead, then we can write 
 ` [1,2,3].map(&:even?) ` whichs returns `'false,true,false'`.
@@ -72,9 +81,12 @@ def show_multiple_blocs(n, &block)
   yield
   yield
 end
-show_multiple_blocs(3) { puts "there" }
+
+irb> show_multiple_blocs(3) { puts "there" }
+
+'3,there, there, there'
 ```
-returns '3,there, there, there'.
+
 
 ### `if block_given?`
 If a  method  uses `yield`  or `.call`   with no block given, this raises an exception. You have to use use `if block_given?` to prevent this. The program won't stop when we use `if block_given?` and this line will simply be skipped.
@@ -86,10 +98,16 @@ def show_if_bloc(word, &block)
   yield if block_given?
   puts "ok"
 end
-show_bloc("Hi")
-show_if_bloc("Hi) { puts "there" }
+
+irb> show_bloc("Hi")
+
+'Hi, ok'
+
+irb> show_if_bloc("Hi) { puts "there" }
+
+'Hi, there, there, ok'
 ```
-will return respectively 'Hi, ok' and 'Hi, there, there, ok'.
+
 
 
 ### Blocks can accept arguments.
@@ -101,19 +119,28 @@ def show
   puts 'Hi '
   yield('John') if block_given?
 end
-show { |name| puts "#{name} from yield"}
+
+irb> show { |name| puts "#{name} from yield"}
+
+'Hi', 'John from yield'
  ```
- returns `'Hi', 'John from yield'.
  
+ We can use `yield`  as a timer   of the execution of a method:
   ```ruby
  def time(m=1, x=0, n=1)
     start_time = Time.now
     m.times { yield(x,n) }
     puts "Execution time: #{ Time.now - start_time } secs."
 end
-puts time(5,2,10) { |x,i| puts x  ** i }
+
+irb> time(5,2,10) { |x,i| puts x  ** i }
+
+1024
+1024
+1024
+Execution time: 2e-05 secs
 ```
-will measure the time to ouptut 5 times the number `2**10=1024`  and returns `"Execution time: 2e-05 secs`
+will measure the time to ouptut 5 times the number `2**10=1024`.
 
 ### The  `yield` returns values
 The block will return the last line.
@@ -145,27 +172,30 @@ To use `my_proc`, we have the two same ways as previously seen:
 - declare a bloc as an argument to the method, and call it inside the method to execute it. When the method doesn't apply to an enumerable, there is no need of the `&` here since we already created a `proc` object, and the ampersand work it precisely to convert a block to a `proc` object. However, if it applies to an enumerable, then we need to 'ampersand' the `proc`  to convert to a block because such methods like `each`, `select`, `map` don't expect arguments.
 
 ```ruby
-hi = Proc.new { puts "hi" }
+bonjour = Proc.new { puts "Bonjour" }
 
-def say_hi(bloc)
+def say_hello(bloc)
     bloc.call
 end
-say_hi(hi)
+
+irb> say_hello(bonjour)
+
+Bonjour
 ```
-returns 'hi'.
 
 - pass the named block already called to a method, and yield it.
 
 ```ruby
-hi = Proc.new { puts "hi" }
+bonjour = Proc.new { puts "Bonjour" }
 
-def say_hi
+def say_hello
     yield
 end
-say_hi {hi.call}
-```
 
-returns 'hi'.
+irb> say_hello {bonjour.call}
+
+Bonjour
+```
 
 ### Example
 
@@ -180,17 +210,20 @@ def say_hi(*blocs, name)
   yield if block_given?
 end
 
-say_hi(my_proc, my_lambda,'John') {  |name|  puts "hello #{name}" }
+irb> say_hi(my_proc, my_lambda,'John') {  |name|  puts "hello #{name}" }
 ```
 
 returns 'hello John, Bonjour there, Hola there, hello'.
 
 ### The converse `&`
 
-To illustrate this, we define a `proc` that returns `true`if a number is a multiple of 3. The method `select`returns the elements of an enumerable when the block returns `true`. We can't therefor select only multiples of 3 within a range by this method. We can't pass  the `proc`as such methods don't accept arguments; we thus pass the block, so we have to use `&multiple`. 
+To illustrate this, we define a `proc` that returns `true`if a number is a multiple of 3. The method `select`returns the elements of an enumerable when the block returns `true`. We can't therefor select only multiples of 3 within a range by this method. We can't pass  the `proc`as such methods don't accept arguments; we thus pass the block, so we have to use `&multiple`.
+
 ```ruby
-multiples_of_3 = Proc.new { |n| n % 3 == 0 } 
-(1..100).to_a.select(&multiples_of_3)
+irb> multiples_of_3 = Proc.new { |n| n % 3 == 0 } 
+irb> (1..100).to_a.select(&multiples_of_3)
+
+[3,6,9]
 ```
 
 ### lambdas
@@ -225,13 +258,18 @@ def call_proc
   puts Proc.new { return 1 }.call
   puts "after proc"
 end
-puts call_proc
+
+irb> puts call_proc
+1
 
 def call_proc
   puts -> { return 2 }.call
   puts "after proc"
 end
-puts call_proc
+
+irb> puts call_proc
+2
+after proc
 ```
 
 returns respectively '1' and '2, after proc'.
@@ -244,9 +282,9 @@ def call_proc(my_proc)
   puts my_proc.call
 end
 
-n   = 1
-my_proc = Proc.new { puts n + 1 }
-my_proc.call
+irb> n   = 1
+irb> my_proc = Proc.new { puts n + 1 }
+irb> my_proc.call
 ```
 
 We would expect '50' but it returns '1', thus the `proc` carries with it values like local variables and methods from the context where it was defined.
