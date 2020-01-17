@@ -7,7 +7,7 @@ title: CSS, selectors, example with tabs
 
 https://flukeout.github.io/?utm_source=lewagon.com
 
-The method `document.querySelector()` returns the first element found when we select elements of the DOM:
+
 - `*` stands for everything
 - by tag (`div`)
 - by id (`#red`),
@@ -15,7 +15,7 @@ The method `document.querySelector()` returns the first element found when we se
 - with both class `(".class1.class2")`
 - mixed: `li` with `.class1` and `#red` with `("li.class1#red")`
 - descendants: all `a`  inside `p` with 'space': `("p a")`
-- everythin inside an element, `(p *)`
+- everything inside an element, `(p *)`
 - AND: with the comma ',' : all `p`   with class1 is `("p,.class 1")`,
 - every adjacent sibling (first direct descendant of the type) with '+':  `(p + li)` 
 - all direct childs with `("ul > li")`  returns all the `li`
@@ -27,14 +27,14 @@ The method `document.querySelector()` returns the first element found when we se
 
 ## Tabs
 
-/* the logic */
 
 ```css
-/* to not display all inputs = radio buttons */
+/* the logic */
+/* to not display all of the radio buttons = input */
 input {display: none;} 
 
 
-/* group the inputs with same name = 'radiobutton' */
+/* group the inputs: use the same name = 'radiobutton' */
 /* select all the 'label' immediately after 'input' with 'input+label'
 and create a row of labels with "display:inline-block" so that all
 the labels will be aligned  */
