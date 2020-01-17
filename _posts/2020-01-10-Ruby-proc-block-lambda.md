@@ -3,45 +3,24 @@ layout: post
 title: Ruby, Examples with proc, lambda, block, yield
 ---
 
-## Block
+## Blocks and procs
 
-A block is a piece of code enclosed by curly braces `{ some code }` or enclosed by `do ...end`  when you have multiline. Blocks are passed and executed by a method. 
+A block is a piece of code enclosed by curly braces `{ some code  }` or enclosed by `do ...end`  when you have multiline. Blocks can have arguments defined between pipes `|arg1, arg2|`. 
 
-The following well known code is a block passed to the method `.each` applied to the enumerable object array:
-```ruby
-irb> [1,2,3].each { |n| puts n if n.even?}
+Blocks can't run by themselves unless we make a `Proc` object of them and use the method `.call`.
 
-=> 2
-```
-The bloc `{ |n| puts n }`  has `|n|` as argument and `puts n` as body. 
+To do so, we use `Proc.new { my code }` or simply `proc {my code }`. We can save a proc object into a variable `my_proc = proc { my code }`.
+`Proc` objects are closures, meaning they remember and can use the entire context in which they were created.
 
-Blocks can have multiple arguments defined between pipes `|arg1, arg2|`. 
-```ruby
-{a:1, b:2}.each do |k,v|
-  puts k
-  puts v**2
-end
+Running   `{ puts "hi" }.call` raises an error, but  `proc { puts "hi" }.call` returns 'hi'.
 
-[[1,2],[3,4]].each   do |a,b|
-  puts a
-  puts b**2
-end
 
-```
-returns respectively `a,1,b,4` and `1,4,3,16`.
 
 ### How to use a block: `yield` and `&`
-Blocks can't be saved into a variable unless we declare the block as a `proc` object (see bellow). Thus blocks don't run by themselves. They have to be used within a method.
-
-A method can accept only one block, but the block can be called several times.
 
 We have two ways to use a block within a method:
+
 - keyword `yield`. You append an inline  block code at the end of a method when calling the method: the block will be run within the method where the `yield` keyword is declared
-- ampersand `&`. You pass an additional argument `&my_bloc` to a method, call `my_block.call`  within the method and declare an inline block when calling the method. 
-
-Note: the work of `&` is to convert a block to a `proc` object (see bellow), and conversely, to convert a `proc` into a block (see the example  with methods on enumerables).
-
-
 ```ruby
 def show_bloc
   puts 'before yield '
@@ -49,42 +28,85 @@ def show_bloc
   puts "after yield"
 end
 
-irb> show_block { puts 'from the yield' }
+irb> show_block do
+        puts 'from the yield'
+     end
 
 before yield
 from the yield
 after yield
 ```
+- ampersand `&`. The `&` method toggles a block to a `Proc`object. The `&` can be used in the definition of the method or during the when calling the method. Doing `&my_proc` is equivalent converting a block to a `Proc`.  
+If a method uses a `Proc` object say `my_proc`, then the method runs the `Proc` using `my_proc.call`. We therefor can pass any block to the method using `&my_bloc`, wether in the definition of the method    of  when called the method.
 
+
+For example, consider the 2 methods:
 
 ```ruby
-def show_bloc(&my_block)
+hello=proc { puts 'hello' }
+
+def greet_b &my_block
   my_block.call
 end
-
-irb> show_bloc { puts "Hello" }
-
-Hello
 ```
+and
+```ruby
+def greet_y
+  yield
+end
+```
+Then all of the following   run `greet_b { puts "Hello" }`  and  `greet_b &hello`   and `greet_y { puts 'hi' }`   and `greet_y &hello` and `greet_y &hello` will return 'hi'. One confusion here is that we can use `yield`as well.
+
+The method `greet_y`  expects a block, so wether  we pass one directly  or  converts a `Proc` into a block     with the `&`   method. Then the method `greet_y`  internaly yields the block.
+Conversely, the `greet_b` method converts any arguments since we have the `&` in the definition. 
 
 
+The last method bellow accepts only a `Proc` object:
+
+```ruby
+def greet(bloc)
+  bloc.call
+  #yield
+end
+```
+so we can only write `greet hello`.
+
+
+### Using `Method` to pass another method as a block
+We define
+```ruby
+def hi
+  puts 'hi'
+end
+```
+The `method` method looks up the specified method name in the current context and returns a `Method` object that represents it. Here, `puts method(:hi)` returns `#<Method: main.hi`. 
+Then we can write `greet method(:hi)` or `greet_b &method(:hi)`
+
+### Examples
 The `map` method applies a block to each element of an enumerable object and collects the values. For example, we pass the block  `{ |n| n.even? }` to each element of an array with `map`. Since Ruby let's us use `:even?` instead, then we can write 
 ` [1,2,3].map(&:even?) ` whichs returns `'false,true,false'`.
+As an example, we define a `proc` that returns `true`if a number is a multiple of 3. The method `select`returns the elements of an enumerable when the block returns `true`. We can't therefor select only multiples of 3 within a range by this method. We can't pass  the `proc`as such methods don't accept arguments; we thus pass the block, so we have to use `&multiple`.
+
+```ruby
+irb> multiples_of_3 = Proc.new { |n| n % 3 == 0 } 
+irb> (1..10).to_a.select(&multiples_of_3)
+
+[3,6,9]
+```
+
 
 
 ### Methods accept a unique block, but can use it multiple times.
 A method can accept only ONE inline block, but the block can be called several times.
 ```ruby
-def show_multiple_blocs(n, &block)
-  puts n
+def show_multiple_blocs(&block)
   block.call 
   yield
   yield
 end
 
-irb> show_multiple_blocs(3) { puts "there" }
+irb> show_multiple_blocs { puts "there" }
 
-3
 there
 there
 there
@@ -111,23 +133,30 @@ irb> show_if_bloc("Hi) { puts "there" }
 Hi, there, there, ok
 ```
 
+### `yield`  accepts arguments when declared in the bloc
 
-
-### Blocks can accept arguments.
-Note: Remember to use double quotes " " when interpolating.
-
-You can pass an argument to a block, and the argument is declared within pipes `|` within the code block.
+You can pass an argument to a block, and the argument is declared within pipes `| |` within the code block. 
 ```ruby
 def show
   puts 'Hi '
   yield('John') if block_given?
+  yield
 end
 
-irb> show { |name| puts "#{name} from yield"}
+irb> show do
+      |name| puts "#{name} from yield"
+    end
 
 Hi
 John from yield
- ```
+from yield
+
+```
+Note: Remember to use double quotes " " when interpolating.
+
+
+### Example: time it
+
  
  We can use `yield`  as a timer   of the execution of a method:
   ```ruby
@@ -162,46 +191,6 @@ end
  returns 'Hi Jim'.
 
 
-
-
-## Class `Proc`
-A block of code can be saved into a variable by defining this block as a new instance of the class `Proc`.  To do so, we use `my_proc = Proc.new { my code }` or simply `my_proc = proc {my code }`. We can save a proc object into a variable `my_proc = proc { puts "hi" }`.
-
-A `proc` can be run with the method `.call`. In other words, a `proc`is a block container that can be used by calling it with `.call`, or used by a method.
-
-
- `{ puts "hi" }.call` raises an error whilst `Proc.new { puts "hi" }.call` returns 'hi'.
-
-
-To use `my_proc`, we have the two same ways as previously seen:
-- declare a bloc as an argument to the method, and call it inside the method to execute it. When the method doesn't apply to an enumerable, there is no need of the `&` here since we already created a `proc` object, and the ampersand work it precisely to convert a block to a `proc` object. However, if it applies to an enumerable, then we need to 'ampersand' the `proc`  to convert to a block because such methods like `each`, `select`, `map` don't expect arguments.
-
-```ruby
-bonjour = Proc.new { puts "Bonjour" }
-
-def say_hello(bloc)
-    bloc.call
-end
-
-irb> say_hello(bonjour)
-
-Bonjour
-```
-
-- pass the named block already called to a method, and yield it.
-
-```ruby
-bonjour = Proc.new { puts "Bonjour" }
-
-def say_hello
-    yield
-end
-
-irb> say_hello {bonjour.call}
-
-Bonjour
-```
-
 ### Example
 
 ```ruby
@@ -220,16 +209,7 @@ irb> say_hi(my_proc, my_lambda,'John') {  |name|  puts "hello #{name}" }
 
 returns 'hello John, Bonjour there, Hola there, hello'.
 
-### The converse `&`
 
-To illustrate this, we define a `proc` that returns `true`if a number is a multiple of 3. The method `select`returns the elements of an enumerable when the block returns `true`. We can't therefor select only multiples of 3 within a range by this method. We can't pass  the `proc`as such methods don't accept arguments; we thus pass the block, so we have to use `&multiple`.
-
-```ruby
-irb> multiples_of_3 = Proc.new { |n| n % 3 == 0 } 
-irb> (1..100).to_a.select(&multiples_of_3)
-
-[3,6,9]
-```
 
 ### lambdas
 A special kind of `proc` is `lambda` and is declared using `-> { my code }` (or `lambda { my code }`).
@@ -254,7 +234,7 @@ x=5
 puts -> { x += 15 }.call
 ```
 
-## TODO: difference `proc` and `lambda`.
+
 A lambda throws an error is  a wrong number of arguments is given, but not a `proc`.
 If you return from a `proc`, then the method will stop, whilst a lambda will continue. A lambda gives back the hand to the method if the lambda returns whilst not the  proc.
 
