@@ -51,9 +51,9 @@ end
 
 irb> show_block { puts 'from the yield' }
 
-'before yield'
-'from the yield'
-'after yield'
+before yield
+from the yield
+after yield
 ```
 
 
@@ -64,7 +64,7 @@ end
 
 irb> show_bloc { puts "Hello" }
 
-'Hello'
+Hello
 ```
 
 
@@ -84,7 +84,10 @@ end
 
 irb> show_multiple_blocs(3) { puts "there" }
 
-'3,there, there, there'
+3
+there
+there
+there
 ```
 
 
@@ -101,11 +104,11 @@ end
 
 irb> show_bloc("Hi")
 
-'Hi, ok'
+Hi, ok
 
 irb> show_if_bloc("Hi) { puts "there" }
 
-'Hi, there, there, ok'
+Hi, there, there, ok
 ```
 
 
@@ -122,7 +125,8 @@ end
 
 irb> show { |name| puts "#{name} from yield"}
 
-'Hi', 'John from yield'
+Hi
+John from yield
  ```
  
  We can use `yield`  as a timer   of the execution of a method:
@@ -144,6 +148,7 @@ will measure the time to ouptut 5 times the number `2**10=1024`.
 
 ### The  `yield` returns values
 The block will return the last line.
+
  ```ruby
 def show
   puts "Hi #{yield}"
