@@ -58,6 +58,7 @@ which displays as:
       <td>C
       <td>81%
 </table>
+          
 
 then `document.querySelectorAll("#score>tbody>tr>td:nth-of-type("1")` returns an array `[A,B,C]` and `document.querySelectorAll("#score>tbody>tr>td:nth-of-type("2")` returns the array `[ 87%, 78%, 81% ]`.
 
