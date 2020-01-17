@@ -30,7 +30,7 @@ end
 ```
 returns respectively `a,1,b,4` and `1,4,3,16`.
 
-### How to use a block: `yield` and `&
+### How to use a block: `yield` and `&`
 Blocks can't be saved into a variable unless we declare the block as a `proc` object (see bellow). Thus blocks don't run by themselves. They have to be used within a method.
 
 A method can accept only one block, but the block can be called several times.
