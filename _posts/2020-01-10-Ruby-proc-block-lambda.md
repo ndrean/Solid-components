@@ -9,7 +9,7 @@ A block is a piece of code enclosed by curly braces `{ some code  }` or enclosed
 
 Blocks can't run by themselves unless we make a `Proc` object of them and use the method `.call`.
 
-To do so, we use `Proc.new { my code }` or simply `proc {my code }`. We can save a proc object into a variable `my_proc = proc { my code }`.
+To do so, we use  `Proc.new { my code }` or simply `proc {my code }`. We can save a proc object into a variable `my_proc = proc { my code }`.
 `Proc` objects are closures, meaning they remember and can use the entire context in which they were created.
 
 Running   `{ puts "hi" }.call` raises an error, but  `proc { puts "hi" }.call` returns 'hi'.
@@ -20,7 +20,8 @@ Running   `{ puts "hi" }.call` raises an error, but  `proc { puts "hi" }.call` r
 
 We have two ways to use a block within a method:
 
-- keyword `yield`. You append an inline  block code at the end of a method when calling the method: the block will be run within the method where the `yield` keyword is declared
+- keyword  `yield`. You append an inline  block code at the end of a method when calling the method: the block will be run within the method where the `yield` keyword is declared
+
 ```ruby
 def show_bloc
   puts 'before yield '
@@ -36,6 +37,7 @@ before yield
 from the yield
 after yield
 ```
+
 - ampersand `&`. The `&` method toggles a block to a `Proc`object. The `&` can be used in the definition of the method or during the when calling the method. Doing `&my_proc` is equivalent converting a block to a `Proc`.  
 If a method uses a `Proc` object say `my_proc`, then the method runs the `Proc` using `my_proc.call`. We therefor can pass any block to the method using `&my_bloc`, wether in the definition of the method    of  when called the method.
 
@@ -49,12 +51,15 @@ def greet_b &my_block
   my_block.call
 end
 ```
+
 and
+
 ```ruby
 def greet_y
   yield
 end
 ```
+
 Then all of the following   run `greet_b { puts "Hello" }`  and  `greet_b &hello`   and `greet_y { puts 'hi' }`   and `greet_y &hello` and `greet_y &hello` will return 'hi'. One confusion here is that we can use `yield`as well.
 
 The method `greet_y`  expects a block, so wether  we pass one directly  or  converts a `Proc` into a block     with the `&`   method. Then the method `greet_y`  internaly yields the block.
@@ -69,18 +74,28 @@ def greet(bloc)
   #yield
 end
 ```
+
 so we can only write `greet hello`.
 
 
 ### Using `Method` to pass another method as a block
 We define
+
 ```ruby
 def hi
   puts 'hi'
 end
 ```
-The `method` method looks up the specified method name in the current context and returns a `Method` object that represents it. Here, `puts method(:hi)` returns `#<Method: main.hi`. 
-Then we can write `greet method(:hi)` or `greet_b &method(:hi)`
+
+The `Method` method looks up the specified method name in the current context and returns a `Method` object that represents it. Then:
+
+```ruby
+> puts method(:hi)
+
+#<Method: main.hi
+```
+
+so that we can write `greet method(:hi)` or `greet_b &method(:hi)`
 
 ### Examples
 The `map` method applies a block to each element of an enumerable object and collects the values. For example, we pass the block  `{ |n| n.even? }` to each element of an array with `map`. Since Ruby let's us use `:even?` instead, then we can write 
