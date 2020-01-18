@@ -9,7 +9,11 @@ A block is a piece of code enclosed by curly braces `{ some code  }` or enclosed
 
 Blocks can't run by themselves unless we make a `Proc` object of them and use the method `.call`.
 
-To do so, we use  `Proc.new { my code }` or simply `proc {my code }`. We can save a proc object into a variable `my_proc = proc { my code }`.
+> Turn a block into a `Proc` bject by:
+- `Proc.new { my code }` or simply
+- `proc {my code }`
+We can save a proc object into a variable `my_proc = proc { my code }`.
+
 `Proc` objects are closures, meaning they remember and can use the entire context in which they were created.
 
 Running   `{ puts "hi" }.call` raises an error, but  `proc { puts "hi" }.call` returns 'hi'.
@@ -39,8 +43,6 @@ after yield
 ```
 
 - ampersand `&`. The `&` method toggles a block to a `Proc`object. The `&` can be used in the definition of the method or during the when calling the method. Doing `&my_proc` is equivalent converting a block to a `Proc`.  
-If a method uses a `Proc` object say `my_proc`, then the method runs the `Proc` using `my_proc.call`. We therefor can pass any block to the method using `&my_bloc`, wether in the definition of the method    of  when called the method.
-
 
 For example, consider the 2 methods:
 
