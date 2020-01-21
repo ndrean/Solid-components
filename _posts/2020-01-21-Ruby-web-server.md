@@ -48,6 +48,10 @@ server.start
           </body>
         </html>
     )
+    
+```ruby
+File.open( "file1.html", "w" ) { file| file << html_string_1 }
+```
 
 
 ### With Sinatra `http://localhost:4567/file`
