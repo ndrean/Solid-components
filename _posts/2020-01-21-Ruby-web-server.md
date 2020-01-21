@@ -5,13 +5,13 @@ title: Create simple web server with Ruby Webrick
 
 
 
-## To serve a local directory at `http://localhost:8000` with a web server from the terminal:
+### To serve a local directory at `http://localhost:8000` with a web server from the terminal:
 
 
   ruby -run -ehttpd . --port=8000
 
 
-## Launch a local directory web server from a Ruby file visible at `http://localhost:5000`
+### Launch a local directory web server from a Ruby file visible at `http://localhost:5000`
 
 ```ruby
 require "webrick"
@@ -50,7 +50,7 @@ server.start
     )
 
 
-### With Sinatra (`http://localhost:4567/file`
+### With Sinatra `http://localhost:4567/file`
 
 ```ruby
 require 'sinatra'
