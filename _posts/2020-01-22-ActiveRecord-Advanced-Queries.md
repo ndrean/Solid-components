@@ -6,7 +6,13 @@ title: ActiveRecord, polymorphism, associations
 
 We have a 1-n relation with `people -> accounts`  and a 1-N with `computers -> accounts`, and 'accounts' is the joint table that decribes which person is using which computer with which role. 
 
-Tables 'people' and 'computers' have one field, `name`, and table 'accounts' has one field `profil` and two foreign keys, `person_id`  and `computer_id`.
+
+
+    > rails g model Person name
+    > rails g model Computer brand
+    > rails g model  Account profil  person:references computer:references
+Table 'accounts' has then two addtional fields, the foreign keys `person_id`  and `computer_id`.
+The models are:
 
 ```ruby
 class Person < ApplicationRecord
@@ -51,12 +57,14 @@ We can search with `where` which returns all matching rows (and equivalently `se
 
 #### 'through'
 
-  If say `a = Account.first`, we can ask `a.person.name`  and `a.computer.name`.
-  With the association `through`, say `c = Computer.first`,  then `c` can access to the table 'computers' ('people -> accounts -> computers'). Then `c.people` gives all the people using computer 'c'.
+If say `a = Account.first`, we can ask `a.person.name`  and `a.computer.brand`.
+
+With the association `through`, say `c = Computer.first`,  then `c` can access to the table 'computers' ('people -> accounts -> computers'). Then `c.people` gives all the people using computer 'c'.
   
-  Symetrically, if `p = Person.first`,  then `p.computers`  gives all the computers used by person 'p'.
+ Symetrically, if `p = Person.first`,  then `p.computers`  gives all the computers used by person 'p'.
   
 
+Note: `has_and_belongs_to_many :computers` and `has_and_belongs_to_many :people` in both models `Computer` and `Person` respectively also gives access  to `Person.first.computers` and `Computer.last.where(name: 'John')`, this without a joint table.
   
  ### Join
  
@@ -72,25 +80,25 @@ and we can write equivalently:
   
   2) The model `Account` has a `belongs_to :computer`, then we use `Account.joins(:computer)` and we can write:
   
-    Account.joins(:computer).where(computers: { name: 'Apple' })
+    Account.joins(:computer).where(computers: { brand: 'Apple' })
     
 Since we have two associations `belongs_to :computer` and `belongs_to :person` in the `Account` model,  we can even join the table 'accounts' with the table 'computers' and 'people':
   
     Account.joins(:computer, :person)
     
- so we can query with constraints on the tables 'people' and 'computers'. For example, we want to order the accounts by the `Person.name` column descending, and by `Computer.name = 'Appple'`
+ so we can query with constraints on the tables 'people' and 'computers'. For example, we want to order the accounts by the `Person.name` column descending, and by `Computer.brand = 'Appple'`
  
-    Account.order('people.name desc').joins(:person, :computer).where(computers: { name: 'Apple' })
+    Account.order('people.name desc').joins(:person, :computer).where(computers: { brand: 'Apple' })
     
 
 If we want to search  for the list of computers names with role of 'employee', then we do:
 
-    Account.where(role: 'employee').joins(:computer).map { |a| a.computer.name }
+    Account.where(role: 'employee').joins(:computer).map { |a| a.computer.brand }
     
 We can have a complete 'readable' picture of the 'accounts' table  with the following query (just added `order`to display this feature):
 
-    Account.order('people.name').joins(:person, :computer).pluck('people.name', :role, 'computers.name')
- and this will return an array `[ [people.name, profil, Computer.name],...]`
+    Account.order('people.name').joins(:person, :computer).pluck('people.name', :role, 'computers.brand')
+ and this will return an array `[ [people.name, profil, Computer.brand],...]`
  
  For example:
  
@@ -122,7 +130,7 @@ We then can use `merge` to call this block on other models after joining them, a
 If we define the following scope in the `Computer` model:
 
           class Computer
-            scope :apple, -> { where(computers: { name: 'Apple' } }
+            scope :apple, -> { where(computers: { brand: 'Apple' } }
           end
           
  then we can chain the methods and query with selections on the model `Account` and `Computer`. For example:
@@ -132,7 +140,7 @@ If we define the following scope in the `Computer` model:
 The `lambda` in the scope can have variables. For example, In the `Computer` model:
 
     class Computer
-      scope :search_by, -> (name) { where('name = ?', name }
+      scope :search_by, -> (name) { where('brand = ?', name }
     end
     
 We can further simply. If  the scope `.admin` is defined in the model `Account`,  then
@@ -173,7 +181,7 @@ class Computer < ApplicationRecord
 
   scope :apple, -> { where(name: 'Apple') }
 
-  scope :search_by, -> (var) { where('name = ?', var)}
+  scope :search_by, -> (var) { where('brand = ?', var)}
 end
 ```
 
