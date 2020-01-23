@@ -27,21 +27,28 @@ class Computer < ApplicationRecord
   scope :apple, -> { where(name: 'Apple') }
 end
 ```
-### Select and Pluck columns
+## Basics:
+
+#### Select and Pluck columns
 `Pluck`returns a column as an array. 
 - `Person.all.pluck(:name)` which returns an array.
 - `Account.pluck(:profil, :computer_id)` for several columns.
 
 'Select' will prepare the query to display only the selected columns.
 
-### 'Find', 'Find_by'  and 'where'
+#### 'Find', 'Find_by'  and 'where'
 We can search by 'id' or by 'name' and return the first matching object:
 - `Person.find(1)` finds by 'id=1' or equivalently `Person.find(Person.last)`
 - `Account.find_by(profil: 'employee')
 We can search with `where` which returns all matching rows.
 `Account.where(profil: 'emloyee') returns them all.
 
-If we wish to query on associated tables, then we `join`:
+#### Join
+If we wish to query on associated tables, then we `join` or `include`
+If we want to know the computers which have an account 'admin', then we can do:
+    Computer.joins(:accounts).where(accounts: {role: 'employee'}).distinct
+    
+We can integrate the block into the model:
 
 
 With the scopes, we can ask:
@@ -54,13 +61,51 @@ With the association `through`, if say 'a = Account.first', we can ask `a.person
 Since  Account `belongs_to :computer` and `belongs_to :person`,  we can join the table 'accounts' with the table 'computers' or 'people' or both: `Account.joins(:computer), or `Account.joins(:computer, :person)`.
 
   
- ### Join
+ ### Join, merge
  
-  Computer.joins(:accounts).merge(Account.admin).distinct
-  
-If we want to know the list of computers which have an employee profil:
+ If we want to know the list of computers which have an 'admin' profil, we join the table 'computers' with the table 'accounts' by calling `joins(:accounts)` where 'accounts' is the name of the relation (`has_may` or '1-N') in the model 'Computer'.
+ 
+  Computer.joins(:accounts).where(accounts: { role: 'admin' })
 
+equivalent to:
+
+  Computer.joins(:accounts).where('accounts.role=?', 'admin') 
+  
+When we have a `belongs_to` or 'N-1' relation, then we reference `joins(:computer)` and we  write:
+  Account.joins(:computer).where(computers: { name: 'Apple' }) 
+
+We can simplify this by defining `scope` in the model. If we define in the 'Account' model:
+  `scope :admin, -> { where(accounts: { role: 'admin' } }` 
+then we can use:
+  Account.admin
+  
+We then can use `merge` to call this block on other models after joining them:
+    Person.joins(:accounts).merge(Account.admin)
+    Computer.joins(:accounts).merge(Account.admin)
+  
+In the 'Computer' model:
+  scope :apple, -> { where(computers: { name: 'Apple' } }
+  scpoe :search_by, -> (name) { where('name = ?', name }
+  scope :as_admin, -> { joins(:accounts).where(accounts: { role: 'admin' } }
+
+then we can use:
+    Computer.search_by('Apple')
+    Computer.as_admin
+    
+instead of
+     Computer.where(name: 'Apple')..joins(:accounts).where(accounts: {role: 'admin' })
+    Account.admin.joins(:computer).merge(Computer.apple)
+    
+    
+and  instead  of:
+  Computer.joins(:accounts).where(accounts: { role: 'admin' })
+we can write:
+  Computer.joins(:accounts).merge(Account.admin)
+  
+In the same way (the 'join'    is on the name of the relation in the model, so `computer`  here):
+  Account.joins(:computer).merge(Computer.apple)
   Account.where(role: 'employee').joins(:computer).map { |a| a.computer.name }
+  
   
 ```ruby
 class Account < ApplicationRecord
