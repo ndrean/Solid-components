@@ -28,7 +28,7 @@ class Computer < ApplicationRecord
 end
 ```
 ### Select and Pluck columns
-`Pluck`returns a column as an array. We can fetch all the column `name`of the table 'people' with: 
+`Pluck`returns a column as an array. 
 - `Person.all.pluck(:name)` which returns an array.
 - `Account.pluck(:profil, :computer_id)` for several columns.
 
@@ -36,9 +36,9 @@ end
 
 ### 'Find', 'Find_by'  and 'where'
 We can search by 'id' or by 'name' and return the first matching object:
-- `Person.find(Person.last)` or `Person.find(1) finds by 'id'
-- `Account.find_by(role: 'employee')
-We can search with `where`which returns all matching rows.
+- `Person.find(1)` finds by 'id=1' or equivalently `Person.find(Person.last)`
+- `Account.find_by(profil: 'employee')
+We can search with `where` which returns all matching rows.
 `Account.where(profil: 'emloyee') returns them all.
 
 If we wish to query on associated tables, then we `join`:
@@ -57,7 +57,9 @@ Since  Account `belongs_to :computer` and `belongs_to :person`,  we can join the
  ### Join
  
   Computer.joins(:accounts).merge(Account.admin).distinct
-If we want to know the list of computers whic have an employee profil:  
+  
+If we want to know the list of computers which have an employee profil:
+
   Account.where(role: 'employee').joins(:computer).map { |a| a.computer.name }
   
 ```ruby
