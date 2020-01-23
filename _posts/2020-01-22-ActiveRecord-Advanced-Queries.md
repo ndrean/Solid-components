@@ -37,7 +37,7 @@ end
 'Select' will prepare the query to display only the selected columns.
 
 #### 'Find', 'Find_by'  and 'where'
-  We can search by 'id' or by 'name' and return the first matching object:
+ We can search by 'id' or by 'name' and return the first matching object:
 - `Person.find(1)` finds by 'id=1'
 - `Person.find(Person.last.id)`
 - `Account.find_by(profil: 'employee')`
@@ -53,19 +53,21 @@ end
   
  ### Join
  
-  If we wish to query on associated tables, then we `join` or `include`. For example, if we want to know the computers which have an account 'admin', we join the table 'computers' with the table 'accounts' by calling `joins(:accounts)` where 'accounts' is the name of the relation (`has_may` or '1-N') in the model 'Computer':
+  If we wish to query on associated tables, then we `join` or `include`. We join 'table-B' to 'table-A' by using the **name of the relation** within the calling table.
+  
+  1) 1-N. For example, we want to know the computers which have an account 'admin'. The table 'accounts' (B) will be joined to the table 'computers' (A) by  `Computer.joins(:accounts)` as the name of the relation is `has_may :accounts` ('1-N') in the model 'Computer':
   
     `Computer.joins(:accounts).where(accounts: {role: 'employee'}).distinct`
   
-equivalent to:
+and we can write equivalently:
 
   `Computer.joins(:accounts).where('accounts.role=?', 'admin') `
   
-  The model 'accounts' has a `belongs_to` or 'N-1' relation with 'computers', then we reference `joins(:computer)` as `computer` is the name of the relation and we  write:
+  2) N-1. The model `Account` has a `belongs_to :computer`, then we use `Account.joins(:computer)` and we can write:
   
     `Account.joins(:computer).where(computers: { name: 'Apple' })`
     
-Since  Account `belongs_to :computer` and `belongs_to :person`,  we can even join the table 'accounts' with the table 'computers' and 'people':
+Since we have two associations `belongs_to :computer` and `belongs_to :person` in the `Account` model,  we can even join the table 'accounts' with the table 'computers' and 'people':
   
     `Account.joins(:computer, :person)`
     
@@ -74,7 +76,7 @@ Since  Account `belongs_to :computer` and `belongs_to :person`,  we can even joi
     
 ## Scope, merge
 
-  We can simplify this by defining `scope` in the model. If we define in the 'Account' model:
+  We can simplify this by defining `scope` in the model. If we define in the `Account` model:
   
     `scope :admin, -> { where(accounts: { role: 'admin' } }` 
     
@@ -82,32 +84,40 @@ then we can use:
     `Account.admin`
   
 We then can use `merge` to call this block on other models after joining them:
-    Person.joins(:accounts).merge(Account.admin)
-    Computer.joins(:accounts).merge(Account.admin)
+
+    `Person.joins(:accounts).merge(Account.admin)`
+    
+    `Computer.joins(:accounts).merge(Account.admin)`
   
-In the 'Computer' model:
-  scope :apple, -> { where(computers: { name: 'Apple' } }
-  scpoe :search_by, -> (name) { where('name = ?', name }
-  scope :as_admin, -> { joins(:accounts).where(accounts: { role: 'admin' } }
+In the `Computer` model:
+
+  `scope :apple, -> { where(computers: { name: 'Apple' } }`
+  `scpoe :search_by, -> (name) { where('name = ?', name }`
+  `scope :as_admin, -> { joins(:accounts).where(accounts: { role: 'admin' } }`
 
 then we can use:
-    Computer.search_by('Apple')
-    Computer.as_admin
+
+    `Computer.search_by('Apple')`
+    `Computer.as_admin`
     
 instead of
-     Computer.where(name: 'Apple')..joins(:accounts).where(accounts: {role: 'admin' })
-    Account.admin.joins(:computer).merge(Computer.apple)
+     `Computer.where(name: 'Apple')..joins(:accounts).where(accounts: {role: 'admin' })`
+    `Account.admin.joins(:computer).merge(Computer.apple)`
     
     
 and  instead  of:
-  Computer.joins(:accounts).where(accounts: { role: 'admin' })
+
+  `Computer.joins(:accounts).where(accounts: { role: 'admin' })`
+  
 we can write:
-  Computer.joins(:accounts).merge(Account.admin)
+
+  `Computer.joins(:accounts).merge(Account.admin)`
+   
+ `Account.joins(:computer).merge(Computer.apple)`
+ 
+  `Account.where(role: 'employee').joins(:computer).map { |a| a.computer.name }`
   
-In the same way (the 'join'    is on the name of the relation in the model, so `computer`  here):
-  Account.joins(:computer).merge(Computer.apple)
-  Account.where(role: 'employee').joins(:computer).map { |a| a.computer.name }
-  
+ 
   
 ```ruby
 class Account < ApplicationRecord
@@ -115,28 +125,29 @@ class Account < ApplicationRecord
 end
 ```
 `Merge` retourn un array permet de faire passer le block qui recherche sur la table 'people'.
-Account.joins(:person).where(people: {name: 'Jo'})
-Account.joins(:person).merge(Person.where(name: 'Jo'))
+
+`Account.joins(:person).where(people: {name: 'Jo'})`
+`Account.joins(:person).merge(Person.where(name: 'Jo'))`
 
 Contrainte sur la table 'computers' et sur la table 'accounts'
-Computer.apple.joins(:accounts).merge(Account.admin)
-Computer.apple.joins(:accounts).where(accounts: {role: 'admin'})
+`Computer.apple.joins(:accounts).merge(Account.admin)`
+`Computer.apple.joins(:accounts).where(accounts: {role: 'admin'})`
 
 
-Account.order('people.name').joins(:person, :computer).admin.select('role', 'person_name').pluck('people.name').uniq
+`Account.order('people.name').joins(:person, :computer).admin.select('role', 'person_name').pluck('people.name').uniq`
   
-  Account.order('people.name').joins(:person, :computer).admin.each {|c| c.computer}
-  Account.order('people.name').joins(:person, :computer).admin
+  `Account.order('people.name').joins(:person, :computer).admin.each {|c| c.computer}`
+ ` Account.order('people.name').joins(:person, :computer).admin`
   
-  Computer.joins(:accounts).merge(Account.admin).distinct
-  Computer.joins(:accounts).merge(Account.admin).apple.distinct 
+  `Computer.joins(:accounts).merge(Account.admin).distinct`
+ ` Computer.joins(:accounts).merge(Account.admin).apple.distinct `
 
 
 ## Counting; `counter_count' and counter_culture
 https://github.com/magnusvk/counter_culture
 
-      >rails g migration AddAccountsCountToPeople accounts_count:integer
-      >rails g migration AddAccountsCountToComputers accounts_count:integer
+      `>rails g migration AddAccountsCountToPeople accounts_count:integer`
+      `>rails g migration AddAccountsCountToComputers accounts_count:integer`
       
 ```ruby
 class Account  < 
@@ -144,7 +155,8 @@ class Account  <
   belongs_to :computer, counter_cache :true
 end
 ```
-    > rails db:migrate
+
+    `> rails db:migrate`
     
 
 ```ruby
@@ -175,7 +187,7 @@ create_table "accounts", force: :cascade do |t|
   add_foreign_key "accounts", "computers"
   add_foreign_key "accounts", "people"
 end
-
+```
 
 `Computer.last.accounts.size` ou `Person.first.accounts.size`
 
