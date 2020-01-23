@@ -99,6 +99,7 @@ and we can write equivalently:
   
     Account.joins(:computer).where(computers: { brand: 'Apple' })
     
+### Join multiple tables
 Since we have two associations `belongs_to :computer` and `belongs_to :person` in the `Account` model,  we can even join the table 'accounts' with the table 'computers' and 'people':
   
     Account.joins(:computer, :person)
