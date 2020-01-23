@@ -37,48 +37,49 @@ end
 'Select' will prepare the query to display only the selected columns.
 
 #### 'Find', 'Find_by'  and 'where'
-We can search by 'id' or by 'name' and return the first matching object:
+  We can search by 'id' or by 'name' and return the first matching object:
 - `Person.find(1)` finds by 'id=1'
 - `Person.find(Person.last.id)`
 - `Account.find_by(profil: 'employee')
 
-We can search with `where` which returns all matching rows.
+  We can search with `where` which returns all matching rows.
 `Account.where(profil: 'emloyee')` returns them all.
 
 #### Join
-If we wish to query on associated tables, then we `join` or `include`. For example, if we want to know the computers which have an account 'admin', then we can do:
-    `Computer.joins(:accounts).where(accounts: {role: 'employee'}).distinct`
-    
-We can integrate the block into the model:
 
 
-With the scopes, we can ask:
+  With the scopes, we can ask:
 - for all computers with name 'Apple' with `Computer.apple`,
 - for all accounts with 'admin' profil with `Account.admin`,
 - for all computers used with and 'admin' profil with `Computer.employee_profil`
 
 With the association `through`, if say 'a = Account.first', we can ask `a.person.name`  and `a.computer.name`.
 
-Since  Account `belongs_to :computer` and `belongs_to :person`,  we can join the table 'accounts' with the table 'computers' or 'people' or both: `Account.joins(:computer), or `Account.joins(:computer, :person)`.
+Since  Account `belongs_to :computer` and `belongs_to :person`,  we can join the table 'accounts' with the table 'computers' or 'people' or both: `Account.joins(:computer)`, or `Account.joins(:computer, :person)`.
 
   
- ### Join, merge
+ ### Join
  
- If we want to know the list of computers which have an 'admin' profil, we join the table 'computers' with the table 'accounts' by calling `joins(:accounts)` where 'accounts' is the name of the relation (`has_may` or '1-N') in the model 'Computer'.
- 
-  Computer.joins(:accounts).where(accounts: { role: 'admin' })
-
+  If we wish to query on associated tables, then we `join` or `include`. For example, if we want to know the computers which have an account 'admin', we join the table 'computers' with the table 'accounts' by calling `joins(:accounts)` where 'accounts' is the name of the relation (`has_may` or '1-N') in the model 'Computer':
+  
+    `Computer.joins(:accounts).where(accounts: {role: 'employee'}).distinct`
+  
 equivalent to:
 
-  Computer.joins(:accounts).where('accounts.role=?', 'admin') 
+  `Computer.joins(:accounts).where('accounts.role=?', 'admin') `
   
-When we have a `belongs_to` or 'N-1' relation, then we reference `joins(:computer)` and we  write:
-  Account.joins(:computer).where(computers: { name: 'Apple' }) 
+  The model 'accounts' has a `belongs_to` or 'N-1' relation with 'computers', then we reference `joins(:computer)` as `computer` is the name of the relation and we  write:
+  
+    `Account.joins(:computer).where(computers: { name: 'Apple' })`
+    
+## Scope, merge
 
-We can simplify this by defining `scope` in the model. If we define in the 'Account' model:
-  `scope :admin, -> { where(accounts: { role: 'admin' } }` 
+  We can simplify this by defining `scope` in the model. If we define in the 'Account' model:
+  
+    `scope :admin, -> { where(accounts: { role: 'admin' } }` 
+    
 then we can use:
-  Account.admin
+    `Account.admin`
   
 We then can use `merge` to call this block on other models after joining them:
     Person.joins(:accounts).merge(Account.admin)
