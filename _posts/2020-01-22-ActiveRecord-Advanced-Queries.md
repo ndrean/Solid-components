@@ -109,9 +109,13 @@ For example, we want to order the accounts by the `Person.name` column descendin
     Account.order('people.name desc').joins(:person, :computer).where(computers: { brand: 'Apple' })
     
 
-If we want to search  for the list of computers names with role of 'employee', then we do (we can use `pluck(
+If we want to search  for the list of computers names with role of 'employee', then we do:
 
     Account.where(role: 'employee').joins(:computer).map { |a| a.computer.brand }
+    
+If we only want the names, then the following query is prefered as it triggers less calls to the database:
+
+    Account.where(role: 'employee').joins(:computer).pluck('computers.name')
     
 We can have a complete 'readable' picture of the 'accounts' table  with the following query (just added `order`to display this feature):
 
