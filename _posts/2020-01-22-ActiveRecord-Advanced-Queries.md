@@ -182,10 +182,10 @@ instead of:
 
      Computer.where(name: 'Apple').joins(:accounts).where(accounts: {role: 'admin' })
     
-   
+ ## Source
     
   
-In resume, we used:
+
 ```ruby
 class Account < ApplicationRecord
   belongs_to :person, counter_cache: true
@@ -199,6 +199,7 @@ and
 class Computer < ApplicationRecord
   has_many :accounts
   has_many :people, through: :accounts
+  has_many : is_used_by, through: :accounts, source: :person
 
   scope :as_employee, -> { joins(:accounts).where(accounts: {role: 'employee'}).distinct }
   scope :as_admin, -> { joins(:accounts).merge(Account.admin) }
@@ -208,25 +209,27 @@ class Computer < ApplicationRecord
   scope :search_by, -> (var) { where('brand = ?', var)}
 end
 ```
+```ruby
+class Person < ApplicationRecord
+  has_many :accounts
+  has_many :computers, through: :accounts
+  has_many :uses, through: :accounts, source: :computer
+end
+```
 
-`Merge` retourn un array permet de faire passer le block qui recherche sur la table 'people'.
+With the `source` declaration, we renamed some relations `persons -> accounts <- computers` to bette reflect the relationship in terms of wording. For example, the relation `uses` express which computer uses a certain `Person`, and we can do:
 
-`Account.joins(:person).where(people: {name: 'Jo'})`
-`Account.joins(:person).merge(Person.where(name: 'Jo'))`
+        Person.first.uses.pluck(:brand)
+        
+to get all the computers used by `Person.first`.
 
-Contrainte sur la table 'computers' et sur la table 'accounts'
-`Computer.apple.joins(:accounts).merge(Account.admin)`
-`Computer.apple.joins(:accounts).where(accounts: {role: 'admin'})`
+Since we also renamed a relation by `is_used_by` to express who uses a certain `Computer`, and we can do:
 
-
-`Account.order('people.name').joins(:person, :computer).admin.select('role', 'person_name').pluck('people.name').uniq`
-  
-  `Account.order('people.name').joins(:person, :computer).admin.each {|c| c.computer}`
- ` Account.order('people.name').joins(:person, :computer).admin`
-  
-  `Computer.joins(:accounts).merge(Account.admin).distinct`
- ` Computer.joins(:accounts).merge(Account.admin).apple.distinct `
-
+        Computer.first.is_used_by.pluck(:name)
+        
+ and we get an array of all the people that used `Computer.first`.
+ 
+ 
 
 ## Counting; `counter_count' and counter_culture
 https://github.com/magnusvk/counter_culture
