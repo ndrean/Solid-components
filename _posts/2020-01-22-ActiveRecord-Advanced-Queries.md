@@ -40,22 +40,15 @@ end
   We can search by 'id' or by 'name' and return the first matching object:
 - `Person.find(1)` finds by 'id=1'
 - `Person.find(Person.last.id)`
-- `Account.find_by(profil: 'employee')
+- `Account.find_by(profil: 'employee')`
 
-  We can search with `where` which returns all matching rows.
-`Account.where(profil: 'emloyee')` returns them all.
+  We can search with `where` which returns all matching rows:
+  
+  `Account.where(profil: 'emloyee')` returns them all.
 
-#### Join
+#### Through
 
-
-  With the scopes, we can ask:
-- for all computers with name 'Apple' with `Computer.apple`,
-- for all accounts with 'admin' profil with `Account.admin`,
-- for all computers used with and 'admin' profil with `Computer.employee_profil`
-
-With the association `through`, if say 'a = Account.first', we can ask `a.person.name`  and `a.computer.name`.
-
-Since  Account `belongs_to :computer` and `belongs_to :person`,  we can join the table 'accounts' with the table 'computers' or 'people' or both: `Account.joins(:computer)`, or `Account.joins(:computer, :person)`.
+  With the association `through`, if say 'a = Account.first', we can ask `a.person.name`  and `a.computer.name`.
 
   
  ### Join
@@ -71,6 +64,13 @@ equivalent to:
   The model 'accounts' has a `belongs_to` or 'N-1' relation with 'computers', then we reference `joins(:computer)` as `computer` is the name of the relation and we  write:
   
     `Account.joins(:computer).where(computers: { name: 'Apple' })`
+    
+Since  Account `belongs_to :computer` and `belongs_to :person`,  we can even join the table 'accounts' with the table 'computers' and 'people':
+  
+    `Account.joins(:computer, :person)`
+    
+ gives access to ................
+
     
 ## Scope, merge
 
