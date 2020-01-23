@@ -11,6 +11,8 @@ We have a 1-n relation with `people -> accounts`  and a 1-N with `computers -> a
     > rails g model Person name
     > rails g model Computer brand
     > rails g model  Account profil  person:references computer:references
+    > rails db:migrate
+    
 Table 'accounts' has then two addtional fields, the foreign keys `person_id`  and `computer_id`.
 The models are:
 
@@ -32,6 +34,21 @@ end
 class Account < ApplicationRecord
   belongs_to :person, counter_cache: true
   belongs_to :computer, counter_cache: true
+end
+```
+
+### Seeds
+
+```ruby
+require 'faker'
+ROLE = ['admin','employee']
+list=[]; 5.times { brand =  Faker::Device.manufacturer; list << brand unless list.include? brand }
+
+
+users = %w(John Mike).map {|user| Person.create! name: user}
+computers = list.map {|comp| Computer.create! name: comp}
+5.times do
+    Account.create! profil: ROLE.sample, computer: computers.sample, person: users.sample
 end
 ```
 
@@ -102,8 +119,12 @@ We can have a complete 'readable' picture of the 'accounts' table  with the foll
  
  For example:
  
-    [["Jo", "employee", "Apple"], ["Jo", "admin", "Dell"], ["Mke", "employee", "Apple"], ["Mke", "admin", "Apple"], ["Mke", "admin", "Lenovo"]]
+    [["John", "employee", "Apple"], ["John", "admin", "Dell"], ["Mike", "employee", "Apple"], ["Mike", "admin", "Apple"], ["Mike", "admin", "Lenovo"]]
 
+    Computer.joins(:accounts, :people).where(accounts: {role: 'employee'}, people: {name: 'John'} ).distinct.pluck(:brand)
+gets all the computers where the person 'John' has a profil 'employee'.
+
+    
 ### Distinct, uniq
 We use `uniq` when the result is an array, and `distinct otherwise`.
 
@@ -111,7 +132,7 @@ We use `uniq` when the result is an array, and `distinct otherwise`.
 
 ## Scope, merge
 
-  We can simplify this by defining `scope` in the model. We define a `lambda` in the `Account` model:
+  We can simplify the previous by defining `scopes` in the model. We define a `lambda` in the `Account` model:
   
     class Account
       scope :admin, -> { where(accounts: { role: 'admin' } }
@@ -125,8 +146,6 @@ We then can use `merge` to call this block on other models after joining them, a
 
     Person.joins(:accounts).merge(Account.admin)
     
-    Computer.joins(:accounts).merge(Account.admin)
-    
 If we define the following scope in the `Computer` model:
 
           class Computer
@@ -134,6 +153,7 @@ If we define the following scope in the `Computer` model:
           end
           
  then we can chain the methods and query with selections on the model `Account` and `Computer`. For example:
+ 
         Computer.apple.joins(:accounts).merge(Account.admin)
   
 
