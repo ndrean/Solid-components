@@ -38,15 +38,16 @@ end
 
 #### 'Find', 'Find_by'  and 'where'
 We can search by 'id' or by 'name' and return the first matching object:
-- `Person.find(1)` finds by 'id=1' or equivalently `Person.find(Person.last)`
+- `Person.find(1)` finds by 'id=1'
+- `Person.find(Person.last.id)`
 - `Account.find_by(profil: 'employee')
+
 We can search with `where` which returns all matching rows.
-`Account.where(profil: 'emloyee') returns them all.
+`Account.where(profil: 'emloyee')` returns them all.
 
 #### Join
-If we wish to query on associated tables, then we `join` or `include`
-If we want to know the computers which have an account 'admin', then we can do:
-    Computer.joins(:accounts).where(accounts: {role: 'employee'}).distinct
+If we wish to query on associated tables, then we `join` or `include`. For example, if we want to know the computers which have an account 'admin', then we can do:
+    `Computer.joins(:accounts).where(accounts: {role: 'employee'}).distinct`
     
 We can integrate the block into the model:
 
