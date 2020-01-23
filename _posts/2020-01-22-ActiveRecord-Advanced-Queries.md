@@ -44,13 +44,10 @@ end
 - `Person.find(Person.last.id)`
 - `Account.find_by(profil: 'employee')`
 
-  We can search with `where` which returns all matching rows:
+We can search with `where` which returns all matching rows (and equivalently `select`  with a block):
   
-  `Account.where(profil: 'emloyee')` returns them all.
-  
-  Note: we can also use `select`  with a block:
-  
-      Account.select { |a| a.profile == 'employee' }
+    Account.where(profil: 'emloyee')
+    Account.select { |a| a.profile == 'employee' }
 
 #### 'through'
 
