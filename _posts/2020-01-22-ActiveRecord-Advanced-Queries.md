@@ -115,11 +115,11 @@ If we want to search  for the list of computers names with role of 'employee', t
     
 If we only want the names, then the following query is prefered as it triggers less calls to the database:
 
-    Account.where(role: 'employee').joins(:computer).pluck('computers.name')
+    Account.where(role: 'employee').joins(:computer).pluck('computers.brand')
     
 We can have a complete 'readable' picture of the 'accounts' table  with the following query (just added `order`to display this feature):
 
-    Account.order('people.name').joins(:person, :computer).pluck('people.name', :role, 'computers.brand')
+    Account.order('people.name').joins(:person, :computer).pluck('people.name', :profil, 'computers.brand')
  
 and this will return an array `[ [people.name, profil, Computer.brand],...]`. For example:
  
