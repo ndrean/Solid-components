@@ -6,27 +6,29 @@ title: ActiveRecord, polymorphism, associations
 
 We have a 1-n relation with `people -> accounts`  and a 1-N with `computers -> accounts`, and 'accounts' is the joint table that decribes which person is using which computer with which role. 
 
+Tables 'people' and 'computers' have one field, `name`, and table 'accounts' has one field `profil` and two foreign keys, `person_id`  and `computer_id`.
 
 ```ruby
 class Person < ApplicationRecord
   has_many :accounts
-  has_many :computers
+  has_many :computers, through: :accounts
 end
 ```
+
 ```ruby
 class Computer < ApplicationRecord
   has_many :accounts
   has_many :people, through: :accounts
-
-  scope :user_profil, -> { joins(:accounts).where(accounts: {role: 'employee'}) }
-  # équivalent to  -> { joins(:accounts).where('accounts.role=?', 'employee') }
-
-  # much slower with includes
-  scope :employee_role_i, -> { includes(:accounts).where(accounts: {role: 'employee'}).references(:accounts) }
-
-  scope :apple, -> { where(name: 'Apple') }
 end
 ```
+
+```ruby
+class Account < ApplicationRecord
+  belongs_to :person, counter_cache: true
+  belongs_to :computer, counter_cache: true
+end
+```
+
 ## Basics:
 
 #### Select and Pluck columns
@@ -45,85 +47,139 @@ end
   We can search with `where` which returns all matching rows:
   
   `Account.where(profil: 'emloyee')` returns them all.
+  
+  Note: we can also use `select`  with a block:
+  
+      Account.select { |a| a.profile == 'employee' }
 
-#### Through
+#### 'through'
 
-  With the association `through`, if say 'a = Account.first', we can ask `a.person.name`  and `a.computer.name`.
+  If say `a = Account.first`, we can ask `a.person.name`  and `a.computer.name`.
+  With the association `through`, say `c = Computer.first`,  then `c` can access to the table 'computers' ('people -> accounts -> computers'). Then `c.people` gives all the people using computer 'c'.
+  
+  Symetrically, if `p = Person.first`,  then `p.computers`  gives all the computers used by person 'p'.
+  
 
   
  ### Join
  
   If we wish to query on associated tables, then we `join` or `include`. We join 'table-B' to 'table-A' by using the **name of the relation** within the calling table.
   
-  1) 1-N. For example, we want to know the computers which have an account 'admin'. The table 'accounts' (B) will be joined to the table 'computers' (A) by  `Computer.joins(:accounts)` as the name of the relation is `has_may :accounts` ('1-N') in the model 'Computer':
+  1) The model `Computer` has a relation `has_may :accounts`. We want to know all the computers whith a profil 'admin'. The table 'accounts' (B) will be joined to the table 'computers' (A) by  `Computer.joins(:accounts)`:
   
-    `Computer.joins(:accounts).where(accounts: {role: 'employee'}).distinct`
+    Computer.joins(:accounts).where(accounts: {profil: 'employee'}).distinct
   
 and we can write equivalently:
 
-  `Computer.joins(:accounts).where('accounts.role=?', 'admin') `
+    Computer.joins(:accounts).where('accounts.role=?', 'admin')
   
-  2) N-1. The model `Account` has a `belongs_to :computer`, then we use `Account.joins(:computer)` and we can write:
+  2) The model `Account` has a `belongs_to :computer`, then we use `Account.joins(:computer)` and we can write:
   
-    `Account.joins(:computer).where(computers: { name: 'Apple' })`
+    Account.joins(:computer).where(computers: { name: 'Apple' })
     
 Since we have two associations `belongs_to :computer` and `belongs_to :person` in the `Account` model,  we can even join the table 'accounts' with the table 'computers' and 'people':
   
-    `Account.joins(:computer, :person)`
+    Account.joins(:computer, :person)
     
- gives access to ................
+ so we can query with constraints on the tables 'people' and 'computers'. For example, we want to order the accounts by the `Person.name` column descending, and by `Computer.name = 'Appple'`
+ 
+    Account.order('people.name desc').joins(:person, :computer).where(computers: { name: 'Apple' })
+    
+
+If we want to search  for the list of computers names with role of 'employee', then we do:
+
+    Account.where(role: 'employee').joins(:computer).map { |a| a.computer.name }
+    
+We can have a complete 'readable' picture of the 'accounts' table  with the following query (just added `order`to display this feature):
+
+    Account.order('people.name').joins(:person, :computer).pluck('people.name', :role, 'computers.name')
+ and this will return an array `[ [people.name, profil, Computer.name],...]`
+ 
+ For example:
+ 
+    [["Jo", "employee", "Apple"], ["Jo", "admin", "Dell"], ["Mke", "employee", "Apple"], ["Mke", "admin", "Apple"], ["Mke", "admin", "Lenovo"]]
+
+### Distinct, uniq
+We use `uniq` when the result is an array, and `distinct otherwise`.
 
     
+
 ## Scope, merge
 
-  We can simplify this by defining `scope` in the model. If we define in the `Account` model:
+  We can simplify this by defining `scope` in the model. We define a `lambda` in the `Account` model:
   
-    `scope :admin, -> { where(accounts: { role: 'admin' } }` 
+    class Account
+      scope :admin, -> { where(accounts: { role: 'admin' } }
+    end
     
 then we can use:
-    `Account.admin`
-  
-We then can use `merge` to call this block on other models after joining them:
 
-    `Person.joins(:accounts).merge(Account.admin)`
+      Account.admin
+  
+We then can use `merge` to call this block on other models after joining them, and `merge` returns an array:
+
+    Person.joins(:accounts).merge(Account.admin)
     
-    `Computer.joins(:accounts).merge(Account.admin)`
+    Computer.joins(:accounts).merge(Account.admin)
+    
+If we define the following scope in the `Computer` model:
+
+          class Computer
+            scope :apple, -> { where(computers: { name: 'Apple' } }
+          end
+          
+ then we can chain the methods and query with selections on the model `Account` and `Computer`. For example:
+        Computer.apple.joins(:accounts).merge(Account.admin)
   
-In the `Computer` model:
 
-  `scope :apple, -> { where(computers: { name: 'Apple' } }`
-  `scpoe :search_by, -> (name) { where('name = ?', name }`
-  `scope :as_admin, -> { joins(:accounts).where(accounts: { role: 'admin' } }`
+The `lambda` in the scope can have variables. For example, In the `Computer` model:
 
+    class Computer
+      scope :search_by, -> (name) { where('name = ?', name }
+    end
+    
+We can further simply. If  the scope `.admin` is defined in the model `Account`,  then
+
+    class Computer
+      scope :as_admin, -> { joins(:accounts).merge(Account.admin) }
+    end
+  
 then we can use:
 
-    `Computer.search_by('Apple')`
-    `Computer.as_admin`
+    Computer.search_by('Apple').as_admin
+ 
     
-instead of
-     `Computer.where(name: 'Apple')..joins(:accounts).where(accounts: {role: 'admin' })`
-    `Account.admin.joins(:computer).merge(Computer.apple)`
-    
-    
-and  instead  of:
+instead of:
 
-  `Computer.joins(:accounts).where(accounts: { role: 'admin' })`
-  
-we can write:
-
-  `Computer.joins(:accounts).merge(Account.admin)`
+     Computer.where(name: 'Apple').joins(:accounts).where(accounts: {role: 'admin' })
+    
    
- `Account.joins(:computer).merge(Computer.apple)`
- 
-  `Account.where(role: 'employee').joins(:computer).map { |a| a.computer.name }`
+    
   
- 
-  
+In resume, we used:
 ```ruby
 class Account < ApplicationRecord
+  belongs_to :person, counter_cache: true
+  belongs_to :computer, counter_cache: true
   scope :admin, -> { where(role: 'admin') }
 end
 ```
+
+and 
+```ruby
+class Computer < ApplicationRecord
+  has_many :accounts
+  has_many :people, through: :accounts
+
+  scope :as_employee, -> { joins(:accounts).where(accounts: {role: 'employee'}).distinct }
+  scope :as_admin, -> { joins(:accounts).merge(Account.admin) }
+
+  scope :apple, -> { where(name: 'Apple') }
+
+  scope :search_by, -> (var) { where('name = ?', var)}
+end
+```
+
 `Merge` retourn un array permet de faire passer le block qui recherche sur la table 'people'.
 
 `Account.joins(:person).where(people: {name: 'Jo'})`
