@@ -32,8 +32,8 @@ end
 
 ```ruby
 class Account < ApplicationRecord
-  belongs_to :person, counter_cache: true
-  belongs_to :computer, counter_cache: true
+  belongs_to :person
+  belongs_to :computer
 end
 ```
 
@@ -100,36 +100,35 @@ and we can write equivalently:
     Account.joins(:computer).where(computers: { brand: 'Apple' })
     
 ### Join multiple tables
-Since we have two associations `belongs_to :computer` and `belongs_to :person` in the `Account` model,  we can even join the table 'accounts' with the table 'computers' and 'people':
+We can even the table 'accounts' with the table 'computers' and 'people' so we can query with constraints on the tables 'people' and 'computers'.
   
     Account.joins(:computer, :person)
     
- so we can query with constraints on the tables 'people' and 'computers'. For example, we want to order the accounts by the `Person.name` column descending, and by `Computer.brand = 'Appple'`
+For example, we want to order the accounts by the `Person.name` column descending, and by `Computer.brand = 'Appple'`
  
     Account.order('people.name desc').joins(:person, :computer).where(computers: { brand: 'Apple' })
     
 
-If we want to search  for the list of computers names with role of 'employee', then we do:
+If we want to search  for the list of computers names with role of 'employee', then we do (we can use `pluck(
 
     Account.where(role: 'employee').joins(:computer).map { |a| a.computer.brand }
     
 We can have a complete 'readable' picture of the 'accounts' table  with the following query (just added `order`to display this feature):
 
     Account.order('people.name').joins(:person, :computer).pluck('people.name', :role, 'computers.brand')
- and this will return an array `[ [people.name, profil, Computer.brand],...]`
  
- For example:
+and this will return an array `[ [people.name, profil, Computer.brand],...]`. For example:
  
     [["John", "employee", "Apple"], ["John", "admin", "Dell"], ["Mike", "employee", "Apple"], ["Mike", "admin", "Apple"], ["Mike", "admin", "Lenovo"]]
 
+We can get all the computers where the person 'John' has a profil 'employee':
+
     Computer.joins(:accounts, :people).where(accounts: {role: 'employee'}, people: {name: 'John'} ).distinct.pluck(:brand)
-gets all the computers where the person 'John' has a profil 'employee'.
 
     
 ### Distinct, uniq
-We use `uniq` when the result is an array, and `distinct otherwise`.
+We use `uniq` when the result is an array, and `distinct` otherwise.
 
-    
 
 ## Scope, merge
 
@@ -253,7 +252,7 @@ create_table "accounts", force: :cascade do |t|
   end
 
   create_table "computers", force: :cascade do |t|
-    t.string "name"
+    t.string "brand"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "accounts_count"
