@@ -4,6 +4,8 @@ layout: post
 title: ActiveRecord, polymorphism, associations
 ---
 
+# https://coderwall.com/p/9xk6ra/rails-filter-using-join-model-on-has_many-through
+
 We have a 1-n relation with `people -> accounts`  and a 1-N with `computers -> accounts`, and 'accounts' is the joint table that decribes which person is using which computer with which role. 
 
 
@@ -111,8 +113,14 @@ For example, we want to order the accounts by the `Person.name` column descendin
 
 If we want to search  for the list of computers names with role of 'employee', then we do:
 
-    Account.where(role: 'employee').joins(:computer).map { |a| a.computer.brand }
-    
+    Account.where(role: 'employee').joins(:computer).select('computers.*, computers.brand as cbrand').map { |a| a.cbrand }
+or
+
+    Account.where(role: 'employee').joins(:computer).pluck('computers.brand')
+  
+  and with `joins` and `select`, the computer's brand is know an attribute  of 'accounts'  and we can reference it rather than going through the association.  
+  
+    Account.where(role:'employee').joins(:computer).select('accounts.*, computers.name as cname').map{ |a| a.cname}
 If we only want the names, then the following query is prefered as it triggers less calls to the database:
 
     Account.where(role: 'employee').joins(:computer).pluck('computers.brand')
@@ -133,6 +141,8 @@ We can get all the computers where the person 'John' has a profil 'employee':
 ### Distinct, uniq
 We use `uniq` when the result is an array, and `distinct` otherwise.
 
+## Include
+So why would you want to use includes at all? Well, if you already know before the query that you will later need all author data, then it can make sense to use includes, because then you only need one database query. That is a lot faster than starten a seperate query for each n.
 
 ## Scope, merge
 
