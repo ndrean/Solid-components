@@ -1,13 +1,12 @@
 ---
 layout: post
-
-title: ActiveRecord, polymorphism, associations
+title: 'ActiveRecord, polymorphism, associations'
+published: true
 ---
 
  https://coderwall.com/p/9xk6ra/rails-filter-using-join-model-on-has_many-through
 
 We have a 1-n relation with `people -> accounts`  and a 1-N with `computers -> accounts`, and 'accounts' is the joint table that decribes which person is using which computer with which role. 
-![Image of db](../images/surfme.png)
 
 
 
@@ -16,7 +15,8 @@ We have a 1-n relation with `people -> accounts`  and a 1-N with `computers -> a
     > rails g model  Account profil  person:references computer:references
     > rails db:migrate
     
-Table 'accounts' has then two addtional fields, the foreign keys `person_id`  and `computer_id`.
+Table 'accounts' has now two addtional fields, the foreign keys `person_id`  and `computer_id`, so we have the method `belongs_to`twice in table 'accounts', and the method `has_many` in each table `computers` and `people`.
+
 The models are:
 
 ```ruby
@@ -142,7 +142,7 @@ We can get all the computers where the person 'John' has a profil 'employee':
 ### Distinct, uniq
 We use `uniq` when the result is an array, and `distinct` otherwise.
 
-## Include
+### Include
 So why would you want to use includes at all? Well, if you already know before the query that you will later need all author data, then it can make sense to use includes, because then you only need one database query. That is a lot faster than starten a seperate query for each n.
 
 ## Scope, merge
@@ -302,4 +302,3 @@ namespace :counters do
   end
 end
 ```
-  
