@@ -4,7 +4,7 @@ layout: post
 title: ActiveRecord, polymorphism, associations
 ---
 
-# https://coderwall.com/p/9xk6ra/rails-filter-using-join-model-on-has_many-through
+ https://coderwall.com/p/9xk6ra/rails-filter-using-join-model-on-has_many-through
 
 We have a 1-n relation with `people -> accounts`  and a 1-N with `computers -> accounts`, and 'accounts' is the joint table that decribes which person is using which computer with which role. 
 
