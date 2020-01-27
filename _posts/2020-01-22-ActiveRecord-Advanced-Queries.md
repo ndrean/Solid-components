@@ -88,7 +88,24 @@ Note: `has_and_belongs_to_many :computers` and `has_and_belongs_to_many :people`
   
  ### Join
  
+ https://code.tutsplus.com/articles/improving-the-performance-of-your-rails-app-with-eager-loading--cms-25018
+ https://scoutapm.com/blog/activerecord-includes-vs-joins-vs-preload-vs-eager_load-when-and-where
+ https://kitt.lewagon.com/knowledge/tutorials/n_plus_one
+ 
   If we wish to query on associated tables, then we `join` or `include`. We join 'table-B' to 'table-A' by using the **name of the relation** within the calling table.
+  If you are just filtering results - not accessing records from a relationship - `joins` should be used.
+```ruby
+Post.joins(:comments).where(:comments => {author: 'Derek'}).map { |post| post.title }
+```
+
+```
+Post.joins(:comments).where(:comments => {author: 'Derek'}).map { |post| post.title }
+> Post Load (1.2ms)  SELECT  "posts".* FROM "posts" INNER JOIN "comments" ON "comments"."post_id" = "posts"."id" WHERE "comments"."author" = $1
+=> ["One weird trick to better Rails apps",
+ "1,234 weird tricks to faster Rails apps",
+ "You wouldn't believe what happened to this Rails developer after 14 days"]
+ ```
+
   
   1) The model `Computer` has a relation `has_may :accounts`. We want to know all the computers whith a profil 'admin'. The table 'accounts' (B) will be joined to the table 'computers' (A) by  `Computer.joins(:accounts)`:
   
