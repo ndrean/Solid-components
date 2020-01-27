@@ -9,11 +9,11 @@ https://www.sihui.io/procs-in-ruby-p3/
 
 A block is a piece of code enclosed by curly braces `{ some code  }` or enclosed by `do ...end`  when you have multiline. Blocks can have arguments defined between pipes `|arg1, arg2|`. 
 
-Blocks can't run by themselves unless we make a `Proc` object of them and use the method `.call`.
+Blocks can't run by themselves. They need to be called by the word `yield` to run. 
+Blocks can be turned into `Proc` object. These objects can be run with the method `.call`.
 
-> Turn a block into a `Proc` bject by:
-- `Proc.new { my code }` or simply
-- `proc {my code }`
+> Turn a block into a `Proc`  object `Proc.new { my code }` or simply `proc {my code }`
+
 We can save a proc object into a variable `my_proc = proc { my code }`.
 
 `Proc` objects are closures, meaning they remember and can use the entire context in which they were created.
