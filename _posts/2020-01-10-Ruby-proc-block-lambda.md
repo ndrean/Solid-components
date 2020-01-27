@@ -3,6 +3,8 @@ layout: post
 title: Ruby, Examples with proc, lambda, block, yield
 ---
 
+https://www.sihui.io/procs-in-ruby-p3/
+
 ## Blocks and procs
 
 A block is a piece of code enclosed by curly braces `{ some code  }` or enclosed by `do ...end`  when you have multiline. Blocks can have arguments defined between pipes `|arg1, arg2|`. 
