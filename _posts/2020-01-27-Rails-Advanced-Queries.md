@@ -14,3 +14,6 @@ https://stackoverflow.com/questions/22461042/sending-array-of-values-to-a-sql-qu
 Paasing multiple values
 
 https://stackoverflow.com/questions/28109037/passing-multiple-values-in-single-parameter/28115702#28115702
+
+ANY:
+https://blog.sundaycoding.com/blog/2017/01/22/rails-plus-postgres-array-plus-any-like/
