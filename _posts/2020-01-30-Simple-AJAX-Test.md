@@ -12,7 +12,7 @@ In this directory, we have 2 files:
 
 - a file named `index.html` (it will be directly displayed by the browser when get `http://localhost:8000`).
 
-In this file, we have 2 parts. First the `<div id="target"> </div>` which `innerText` will be changed by a Javascript script bellow. In this script, we create an object `XMLHttpRequest` that will get from the web server the data contained into the file `file.txt`  and upon reception will set this data into the DOM at the location `#target`.
+In this file, we have 2 parts. First the `<div id="target"> </div>` which `innerText` will be changed by a Javascript script bellow when the button with `#actionBtn` is clicked. We create an object `XMLHttpRequest` that will get from the web server the data contained into the file `file.txt`  and upon reception will set this data into the DOM at the location `#target`.
 
 
       <!DOCTYPE html>
