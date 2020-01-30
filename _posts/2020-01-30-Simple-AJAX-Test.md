@@ -1,0 +1,45 @@
+---
+layout: post
+title: AJAX injection with XMLHttpRequest with simple Ruby web server
+---
+
+
+In a directory, we run the script `ruby -run -e http . -p 8000` so that we have a web server at 'localhost:8000'.
+In this directory, we have 2 files:
+- 'file.txt' that contains (for example) the line h1> Here we go!...</h1
+- a file 'index.html' so that it will be directly lauched by the web server. This file has the following code:
+
+      <!DOCTYPE html>
+      <html>
+      <body>
+          <div>
+              <p>Start a web server with 'ruby -run -e httpd . -p 8000' in this directory</p>
+              <br>
+              <p>Check if the file 'file.txt' is located in the same directory</p>
+          </div>
+          <div id="target"> 
+              <p>Click bellow to inject the file content here.....</p>
+          </div>
+
+          <br>
+
+          <button id="actionBtn"> Change !</button>
+
+          <script>
+              const btn = document.getElementById('actionBtn')
+
+              btn.addEventListener('click', (e) => {
+                  const myUrl = 'http://localhost:8000/file.txt'
+                  const xhr = new XMLHttpRequest();
+                  xhr.open("GET", myUrl, asyn = true);
+                  xhr.onreadystatechange = function () {
+                      if (xhr.readyState == 4 && xhr.status == 200) {
+                          const target = document.getElementById('target');
+                          target.innerHTML = xhr.responseText;
+                              }
+                    };
+                    xhr.send();  
+                });
+            </script>
+        </body>
+        </html>
