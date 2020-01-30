@@ -49,3 +49,5 @@ In this file, we have 2 parts. First the `<div id="target"> </div>` which `inner
             </script>
         </body>
         </html>
+
+or slightly shorter with `document.getElementById('actionBtn').onclick = function () {...}`.
