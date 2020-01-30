@@ -5,9 +5,15 @@ title: AJAX injection with XMLHttpRequest with simple Ruby web server
 
 
 In a directory, we run the script `ruby -run -e http . -p 8000` so that we have a web server at 'localhost:8000'.
+
 In this directory, we have 2 files:
-- 'file.txt' that contains (for example) the line h1> Here we go!...</h1
-- a file 'index.html' so that it will be directly lauched by the web server. This file has the following code:
+
+- `file.txt` that contains (for example) the line `<h1> Here we go!...</h1>`
+
+- a file named `index.html` (it will be directly displayed by the browser when get `http://localhost:8000`).
+
+In this file, we have 2 parts. First the `<div id="target"> </div>` which `innerText` will be changed by a Javascript script bellow. In this script, we create an object `XMLHttpRequest` that will get from the web server the data contained into the file `file.txt`  and upon reception will set this data into the DOM at the location `#target`.
+
 
       <!DOCTYPE html>
       <html>
