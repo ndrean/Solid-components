@@ -19,7 +19,7 @@ WEBrick::HTTPServer.new( Port: 8000, DocumentRoot: Dir::pwd ).start
 
 In this directory, we have 2 files:
 
-- `file.txt` that contains (for example) the line `<h1> Here we go!...</h1>`. Check again in the terminal the command `curl http://localhost:8000/filex.txt` so that it is ok.
+- `file.txt` that contains (for example) the line `<h1> Here we go!...</h1>`. Check again in the terminal the command `curl http://localhost:8000/file.txt` so that it is ok.
 
 - a file named `index.html` (it will be directly displayed by the browser when get `http://localhost:8000`).
 
