@@ -4,7 +4,18 @@ title: AJAX injection with XMLHttpRequest with simple Ruby web server
 ---
 
 
-In a directory, we run the script `ruby -run -e http . -p 8000` in the terminal so that we have a web server at 'localhost:8000'.
+In a directory, we run the script `ruby -run -e http . -p 8000` in the terminal so that we have a `web server` at `localhost:8000`.
+
+> Note: we can also run the file bellow `ruby my-web-server.rb`.
+
+```ruby
+#my-web-server.rb
+require "webrick"
+WEBrick::HTTPServer.new( Port: 8000, DocumentRoot: Dir::pwd ).start
+ server = WEBrick::HTTPServer.new Port: 8000
+ trap 'INT'  do server.shutdown end
+ server.start
+```
 
 In this directory, we have 2 files:
 
