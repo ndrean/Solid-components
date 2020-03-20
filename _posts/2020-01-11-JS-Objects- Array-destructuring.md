@@ -19,12 +19,8 @@ let { name } = person;
 For an array:
 ```javascript
 const [head, ...tail] = [1, 2, 3, 4];
-head
-// 1
-tail
-// [2, 3, 4]
-tail[1]
-//3
+console.log(head, tail, tail[1)
+// 1, [2,3,4], 3
 ```
 We can concate two arrays:
 ```javascript
