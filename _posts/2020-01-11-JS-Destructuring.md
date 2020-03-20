@@ -28,7 +28,6 @@ alert(`firstname is ${first}`); // whatever input
 alert(`lastname is ${last}`); // Brown
 ```
 ## Objects.
-Same process. The order has it's importance.
 
 We can pluck the name of the object with `let name = person.name`  or:
 
@@ -42,12 +41,6 @@ const { name } = person;
 console.log(name)
 // 'James'
 ```
-With objects, we can change the key and the order:
-```javascript
-const { username: u, name:n } = person;
-console.log(u)
-// 'James'
-```
 
 ```javascript
 let user = {};
@@ -55,6 +48,24 @@ let user = {};
 console.log(user.first);
 // James
 ```
+
+With objects, we can change the key and the order:
+```javascript
+const { username: u, name:n } = person;
+console.log(u)
+// 'Brown'
+```
+
+###Concate object
+Ths order is important
+```javascript
+const employee = { name:'Jo', salaray: 20000}
+const boss = {name:'Big', salaray: 100000, company:'Brown'}
+
+alert({ ...employee, ...boss }.name); // Big
+alert({ ...boss, ...employee }.name); // Jo
+```
+
 
 ### Default values
 ```javacsript
