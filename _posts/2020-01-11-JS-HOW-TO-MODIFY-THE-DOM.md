@@ -7,12 +7,13 @@ title: Javascript, how to select and modifiy the DOM
 
 - `document.querySelector('.class1')` returns the first found,
 - `document.querySelectorAll('.class1')`  returns an iterable nodeList.
-Note 1: we have to put `.class1`  and `#my_id` with this method.
-Note 2: a nodeList a dynamic: anychange change in the DOM will affect the nodeList.
+
+> Note 1: we have to put `.class1`  and `#my_id` with this method.
+
 
 - `document.getElementById('my_id')` which returns the first found (since we are looking for `id`,  no need to specifiy `#my_id`).
 
-Note: we can define the function:
+> Note: we can define the function:
 ```javascript
 const $ = elt => document.querySelector(elt)
 const $$ = elt => document.qureySelectorAll(elt)
@@ -25,11 +26,16 @@ $$('p')
 // nodeList, iterable
 ```
 
-Note3: we can transform the nodeList into an array by:
+> Note 2: we can transform the nodeList into an array by:
 ```javacsript
 array.from($$('p'))
 //or
 [...$$('p')]
+```
+
+> Note 3: Interation. We can iterate with `forEach` and `for..of`.
+```javacsript
+for(p of $$('p')) { console.log(p.innerHTML) }
 ```
 
 ### Example `nth-of-type()`
