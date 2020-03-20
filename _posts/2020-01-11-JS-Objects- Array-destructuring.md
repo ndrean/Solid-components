@@ -14,6 +14,8 @@ We can pluck the name of the object with `let name = person.name`  or:
 
 ```javascript
 let { name } = person;
+console.log(name)
+// 'James'
 ```
 
 For an array:
@@ -29,4 +31,4 @@ const arr2 = [4,5,6]
 [...arr1,...arr2]
 ///[1,2,3,4,5,6]
 ```
-Same with
+Same with objects. The order has it's importance.
