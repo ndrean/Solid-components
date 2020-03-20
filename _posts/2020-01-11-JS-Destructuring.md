@@ -49,14 +49,14 @@ console.log(user.first);
 // James
 ```
 
-With objects, we can change the key and the order:
+### Renaming keys, order unimportant
 ```javascript
 const { username: u, name:n } = person;
 console.log(u)
 // 'Brown'
 ```
 
-###Concate object
+### Concate object
 Ths order is important
 ```javascript
 const employee = { name:'Jo', salaray: 20000}
