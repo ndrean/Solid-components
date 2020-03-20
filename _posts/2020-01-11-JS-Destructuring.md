@@ -5,6 +5,7 @@ title: Javascript, object & array destructuring
 
 > Note: we can run `serve` which will launch a Ruby web-server and touch an index.html file with `<script src=./myfile.js></script>`, and open http://localhost:8000 for live changes. 
 
+My `myfile.js`:
 
 ## Array:
 ```javascript
