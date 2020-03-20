@@ -16,20 +16,21 @@ const user = {
     firstName: "James",
     lastName : "Brown",
     alive    : false,
-    fullName: function() {
-       return this.firstName + " " + this.lastName;
-    }
+    fullName : function() { return this.firstName + " " + this.lastName; }
+    // or also valid
+//  fullName() {return this.firstName + " " + this.lastName };
 };
 
-//  fullName: function() {return this.firstName}
 ```
 
 and we can do `user.lastName`  or `user.fullName()`. 
 
-Note that arrow function does not work here.  Using `fullName() { return [..] }` is also valid.
+Note that arrow function does not work here since we don't have `this` with arrow functions.
 
  ## JSON
- It is a format for sharing data. Files have the extension `.json`. The format is curly braces with pairs of `"keys" : "values"` where `values`  can be a nested 
+ 
+ It is a format for sharing data. Files have the extension `.json`. The format is curly braces with pairs of `"keys" : "values"` where `values`  can be a nested.
+ 
  JSON or an array in JSON format. 
  CSV files can be converted to JSON format.
  
@@ -53,6 +54,11 @@ Note that arrow function does not work here.  Using `fullName() { return [..] }`
  We can do  `console.log(artist.lastName)` or `console.log(artist['lastName'])` or `console.log(artist.fans[1].fbName)`.
  
  ## `JSON.stringify`  and `JSON.parse`
+ 
+ | object | string |
+ | -------|--------|
+ | obj => | `JSON.stringify(obj) |
+ | JSON.parse(str) | <= str |
  
  - object -> string by the `JSON.stringify(obj)` function
  - string =>  object     with the `JSON.parse(s)` function
