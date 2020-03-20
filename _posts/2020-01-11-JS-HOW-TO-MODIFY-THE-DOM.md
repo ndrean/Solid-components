@@ -5,11 +5,32 @@ title: Javascript, how to select and modifiy the DOM
 
 ## Access selected elements in Javascript
 
-- `document.querySelector('.class1')` returns the first found, and `querySelectorAll('.class1')`  returns them all. We have to put `.class1`  and `#my_id` with this method.
+- `document.querySelector('.class1')` returns the first found,
+- `document.querySelectorAll('.class1')`  returns an iterable nodeList.
+Note 1: we have to put `.class1`  and `#my_id` with this method.
+Note 2: a nodeList a dynamic: anychange change in the DOM will affect the nodeList.
 
 - `document.getElementById('my_id')` which returns the first found (since we are looking for `id`,  no need to specifiy `#my_id`).
 
+Note: we can define the function:
+```javascript
+const $ = elt => document.querySelector(elt)
+const $$ = elt => document.qureySelectorAll(elt)
+```
 
+so that we can shorten by using:
+```javascript
+$('p')
+$$('p')
+// nodeList, iterable
+```
+
+Note3: we can transform the nodeList into an array by:
+```javacsript
+array.from($$('p'))
+//or
+[...$$('p')]
+```
 
 ### Example `nth-of-type()`
 
@@ -38,29 +59,35 @@ If we have the following HTML file:
 
 which displays as:
 
-<table id="score">
-  <thead>
-    <tr>
-      <th>Test
-      <th>Result
-  <tfoot>
-    <tr>
-      <th>Average
-      <td>82%
-  <tbody>
-    <tr>
-      <td>A
-      <td>87%
-    <tr>
-      <td>B
-      <td>78%
-    <tr>
-      <td>C
-      <td>81%
-</table>
+    <table id="score">
+      <thead>
+        <tr>
+          <th>Test
+          <th>Result
+      <tfoot>
+        <tr>
+          <th>Average
+          <td>82%
+      <tbody>
+        <tr>
+          <td>A
+          <td>87%
+        <tr>
+          <td>B
+          <td>78%
+        <tr>
+          <td>C
+          <td>81%
+    </table>
           
 
-then `document.querySelectorAll("#score>tbody>tr>td:nth-of-type("1")` returns an array `[A,B,C]` and `document.querySelectorAll("#score>tbody>tr>td:nth-of-type("2")` returns the array `[ 87%, 78%, 81% ]`.
+then:
+
+`document.querySelectorAll("#score>tbody>tr>td:nth-of-type("1")` returns an array `[A,B,C]`,
+
+and
+
+`document.querySelectorAll("#score>tbody>tr>td:nth-of-type("2")` returns the array `[ 87%, 78%, 81% ]`.
 
 
 ## Create new Nodes
