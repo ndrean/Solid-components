@@ -56,7 +56,7 @@ Note that arrow function does not work here since we don't have `this` with arro
  ## `JSON.stringify`  and `JSON.parse`
  
  | object | string |
- | -------|--------|
+ | :-----:|:------:|
  | obj => | `JSON.stringify(obj)` |
  | `JSON.parse(str)` | <= str |
  
