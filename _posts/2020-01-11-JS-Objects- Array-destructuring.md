@@ -21,11 +21,9 @@ const arr2 = [4,5,6]
 
 ### Default values
 ```javascript
-const [name = window.prompt("name2?"), surname = window.prompt("surname2?")] = [
-  "Julius"
-];
-alert(`name is ${name}`); // Toto
-alert(`surname is ${surname}`); // whatever input in prompt
+const [first = window.prompt("name2?"), last] = [,  "Brown"];
+alert(`firstname is ${first}`); // whatever input
+alert(`lastname is ${last}`); // Brown
 ```
 ## Objects.
 Same process. The order has it's importance.
@@ -42,6 +40,12 @@ const { name } = person;
 console.log(name)
 // 'James'
 ```
+With objects, we can change the key and the order:
+```javascript
+const { username: u, name:n } = person;
+console.log(u)
+// 'James'
+```
 
 ```javascript
 let user = {};
@@ -52,26 +56,25 @@ console.log(user.first);
 
 ### Default values
 ```javacsript
-const {height, width, title} = { title: "Menu", height: 200, width: 100 };
-alert(width); // 100
+const menu = { title: "Menu", height: 200, width: 100 };
+const {height:h, ...rest} = menu;
+alert(h); // 100
+alert(rest.width);
+
 ```
 
 ## Nested destructuring
 ```javascript
 const options = {
-  size: {
-    width: 100,
-    height: 200
-  },
+  size: { width: 100, height: 200 },
   items: ["Cake", "Donut"],
   extra: true
 };
-
-let {
-  size: {
-    width,
-    height
-  },
+```
+We can access directly to the nested arguments:
+```javascript
+const {
+  size: { width, height },
   items: [item1, item2],
   title = "Menu" // not present in the object (default value is used)
 } = options;
@@ -81,4 +84,26 @@ alert(width);  // 100
 alert(height); // 200
 alert(item1);  // Cake
 alert(item2);  // Donut
+```
+
+## Passing an object to a function
+In this way, it will not depend upon the order of the arguments
+```javascript
+function showMenu({
+  title = "Untitled",
+  width: w = 100, // width goes to w
+  height: h = 200, // height goes to h
+  items: [item1, item2] // items first element goes to item1, second to item2
+}) {
+  alert(`${title} ${w} ${h}`); // My Menu 100 200
+  alert(item1); // Item1
+  alert(item2); // Item2
+}
+
+const options = {
+  items: ["A1", "A2"],
+  title: "My menu"
+};
+
+showMenu(options);
 ```
