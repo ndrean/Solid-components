@@ -54,16 +54,15 @@ The browser opens and renders:
 
   
 # A step further:
-Insert a partial into the yield
+We start with a new file. This time, we define the `template` string with the word `<% yield %>`  inside:
 
 ```ruby
 require 'erb'
-
 template = %( <!DOCTYPE html> <html> <body> <%= yield %> </body> </html> )
-
 ```
 
-Then we define the partial you want to pass to `yield`:
+Then we define another varialbe named `partial` with two variables inside, `name` and `message`. We want to pass the partial to `yield` as Rails does:
+
 ```ruby
 partial = %(
     <h3>Hello <%= name %> </h3>
@@ -75,7 +74,7 @@ partial = %(
 ```
 
 
-We define a class:
+For this, we define a class with 
 ```ruby
 class Template
 
@@ -84,25 +83,23 @@ class Template
     @partial = ERB.new(partial)
   end
 
-  def set_binding
-    binding
-  end
-
   def display
     @template.result set_binding { @partial.result }
+  end
+  
+  private
+  def set_binding
+    binding
   end
 end
 ```
 We defined a lambda with params `'name','messages'` and let `binding` pass them to `.result` on the object `@template = ERB.new(partial)` and this lambda will by called by `set_partial.call(my_name, my_messages)`.
 
-We then define two variables:
+
 ```ruby
 text= "ERB from yield with class"
 messages = [ "This is a line", "This  is another great line" ]
-```
 
-and finally use our methods:
-```ruby
 render = Template.new(template: template, partial: partial)
 puts view = render.display
 
