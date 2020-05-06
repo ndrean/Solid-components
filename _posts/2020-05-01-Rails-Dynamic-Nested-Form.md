@@ -131,3 +131,9 @@ document.addEventListener("turbolinks:load", () => {
 });
 ```
 
+## Turbolinks issues
+
+We have to 
+- load Javascript after Turbolinks, and add the attribute `defer: true` to load everything after the DOM
+- disable Turbolinks when we navigate to this page with `<%=link_to 'nested view', nests_path, data: {turbolinks: false}%>`
+
