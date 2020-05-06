@@ -50,38 +50,44 @@ end
 
 ## The nested form *new* view
 
-The use the formbuilder `form_with` with `model: @resto` for the parent form, and the formbuilder `fields_for` with the association `:comments`. This formbuilder will render a block for every element in the association. We instanciated this view with a first block given by the line `@resto.comments.build`  in the *nests_controller*.
+The use the formbuilder `form_with` object with `model: @resto` for the parent form, and the formbuilder `fields_for` object with the association `:comments`. This formbuilder object will generate form fields for us, and will render a block for every element in the association by iteration. We first instanciate a first block by instanciating a first association in the line `@resto.comments.build`  in the *nests_controller* above.
+
+We add a dataset to the *fieldset* wrapper and set it to the  `formbuilder.id`.
 
 ```
-<%= form_with( model: @resto,  url: 'create', method: :post, local: true) do |f| %>  
-    <fieldset>
-        <div class="form-group">
-        <%= f.label :name, class:"pr-5" %>
-        <%= f.text_field :name, required: true %>
+<div id="myform">
+    <%= form_with( model: @resto,  url: 'create', method: :post, local: true) do |f| %>  
+        <fieldset>
+            <div class="form-group">
+            <%= f.label :name, class:"pr-5" %>
+            <%= f.text_field :name, required: true %>
+            </div>
+        </fieldset>
+        <div id="commentsDiv">
+            <%= f.fields_for :comments do |c| %>
+                <fieldset class="form-group  fieldComment" data-id = "<%= c.index%>">
+                    <%= c.label "Comment:" %>
+                    <%= c.text_field :comment, required: true %>
+                </fieldset>
+            <% end %>
+            <!-- JS will inject a new block here -->
         </div>
-    </fieldset>
-            
-    <div id="commentsDiv">
-        <%= f.fields_for :comments do |c| %>
-            <fieldset class="form-group  fieldComment" data-id = "<%= c.index%>">
-                <%= c.label "Comment:" %>
-                <%= c.text_field :comment, required: true %>
-            </fieldset>
-        <% end %>
-        
-        
-    </div>
-    
-    <p>
-        <%= f.button :submit, class:"btn btn-primary pl-2",  id:"submitBtn"%>
-    </p>
-    
-<% end %>
+        <p> <%= f.button :submit, class:"btn btn-primary pl-2",  id:"submitBtn"%> </p>
+    <% end %>
+    <p> <button id="newComment", class=" btn-success pl-3">Create Comment</button> </p>
+</div>
+```
 
+We can add the following CSS to move the button *create comment* below the form *submit* button.
+```
+#myform {
+    position: relative;
+}
 
-<p>
-    <button id="newComment", class=" btn-success pl-3">Create Comment</button>
-</p>
+#submitBtn {
+    position: absolute;
+    bottom: -0px;
+}
 ```
 
 ## Javacsript
