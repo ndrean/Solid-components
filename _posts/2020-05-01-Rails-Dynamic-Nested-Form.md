@@ -50,10 +50,43 @@ end
 
 ## The nested form *new* view
 
+The use the formbuilder `form_with` with `model: @resto` for the parent form, and the formbuilder `fields_for` with the association `:comments`. This formbuilder will render a block for every element in the association. We instanciated this view with a first block given by the line `@resto.comments.build`  in the *nests_controller*.
+
 ```
+<%= form_with( model: @resto,  url: 'create', method: :post, local: true) do |f| %>  
+    <fieldset>
+        <div class="form-group">
+        <%= f.label :name, class:"pr-5" %>
+        <%= f.text_field :name, required: true %>
+        </div>
+    </fieldset>
+            
+    <div id="commentsDiv">
+        <%= f.fields_for :comments do |c| %>
+            <fieldset class="form-group  fieldComment" data-id = "<%= c.index%>">
+                <%= c.label "Comment:" %>
+                <%= c.text_field :comment, required: true %>
+            </fieldset>
+        <% end %>
+        
+        
+    </div>
+    
+    <p>
+        <%= f.button :submit, class:"btn btn-primary pl-2",  id:"submitBtn"%>
+    </p>
+    
+<% end %>
+
+
+<p>
+    <button id="newComment", class=" btn-success pl-3">Create Comment</button>
+</p>
 ```
 
 ## Javacsript
+
+This function injects a HTML string after the last input field block, and gives a unique id to the input by incrementing the penultimate block id (given by the formbuilder method `f.id`).
 ```js
 #javascript/components/createComment.js
 
@@ -78,6 +111,7 @@ function createComment() {
 export { createComment };
 ```
 
+We have to wait for Turbolinks to be loaded to load the Javascript function.
 ```
 #javascript/packs/application.js
 
