@@ -3,6 +3,8 @@ layout: post
 title : Create dynamic nested forms
 ---
 
+We give a simple solution to how dynamically create an associated nested form by injecting with Javascript a HTML string with a unique ID.
+
 ## Setup with One-to-many association
 We setup a simple example with two models. The table *restos* has one coliumn  `[name: string]`  and the table `comments` has two columns,  `[comment: string, resto_id: integer]`. 
 
@@ -50,7 +52,20 @@ end
 
 ## The nested form *new* view
 
-The use the formbuilder `form_with` object with `model: @resto` for the parent form, and the formbuilder `fields_for` object with the association `:comments`. This formbuilder object will generate form fields for us, and will render a block for every element in the association by iteration. We first instanciate a first block by instanciating a first association in the line `@resto.comments.build`  in the *nests_controller* above.
+The use the formbuilder `form_with` object with `model: @resto` for the parent form, and the formbuilder `fields_for` object with the association `:comments`. This formbuilder object will generate form fields for us, and will render a block for every element in the association by iteration. This is done by instanciating associations with `@resto.comments.build`  in the *nests_controller* above, and the formbuilder will render as many as associations are declared.
+
+Here, we simply allow in the strong params an array of associated elements, so the hash params will accept them:
+
+`{
+    "authenticity_token"=>"iPCX9NqD0JJWUs51/aZMuqnWBedKgMqKYhez18nosvOcZ8BsffZDjZQahPd6QVF2RnSUpgHOxyNZx+oUeDyP8w==",
+     "resto"=>{
+        "name"=>"Au Bureau",
+        "comments_attributes"=>{
+            "0"=>{"comment"=>"Cool"},
+            "1"=>{"comment"=>"Perfect"}
+            }
+        },
+     "button"=>""}`
 
 We add a dataset to the *fieldset* wrapper and set it to the  `formbuilder.id`.
 
