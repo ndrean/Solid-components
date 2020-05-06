@@ -6,6 +6,10 @@ title : Create dynamic nested forms
 ## Setup with One-to-many association
 We setup a simple example with two models. The table *restos* has one coliumn  `[name: string]`  and the table `comments` has two columns,  `[comment: string, resto_id: integer]`. 
 
+> We use the standard method `accepts_nested_attributes` to allow you to save attributes on associated records (*comments* here) through the parent (*resto* here). 
+
+> We also use the attribute *dependend: : destroy* to delete every associated records when deleting the parent. We could also use `@resto.comments.destroy_all` in the *destroy* method of the controller *restos*.
+
 ```ruby
 #models/resto.rb
 class Resto < ApplicationRecord
@@ -25,7 +29,6 @@ Besides the classic two controllers *restos_controller.rb* and *comments_control
 ```ruby
 def new
     @resto = Resto.new
-    
     @resto.comments.build
  end
 
