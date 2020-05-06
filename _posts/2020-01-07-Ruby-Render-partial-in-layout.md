@@ -4,8 +4,15 @@ layout: post
 title: Ruby - How to render partial in an .erb layout
 ---
 
+We create a file "testerb.rb" and type in the following:
+
 # First step:
-`require 'erb'` and define the template:
+Firstly we use `ERB`
+```ruby
+`require 'erb'
+```
+and then define a variable which is a string:
+
 ```ruby
 template = %(
   <!DOCTYPE html>
@@ -21,12 +28,16 @@ template = %(
     </html>
 )
 ```
-and define an object `ERB.new(template)` and use the method `.result` (of  class `String`) with `binding`. The context will be `'name'`and `'messages'`.
+and next define an object `ERB.new(template)` and use the method `.result` (of  class `String`) with `binding`. The context will be `'name'`and `'messages'` which we define:
 
 ```ruby
 name = 'ERB'
 messages = ['ligne 1', 'ligne 2']
+````
 
+and finally  the method `binding` will find the context for `message`  and use the variables `name` and `message`:
+
+```ruby
 layout = ERB.new(template).result(binding)
 ```
 Then save this into a file and render it with Google Chrome or Firefox by
