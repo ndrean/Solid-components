@@ -51,7 +51,8 @@ require 'erb'
 template = %( <!DOCTYPE html> <html> <body> <%= yield %> </body> </html> )
 
 ```
-Define the partial you want to pass to `yield`:
+
+Then we define the partial you want to pass to `yield`:
 ```ruby
 partial = %(
     <h3>Hello <%= name %> </h3>
@@ -62,7 +63,43 @@ partial = %(
     </ul>
 ```
 
-Define a lambda with params `'name','messages'` and let `binding` pass them to `.result` on the object `ERB.new(partial)` and this lambda will by called by `set_partial.call(my_name, my_messages)`
+
+We define a class:
+```ruby
+class Template
+
+  def initialize( template:, partial: )
+    @template = ERB.new(template)
+    @partial = ERB.new(partial)
+  end
+
+  def set_binding
+    binding
+  end
+
+  def display
+    @template.result set_binding { @partial.result }
+  end
+end
+```
+We defined a lambda with params `'name','messages'` and let `binding` pass them to `.result` on the object `@template = ERB.new(partial)` and this lambda will by called by `set_partial.call(my_name, my_messages)`.
+
+We then define two variables:
+```ruby
+text= "ERB from yield with class"
+messages = [ "This is a line", "This  is another great line" ]
+```
+
+and finally use our methods:
+```ruby
+render = Template.new(template: template, partial: partial)
+puts view = render.display
+
+File.open("app.html", "w") do
+   |file| file << view
+end
+#%x[ open -a 'Google Chrome' app.html ]
+```
 
 
 ```ruby
