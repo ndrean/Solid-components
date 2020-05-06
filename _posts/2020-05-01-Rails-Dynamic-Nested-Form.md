@@ -90,7 +90,7 @@ We can add the following CSS to move the button *create comment* below the form 
 }
 ```
 
-## Javacsript
+## Javascript
 
 This function injects a HTML string after the last input field block, and gives a unique id to the input by incrementing the penultimate block id (given by the formbuilder method `f.id`).
 ```js
@@ -136,4 +136,8 @@ document.addEventListener("turbolinks:load", () => {
 We have to 
 - load Javascript after Turbolinks, and add the attribute `defer: true` to load everything after the DOM
 - disable Turbolinks when we navigate to this page with `<%=link_to 'nested view', nests_path, data: {turbolinks: false}%>`
+
+## More advanced solution
+
+<https://stevepolito.design/blog/create-a-nested-form-in-rails-from-scratch/>
 
