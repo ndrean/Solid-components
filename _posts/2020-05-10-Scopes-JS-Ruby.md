@@ -13,6 +13,7 @@ var adder = function (x) {
 add5 = adder(5);
 add5(1) == 6
 ```
+or with ES6 syntex:
 
 ```js
 const adder = x => y => x + y;
@@ -28,6 +29,8 @@ def adder(x)
 end
 add5 = adder(5)
 add5[1] == 6
+```
+or with the `->` syntax:
 
 ```ruby
 def adder(x)
