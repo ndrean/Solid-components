@@ -13,7 +13,7 @@ var adder = function (x) {
 add5 = adder(5);
 add5(1) == 6
 ```
-or with ES6 syntex:
+or with ES6 syntax:
 
 ```js
 const adder = x => y => x + y;
