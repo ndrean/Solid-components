@@ -18,6 +18,8 @@ With this setting, we then can create a *.js.erb* file in the folder */javascrip
 
 In other words, we can import *.js* libraries into *.js.erb* files.
 
+This can save some data-attributes.
+
 
 > Note 1: A 'standard' view rendering file *.js.erb* located in the views does <strong>not</strong> have access to `import`, only those located in the folder */javascript/packs/* do (after running `webpacker:install:erb`).
  
