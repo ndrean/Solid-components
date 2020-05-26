@@ -14,18 +14,16 @@ bundle exec rails webpacker:install:erb
 
 on a Rails app already setup with Webpacker.
 
-With this setting, we then can create a *.js.erb* file in the folder */javascript/packs/*. Then we can use ERB (Ruby parses it first) and import external libraries with `import { myFunction } from '../components/myJsFile.js`. In other words, we can import *.js* libraries into *.js.erb* files.
+With this setting, we then can create a *.js.erb* file in the folder */javascript/packs/*. Then we can use ERB (Ruby parses the file first) and import external libraries with `import { myFunction } from '../components/myJsFile.js`. In other words, we can import *.js* libraries into *.js.erb* files.
 
 
-> Note 1: A 'standard' view rendering file *.js.erb* located in the views does <strong>not</strong>
-have access to `import`, only those located in the folder */javascript/packs/* do
- (after running `webpacker:install:erb`).
+> Note 1: A 'standard' view rendering file *.js.erb* located in the views does <strong>not</strong> have access to `import`, only those located in the folder */javascript/packs/* do (after running `webpacker:install:erb`).
  
-> Note 2: To use a JS library inside a view *.html.erb<* we need to:
-- import the library in a *someFile.js.erb* file in */javascript/packs*
+> Note 2: To use a JS library inside a view *.html.erb* we need to:
+
+- import the library in a *someFile.js.erb* file in the folder */javascript/packs/*
+
  - import the *someFile.js.erb* file in the view with `<t%= javascript_pack_tag 'someFile' %>`
 
 
- >Note 3: we need to have Turbolinks loaded to access to the DOM, so all the code in the 
-*someFile.js.erb*file is a callback: `document.addEventListener("turbolinks:load", myFunction})`
-and declare `const myFunction = ()=> {[...]}` after.
+ > Note 3: we need to have Turbolinks loaded to access to the DOM, so all the code in the *someFile.js.erb* file is wrapped as a callback: `document.addEventListener("turbolinks:load", myFunction})`, and declare `const myFunction = ()=> {[...]}` after.
