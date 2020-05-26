@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rails - Add ERB support in JS files
+title: Rails - Add ERB support in JS files and import JS methods in .js.erb
 ---
 
 
@@ -14,7 +14,9 @@ bundle exec rails webpacker:install:erb
 
 on a Rails app already setup with Webpacker.
 
-With this setting, we then can create a *.js.erb* file in the folder */javascript/packs/*. Then we can use ERB (Ruby parses the file first) and import external libraries with `import { myFunction } from '../components/myJsFile.js`. In other words, we can import *.js* libraries into *.js.erb* files.
+With this setting, we then can create a *.js.erb* file in the folder */javascript/packs/*. Then we can use ERB (Ruby parses the file first) and import external libraries with `import { myFunction } from '../components/myJsFile.js`. 
+
+In other words, we can import *.js* libraries into *.js.erb* files.
 
 
 > Note 1: A 'standard' view rendering file *.js.erb* located in the views does <strong>not</strong> have access to `import`, only those located in the folder */javascript/packs/* do (after running `webpacker:install:erb`).
