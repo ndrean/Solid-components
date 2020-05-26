@@ -18,7 +18,7 @@ With this setting, we then can create a *.js.erb* file in the folder */javascrip
 
 In other words, we can import *.js* libraries into *.js.erb* files.
 
-> This can save on _data-attributes_: the `<div data-something="<%= Post.first.id%>">` in the HTML file with it's searching `document.qureySelector('[data-something]')`in a *.js* file can be replaced simply by eg `const id = <%= Post.first.id%> in the _.js.erb_ file)
+> This can save on _data-attributes_: the `<div data-something="<%= Post.first.id%>">` in the HTML file with it's searching `document.qureySelector('[data-something]')`in a *.js* file can be replaced simply by eg `const id = <%= Post.first.id%>` in the _.js.erb_ file)
 
 
 > Note 1: A 'standard' view rendering file *.js.erb* located in the views does <strong>not</strong> have access to `import`, only those located in the folder */javascript/packs/* do (after running `webpacker:install:erb`).
