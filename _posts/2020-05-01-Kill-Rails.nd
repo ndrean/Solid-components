@@ -3,7 +3,9 @@ layout: post
 title: Kill Rails server
 ---
 
-Which service is running on port 3000? Do: `lsof -i tcp:3000`
+Which service is running on port 3000? Do: 
+```lsof -i tcp:3000```
 
-To kill it, just pipe: `kill -9 $(lsof -i tcp:3000)`
+To kill it, just pipe:
+```kill -9 $(lsof -i tcp:3000)`
 
