@@ -1,4 +1,4 @@
-import { Tcustom, Tdefault } from "../components/title";
+import { Title1 } from "../components/title";
 import "../index.css";
 
 export default function Titles() {
@@ -6,8 +6,7 @@ export default function Titles() {
     <>
       <p>Third version</p>
       <div class="center">
-        <Tcustom>Essai</Tcustom>
-        <Tdefault>Default</Tdefault>
+        <Title1>Essai</Title1>
       </div>
     </>
   );

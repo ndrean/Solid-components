@@ -1,18 +1,15 @@
-import { styled } from "solid-styled-components";
-// import { parseProps } from "../utils";
+import { genComponent } from "../utils";
 
-const defaultCss = { color: "blue" };
-
-const title = (tag, css) => styled(tag)(() => (css ? css : defaultCss));
-
-const Tcustom = title("h1", {
+const titleGreen = {
   color: "green",
   "font-size": "2rem",
   "font-weight": "bold",
-});
-const Tdefault = title("h1");
+  border: "solid 2px",
+};
 
-export { Tcustom, Tdefault };
+const Title1 = genComponent("h1", titleGreen);
+
+export { Title1 };
 
 /*
 const Title1 = (props) => {
