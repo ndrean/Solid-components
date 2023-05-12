@@ -6,6 +6,10 @@
   --primary-text-color: blue;
 }
 
+.center {
+  text-align: center;
+}
+
 .btn {
   background-color: blue;
   color: white;

@@ -15,6 +15,11 @@ const Title2 = styled("h1")((props) =>
   Object.keys(props).length > 2 ? parseProps(props) : defaultCss
 );
 
-const Title3 = (css) => styled("h1")(() => css);
-const Tgreen = Title3({ color: "green" });
-export { Title1, Title2, Tgreen };
+const Title3 = (tag, css) => styled(tag)(() => (css ? css : defaultCss));
+const Tgreen = Title3("h1", {
+  color: "green",
+  "font-size": "2rem",
+  "font-weight": "bold",
+});
+const Tdefault = Title3("h1");
+export { Title1, Title2, Tgreen, Tdefault };
