@@ -1,10 +1,20 @@
-import { Title1, Title2, Tgreen, Tdefault } from "../components/title";
+import { Tcustom, Tdefault } from "../components/title";
 import "../index.css";
 
 export default function Titles() {
   return (
     <>
-      <p>First version using "class with `css`"</p>
+      <p>Third version</p>
+      <div class="center">
+        <Tcustom>Essai</Tcustom>
+        <Tdefault>Default</Tdefault>
+      </div>
+    </>
+  );
+}
+
+/*
+<p>First version using "class with `css`"</p>
       <div class="center">
         <Title1>default class Title</Title1>
         <Title1 color="red" fontWeight="bold" textAlign="center">
@@ -20,11 +30,4 @@ export default function Titles() {
         <Title2>With default Styled tag </Title2>
       </div>
       <hr />
-      <p>Third version</p>
-      <div class="center">
-        <Tgreen>Essai</Tgreen>
-        <Tdefault>Default</Tdefault>
-      </div>
-    </>
-  );
-}
+*/
