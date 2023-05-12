@@ -1,12 +1,12 @@
-import StyledTitle from "../components/title";
+import Title1 from "../components/title";
 
 export default function Test() {
   return (
     <>
-      <StyledTitle />
-      <StyledTitle color="red" fontWeight="bold">
+      <Title1 />
+      <Title1 color="red" fontWeight="bold">
         Styled title
-      </StyledTitle>
+      </Title1>
     </>
   );
 }
