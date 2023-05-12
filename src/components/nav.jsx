@@ -1,14 +1,20 @@
 import { NavLink } from "@solidjs/router";
+import routes from "./routes";
 
 const Nav = () => {
   return (
     <nav class="mt-5 mb-3">
-      <NavLink href="/" class="btn btn-primary me-2" activeClass="btn-success">
-        Home
-      </NavLink>
-      <NavLink href="/test" class="btn btn-primary" activeClass="btn-success">
-        Titles
-      </NavLink>
+      <For each={routes}>
+        {({ href, title }) => (
+          <NavLink
+            href={href}
+            class="btn btn-primary me-2"
+            activeClass="btn-success"
+          >
+            {title}
+          </NavLink>
+        )}
+      </For>
     </nav>
   );
 };

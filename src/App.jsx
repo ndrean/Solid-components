@@ -4,16 +4,16 @@ import { lazy } from "solid-js";
 import styles from "./App.module.css";
 import Nav from "./components/nav";
 
-const Home = lazy(() => import("./pages/home"));
-const Test = lazy(() => import("./pages/test"));
+import routes from "./components/routes";
 
 export default function App() {
   return (
     <div class={styles.App}>
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/test" element={<Test />} />
+        <For each={routes}>
+          {({ href, component }) => <Route path={href} element={component} />}
+        </For>
       </Routes>
     </div>
   );

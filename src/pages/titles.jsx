@@ -1,6 +1,6 @@
 import Title1 from "../components/title";
 
-export default function Test() {
+export default function Titles() {
   return (
     <>
       <Title1 />
