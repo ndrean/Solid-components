@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-text-color: blue;
+}
+
 .btn {
   background-color: blue;
   color: white;
@@ -9,7 +13,7 @@
 }
 
 .abtn {
-  @apply bg-blue-300 text-white inline-block p-2 m-2;
+  @apply text-[color:var(--primary-text-color)] text-white inline-block p-2 m-2;
 }
 
 .h1-title {
