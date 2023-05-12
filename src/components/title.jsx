@@ -7,7 +7,7 @@ const StyledTitle = (props) => {
   const cssObj = parseProps(props);
   const newclass = Object.keys(cssObj).length > 0 ? css(cssObj) : defaultCss;
 
-  return <h1 class={newclass}>{props.children}</h1>;
+  return <h1 class={newclass}>{props.children || "define a title"}</h1>;
 };
 
 export default StyledTitle;
