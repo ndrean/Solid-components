@@ -4,7 +4,7 @@ import { TitleV1, BaseH1Obj, BaseH1Props } from "./title";
 import Home from "../pages/home";
 import "../index.css";
 
-export default function Titles() {
+export default function TitleExamples() {
   const customCss = `
   color: blue; 
   border: dotted 1px;
@@ -51,13 +51,15 @@ export default function Titles() {
 
             <TitleV3Custom>V3 custom</TitleV3Custom>
             <p>
-              Styled overwritten with object <code>css: "{customCss}"</code>
+              Styled overwritten with object <code>css: "{customCss}"</code>{" "}
+              when defining the component
             </p>
             <hr />
             <TitleV4>V4 base</TitleV4>
             <TitleV4Custom css={customCss2}>V4 custom</TitleV4Custom>
             <p>
-              Styled overwritten with the prop: <code>"{customCss2} </code>
+              Styled overwritten with the prop: <code>"{customCss2} </code> when
+              using this component
             </p>
           </div>
         </li>

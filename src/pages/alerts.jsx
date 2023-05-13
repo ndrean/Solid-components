@@ -7,6 +7,6 @@ const context = {
 
 const AlertExamples = alertExamples(context);
 
-export default function Alerte() {
+export default function Alerts() {
   return <AlertExamples />;
 }
