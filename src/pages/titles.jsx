@@ -45,13 +45,13 @@ export default function Titles() {
 
             <TitleV3Custom>V3 custom</TitleV3Custom>
             <p>
-              Styled with object <code>css: "{customCss}"</code>
+              Styled overwritten with object <code>css: "{customCss}"</code>
             </p>
             <hr />
             <TitleV4>V4 base</TitleV4>
             <TitleV4Custom css={customCss2}>V4 custom</TitleV4Custom>
             <p>
-              Styled with the prop: <code>"{customCss2} </code>
+              Styled overwritten with the prop: <code>"{customCss2} </code>
             </p>
           </div>
         </li>
