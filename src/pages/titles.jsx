@@ -6,9 +6,16 @@ import "../index.css";
 
 export default function Titles() {
   // it must be a css string in one line
-  const customCss = "color: blue; border: dotted 1px;cursor: pointer;";
-  const customCss2 =
-    "border: none; color: green; box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);";
+  const customCss = `
+  color: blue; 
+  border: dotted 1px;
+  cursor: pointer;`;
+
+  const customCss2 = `
+  border: none; 
+  color: green; 
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+  `;
 
   // Usage of the component that returns a styled "h1"
   // 1. with an object whose key is "css"
@@ -37,8 +44,8 @@ export default function Titles() {
 
         <li>
           <p>
-            Second version with styled. The CSS msut be defined in{" "}
-            <strong>one</strong> line.
+            Second version with styled. The CSS msut be defined within{" "}
+            <strong>backticks "`"</strong> if you want to use multiline.
           </p>
           <div class="center">
             <TitleV3>V3 base</TitleV3>

@@ -23,20 +23,10 @@ export default ({ tr, colors }) => {
   );
 
   const toCss = (color) =>
-    css`
-      border-left: 8px solid ${color[700]};
-      color: ${color[700]};
-      background-color: ${color[50]};
-    `;
+    `border-left: 8px solid ${color[700]}; color: ${color[700]}; background-color: ${color[50]};`;
 
-  const rootStyle = css`
-    display: flex;
-    max-width: 600px;
-    justify-content: flex-start;
-    align-items: stretch;
-    margin: 0.5rem;
-    font-weight: 500;
-  `;
+  const rootStyle = `
+    display: flex; max-width: 600px; justify-content: flex-start; align-items: stretch; margin: 0.5rem; font-weight: 500;`;
 
   const severityToStyle = ({ severity, message }) => {
     const style = severityMap[severity];
