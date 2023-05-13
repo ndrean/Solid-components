@@ -1,7 +1,8 @@
 import alertExamples from "../components/alert.examples";
+import { red, orange, teal, blue } from "material-ui-colors";
 
 const context = {
-  colors: { red: "red", teal: "teal", orange: "orange", blue: "blue" },
+  colors: { red, teal, orange, blue },
 };
 
 const AlertExamples = alertExamples(context);

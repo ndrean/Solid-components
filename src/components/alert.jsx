@@ -1,8 +1,7 @@
-import { css, styled } from "solid-styled-components";
+import { css } from "solid-styled-components";
 
 export default ({ colors }) => {
   const { red, teal, orange, blue } = colors;
-
   const severityMap = {
     error: { icon: "\u26A0", color: red },
     warning: { icon: "\u26A0", color: orange },
@@ -23,9 +22,9 @@ export default ({ colors }) => {
   );
 
   const toCss = (color) =>
-    `border-left: 8px solid ${color}; 
-    color: hsl(0,100%, 35%); 
-    background-color: ${color};
+    `border-left: 8px solid ${color[700]}; 
+    color: ${color[700]}; 
+    background-color: ${color[50]};
     `;
 
   const rootStyle = `
@@ -67,7 +66,7 @@ export default ({ colors }) => {
           class={css`
             padding: 0 1.5rem;
             font-size: 3rem;
-            background-color: ${style.color};
+            background-color: ${style.color[100]};
             min-height: 1rem;
             display: flex;
             justify-content: center;
