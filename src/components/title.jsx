@@ -6,15 +6,15 @@ const TitleV1 = (props) => (
 );
 
 const h1BaseCss = "border: solid 5px; background-color: beige;";
-const BaseH1Obj = (css) => {
-  return styled("h1")`
+
+const BaseH1Obj = (css) =>
+  styled("h1")`
     ${css?.css ? h1BaseCss + css.css : h1BaseCss}
   `;
-};
 
 const BaseH1Props = () => {
   return styled("h1")(
-    (props) => `${props.css ? h1BaseCss + props.css : h1BaseCss}`
+    (props) => `${props?.css ? h1BaseCss + props.css : h1BaseCss}`
   );
 };
 
