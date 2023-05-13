@@ -1,5 +1,5 @@
 import "../index.css";
-import { css, styled } from "solid-styled-components";
+import { styled } from "solid-styled-components";
 
 const TitleV1 = (props) => (
   <h1 class={["title", props.newClass].join(" ")}> {props.children}</h1>

@@ -7,10 +7,11 @@ import "../index.css";
 export default function Titles() {
   const customCss = "color: blue; border: dotted 1px;cursor: pointer;";
   const customCss2 =
-    "color: green; box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);";
+    "border: none; color: green; box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);";
 
   const TitleV3 = BaseH1Obj();
   const TitleV3Custom = BaseH1Obj({ css: customCss });
+  const TitleV4 = BaseH1Props();
   const TitleV4Custom = BaseH1Props();
 
   return (
@@ -35,6 +36,8 @@ export default function Titles() {
             <TitleV3>V3 base</TitleV3>
 
             <TitleV3Custom>V3 custom</TitleV3Custom>
+            <hr />
+            <TitleV4>V4 base</TitleV4>
             <p>
               Styled with object <code>css: "{customCss}"</code>
             </p>
