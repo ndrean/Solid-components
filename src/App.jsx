@@ -1,7 +1,8 @@
 import { Route, Routes } from "@solidjs/router";
 
 import Nav from "./components/nav";
-import routes from "./components/routes";
+import routes from "./routes";
+import "./index.css";
 
 export default function App() {
   return (

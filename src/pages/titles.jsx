@@ -1,32 +1,54 @@
-import { Title1 } from "../components/title";
+import { A } from "@solidjs/router";
+
+import { TitleV1, BaseH1Obj, BaseH1Props } from "../components/title";
+import Home from "../pages/home";
 import "../index.css";
 
 export default function Titles() {
+  const customCss = "color: blue; border: dotted 1px;cursor: pointer;";
+  const customCss2 =
+    "color: green; box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);";
+
+  const TitleV3 = BaseH1Obj();
+  const TitleV3Custom = BaseH1Obj({ css: customCss });
+  const TitleV4Custom = BaseH1Props();
+
   return (
     <>
-      <p>Third version</p>
-      <div class="center">
-        <Title1>Essai</Title1>
-      </div>
+      <ul>
+        <li>
+          <p>First version with classes defined in "index.jss"</p>
+          <div class="center">
+            <TitleV1>Default</TitleV1>
+            <TitleV1 newClass="dotted-red-title">Red</TitleV1>
+            <p>
+              New class defined in "index.css" and the prop{" "}
+              <code>newClass="red-title"</code>
+            </p>
+          </div>
+          <hr />
+        </li>
+
+        <li>
+          <p>Second version with styled</p>
+          <div class="center">
+            <TitleV3>V3 base</TitleV3>
+
+            <TitleV3Custom>V3 custom</TitleV3Custom>
+            <p>
+              Styled with object <code>css: "{customCss}"</code>
+            </p>
+            <TitleV4Custom css={customCss2}>V4 custom</TitleV4Custom>
+            <p>
+              Styled with the prop: <code>"{customCss2} </code>
+            </p>
+          </div>
+        </li>
+      </ul>
+
+      <A href="/" class="btn" component={Home}>
+        Home
+      </A>
     </>
   );
 }
-
-/*
-<p>First version using "class with `css`"</p>
-      <div class="center">
-        <Title1>default class Title</Title1>
-        <Title1 color="red" fontWeight="bold" textAlign="center">
-          with class
-        </Title1>
-      </div>
-      <hr />
-      <p>Second version using "styled"</p>
-      <div class="center">
-        <Title2 color="orange" fontSize={"2rem"}>
-          With Styled tag
-        </Title2>
-        <Title2>With default Styled tag </Title2>
-      </div>
-      <hr />
-*/

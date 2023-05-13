@@ -1,26 +1,21 @@
-import { genComponent } from "../utils";
+import "../index.css";
+import { css, styled } from "solid-styled-components";
 
-const titleGreen = {
-  color: "green",
-  "font-size": "2rem",
-  "font-weight": "bold",
-  border: "solid 2px",
-};
-
-const Title1 = genComponent("h1", titleGreen);
-
-export { Title1 };
-
-/*
-const Title1 = (props) => {
-  const cssObj = parseProps(props);
-  const newclass =
-    Object.keys(cssObj).length > 0 ? css(cssObj) : css(defaultCss);
-  return <h1 class={newclass}>{props.children}</h1>;
-};
-
-// default props are "theme" and children"
-const Title2 = styled("h1")((props) =>
-  Object.keys(props).length > 2 ? parseProps(props) : defaultCss
+const TitleV1 = (props) => (
+  <h1 class={["title", props.newClass].join(" ")}> {props.children}</h1>
 );
-*/
+
+const h1BaseCss = "border: solid 5px; background-color: beige;";
+const BaseH1Obj = (css) => {
+  return styled("h1")`
+    ${css?.css ? h1BaseCss + css.css : h1BaseCss}
+  `;
+};
+
+const BaseH1Props = () => {
+  return styled("h1")(
+    (props) => `${props.css ? h1BaseCss + props.css : h1BaseCss}`
+  );
+};
+
+export { TitleV1, BaseH1Obj, BaseH1Props };

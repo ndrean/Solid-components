@@ -1,29 +1,50 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --primary-text-color: blue;
 }
 
 .center {
   text-align: center;
+  padding: 2px;
+}
+
+.nav {
+  display: flex;
+}
+
+a {
+  flex-direction: row;
+  padding: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  border: solid 1px;
+  display: inline-block;
+  font-weight: bold;
+}
+a.link {
+  text-decoration: none;
+}
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.dotted-red-title {
+  color: red;
+  border: dotted 2px;
 }
 
 .btn {
-  background-color: blue;
-  color: white;
-  padding: 10px;
+  cursor: pointer;
+  background-color: bisque;
+  border-radius: 8px;
+  text-decoration: none;
 }
 
-.abtn {
-  @apply text-[color:var(--primary-text-color)] text-white inline-block p-2 m-2;
+.bg-grey {
+  background-color: bisque;
 }
 
-.h1-title {
-  @apply text-3xl font-bold;
-}
-
-.h1-title-green {
-  @apply text-green-300;
+.bg-white {
+  background-color: white;
 }
