@@ -7,6 +7,11 @@ const routes = [
     title: "Titles",
     component: lazy(() => import("./pages/titles")),
   },
+  {
+    href: "/alerts",
+    title: "Alerts",
+    component: lazy(() => import("./pages/alerts")),
+  },
 ];
 
 export default routes;

@@ -1,12 +1,11 @@
 import alert from "./alert";
 
 export default (context) => {
-  const { tr } = context;
   const Alert = alert(context);
   return function AlertExamples() {
     return (
       <section id="alert">
-        <h3>{tr.t("Alert")}</h3>
+        <h3>Alert</h3>
         <Alert
           severity="error"
           name="Trouble Ahead"

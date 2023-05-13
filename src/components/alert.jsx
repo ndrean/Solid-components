@@ -1,6 +1,6 @@
-import { css } from "solid-styled-components";
+import { css, styled } from "solid-styled-components";
 
-export default ({ tr, colors }) => {
+export default ({ colors }) => {
   const { red, teal, orange, blue } = colors;
 
   const severityMap = {
@@ -23,10 +23,19 @@ export default ({ tr, colors }) => {
   );
 
   const toCss = (color) =>
-    `border-left: 8px solid ${color[700]}; color: ${color[700]}; background-color: ${color[50]};`;
+    `border-left: 8px solid ${color}; 
+    color: hsl(0,100%, 35%); 
+    background-color: ${color};
+    `;
 
   const rootStyle = `
-    display: flex; max-width: 600px; justify-content: flex-start; align-items: stretch; margin: 0.5rem; font-weight: 500;`;
+    display: flex; 
+    max-width: 600px; 
+    justify-content: flex-start; 
+    align-items: stretch; 
+    margin: 0.5rem; 
+    font-weight: 500;
+    `;
 
   const severityToStyle = ({ severity, message }) => {
     const style = severityMap[severity];
@@ -46,14 +55,19 @@ export default ({ tr, colors }) => {
     ...other
   }) => {
     const style = severityToStyle({ severity, message });
-
     return (
-      <div class={[rootStyle, toCss(style.color)]} {...other} role="alert">
+      <div
+        class={css`
+          ${rootStyle} + ${toCss(style.color)}
+        `}
+        {...other}
+        role="alert"
+      >
         <div
           class={css`
             padding: 0 1.5rem;
             font-size: 3rem;
-            background-color: ${style.color[100]};
+            background-color: ${style.color};
             min-height: 1rem;
             display: flex;
             justify-content: center;
@@ -74,7 +88,7 @@ export default ({ tr, colors }) => {
         >
           {name && (
             <h3>
-              {tr.t(name)} {code && `(${code})`}
+              {name} {code && `(${code})`}
             </h3>
           )}
           <h4>{message}</h4>
