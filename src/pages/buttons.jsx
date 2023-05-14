@@ -1,9 +1,14 @@
-import buttonExamples from "../components/button.examples";
-import { red } from "material-ui-colors";
+import buttonExamples from "../examples/button.examples";
+import { red, orange, teal, blue, grey } from "material-ui-colors";
+import fbIcon from "../icons/facebook.svg";
 
 const context = {
-  color: red,
+  colors: { red, teal, orange, blue, grey },
   borderRadius: "4px",
+  tr: {
+    t: (v) => v,
+  },
+  icon: fbIcon,
 };
 
 const ButtonExamples = buttonExamples(context);

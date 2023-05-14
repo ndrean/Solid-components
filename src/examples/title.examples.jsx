@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 
-import { TitleV1, BaseH1Obj, BaseH1Props } from "./title";
+import { TitleV1, BaseH1Obj, BaseH1Props } from "../components/title";
 import Home from "../pages/home";
 import "../index.css";
 
@@ -12,7 +12,7 @@ export default function TitleExamples() {
 
   const customCss2 = `
   border: none; 
-  color: green; 
+  text-align: left;
   box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
   `;
 

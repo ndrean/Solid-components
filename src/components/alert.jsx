@@ -1,6 +1,6 @@
 import { css } from "solid-styled-components";
 
-export default ({ colors }) => {
+export default ({ tr, colors }) => {
   const { red, teal, orange, blue } = colors;
   const severityMap = {
     error: { icon: "\u26A0", color: red },

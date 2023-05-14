@@ -1,9 +1,11 @@
 import { styled } from "solid-styled-components";
 
-export default ({ color, borderRadius, shadows }) => {
-  const rootStyle = (color, borderRadius) => `
+export default ({ colors, borderRadius }) => {
+  const { red, grey, blue } = colors;
+
+  const rootStyle = (borderRadius) => `
     cursor: pointer;
-    color: ${color[200]};
+    color: black;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -24,20 +26,41 @@ export default ({ color, borderRadius, shadows }) => {
     box-sizing: border-box;
     user-select: none;
     transition: background-color 0.3s;
+    &:before {
+      background-color: rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: calc(50% - 100%);
+      left: calc(50% - 100%);
+      width: 200%;
+      height: 200%;
+      transition: opacity 250ms linear;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      content: "";
+    };
+    &:active {
+      &:before {
+        opacity: 1;
+      }
+    };
+    &:hover {
+      &:before {
+        opacity: 0.5;
+      }
+    };
   `;
 
   const styles = {
-    root: rootStyle(color, borderRadius),
+    root: rootStyle(borderRadius),
     flat: `
       border-width: 0;
     `,
     flatPrimary: `
-      background-color: ${color[200]};
-      color: ${color[400]};
+      color: ${blue[400]};
     `,
     flatAccent: `
-      background-color: ${color[100]};
-      color: ${color[300]};
+      color: ${red[300]};
     `,
     // raised: `
     //   box-shadow: ${shadows[2]};
@@ -50,12 +73,12 @@ export default ({ color, borderRadius, shadows }) => {
     //   };
     // `,
     raisedPrimary: `
-      background-color: ${color[100]};
-      color: ${color[400]};
+      background-color: ${grey[100]};
+      color: ${red[400]};
     `,
     raisedAccent: `
-      background-color: ${color[100]};
-      color: ${color[400]};
+      background-color: ${grey[100]};
+      color: ${red[400]};
     `,
     disabled: `
       color: rgba(0, 0, 0, 0.26);
@@ -77,7 +100,7 @@ export default ({ color, borderRadius, shadows }) => {
       position: relative;
       overflow: hidden;
       transform: translate3d(0, 0, 0);
-      ::after {
+      &:after {
         content: "";
         display: block;
         position: absolute;
@@ -93,7 +116,7 @@ export default ({ color, borderRadius, shadows }) => {
         opacity: 0;
         transition: transform 0.5s, opacity 1s;
       };
-      :active::after {
+      &:active&:after {
         transform: scale(0, 0);
         opacity: 0.2;
         transition: 0s;
@@ -101,12 +124,17 @@ export default ({ color, borderRadius, shadows }) => {
     `,
   };
 
-  return styled("button")((props) => {
-    console.log(props);
-    return `${
-      (props.ripple ? styles.ripple : styles.root) +
-      (props.disabled ? styles.disabled : styles.root) +
-      (props.fullWidth ? styles.fullWidth : styles.root)
-    }`;
-  });
+  return styled("button")(
+    (props) =>
+      `${
+        styles.root +
+        (props.flat ? styles.flat : "") +
+        (props.accent ? styles.flatAccent : "") +
+        (props.primary ? styles.flatPrimary : "") +
+        (props.ripple ? styles.ripple : "") +
+        (props.disabled ? styles.disabled : "") +
+        (props.fullWidth ? styles.fullWidth : "")
+      }
+    `
+  );
 };

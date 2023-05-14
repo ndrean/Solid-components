@@ -1,13 +1,9 @@
-/* @jsxImportSource @emotion/react */
-import { jsx, css, keyframes } from "@emotion/react";
-import styled from "@emotion/styled";
-import { observable } from "mobx";
-import { observer } from "mobx-react";
+import { css, keyframes } from "solid-styled-components";
 
 const deleteAfterDuration = 5e3;
 
 export default (context, { limit = 10 }) => {
-  const store = observable({
+  const store = {
     messages: [],
     setStatus(id, status) {
       store.messages.findIndex((message) => {
@@ -20,7 +16,6 @@ export default (context, { limit = 10 }) => {
     },
     add(component) {
       const { messages } = store;
-      //console.log("add ", component);
       const message = {
         id: Math.random().toString(10).split(".")[1],
         component,
@@ -45,7 +40,7 @@ export default (context, { limit = 10 }) => {
         return false;
       });
     },
-  });
+  };
 
   const AlertView = styled("div")({
     margin: 10,
@@ -74,7 +69,7 @@ export default (context, { limit = 10 }) => {
     },
   };
 
-  const Alert = observer(function Alert({ message }) {
+  const Alert = function Alert({ message }) {
     const css = animation[message.status];
     const { component } = message;
     return (
@@ -82,7 +77,7 @@ export default (context, { limit = 10 }) => {
         {component}
       </AlertView>
     );
-  });
+  };
 
   function AlertStack() {
     return (

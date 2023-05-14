@@ -1,9 +1,9 @@
 import { css } from "solid-styled-components";
-import button from "../button";
-import alert from "../alert";
+import button from "../components/button";
+import alert from "../components/alert";
 
 export default (context) => {
-  const { tr, alertStack } = context;
+  const { alertStack } = context;
 
   const AlertStack = alertStack.View;
   const Button = button(context);
@@ -13,49 +13,47 @@ export default (context) => {
     return (
       <section id="alert-stack">
         <AlertStack />
-        <h1>{tr.t("Alert Stack")}</h1>
+        <h1>Alert Stack</h1>
         <Button
-          label="success alert"
           raised
           onClick={() => {
             alertStack.add(
-              <Alert
-                severity="success"
-                message={tr.t("Infrastructure Created")}
-              />
+              <Alert severity="success" message={"Infrastructure Created"} />
             );
           }}
-        />
+        >
+          success alert
+        </Button>
         <Button
-          label="info alert"
           raised
           onClick={() => {
             alertStack.add(
-              <Alert severity="info" message={tr.t("Something went wrong")} />
+              <Alert severity="info" message={"Something went wrong"} />
             );
           }}
-        />
+        >
+          Info alert
+        </Button>
         <Button
-          label="warning alert"
           raised
           onClick={() => {
             alertStack.add(
-              <Alert
-                severity="warning"
-                message={tr.t("Peggy went to the market")}
-              />
+              <Alert severity="warning" message={"Peggy went to the market"} />
             );
           }}
-        />
+        >
+          warning alert
+        </Button>
         <Button
-          label="error alert"
           raised
           onClick={() => {
             alertStack.add(
-              <Alert severity="error" message={tr.t("Something went wrong")} />
+              <Alert severity="error" message={"Something went wrong"} />
             );
           }}
-        />
+        >
+          error alert
+        </Button>
       </section>
     );
   };
