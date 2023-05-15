@@ -1,54 +1,13 @@
-import { createSignal } from "solid-js";
-
 import button from "../components/button";
 import alertStack from "../components/alertStack";
-import alert from "../components/alert";
-
-const deleteAfterDuration = 8e3;
+// import alert from "../components/alert";
 
 export default (context) => {
-  const { tr, limit } = context;
+  const { tr } = context;
   const Button = button(context);
 
-  const [messages, setMessages] = createSignal([]);
-
-  const AlertStack = alertStack(context);
-  const Alert = alert(context);
-
-  function setStatus(id, status) {
-    const updatedMessages = messages().map((message) => {
-      if (message.id === id) {
-        return { ...message, status: status };
-      }
-      return message;
-    });
-    setMessages(updatedMessages);
-  }
-
-  function remove(id) {
-    console.log("remove", id);
-    setStatus(id, "removing");
-    const updatedMessages = messages().filter((message) => message.id !== id);
-    setMessages(updatedMessages);
-  }
-
-  function add(component) {
-    const message = {
-      id: Math.random().toString(10).split(".")[1],
-      component,
-      status: "inserting",
-    };
-    console.log("add", message.id);
-
-    if (messages().length >= limit) {
-      const [f, ...rest] = messages();
-      remove(f.id);
-    }
-
-    setMessages((messages) => [...messages, message]);
-    setTimeout(() => setStatus(message.id, "inserted"), 400);
-    setTimeout(() => remove(message.id), deleteAfterDuration);
-  }
+  const { AlertStack, msgs, add } = alertStack(context);
+  // const Alert = alert(context);
 
   return (
     <section id="alert-stack">
@@ -86,7 +45,8 @@ export default (context) => {
       >
         error alert
       </Button>
-      <AlertStack messages={messages()} />
+      {/* <p>{JSON.stringify(msgs)}</p> */}
+      <AlertStack messages={msgs} />
     </section>
   );
 };
