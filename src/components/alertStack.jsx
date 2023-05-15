@@ -1,4 +1,4 @@
-import { For, createEffect } from "solid-js";
+import { For } from "solid-js";
 import { styled, css, keyframes } from "solid-styled-components";
 
 import alert from "./alert";

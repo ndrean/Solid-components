@@ -20,15 +20,14 @@ export default (context) => {
       }
       return message;
     });
-    return setMessages(updatedMessages);
+    setMessages(updatedMessages);
   }
 
   function remove(id) {
     console.log("remove", id);
     setStatus(id, "removing");
     const updatedMessages = messages().filter((message) => message.id !== id);
-
-    setTimeout(() => setMessages(updatedMessages), 400);
+    setMessages(updatedMessages);
   }
 
   function add(component) {
