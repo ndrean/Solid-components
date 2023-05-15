@@ -1,4 +1,3 @@
-export default (icon, width) => {
-  const IconImg = () => <img src={icon} width={width} alt="with icon" />;
-  return IconImg;
-};
+export default (icon, width, label = "icon") => (
+  <img src={icon} width={width} alt={label} />
+);

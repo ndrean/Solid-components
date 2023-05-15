@@ -6,7 +6,7 @@ import drawCodePoint from "../components/drawCodePoint.jsx";
 export default () => {
   const CodePoint = () => drawCodePoint("0x2654", 96);
   const Emoji = () => drawEmoji("🍔", 56, "hamburger");
-  const FbIcon = () => iconSVG(fbIcon, 56);
+  const FbIcon = () => iconSVG(fbIcon, 56, "facebook");
   return (
     <>
       <p>
