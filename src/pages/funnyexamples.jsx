@@ -4,12 +4,15 @@ import drawEmoji from "../components/drawEmoji.jsx";
 import drawCodePoint from "../components/drawCodePoint.jsx";
 
 export default () => {
-  const CodePoint = () => drawCodePoint("0x2654");
-  const Emoji = () => drawEmoji("🍔", 20);
-  const FbIcon = () => iconSVG(fbIcon, 48);
+  const CodePoint = () => drawCodePoint("0x2654", 96);
+  const Emoji = () => drawEmoji("🍔", 56, "hamburger");
+  const FbIcon = () => iconSVG(fbIcon, 56);
   return (
     <>
-      <p>An SVG:</p>
+      <p>
+        Set the <code>font-size</code> or <code>width</code>:
+      </p>
+      <p>An emoji:</p>
       <Emoji />
       <p>An SVG:</p>
       <FbIcon />

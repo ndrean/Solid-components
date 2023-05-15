@@ -1,13 +1,12 @@
 import { css } from "solid-styled-components";
 
-export default (emoji, width = 0) => (
+export default (emoji, size = 48, name = "hamburger") => (
   <span
     class={css`
-      font-size: 48px;
+      font-size: ${size}px;
     `}
     role="img"
-    aria-label="hamburger"
-    width={width}
+    aria-label={name}
   >
     {emoji}
   </span>

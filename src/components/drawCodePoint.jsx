@@ -1,9 +1,9 @@
 import { css } from "solid-styled-components";
 
-export default (codePoint, width = 0) => (
+export default (codePoint, size = 48) => (
   <span
     class={css`
-      font-size: 48px;
+      font-size: ${size}px;
     `}
   >
     {String.fromCodePoint(codePoint)}
