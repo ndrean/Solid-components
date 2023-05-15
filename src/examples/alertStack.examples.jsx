@@ -2,6 +2,7 @@ import { createSignal } from "solid-js";
 
 import button from "../components/button";
 import alertStack from "../components/alertStack";
+import alert from "../components/alert";
 
 const deleteAfterDuration = 8e3;
 
@@ -12,6 +13,7 @@ export default (context) => {
   const [messages, setMessages] = createSignal([]);
 
   const AlertStack = alertStack(context);
+  const Alert = alert(context);
 
   function setStatus(id, status) {
     const updatedMessages = messages().map((message) => {
@@ -54,6 +56,7 @@ export default (context) => {
       <Button
         ripple
         onClick={() =>
+          // add(<Alert severity="success" message="Infrastructure Created" />)
           add({ severity: "success", message: "Infrastructure Created" })
         }
       >
