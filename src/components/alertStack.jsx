@@ -49,8 +49,7 @@ export default (context) => {
     };
 
     if (msgs.length >= limit) {
-      const [f, ...rest] = msgs;
-      remove(f.id);
+      remove(msgs[0].id);
     }
 
     setMsgs((curr) => [...curr, newMsg]);
