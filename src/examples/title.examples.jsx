@@ -1,7 +1,4 @@
-import { A } from "@solidjs/router";
-
 import { TitleV1, BaseH1Obj, BaseH1Props } from "../components/title";
-import Home from "../pages/home";
 import "../index.css";
 
 export default function TitleExamples() {
@@ -64,10 +61,6 @@ export default function TitleExamples() {
           </div>
         </li>
       </ul>
-
-      <A href="/" class="btn" component={Home}>
-        Home
-      </A>
     </>
   );
 }

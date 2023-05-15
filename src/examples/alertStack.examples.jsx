@@ -1,59 +1,89 @@
-import { css } from "solid-styled-components";
+import { createSignal } from "solid-js";
+
 import button from "../components/button";
-import alert from "../components/alert";
+import AlertStack from "../components/alertStack";
+
+const deleteAfterDuration = 5e3;
+
+const [messages, setMessages] = createSignal([]);
 
 export default (context) => {
-  const { alertStack } = context;
-
-  const AlertStack = alertStack.View;
+  const { tr, limit } = context;
   const Button = button(context);
-  const Alert = alert(context);
+
+  function setStatus(id, status) {
+    const updatedMessages = messages().map((message) => {
+      if (message.id === id) {
+        return { ...message, status: status };
+      }
+      return message;
+    });
+    return setMessages(updatedMessages);
+  }
+
+  function remove(id) {
+    console.log("remove", id);
+    setStatus(id, "removing");
+    const updatedMessages = messages().filter((message) => message.id !== id);
+    setTimeout(() => setMessages(updatedMessages), 400);
+  }
+
+  function add(component) {
+    const message = {
+      id: Math.random().toString(10).split(".")[1],
+      component,
+      status: "inserting",
+    };
+    console.log("add", message.id);
+
+    if (messages().length >= limit) {
+      const [f, ...rest] = messages();
+      remove(f.id);
+    }
+
+    setMessages((messages) => [...messages, message]);
+    setTimeout(() => setStatus(message.id, "inserted"), 400);
+    setTimeout(() => remove(message.id), deleteAfterDuration);
+  }
 
   return function () {
     return (
       <section id="alert-stack">
-        <AlertStack />
-        <h1>Alert Stack</h1>
+        <h1>{tr.t("Alert Stack")}</h1>
+        <p>{JSON.stringify(messages())}</p>
         <Button
-          raised
-          onClick={() => {
-            alertStack.add(
-              <Alert severity="success" message={"Infrastructure Created"} />
-            );
-          }}
+          ripple
+          onClick={() =>
+            add({ severity: "success", message: "Infrastructure Created" })
+          }
         >
           success alert
         </Button>
         <Button
-          raised
-          onClick={() => {
-            alertStack.add(
-              <Alert severity="info" message={"Something went wrong"} />
-            );
-          }}
+          ripple
+          onClick={() =>
+            add({ severity: "info", message: "Something went wrong" })
+          }
         >
           Info alert
         </Button>
         <Button
-          raised
-          onClick={() => {
-            alertStack.add(
-              <Alert severity="warning" message={"Peggy went to the market"} />
-            );
-          }}
+          ripple
+          onClick={() =>
+            add({ severity: "warning", message: "Peggy went to the market" })
+          }
         >
           warning alert
         </Button>
         <Button
-          raised
-          onClick={() => {
-            alertStack.add(
-              <Alert severity="error" message={"Something went wrong"} />
-            );
-          }}
+          ripple
+          onClick={() =>
+            add({ severity: "error", message: "Something went wrong" })
+          }
         >
           error alert
         </Button>
+        <AlertStack />
       </section>
     );
   };

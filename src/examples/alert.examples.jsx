@@ -3,6 +3,7 @@ import alert from "../components/alert";
 export default (context) => {
   const { tr } = context;
   const Alert = alert(context);
+
   return function AlertExamples() {
     return (
       <section id="alert">

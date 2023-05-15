@@ -1,7 +1,11 @@
 import { lazy } from "solid-js";
 
 const routes = [
-  { href: "/", title: "Home", component: lazy(() => import("./pages/home")) },
+  {
+    href: "/",
+    title: "Home",
+    component: lazy(() => import("./pages/home")),
+  },
   {
     href: "/titles",
     title: "Titles",
@@ -13,14 +17,19 @@ const routes = [
     component: lazy(() => import("./pages/alerts")),
   },
   {
+    href: "/icons",
+    title: "Funny",
+    component: lazy(() => import("./pages/funnyexamples")),
+  },
+  {
     href: "/buttons",
     title: "Buttons",
     component: lazy(() => import("./pages/buttons")),
   },
   {
-    href: "/alertstacks",
-    title: "AlertStacks",
-    component: lazy(() => import("./pages/alertStacks")),
+    href: "/alertstack",
+    title: "AlertStack",
+    component: lazy(() => import("./pages/alertStack")),
   },
 ];
 

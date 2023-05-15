@@ -1,16 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { styled } from "solid-styled-components";
 import button from "../components/button";
-import iconImg from "../components/iconImg";
+import iconSVG from "../components/iconSVG";
 import { BaseH1Props } from "../components/title";
 
 export default (context) => {
   const { icon } = context;
   const Button = button(context);
-
-  const Icon = iconImg(icon, 20);
-  const TallIcon = iconImg(icon, 80);
-
+  const Icon = iconSVG(icon, 20);
+  const TallIcon = iconSVG(icon, 80);
+  const Title = BaseH1Props();
   const Form = styled("form")`
     margin: 12px;
   `;
@@ -18,10 +17,9 @@ export default (context) => {
   const customCss2 = `
   border: none; 
   text-align: left;
-  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+  padding-left: 12px;
+  box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
   `;
-
-  const Title = BaseH1Props();
 
   const handleClick = (e) => {
     console.log(Object.values(e.target.attributes));
@@ -51,7 +49,9 @@ export default (context) => {
           </p>
           <Title css={customCss2}>Full width</Title>
           <p>
-            <Button fullWidth>full width</Button>
+            <Button fullWidth ripple>
+              full width & ripple
+            </Button>
             <Button fullWidth primary>
               full primary
             </Button>
@@ -61,11 +61,11 @@ export default (context) => {
             <Button onClick={handleClick}>
               <Icon /> with icon
             </Button>
-            <Button onClick={handleClick}>
-              <TallIcon /> with tall icon
+            <Button ripple onClick={handleClick}>
+              <TallIcon /> with tall icon & ripple
             </Button>
-            <Button fullWidth onClick={handleClick}>
-              <Icon /> with icon
+            <Button fullWidth ripple onClick={handleClick}>
+              <Icon /> with icon & ripple
             </Button>
           </p>
         </Form>
