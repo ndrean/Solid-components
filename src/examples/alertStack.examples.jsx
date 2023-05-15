@@ -1,15 +1,17 @@
 import { createSignal } from "solid-js";
 
 import button from "../components/button";
-import AlertStack from "../components/alertStack";
+import alertStack from "../components/alertStack";
 
-const deleteAfterDuration = 5e3;
-
-const [messages, setMessages] = createSignal([]);
+const deleteAfterDuration = 8e3;
 
 export default (context) => {
   const { tr, limit } = context;
   const Button = button(context);
+
+  const [messages, setMessages] = createSignal([]);
+
+  const AlertStack = alertStack(context);
 
   function setStatus(id, status) {
     const updatedMessages = messages().map((message) => {
@@ -25,6 +27,7 @@ export default (context) => {
     console.log("remove", id);
     setStatus(id, "removing");
     const updatedMessages = messages().filter((message) => message.id !== id);
+
     setTimeout(() => setMessages(updatedMessages), 400);
   }
 
@@ -46,45 +49,42 @@ export default (context) => {
     setTimeout(() => remove(message.id), deleteAfterDuration);
   }
 
-  return function () {
-    return (
-      <section id="alert-stack">
-        <h1>{tr.t("Alert Stack")}</h1>
-        <p>{JSON.stringify(messages())}</p>
-        <Button
-          ripple
-          onClick={() =>
-            add({ severity: "success", message: "Infrastructure Created" })
-          }
-        >
-          success alert
-        </Button>
-        <Button
-          ripple
-          onClick={() =>
-            add({ severity: "info", message: "Something went wrong" })
-          }
-        >
-          Info alert
-        </Button>
-        <Button
-          ripple
-          onClick={() =>
-            add({ severity: "warning", message: "Peggy went to the market" })
-          }
-        >
-          warning alert
-        </Button>
-        <Button
-          ripple
-          onClick={() =>
-            add({ severity: "error", message: "Something went wrong" })
-          }
-        >
-          error alert
-        </Button>
-        <AlertStack />
-      </section>
-    );
-  };
+  return (
+    <section id="alert-stack">
+      <h1>{tr.t("Alert Stack")}</h1>
+      <Button
+        ripple
+        onClick={() =>
+          add({ severity: "success", message: "Infrastructure Created" })
+        }
+      >
+        success alert
+      </Button>
+      <Button
+        ripple
+        onClick={() =>
+          add({ severity: "info", message: "Something went wrong" })
+        }
+      >
+        Info alert
+      </Button>
+      <Button
+        ripple
+        onClick={() =>
+          add({ severity: "warning", message: "Peggy went to the market" })
+        }
+      >
+        warning alert
+      </Button>
+      <Button
+        ripple
+        onClick={() =>
+          add({ severity: "error", message: "Something went wrong" })
+        }
+      >
+        error alert
+      </Button>
+      <AlertStack messages={messages()} />
+    </section>
+  );
 };

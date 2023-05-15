@@ -1,17 +1,20 @@
 import fbIcon from "../icons/facebook.svg";
-import funnyExamples from "../examples/funny.examples";
+import iconSVG from "../components/iconSVG";
+import drawEmoji from "../components/drawEmoji.jsx";
+import drawCodePoint from "../components/drawCodePoint.jsx";
 
-const examples = [
-  { src: fbIcon, width: 40 },
-  { emoji: "🍔", width: 20 },
-  { codePoint: 0x2654, width: 20 },
-];
-
-const FunnyExamples = funnyExamples(examples);
-
-export default () => (
-  <>
-    <p>An SVG:</p>
-    <FunnyExamples />
-  </>
-);
+export default () => {
+  const CodePoint = () => drawCodePoint("0x2654");
+  const Emoji = () => drawEmoji("🍔", 20);
+  const FbIcon = () => iconSVG(fbIcon, 48);
+  return (
+    <>
+      <p>An SVG:</p>
+      <Emoji />
+      <p>An SVG:</p>
+      <FbIcon />
+      <p>A codepoint:</p>
+      <CodePoint />
+    </>
+  );
+};

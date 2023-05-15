@@ -1,9 +1,10 @@
-import { For } from "solid-js";
+import { For, createEffect } from "solid-js";
 import { styled, css, keyframes } from "solid-styled-components";
 
 import alert from "./alert";
 
-export default (context, { limit = 3 }) => {
+export default (context) => {
+  const Alert = alert(context);
   const animationFadeIn = keyframes({
     "0%": { transform: "scale(0.5)", opacity: 0 },
     "100%": { transform: "scale(1)", opacity: 1 },
@@ -22,21 +23,7 @@ export default (context, { limit = 3 }) => {
     },
   };
 
-  const alertView = ({ message }) => {
-    // const css = animation[message.status];
-    const { component } = message;
-    const AlertView = styled("div")(`
-    margin: 10,
-    padding: 10,
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    cursor: "pointer",
-  `);
-    return <AlertView>{component}</AlertView>;
-  };
-
-  return function AlertStack() {
+  const AlertStack = (props) => {
     return (
       <div
         class={css`
@@ -48,8 +35,13 @@ export default (context, { limit = 3 }) => {
           z-index: 10;
         `}
       >
-        <For each={messages}>{(message) => <Alert message={message} />}</For>
+        <For each={props.messages}>
+          {({ component: { severity, message } }) => (
+            <Alert message={message} severity={severity} />
+          )}
+        </For>
       </div>
     );
   };
+  return AlertStack;
 };

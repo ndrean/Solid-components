@@ -2,6 +2,7 @@ import { css } from "solid-styled-components";
 
 export default ({ tr, colors }) => {
   const { red, teal, orange, blue } = colors;
+
   const severityMap = {
     error: { icon: "\u26A0", color: red },
     warning: { icon: "\u26A0", color: orange },
@@ -11,10 +12,10 @@ export default ({ tr, colors }) => {
 
   const CloseIcon = ({ onClick }) => (
     <span
-      css={{
-        cursor: "pointer",
-        margin: 0,
-      }}
+      class={css`
+        cursor: pointer;
+        margin: 0;
+      `}
       onClick={onClick}
     >
       {"\u2716"}
