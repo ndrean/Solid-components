@@ -1,5 +1,5 @@
 import { styled, css } from "solid-styled-components";
-import { createSignal, createEffect } from "solid-js";
+import { createSignal } from "solid-js";
 import checkbox from "../components/checkbox";
 import { BaseH1Props } from "../components/title";
 
@@ -16,8 +16,8 @@ export default (context) => {
   const { tr } = context;
   const Checkbox = checkbox(context);
 
-  const initMap = new Map().set("myCheckbox", false);
-  const [map, setMap] = createSignal(initMap);
+  const [state, setState] = createSignal({});
+  const [group, setGroup] = createSignal(undefined);
 
   const CheckboxContainer = styled("div")`
     display: flex;
@@ -42,9 +42,12 @@ export default (context) => {
             <Checkbox
               id="myCheckbox"
               name="myCheckbox"
-              value={map().get("myCheckbox") || false}
+              value={state().myCheckbox || false}
               onChange={(evt) => {
-                setMap((m) => m.set(evt.target.name, evt.target.checked));
+                setState({
+                  ...state(),
+                  [evt.target.name]: evt.target.checked,
+                });
               }}
             />
             <label for="myCheckbox">My Checkbox</label>
@@ -53,26 +56,62 @@ export default (context) => {
             <Checkbox
               id="autoplay"
               name="autoplay"
-              value={map().get("myCheckbox") || ""}
+              value={state()["autoplay"] || false}
               onChange={(evt) => {
-                setMap((m) => m.set(evt.target.name, evt.target.checked));
+                setState({
+                  ...state(),
+                  [evt.target.name]: evt.target.checked,
+                });
               }}
             />
             <label for="autoplay">Autoplay</label>
           </CheckboxContainer>
           <CheckboxContainer>
-            <Checkbox
-              id="disabled"
-              disabled
-              name="myCheckbox"
-              //   value={map().get("myCheckbox") || ""}
-              //   onChange={(evt) => {
-              //     setMap((m) => m.set(evt.target.name, evt.target.checked));
-              //   }}
-            />
+            <Checkbox id="disabled" disabled name="myCheckbox" />
             <label for="disabled">Disabled</label>
           </CheckboxContainer>
         </form>
+        <p>My checkbox is: {state()["myCheckbox"] ? "true" : "false"}</p>
+        <p>Autoplay is: {state()["autoplay"] ? "true" : "false"}</p>
+
+        <Title css={customCss2}>{tr.t("Grouped checkboxes")}</Title>
+        <form
+          class={css`
+            > div {
+              margin: 10px;
+            }
+          `}
+        >
+          <CheckboxContainer>
+            <Checkbox
+              type="radio"
+              name="group"
+              value="option-1"
+              id="1"
+              onChange={(evt) => {
+                setGroup(evt.target.value);
+              }}
+            >
+              Option 1
+            </Checkbox>
+            <label for="1">Radio 1</label>
+          </CheckboxContainer>
+          <CheckboxContainer>
+            <Checkbox
+              type="radio"
+              name="group"
+              id="2"
+              value="option-2"
+              onChange={(evt) => {
+                setGroup(evt.target.value);
+              }}
+            >
+              Option 2
+            </Checkbox>
+            <label for="2">Radio 2</label>
+          </CheckboxContainer>
+        </form>
+        <p>Your selected: {group()}</p>
       </section>
     );
   };
