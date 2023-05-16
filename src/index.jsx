@@ -11,7 +11,6 @@ render(
       <Routes>
         <App />
       </Routes>
-      .{" "}
     </Router>
   ),
   document.getElementById("root")

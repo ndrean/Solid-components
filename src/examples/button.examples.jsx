@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { styled } from "solid-styled-components";
 import button from "../components/button";
 import iconSVG from "../components/iconSVG";
@@ -7,8 +6,8 @@ import { BaseH1Props } from "../components/title";
 export default (context) => {
   const { icon } = context;
   const Button = button(context);
-  const Icon = iconSVG(icon, 20);
-  const TallIcon = iconSVG(icon, 80);
+  const Icon = () => iconSVG(icon, 20);
+  const TallIcon = () => iconSVG(icon, 80);
   const Title = BaseH1Props();
   const Form = styled("form")`
     margin: 12px;

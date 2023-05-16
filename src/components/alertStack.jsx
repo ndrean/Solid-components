@@ -1,36 +1,41 @@
-import { For, createEffect } from "solid-js";
+import { For } from "solid-js";
 import { createStore } from "solid-js/store";
 import { styled, css, keyframes } from "solid-styled-components";
 
 import alert from "./alert";
 
-const animationFadeIn = keyframes({
-  "0%": { transform: "scale(0.5)", opacity: 0 },
-  "100%": { transform: "scale(1)", opacity: 1 },
-});
+const animationFadeIn = keyframes`
+  0% {  opacity: 0 }
+  100% {  opacity: 1 }
+`;
 
-const animationFadeOut = keyframes({
-  "0%": { transform: "scale(1)", opacity: 1 },
-  "100%": { transform: "scale(0)", opacity: 0 },
-});
+const animationFadeOut = keyframes`
+  0% { opacity: 1 }
+  100% {  opacity: 0 }
+`;
 
-const animation = {
-  inserting: {
-    animation: `${animationFadeIn} 0.5s`,
-  },
-  removing: {
-    animation: `${animationFadeOut} 0.5s`,
-  },
+const animations = {
+  inserting: animationFadeIn,
+  removing: animationFadeOut,
 };
 
-const deleteAfterDuration = 5e3;
+const alertView = (animation) =>
+  styled("div")`
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    animation: ${animation} 1s linear;
+  `;
 
 ////////
+const deleteAfterDuration = 5e3;
 
 export default (context) => {
   const { limit } = context;
   const [msgs, setMsgs] = createStore([]);
-  const Alert = alert(context);
 
   function setStatus(id, status) {
     setMsgs((curr) => curr.id === id, "status", status);
@@ -38,7 +43,10 @@ export default (context) => {
 
   function remove(id) {
     setStatus(id, "removing");
-    setMsgs((curr) => curr.filter((msg) => msg.id !== id));
+    setTimeout(
+      () => setMsgs((curr) => curr.filter((msg) => msg.id !== id)),
+      400
+    );
   }
 
   function add(component) {
@@ -57,6 +65,8 @@ export default (context) => {
     setTimeout(() => remove(newMsg.id), deleteAfterDuration);
   }
 
+  const Alert = alert(context);
+
   const AlertStack = (props) => {
     return (
       <div
@@ -70,13 +80,21 @@ export default (context) => {
         `}
       >
         <For each={props.messages}>
-          {({ component: { severity, message } }) => (
-            <Alert
-              message={message}
-              severity={severity}
-              onRemove={(e) => console.log(e.currentTarget)}
-            />
-          )}
+          {(msg) => {
+            const {
+              component: { severity, message },
+              status,
+              id,
+            } = msg;
+
+            const AlertView = alertView(animations[status]);
+
+            return (
+              <AlertView onClick={() => remove(id)}>
+                <Alert message={message} severity={severity} />
+              </AlertView>
+            );
+          }}
         </For>
       </div>
     );

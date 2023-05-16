@@ -1,13 +1,11 @@
 import button from "../components/button";
 import alertStack from "../components/alertStack";
-// import alert from "../components/alert";
 
 export default (context) => {
   const { tr } = context;
   const Button = button(context);
 
   const { AlertStack, msgs, add } = alertStack(context);
-  // const Alert = alert(context);
 
   return (
     <section id="alert-stack">
@@ -15,7 +13,6 @@ export default (context) => {
       <Button
         ripple
         onClick={() =>
-          // add(<Alert severity="success" message="Infrastructure Created" />)
           add({ severity: "success", message: "Infrastructure Created" })
         }
       >
@@ -45,7 +42,6 @@ export default (context) => {
       >
         error alert
       </Button>
-      {/* <p>{JSON.stringify(msgs)}</p> */}
       <AlertStack messages={msgs} />
     </section>
   );
