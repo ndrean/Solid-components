@@ -1,5 +1,5 @@
 import { red, orange, teal, blue, grey } from "material-ui-colors";
-import fbIcon from "../icons/facebook.svg";
+import fbIcon from "../assets/facebook.svg";
 
 const customTitleCss = `
   border: none; 

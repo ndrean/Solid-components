@@ -48,7 +48,7 @@ export default (context) => {
           class={css`
             ${style(props.open).overlay}
           `}
-          onClick={() => onClose()}
+          onClick={props.onClose()}
         />
         <div
           class={css`

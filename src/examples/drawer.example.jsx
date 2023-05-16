@@ -24,11 +24,11 @@ export default (context) => {
   return (
     <section id="drawer">
       <Title css={customCss}>{tr.t("Drawer")}</Title>
+      <br />
       <Button ripple onClick={() => setDrawOpen((val) => !val)}>
         OPEN DRAWER
       </Button>
-      <p>{drawerOpen() ? "true" : "false"}</p>
-      <Drawer open={drawerOpen()} onClose={() => setDrawOpen(true)}>
+      <Drawer open={drawerOpen()} onClose={() => setDrawOpen(false)}>
         <Menu navChange={(item) => navChange(item)} />
       </Drawer>
     </section>

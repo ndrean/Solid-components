@@ -1,13 +1,29 @@
 import { For } from "solid-js";
-import fbIcon from "../icons/facebook.svg";
-import iconSVG from "../components/iconSVG";
+import fbIcon from "../assets/facebook.svg";
+import imgSVG from "../components/imgSVG";
 import drawEmoji from "../components/drawEmoji.jsx";
 import drawCodePoint from "../components/drawCodePoint.jsx";
+
+const hamburger = (color) => (
+  <svg
+    id="burger-icon"
+    version="1.1"
+    viewBox="0 0 32 32"
+    width="40px"
+    height="50px"
+  >
+    <path
+      fill={color}
+      d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"
+    />
+  </svg>
+);
 
 export default () => {
   const CodePoint = () => drawCodePoint("0x2654", 96);
   const Emoji = () => drawEmoji("🍔", 56, "hamburger");
-  const FbIcon = () => iconSVG(fbIcon, 56, "facebook");
+  const FbIcon = () => imgSVG(fbIcon, 56, "facebook");
+  const Burger = () => hamburger("orange");
 
   return (
     <>
@@ -16,8 +32,10 @@ export default () => {
       </p>
       <p>An emoji:</p>
       <Emoji />
-      <p>An SVG:</p>
+      <p>Some SVGs:</p>
       <FbIcon />
+      <br />
+      <Burger />
       <p>A codepoint:</p>
       <CodePoint />
       <p>Unicodes: </p>

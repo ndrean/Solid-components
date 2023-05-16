@@ -1,6 +1,6 @@
 import { styled } from "solid-styled-components";
 import button from "../components/button";
-import iconSVG from "../components/iconSVG";
+import iconSVG from "../components/imgSVG";
 import { BaseH1Props } from "../components/title";
 
 export default (context) => {
