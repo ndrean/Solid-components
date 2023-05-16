@@ -31,6 +31,11 @@ const routes = [
     title: "AlertStack",
     component: lazy(() => import("./pages/alertStackPage")),
   },
+  {
+    href: "/checkbox",
+    title: "Checkboxes",
+    component: lazy(() => import("./pages/checkboxes")),
+  },
 ];
 
 export default routes;

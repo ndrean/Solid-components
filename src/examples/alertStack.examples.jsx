@@ -1,5 +1,15 @@
 import button from "../components/button";
 import alertStack from "../components/alertStack";
+import { BaseH1Props } from "../components/title";
+
+const customCss2 = `
+  border: none; 
+  text-align: left;
+  padding-left: 12px;
+  box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
+  `;
+
+const Title = BaseH1Props();
 
 export default (context) => {
   const { tr } = context;
@@ -9,7 +19,7 @@ export default (context) => {
 
   return (
     <section id="alert-stack">
-      <h1>{tr.t("Alert Stack")}</h1>
+      <Title css={customCss2}>{tr.t("Alert Stack")}</Title>
       <Button
         ripple
         onClick={() =>
