@@ -3,17 +3,10 @@ import { createSignal } from "solid-js";
 import checkbox from "../components/checkbox";
 import { BaseH1Props } from "../components/title";
 
-const customCss2 = `
-  border: none; 
-  text-align: left;
-  padding-left: 12px;
-  box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
-  `;
-
 const Title = BaseH1Props();
 
 export default (context) => {
-  const { tr } = context;
+  const { tr, customCss } = context;
   const Checkbox = checkbox(context);
 
   const [state, setState] = createSignal({});
@@ -30,7 +23,7 @@ export default (context) => {
   return function CheckBoxExamples() {
     return (
       <section id="checkbox">
-        <Title css={customCss2}>{tr.t("Checkbox")}</Title>
+        <Title css={customCss}>{tr.t("Checkbox")}</Title>
         <form
           class={css`
             > div {
@@ -74,7 +67,7 @@ export default (context) => {
         <p>My checkbox is: {state()["myCheckbox"] ? "true" : "false"}</p>
         <p>Autoplay is: {state()["autoplay"] ? "true" : "false"}</p>
 
-        <Title css={customCss2}>{tr.t("Grouped checkboxes")}</Title>
+        <Title css={customCss}>{tr.t("Grouped checkboxes")}</Title>
         <form
           class={css`
             > div {

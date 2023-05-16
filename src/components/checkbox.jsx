@@ -39,7 +39,7 @@ export default (context) => {
         opacity: 0;
       }
       &:checked&:after {
-        color: ${grey[200]};
+        color: ${grey[500]};
         opacity: 1;
       }
     `,

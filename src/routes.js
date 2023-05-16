@@ -36,6 +36,11 @@ const routes = [
     title: "Checkboxes",
     component: lazy(() => import("./pages/checkboxes")),
   },
+  {
+    href: "/drawer",
+    title: "Drawer",
+    component: lazy(() => import("./pages/drawerPage")),
+  },
 ];
 
 export default routes;

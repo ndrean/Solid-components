@@ -12,10 +12,7 @@ const BaseH1Obj = (css) =>
     ${css?.css ? h1BaseCss + css.css : h1BaseCss}
   `;
 
-const BaseH1Props = () => {
-  return styled("h1")(
-    (props) => `${props?.css ? h1BaseCss + props.css : h1BaseCss}`
-  );
-};
+const BaseH1Props = () =>
+  styled("h1")((props) => `${props?.css ? h1BaseCss + props.css : h1BaseCss}`);
 
 export { TitleV1, BaseH1Obj, BaseH1Props };

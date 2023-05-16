@@ -4,20 +4,13 @@ import iconSVG from "../components/iconSVG";
 import { BaseH1Props } from "../components/title";
 
 export default (context) => {
-  const { icon } = context;
+  const { icon, customCss } = context;
   const Button = button(context);
   const Icon = () => iconSVG(icon, 20);
-  const TallIcon = () => iconSVG(icon, 80);
   const Title = BaseH1Props();
+  const TallIcon = () => iconSVG(icon, 80);
   const Form = styled("form")`
     margin: 12px;
-  `;
-
-  const customCss2 = `
-  border: none; 
-  text-align: left;
-  padding-left: 12px;
-  box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
   `;
 
   const handleClick = (e) => {
@@ -27,7 +20,7 @@ export default (context) => {
   return (
     <section id="button">
       <Form onSubmit={(e) => e.preventDefault()}>
-        <Title css={customCss2}>Flat</Title>
+        <Title css={customCss}>Flat</Title>
         <p>
           <Button flat onClick={handleClick}>
             Flat
@@ -45,7 +38,7 @@ export default (context) => {
             flat disabled
           </Button>
         </p>
-        <Title css={customCss2}>Full width</Title>
+        <Title css={customCss}>Full width</Title>
         <p>
           <Button fullWidth ripple>
             full width & ripple
@@ -54,7 +47,7 @@ export default (context) => {
             full primary
           </Button>
         </p>
-        <Title css={customCss2}>Icons</Title>
+        <Title css={customCss}>Icons</Title>
         <p>
           <Button onClick={handleClick}>
             <Icon /> with icon
