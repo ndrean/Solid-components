@@ -31,7 +31,7 @@ export default (context) => {
         z-index: 2;
         position: absolute;
         box-shadow: ${shadows[1]};
-        background-color: ${grey};
+        background-color: ${grey[100]};
         top: 0;
         left: 0;
         transition: transform 0.3s ease-out;

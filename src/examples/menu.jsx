@@ -23,12 +23,7 @@ export default (context) => {
     const Button = button(context);
     return (
       <MenuItemView>
-        <Button
-          style={{ justifyContent: "flex-start" }}
-          ripple
-          fullWidth
-          onClick={() => navChange(menu)}
-        >
+        <Button primary onClick={() => navChange(menu)}>
           {menu.text}
         </Button>
       </MenuItemView>
