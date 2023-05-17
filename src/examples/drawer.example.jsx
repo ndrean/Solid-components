@@ -4,12 +4,12 @@ import { createSignal } from "solid-js";
 
 import drawer from "../components/drawer";
 import button from "../components/button";
-import { BaseH1Props } from "../components/title";
+import { tClass } from "../components/title";
 import menu from "./menu";
 
 export default (context) => {
   const { tr, customCss } = context;
-  const Title = BaseH1Props();
+  const Title = tClass(customCss);
   const [drawerOpen, setDrawOpen] = createSignal(false);
 
   const navChange = (newItem) => {

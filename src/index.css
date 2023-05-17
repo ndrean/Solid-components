@@ -24,17 +24,6 @@ a {
 a.link {
   text-decoration: none;
 }
-.title {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  padding: 2px;
-}
-
-.dotted-red-title {
-  color: red;
-  border: dotted 2px;
-}
 
 .btn {
   cursor: pointer;

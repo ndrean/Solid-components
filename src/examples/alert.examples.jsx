@@ -1,15 +1,14 @@
 import alert from "../components/alert";
-import { BaseH1Props } from "../components/title";
-
-const Title = BaseH1Props();
+import { tClass } from "../components/title";
 
 export default (context) => {
   const { tr, customCss } = context;
   const Alert = alert(context);
+  const Title = tClass(customCss);
 
   return (
     <section id="alert">
-      <Title css={customCss}>{tr.t("Alert")}</Title>
+      <Title>{tr.t("Alert")}</Title>
       <Alert
         severity="error"
         name="Trouble Ahead"

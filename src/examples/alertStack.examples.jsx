@@ -1,6 +1,7 @@
 import button from "../components/button";
 import alertStack from "../components/alertStack";
-import { BaseH1Props } from "../components/title";
+import { tClass } from "../components/title";
+import { createUniqueId } from "solid-js";
 
 // const customCss2 = `
 //   border: none;
@@ -9,11 +10,10 @@ import { BaseH1Props } from "../components/title";
 //   box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
 //   `;
 
-const Title = BaseH1Props();
-
 export default (context) => {
   const { tr, customCss } = context;
   const Button = button(context);
+  const Title = tClass(customCss);
 
   const { AlertStack, msgs, add } = alertStack(context);
 

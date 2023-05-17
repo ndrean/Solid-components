@@ -49,9 +49,61 @@ const context = {
 
 We can now define customized components using the `context` object:
 
-```js
-const Title = title(context)
+```jsx
+const Title = title(context);
+```
 
-<Title class={context.redclass}> My red title</Title>
-<Title class={context.blueclass}> My blue title</Title>
+and we can use the context to define a `class` prop:
+
+```jsx
+<Title class={css`${context.redclass}`}>My red title</Title>
+
+<Title class={css`${context.blueclass}`}>My blue title</Title>
+```
+
+## Overriding CSS in JS
+
+Suppose we have a base component with class `base` and that we want to override the CSS.
+
+We can use classes from "index.css". We can also do CSS in JS with the package "solid-styled-components".
+
+```js
+const base = `
+  color: black;
+`;
+
+const blue = `
+  color: blue
+`;
+```
+
+```jsx
+import { css } from "solid-styled-components";
+
+const overTitle = (newclass) => (props) =>
+  (
+    <h1
+      class={css`
+        ${base + newclass}
+      `}
+    >
+      {props.children}
+    </h1>
+  );
+
+const BaseTitle = overTitle();
+const OverTitle = overTitle(blue);
+```
+
+We can also use `styled`from "solid-styled-components". This returned a styled function component.
+
+```jsx
+
+import { styled } from "solid-styled-components";
+
+const StyledTitle = (context) =>
+  styled("h1")((props) => `${props?.newClass ? base + props.newClass : base}`);
+
+<StyledTitle>Basic title</StyledTitle>
+<StyledTitle newClass={blue}>Blue title</StyledTitle>
 ```

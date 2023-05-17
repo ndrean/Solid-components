@@ -52,16 +52,18 @@ function home(context) {
       We can now define customized components using the <code>context </code>{" "}
       object:
       <Pre>
+        <code>import \u007B css \u007D from "solid-styled-components</code>
+        <br />
         <code>const Title = title(context)</code>
         <br />
         <code>
-          &ltTitle class=\u007Bcontext.redclass\u007D &gt My red title
-          &lt/Title&gt
+          &ltTitle class=\u007Bcss`$\u007Bcontext.redclass\u007D`\u007D &gt My
+          red title &lt/Title&gt
         </code>
         <br />
         <code>
-          &ltTitle class=\u007Bcontext.blueclass\u007D &gt My blue title
-          &lt/Title&gt
+          &ltTitle class=\u007Bcss`$\u007Bcontext.blueclass\u007D`\u007D &gt My
+          blue title &lt/Title&gt
         </code>
       </Pre>
     </>
