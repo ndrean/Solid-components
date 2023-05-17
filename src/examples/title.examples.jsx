@@ -2,10 +2,10 @@ import { css } from "solid-styled-components";
 
 import {
   title,
-  tClass,
-  tClassProps,
-  tStyled,
-  cStyled,
+  classTitle,
+  propStyled,
+  contextStyled,
+  propClassTitle,
 } from "../components/title";
 
 import "../index.css";
@@ -34,37 +34,37 @@ const blueRightGrey = `
 const c = [left2Shadow, blueDotted].join(" ");
 export default function TitleExamples() {
   const context = { myclass: left2Shadow };
-  const T0 = title();
-  const T0C = title(context);
+  const T = title();
+  const TC = title(context);
 
-  const TC = tClass();
-  const TCN = tClass(blueRightGrey);
-  const TCP = tClassProps();
+  const CT = classTitle();
+  const CT2 = classTitle(blueRightGrey);
 
-  const TS = tStyled();
-  const TCS = cStyled({ newClass: blueRightGrey });
+  const PCT = propClassTitle();
+  const PS = propStyled();
+  const PS2 = contextStyled({ newClass: blueRightGrey });
 
   return (
     <>
-      <T0>No style title</T0>
-      <T0C
+      <p>Different possible implementations</p>
+      <T>No style title</T>
+      <TC
         class={css`
           ${context.myclass}
         `}
       >
         added class via the context
-      </T0C>
-      <TC>With base class</TC>
-      <TCN>Arg class blueRightGrey</TCN>
+      </TC>
 
-      <TCP>empty class props</TCP>
-      <TCP newClass={blueRightGrey}>via class prop blueRightGrey</TCP>
+      <CT>With base class</CT>
+      <CT2>Arg class blueRightGrey</CT2>
 
       <br />
 
-      <TS>Styled Basic</TS>
-      <TS>Styled predefined with css object</TS>
-      <TCS>ola</TCS>
+      <PS>Styled Basic</PS>
+      <PS2>Styled predefined with css object</PS2>
+
+      <PCT newClass={blueDotted}>class via props</PCT>
     </>
   );
 }

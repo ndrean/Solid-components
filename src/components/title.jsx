@@ -10,7 +10,13 @@ background-color: beige;
 
 const title = (context) => (props) => <h1 {...props}>{props.children}</h1>;
 
-const tClass =
+const propStyled = (context) =>
+  styled("h1")((props) => (props.newClass ? base + props.newClass : base));
+
+const contextStyled = (context) =>
+  styled("h1")((props) => (context?.newClass ? base + context.newClass : base));
+
+const classTitle =
   (newclass = null) =>
   (props) =>
     (
@@ -23,16 +29,9 @@ const tClass =
       </h1>
     );
 
-const tStyled = (context) =>
-  styled("h1")((props) => `${props?.newClass ? base + props.newClass : base}`);
+const propClassTitle =
+  (context = undefined) =>
+  (props) =>
+    <h1 class={css`[${base + props?.newClass}`}>{props.children}</h1>;
 
-const cStyled = (context) =>
-  styled("h1")(
-    (props) =>
-      (props.class = `${context?.newClass ? base + context.newClass : base}`)
-  );
-
-const tClassProps = (context) => (props) =>
-  <h1 class={css`[${base + props?.newClass}`}>{props.children}</h1>;
-
-export { title, tClass, tClassProps, tStyled, cStyled };
+export { title, classTitle, propStyled, contextStyled, propClassTitle };
