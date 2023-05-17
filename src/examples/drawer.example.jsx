@@ -4,12 +4,12 @@ import { createSignal } from "solid-js";
 
 import drawer from "../components/drawer";
 import button from "../components/button";
-import { tClass } from "../components/title";
+import { classTitle } from "../components/title";
 import menu from "./menu";
 
 export default (context) => {
   const { tr, customCss } = context;
-  const Title = tClass(customCss);
+  const Title = classTitle(customCss);
   const [drawerOpen, setDrawOpen] = createSignal(false);
 
   const navChange = (newItem) => {

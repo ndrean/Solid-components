@@ -1,13 +1,13 @@
 import { styled } from "solid-styled-components";
 import button from "../components/button";
 import iconSVG from "../components/imgSVG";
-import { tClass } from "../components/title";
+import { classTitle } from "../components/title";
 
 export default (context) => {
   const { icon, customCss } = context;
   const Button = button(context);
   const Icon = () => iconSVG(icon, 20);
-  const Title = tClass(customCss);
+  const Title = classTitle(customCss);
   const TallIcon = () => iconSVG(icon, 80);
   const Form = styled("form")`
     margin: 12px;

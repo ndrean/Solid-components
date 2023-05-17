@@ -1,10 +1,10 @@
 import alert from "../components/alert";
-import { tClass } from "../components/title";
+import { classTitle } from "../components/title";
 
 export default (context) => {
   const { tr, customCss } = context;
   const Alert = alert(context);
-  const Title = tClass(customCss);
+  const Title = classTitle(customCss);
 
   return (
     <section id="alert">

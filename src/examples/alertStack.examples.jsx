@@ -1,6 +1,6 @@
 import button from "../components/button";
 import alertStack from "../components/alertStack";
-import { tClass } from "../components/title";
+import { classTitle } from "../components/title";
 import { createUniqueId } from "solid-js";
 
 // const customCss2 = `
@@ -13,7 +13,7 @@ import { createUniqueId } from "solid-js";
 export default (context) => {
   const { tr, customCss } = context;
   const Button = button(context);
-  const Title = tClass(customCss);
+  const Title = classTitle(customCss);
 
   const { AlertStack, msgs, add } = alertStack(context);
 

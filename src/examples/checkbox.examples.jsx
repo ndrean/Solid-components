@@ -1,11 +1,11 @@
 import { styled, css } from "solid-styled-components";
 import { createSignal } from "solid-js";
 import checkbox from "../components/checkbox";
-import { tClass } from "../components/title";
+import { classTitle } from "../components/title";
 
 export default (context) => {
   const { tr, customCss } = context;
-  const Title = tClass(customCss);
+  const Title = classTitle(customCss);
   const Checkbox = checkbox(context);
 
   const [state, setState] = createSignal({});

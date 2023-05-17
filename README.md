@@ -10,12 +10,12 @@ Building...<https://test-solid.surge.sh>
 
 We define a closure that takes an argument context and renders a function component.
 
-```js
-const comp = (context) => (props) => component( context, props)
+```jsx
+const comp = (context) => (props) => component(context, props);
 
-const ContextedComp = comp(someContext)
+const ContextedComp = comp(someContext);
 
-<ContextedComp {...props}>{props.children} </ContextedComp>
+<ContextedComp {...props}>{props.children} </ContextedComp>;
 ```
 
 Here is an example:
@@ -63,7 +63,7 @@ and we can use the context to define a `class` prop:
 
 ## Overriding CSS in JS
 
-Suppose we have a base component with class `base` and that we want to override the CSS.
+Suppose we have a base component with class `base` and we want to override the CSS.
 
 We can use classes from "index.css". We can also do CSS in JS with the package "solid-styled-components".
 
@@ -102,10 +102,10 @@ We can also use `styled`from "solid-styled-components". This returned a styled f
 import { styled } from "solid-styled-components";
 
 const StyledTitle = () =>
-  styled("h1")((props) => `${props?.newClass ? base + props.newClass : base}`);
+  styled("h1")((props) => props?.newClass ? base + props.newClass : base});
 
 const contextedTitle = (context) =>
-  styled("h1")((props) => props.class = `${context?.newClass ? context.newClass + base : base}`);
+  styled("h1")((props) => (context?.newClass ? context.newClass + base : base));
 
 const ContextedTitle = contextedTitle({newClass: blue})
 
