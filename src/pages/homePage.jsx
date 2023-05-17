@@ -8,7 +8,7 @@ const Pre = styled("pre")`
 
 function home(context) {
   const { tr } = context;
-  return (
+  return () => (
     <>
       <h1>{tr.t("A demo of customized HTML elements with SolidJS.")}</h1>
       <p>
@@ -41,7 +41,7 @@ function home(context) {
       </Pre>
       <p>
         Suppose we defined CSS classes "red-dotted" and "blue-solid". We define
-        a general object "context":
+        a general object <code>context </code>:
       </p>
       <Pre>
         <code>
@@ -68,7 +68,7 @@ function home(context) {
   );
 }
 
-export default function Home() {
-  const HomeExample = () => home(context);
-  return <HomeExample />;
-}
+export default () => {
+  const Home = home(context);
+  return <Home />;
+};

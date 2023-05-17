@@ -4,7 +4,7 @@ const routes = [
   {
     href: "/",
     title: "Home",
-    component: lazy(() => import("./pages/home")),
+    component: lazy(() => import("./pages/homePage")),
   },
   {
     href: "/titles",
