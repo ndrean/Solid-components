@@ -101,9 +101,15 @@ We can also use `styled`from "solid-styled-components". This returned a styled f
 
 import { styled } from "solid-styled-components";
 
-const StyledTitle = (context) =>
+const StyledTitle = () =>
   styled("h1")((props) => `${props?.newClass ? base + props.newClass : base}`);
+
+const contextedTitle = (context) =>
+  styled("h1")((props) => props.class = `${context?.newClass ? context.newClass + base : base}`);
+
+const ContextedTitle = contextedTitle({newClass: blue})
 
 <StyledTitle>Basic title</StyledTitle>
 <StyledTitle newClass={blue}>Blue title</StyledTitle>
+<ContexedTitle> Anotherblue title</ContexedTitle>
 ```

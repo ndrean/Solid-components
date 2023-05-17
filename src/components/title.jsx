@@ -23,10 +23,16 @@ const tClass =
       </h1>
     );
 
-const tClassProps = (context) => (props) =>
-  <h1 class={css`[${base + props?.newClass}`}>{props.children}</h1>;
-
 const tStyled = (context) =>
   styled("h1")((props) => `${props?.newClass ? base + props.newClass : base}`);
 
-export { title, tClass, tClassProps, tStyled };
+const cStyled = (context) =>
+  styled("h1")(
+    (props) =>
+      (props.class = `${context?.newClass ? base + context.newClass : base}`)
+  );
+
+const tClassProps = (context) => (props) =>
+  <h1 class={css`[${base + props?.newClass}`}>{props.children}</h1>;
+
+export { title, tClass, tClassProps, tStyled, cStyled };

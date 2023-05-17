@@ -1,6 +1,12 @@
 import { css } from "solid-styled-components";
 
-import { title, tClass, tClassProps, tStyled } from "../components/title";
+import {
+  title,
+  tClass,
+  tClassProps,
+  tStyled,
+  cStyled,
+} from "../components/title";
 
 import "../index.css";
 
@@ -36,6 +42,7 @@ export default function TitleExamples() {
   const TCP = tClassProps();
 
   const TS = tStyled();
+  const TCS = cStyled({ newClass: blueRightGrey });
 
   return (
     <>
@@ -57,6 +64,7 @@ export default function TitleExamples() {
 
       <TS>Styled Basic</TS>
       <TS>Styled predefined with css object</TS>
+      <TCS>ola</TCS>
     </>
   );
 }

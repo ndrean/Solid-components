@@ -66,6 +66,10 @@ function home(context) {
           blue title &lt/Title&gt
         </code>
       </Pre>
+      <p>
+        You can also override the CSS classes or define dynamic classes. Take a
+        look at the Readme.
+      </p>
     </>
   );
 }
