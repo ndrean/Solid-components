@@ -19,11 +19,12 @@ const hamburger = (color) => (
   </svg>
 );
 
+const Burger = () => hamburger("orange");
+
 export default () => {
   const CodePoint = () => drawCodePoint("0x2654", 96);
   const Emoji = () => drawEmoji("🍔", 56, "hamburger");
   const FbIcon = () => imgSVG(fbIcon, 56, "facebook");
-  const Burger = () => hamburger("orange");
 
   return (
     <>
@@ -47,3 +48,5 @@ export default () => {
     </>
   );
 };
+
+export { Burger };

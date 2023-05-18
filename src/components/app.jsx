@@ -5,8 +5,8 @@ import routes from "../routes";
 import "../index.css";
 
 const appContainer = css`
-  ${"" /* background-color: #ffffff; */}
   padding: 20px;
+  overflow-y: scroll;
 `;
 
 const App = () => (

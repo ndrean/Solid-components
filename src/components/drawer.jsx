@@ -1,5 +1,4 @@
 import { css } from "solid-styled-components";
-import { createEffect } from "solid-js";
 export default (context) => {
   const {
     colors: { grey },
