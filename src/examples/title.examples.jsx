@@ -1,6 +1,8 @@
 import { css } from "solid-styled-components";
-
+import "../index.css";
 import {
+  myTitle,
+  myTitle2,
   title,
   classTitle,
   propStyled,
@@ -31,11 +33,22 @@ const blueRightGrey = `
   background-color: grey;
 `;
 
-const c = [left2Shadow, blueDotted].join(" ");
+const theme = {
+  colors: {
+    primary: "red",
+  },
+};
+
 export default function TitleExamples() {
   const context = { myclass: left2Shadow };
   const T = title();
-  const TC = title(context);
+  const T2 = myTitle2(left2Shadow);
+  const TCon = title(context);
+  const TCSS = myTitle(
+    css`
+      ${left2Shadow}
+    `
+  );
 
   const CT = classTitle();
   const CT2 = classTitle(blueRightGrey);
@@ -47,14 +60,17 @@ export default function TitleExamples() {
   return (
     <>
       <p>Different possible implementations</p>
+      <T2>test</T2>
+      <TCSS>centered?</TCSS>
       <T>No style title</T>
-      <TC
+      <T class="center">Simple styled title</T>
+      <TCon
         class={css`
           ${context.myclass}
         `}
       >
         added class via the context
-      </TC>
+      </TCon>
 
       <CT>With base class</CT>
       <CT2>Arg class blueRightGrey</CT2>

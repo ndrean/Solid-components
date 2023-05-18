@@ -1,25 +1,39 @@
 import { render } from "solid-js/web";
-import { Router, Routes } from "@solidjs/router";
-import { ThemeProvider } from "solid-styled-components";
+import { css } from "solid-styled-components";
+import { Router } from "@solidjs/router";
 import Nav from "./components/nav";
 import App from "./components/app.jsx";
 
-const theme = {
-  colors: {
-    primary: "hotpink",
-  },
-};
+const container = css`
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  margin-top: 60px;
+`;
 
+const headerCss = css`
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+`;
+const Container = (props) => <div class={container}>{props.children}</div>;
+
+const Header = () => <div class={headerCss}>MDLean SolidJS</div>;
 render(
   () => (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <Nav />
-        <Routes>
+    <>
+      <Router>
+        <Header />
+        <Container>
+          <Nav />
           <App />
-        </Routes>
-      </ThemeProvider>
-    </Router>
+        </Container>
+      </Router>
+    </>
   ),
   document.getElementById("root")
 );

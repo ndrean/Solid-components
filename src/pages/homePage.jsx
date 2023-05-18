@@ -40,8 +40,8 @@ function home(context) {
         </code>
       </Pre>
       <p>
-        Suppose we defined CSS classes "red-dotted" and "blue-solid". We define
-        a general object <code>context </code>:
+        Suppose we defined CSS classes "red-dotted" and "blue-solid" on the file
+        "index.css". We define a general object <code>context </code>:
       </p>
       <Pre>
         <code>
@@ -67,8 +67,8 @@ function home(context) {
         </code>
       </Pre>
       <p>
-        You can also override the CSS classes or define dynamic classes. Take a
-        look at the Readme.
+        Take a look at the Readme or the code for more examples, in particular
+        how to override the CSS classes or define dynamic classes.
       </p>
     </>
   );

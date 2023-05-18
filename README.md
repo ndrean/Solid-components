@@ -1,12 +1,12 @@
 # Pattern for customized functional components with SolidJS
 
-100% based on: <https://github.com/FredericHeem/mdlean>
+This work is 100% based on the following repo: <https://github.com/FredericHeem/mdlean>
 
 ## Status
 
-Building...<https://test-solid.surge.sh>
+Still building...<https://test-solid.surge.sh>
 
-## Pattern
+## The pattern
 
 We define a closure that takes an argument context and renders a function component.
 
@@ -18,16 +18,13 @@ const ContextedComp = comp(someContext);
 <ContextedComp {...props}>{props.children} </ContextedComp>;
 ```
 
-Here is an example:
+## Example
 
-```js
-const title = (context) => (props) => <h1 {...props}> {props.children}</h1>;
-```
-
-Suppose we defined CSS classes "red-dotted" and "blue-solid".
+Suppose we want to apply the CSS classes "red-dotted" and "blue-solid" to a `h1` tag.
 
 ```css
-.redclass {
+/* index.css */
+.red-dotted {
   color: red;
   border: dotted 1px;
 }
@@ -38,34 +35,91 @@ Suppose we defined CSS classes "red-dotted" and "blue-solid".
 }
 ```
 
-We define a general object "context":
+We define a closure that takes a class name (as a string) and returns a function component:
+
+```jsx
+const myTitle = (myclass) => (props) =>
+  <h1 class={myclass}>{props.children}</h1>;
+```
 
 ```js
-const context = {
-  redclass: "red-dotted",
-  blueclass: "blue-solid",
+import "index.css";
+import { myTitle } from "...";
+
+// [...]
+const RedTitle = myTitle("red-dotted");
+const BlueTitle = myTitle("blue-solid");
+```
+
+And use it:
+
+```jsx
+<RedTitle>A red title</RedTitle>
+<BlueTitle>A blue title</BlueTitle>
+```
+
+## JS in CSS
+
+We can alternatively use JS in CSS with the library [solid-styled-components](https://github.com/solidjs/solid-styled-components).
+
+Lets copy-paste CSS into JS:
+
+```js
+// context.js
+
+const redDotted = `
+  color: red;
+  border: dotted 1px;
+`;
+const blueSolid = `
+  color: blue;
+  border: solid 1px;
+`;
+
+export default { redDotted, blueSolid };
+```
+
+We can now define customized components that use the `context` object. We define a helper function `toClass` that uses `css` from "solid-styled-components".
+
+```jsx
+import context from "./context.js";
+
+const toClass = (cssObj) =>
+  css`
+    ${cssObj}
+  `;
+
+const title = (newClass) => (props) => {
+  return <h1 class={toClass(newClass)}>{props.children}</h1>;
 };
+
+const Title = title(context.redDotted);
+<Title>A red title</Title>;
 ```
 
-We can now define customized components using the `context` object:
+### Using `ThemeProvider`
 
-```jsx
-const Title = title(context);
-```
+Solidjs offers a context
 
-and we can use the context to define a `class` prop:
+```js
+import { styled, ThemeProvider } from "solid-styled-components";
 
-```jsx
-<Title class={css`${context.redclass}`}>My red title</Title>
+const theme = {
+  colors: {
+    primary: "hotpink",
+  },
+};
 
-<Title class={css`${context.blueclass}`}>My blue title</Title>
+const myTitle = styled("h1")`
+  color: ${(props) => props.theme.colors.primary};
+`;
 ```
 
 ## Overriding CSS in JS
 
 Suppose we have a base component with class `base` and we want to override the CSS.
 
-We can use classes from "index.css". We can also do CSS in JS with the package "solid-styled-components".
+We can also do CSS in JS with the package "solid-styled-components".
 
 ```js
 const base = `
@@ -79,20 +133,16 @@ const blue = `
 
 ```jsx
 import { css } from "solid-styled-components";
+import { toClass} from "...";
 
 const overTitle = (newclass) => (props) =>
-  (
-    <h1
-      class={css`
-        ${base + newclass}
-      `}
-    >
-      {props.children}
-    </h1>
-  );
+  <h1 class={toClass(base+newClass)}}> {props.children}</h1>;
 
 const BaseTitle = overTitle();
-const OverTitle = overTitle(blue);
+<BaseTitle>A red title</BaseTitle>;
+
+const BlueTitle = overTitle(blue);
+<BlueTitle> A blue title </BlueTitle>;
 ```
 
 We can also use `styled`from "solid-styled-components". This returned a styled function component.
