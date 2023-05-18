@@ -10,6 +10,7 @@ import {
   propClassTitle,
 } from "../components/title";
 
+import context from "../pages/context";
 import "../index.css";
 
 const blueDotted = `
@@ -40,10 +41,11 @@ const theme = {
 };
 
 export default function TitleExamples() {
-  const context = { myclass: left2Shadow };
   const T = title();
+  const TC = title(context);
   const T2 = myTitle2(left2Shadow);
-  const TCon = title(context);
+  const context2 = { myclass: left2Shadow };
+  const TCon = title(context2);
   const TCSS = myTitle(
     css`
       ${left2Shadow}
@@ -60,13 +62,20 @@ export default function TitleExamples() {
   return (
     <>
       <p>Different possible implementations</p>
+      <TC
+        class={css`
+          ${context.testclass}
+        `}
+      >
+        first
+      </TC>
       <T2>test</T2>
       <TCSS>centered?</TCSS>
       <T>No style title</T>
       <T class="center">Simple styled title</T>
       <TCon
         class={css`
-          ${context.myclass}
+          ${context2.myclass}
         `}
       >
         added class via the context

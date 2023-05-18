@@ -17,6 +17,9 @@ const navCss = css`
   height: 100vh;
   background-color: #f1f1f1;
   overflow-y: scroll;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Nav = () => {

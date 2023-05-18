@@ -10,6 +10,14 @@ const customTitleCss = `
 
 const shadows = { 1: "6px 6px 2px 1px rgba(0, 0, 255, .2);" };
 
+const testCss = `
+font-size: 1em;
+border: solid 2px;
+padding-left: 10px;
+text-align: right;
+box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
+`;
+
 export default {
   colors: { red, teal, orange, blue, grey },
   borderRadius: "4px",
@@ -20,4 +28,5 @@ export default {
   icon: fbIcon,
   limit: 3,
   customCss: customTitleCss,
+  testclass: testCss,
 };

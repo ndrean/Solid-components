@@ -9,7 +9,7 @@ const hamburger = (color) => (
     id="burger-icon"
     version="1.1"
     viewBox="0 0 32 32"
-    width="40px"
+    width="20px"
     height="50px"
   >
     <path

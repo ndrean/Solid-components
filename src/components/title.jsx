@@ -8,7 +8,10 @@ padding: 4px;
 background-color: beige;
 `;
 
-const title = (context) => (props) => <h1 {...props}>{props.children}</h1>;
+const title = (context) => (props) => {
+  console.log("title", context);
+  return <h1 {...props}>{props.children}</h1>;
+};
 
 const myTitle = (myclass) => (props) =>
   <h1 class={myclass}>{props.children}</h1>;
