@@ -22,9 +22,13 @@ const navCss = css`
   }
 `;
 
-const Nav = () => {
+const display = css`
+  display: block;
+`;
+
+export default (props) => {
   return (
-    <nav class={navCss}>
+    <nav class={props?.override ? navCss + display : navCss}>
       <For each={routes}>
         {({ href, title }) => (
           <A href={href} class={link} end activeClass="bg-grey">
@@ -35,5 +39,3 @@ const Nav = () => {
     </nav>
   );
 };
-
-export default Nav;

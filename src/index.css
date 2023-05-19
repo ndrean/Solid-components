@@ -1,6 +1,7 @@
 :root {
   --primary-text-color: blue;
   --width: 130px;
+  --mobile: 768px;
 }
 
 body {

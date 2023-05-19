@@ -12,7 +12,7 @@ const appContainer = css`
   }
 `;
 
-const App = () => (
+export default () => (
   <div class={appContainer}>
     <Routes>
       <For each={routes}>
@@ -21,5 +21,3 @@ const App = () => (
     </Routes>
   </div>
 );
-
-export default App;
