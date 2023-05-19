@@ -54,7 +54,7 @@ const App = () => {
           ) : undefined}
         </Drawer>
         <Container>
-          <Nav />
+          <Nav navChange={() => navChange()} />
           <Pages />
         </Container>
       </Router>

@@ -38,7 +38,7 @@ export default (props) => {
               class={link}
               end
               activeClass="bg-grey"
-              onClick={() => props.navChange()}
+              onClick={(e) => props.navChange()}
             >
               {title}
             </A>

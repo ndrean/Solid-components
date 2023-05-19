@@ -15,9 +15,10 @@ body {
   padding: 2px;
 }
 
+/* 
 .nav {
   display: flex;
-}
+} */
 
 .btn {
   cursor: pointer;
@@ -25,11 +26,11 @@ body {
   border-radius: 8px;
   text-decoration: none;
 }
-
+/* 
 .bg-grey {
   background-color: bisque;
 }
 
 .bg-white {
   background-color: white;
-}
+} */
