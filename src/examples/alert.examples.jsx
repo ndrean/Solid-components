@@ -2,9 +2,12 @@ import alert from "../components/alert";
 import { classTitle } from "../components/title";
 
 export default (context) => {
-  const { tr, customCss } = context;
+  const {
+    tr,
+    classes: { stdTitle },
+  } = context;
   const Alert = alert(context);
-  const Title = classTitle(customCss);
+  const Title = classTitle(stdTitle);
 
   return (
     <section id="alert">

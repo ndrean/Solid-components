@@ -8,8 +8,13 @@ import { classTitle } from "../components/title";
 import menu from "./menu";
 
 export default (context) => {
-  const { tr, customCss } = context;
-  const Title = classTitle(customCss);
+  const {
+    tr,
+    classes: { stdTitle },
+  } = context;
+
+  const Title = classTitle(stdTitle);
+
   const [drawerOpen, setDrawOpen] = createSignal(false);
 
   const navChange = (newItem) => {
@@ -23,7 +28,7 @@ export default (context) => {
 
   return (
     <section id="drawer">
-      <Title css={customCss}>{tr.t("Drawer")}</Title>
+      <Title>{tr.t("Drawer")}</Title>
       <br />
       <Button ripple onClick={() => setDrawOpen((val) => !val)}>
         OPEN DRAWER

@@ -4,8 +4,11 @@ import checkbox from "../components/checkbox";
 import { classTitle } from "../components/title";
 
 export default (context) => {
-  const { tr, customCss } = context;
-  const Title = classTitle(customCss);
+  const {
+    tr,
+    classes: { stdTitle },
+  } = context;
+  const Title = classTitle(stdTitle);
   const Checkbox = checkbox(context);
 
   const [state, setState] = createSignal({});
@@ -22,7 +25,7 @@ export default (context) => {
   return function CheckBoxExamples() {
     return (
       <section id="checkbox">
-        <Title css={customCss}>{tr.t("Checkbox")}</Title>
+        <Title>{tr.t("Checkbox")}</Title>
         <form
           class={css`
             > div {
@@ -66,7 +69,7 @@ export default (context) => {
         <p>My checkbox is: {state()["myCheckbox"] ? "true" : "false"}</p>
         <p>Autoplay is: {state()["autoplay"] ? "true" : "false"}</p>
 
-        <Title css={customCss}>{tr.t("Grouped checkboxes")}</Title>
+        <Title>{tr.t("Grouped checkboxes")}</Title>
         <form
           class={css`
             > div {
@@ -103,7 +106,7 @@ export default (context) => {
             <label for="2">Radio 2</label>
           </CheckboxContainer>
         </form>
-        <p>Your selected: {group()}</p>
+        <p>Your selection: {group()}</p>
       </section>
     );
   };

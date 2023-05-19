@@ -4,41 +4,44 @@ import iconSVG from "../components/imgSVG";
 import { classTitle } from "../components/title";
 
 export default (context) => {
-  const { icon, customCss } = context;
+  const {
+    icon,
+    classes: { stdTitle },
+  } = context;
   const Button = button(context);
   const Icon = () => iconSVG(icon, 20);
-  const Title = classTitle(customCss);
+  const Title = classTitle(stdTitle);
   const TallIcon = () => iconSVG(icon, 80);
   const Form = styled("form")`
     margin: 12px;
   `;
 
   const handleClick = (e) => {
-    console.log(Object.values(e.target.attributes));
+    // console.log(Object.values(e.target.attributes));
   };
 
   return (
     <section id="button">
       <Form onSubmit={(e) => e.preventDefault()}>
-        <Title css={customCss}>Flat</Title>
+        <Title>Flat</Title>
         <p>
-          <Button flat onClick={handleClick}>
+          <Button flat onClick={handleClick} aria-label="btn">
             Flat
           </Button>
-          <Button flat primary onClick={handleClick}>
+          <Button flat primary onClick={handleClick} aria-label="btn">
             Flat primary
           </Button>
-          <Button flat accent onClick={handleClick}>
+          <Button flat accent onClick={handleClick} aria-label="btn">
             Flat accent
           </Button>
-          <Button flat ripple onClick={handleClick}>
+          <Button flat ripple onClick={handleClick} aria-label="btn">
             Flat ripple
           </Button>
-          <Button flat disabled onClick={handleClick}>
+          <Button flat disabled onClick={handleClick} aria-label="btn">
             flat disabled
           </Button>
         </p>
-        <Title css={customCss}>Full width</Title>
+        <Title>Full width</Title>
         <p>
           <Button fullWidth ripple>
             full width & ripple
@@ -47,7 +50,7 @@ export default (context) => {
             full primary
           </Button>
         </p>
-        <Title css={customCss}>Icons</Title>
+        <Title>Icons</Title>
         <p>
           <Button onClick={handleClick}>
             <Icon /> with icon

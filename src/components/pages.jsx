@@ -7,7 +7,7 @@ import "../index.css";
 const appContainer = css`
   padding: 20px;
   overflow-y: scroll;
-  @media (max-width: 768px) {
+  @media (max-width: var(--mobile)) ) {
     width: 100%;
   }
 `;

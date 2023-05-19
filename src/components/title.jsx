@@ -9,7 +9,6 @@ background-color: beige;
 `;
 
 const title = (context) => (props) => {
-  console.log("title", context);
   return <h1 {...props}>{props.children}</h1>;
 };
 

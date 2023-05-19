@@ -1,12 +1,10 @@
-import { createSignal, onMount, onCleanup } from "solid-js";
+import { createSignal, onMount, onCleanup, Show } from "solid-js";
 import { render } from "solid-js/web";
 import { css } from "solid-styled-components";
 import { Router } from "@solidjs/router";
 
-import button from "./components/button";
 import Nav from "./components/nav";
 import Pages from "./components/pages.jsx";
-// import { Burger } from "./pages/funnyexamples";
 import context from "./pages/context";
 import drawer from "./components/drawer";
 import { Header, menuOpen, setMenuOpen } from "./components/header";
@@ -21,22 +19,16 @@ const container = css`
   }
 `;
 
-const Container = (props) => <div class={container}>{props.children}</div>;
-const Button = button(context);
-const Drawer = drawer(context);
-
-const navChange = () => {
-  // window.alert("going to..." + newItem.text);
-  setTimeout(() => setMenuOpen(false), 400);
-};
-
 const App = () => {
   const [isMobile, setIsMobile] = createSignal(false);
   const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+  const navChange = () => setTimeout(() => setMenuOpen(false), 400);
+
+  const Container = (props) => <div class={container}>{props.children}</div>;
+  const Drawer = drawer(context);
 
   onMount(() => {
     checkMobile();
-    // window.alert(window.innerWidth + " " + window.orientation);
     window.addEventListener("resize", checkMobile);
   });
 
@@ -48,15 +40,22 @@ const App = () => {
     <>
       <Router>
         <Header />
-        <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
-          {isMobile() ? (
+        <Show
+          when={isMobile()}
+          fallback={
+            <Container>
+              <Nav override={false} />
+              <Pages />
+            </Container>
+          }
+        >
+          <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
             <Nav override={isMobile()} navChange={() => navChange()} />
-          ) : undefined}
-        </Drawer>
-        <Container>
-          <Nav navChange={() => navChange()} />
-          <Pages />
-        </Container>
+          </Drawer>
+          <Container>
+            <Pages />
+          </Container>
+        </Show>
       </Router>
     </>
   );

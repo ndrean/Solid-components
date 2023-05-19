@@ -29,7 +29,7 @@ const [menuOpen, setMenuOpen] = createSignal(false);
 const Header = () => {
   return (
     <div class={headerCss}>
-      <Button onClick={() => setMenuOpen((val) => !val)}>
+      <Button onClick={() => setMenuOpen((val) => !val)} aria-label="btn">
         <Burger />
       </Button>
       <p class={headerTitle}>Components & CSS with SolidJS</p>

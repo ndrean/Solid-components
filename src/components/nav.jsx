@@ -13,12 +13,16 @@ const link = css`
   text-decoration: none;
 `;
 
+const bgBisque = css`
+  background-color: bisque;
+`;
+
 const navCss = css`
   width: var(--width);
   height: 100vh;
   background-color: #f1f1f1;
   overflow-y: scroll;
-  @media (max-width: 768px) {
+  @media (max-width: var(--mobile)) ) {
     display: none;
   }
 `;
@@ -37,8 +41,8 @@ export default (props) => {
               href={href}
               class={link}
               end
-              activeClass="bg-grey"
-              onClick={(e) => props.navChange()}
+              activeClass={bgBisque}
+              onClick={() => (props?.navChange ? props.navChange() : null)}
             >
               {title}
             </A>
