@@ -2,6 +2,7 @@ import { A } from "@solidjs/router";
 import { css } from "solid-styled-components";
 import "../index.css";
 import routes from "../routes";
+import { menuOpen, setMenuOpen } from "./header";
 
 // flex-direction: row;
 const link = css`
@@ -30,11 +31,19 @@ export default (props) => {
   return (
     <nav class={props?.override ? navCss + display : navCss}>
       <For each={routes}>
-        {({ href, title }) => (
-          <A href={href} class={link} end activeClass="bg-grey">
-            {title}
-          </A>
-        )}
+        {({ href, title }) => {
+          return (
+            <A
+              href={href}
+              class={link}
+              end
+              activeClass="bg-grey"
+              onClick={() => props.navChange()}
+            >
+              {title}
+            </A>
+          );
+        }}
       </For>
     </nav>
   );

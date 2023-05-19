@@ -25,8 +25,8 @@ const Container = (props) => <div class={container}>{props.children}</div>;
 const Button = button(context);
 const Drawer = drawer(context);
 
-const navChange = (newItem) => {
-  window.alert("going to..." + newItem.text);
+const navChange = () => {
+  // window.alert("going to..." + newItem.text);
   setTimeout(() => setMenuOpen(false), 400);
 };
 
@@ -49,7 +49,9 @@ const App = () => {
       <Router>
         <Header />
         <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
-          {isMobile() ? <Nav override={isMobile()} /> : undefined}
+          {isMobile() ? (
+            <Nav override={isMobile()} navChange={() => navChange()} />
+          ) : undefined}
         </Drawer>
         <Container>
           <Nav />
