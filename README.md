@@ -42,7 +42,7 @@ const myTitle = (myclass) => (props) =>
   <h1 class={myclass}>{props.children}</h1>;
 ```
 
-```js
+```jsx
 import "index.css";
 import { myTitle } from "...";
 
@@ -54,13 +54,13 @@ const BlueTitle = myTitle("blue-solid");
 And use it:
 
 ```jsx
-<RedTitle>A red title</RedTitle>
-<BlueTitle>A blue title</BlueTitle>
+<RedTitle>A red title</RedTitle>;
+<BlueTitle>A blue title</BlueTitle>;
 ```
 
 ## JS in CSS
 
-We can alternatively use JS in CSS with the library [solid-styled-components](https://github.com/solidjs/solid-styled-components).
+We can alternatively use CSS in JS with the library [solid-styled-components](https://github.com/solidjs/solid-styled-components).
 
 Lets copy-paste CSS into JS:
 

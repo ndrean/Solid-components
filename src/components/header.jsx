@@ -8,14 +8,13 @@ import context from "../pages/context";
 const headerCss = css`
   background-color: #333333;
   color: #ffffff;
-  text-align: center;
   padding: 5px;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   display: flex;
-  align-items: start;
+  align-items: center;
 `;
 
 const headerTitle = css`

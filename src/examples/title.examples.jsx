@@ -24,7 +24,7 @@ const left2Shadow = `
   border: solid 2px;
   padding-left: 10px;
   text-align: left;
-  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
+  box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, 0.2);
 `;
 
 const blueRightGrey = `
@@ -64,7 +64,7 @@ export default function TitleExamples() {
       <p>Different possible implementations</p>
       <TC
         class={css`
-          ${context.testclass}
+          ${context.classes.testclass}
         `}
       >
         first

@@ -4,7 +4,7 @@ import { css } from "solid-styled-components";
 import { Router } from "@solidjs/router";
 
 import Nav from "./components/nav";
-import Pages from "./components/pages.jsx";
+import Pages from "./pages/pages.jsx";
 import context from "./pages/context";
 import drawer from "./components/drawer";
 import { Header, menuOpen, setMenuOpen } from "./components/header";

@@ -22,10 +22,9 @@ const shadows = {
 
 const testCss = `
 font-size: 1em;
-border: solid 2px;
-padding-left: 10px;
+border: solid 1px;
+padding: 0px 10px;
 text-align: right;
-box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
 `;
 
 export default {
@@ -52,5 +51,6 @@ export default {
     stdTitle,
     testclass: testCss,
     stdContainer: stdContainer,
+    testCss,
   },
 };

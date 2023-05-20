@@ -10,7 +10,8 @@ body {
   font-family: sans-serif;
 }
 
-.center {
+.center-blue {
   text-align: center;
+  color: blue;
   padding: 2px;
 }
