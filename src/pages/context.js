@@ -12,6 +12,7 @@ const stdTitle = `
   border: none; 
   text-align: left;
   padding-left: 12px;
+  background-color: ${orange[50]};
   box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
   `;
 

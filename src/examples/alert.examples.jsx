@@ -1,5 +1,5 @@
 import alert from "../components/alert";
-import { classTitle } from "../components/title";
+import title from "../components/title";
 
 export default (context) => {
   const {
@@ -7,7 +7,7 @@ export default (context) => {
     classes: { stdTitle },
   } = context;
   const Alert = alert(context);
-  const Title = classTitle(stdTitle);
+  const Title = title(stdTitle);
 
   return (
     <section id="alert">

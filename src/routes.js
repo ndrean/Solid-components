@@ -7,11 +7,6 @@ const routes = [
     component: lazy(() => import("./pages/homePage")),
   },
   {
-    href: "/titles",
-    title: "Titles",
-    component: lazy(() => import("./pages/titles")),
-  },
-  {
     href: "/icons",
     title: "Funny",
     component: lazy(() => import("./pages/funnyexamples")),

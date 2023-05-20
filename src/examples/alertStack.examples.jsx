@@ -2,7 +2,7 @@ import { css } from "solid-styled-components";
 
 import button from "../components/button";
 import alertStack from "../components/alertStack";
-import { classTitle } from "../components/title";
+import title from "../components/title";
 
 // const customCss2 = `
 //   border: none;
@@ -23,7 +23,7 @@ export default (context) => {
     classes: { stdContainer, stdTitle },
   } = context;
   const Button = button(context);
-  const Title = classTitle(stdTitle);
+  const Title = title(stdTitle);
 
   const { AlertStack, msgs, add } = alertStack(context);
 

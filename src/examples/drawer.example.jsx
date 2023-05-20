@@ -4,7 +4,7 @@ import { createSignal } from "solid-js";
 
 import drawer from "../components/drawer";
 import button from "../components/button";
-import { classTitle } from "../components/title";
+import title from "../components/title";
 import menu from "./menu";
 
 export default (context) => {
@@ -13,7 +13,7 @@ export default (context) => {
     classes: { stdTitle },
   } = context;
 
-  const Title = classTitle(stdTitle);
+  const Title = title(stdTitle);
 
   const [drawerOpen, setDrawOpen] = createSignal(false);
 
