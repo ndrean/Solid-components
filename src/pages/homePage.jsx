@@ -1,5 +1,7 @@
+import { lazy } from "solid-js";
 import { styled, css } from "solid-styled-components";
 import context from "./context.js";
+import { extendedTitle, styledTitle } from "../components/title.jsx";
 import "../index.css";
 
 const Pre = styled("pre")`
@@ -42,30 +44,30 @@ function home(context) {
 
   const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
 
-  const extendedTitle = (context) => (props) => {
-    const {
-      classes: { base },
-    } = context;
-    return (
-      <h4
-        class={css`
-          ${props?.newClass ? props.newClass : base}
-        `}
-      >
-        {props.children}
-      </h4>
-    );
-  };
+  // const extendedTitle = (context) => (props) => {
+  //   const {
+  //     classes: { base },
+  //   } = context;
+  //   return (
+  //     <h4
+  //       class={css`
+  //         ${props?.newClass ? props.newClass : base}
+  //       `}
+  //     >
+  //       {props.children}
+  //     </h4>
+  //   );
+  // };
 
-  const ExtentedTitle = extendedTitle(cont);
+  const ExtendTitle = extendedTitle(cont);
 
-  const styledTitle = (context) =>
-    styled("h4")((props) => {
-      const {
-        classes: { base },
-      } = context;
-      return props?.newClass ? base + props.newClass : base;
-    });
+  // const styledTitle = (context) =>
+  //   styled("h4")((props) => {
+  //     const {
+  //       classes: { base },
+  //     } = context;
+  //     return props?.newClass ? base + props.newClass : base;
+  //   });
 
   const StyledTitle = styledTitle(cont);
 
@@ -125,8 +127,8 @@ function home(context) {
       </Pre>
       <TitleV0 style={{ color: "red" }}>Color is "red"</TitleV0>
       <p>
-        SolidJS provides the prop classto pass a CSS class name. Suppose we
-        define CSS classe "center-blue" in the file "index.css".
+        SolidJS provides the prop <code>class</code> to pass a CSS class name.
+        Suppose we define CSS classe "center-blue" in the file "index.css".
       </p>
       <Pre>
         <code>.center-blue \u007B</code>
@@ -136,6 +138,12 @@ function home(context) {
         <code>&nbsp color: blue;</code>
         <br />
         <code>\u007D</code>
+      </Pre>
+      <p>We can simply use the class name:</p>
+      <Pre>
+        <code>
+          &ltTitleV0 class="center-blue"&gtBlue and solid title&lt/TitleV0&gt
+        </code>
       </Pre>
       <TitleV0 class="center-blue">Blue and solid title</TitleV0>
       <h2>Using the pattern with CSS-in-JS</h2>
@@ -200,10 +208,10 @@ function home(context) {
           &lt/ContextedTitle&gt
         </code>
       </Pre>
-      <ExtentedTitle>A red doted title</ExtentedTitle>
-      <ExtentedTitle newClass={cont.classes.blueSolid}>
+      <ExtendTitle>A red doted title</ExtendTitle>
+      <ExtendTitle newClass={cont.classes.blueSolid}>
         A blue solid title
-      </ExtentedTitle>
+      </ExtendTitle>
       <h2>Override classes</h2>
       <p>
         We have a base component with class base and we want to override the
