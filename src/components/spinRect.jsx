@@ -4,7 +4,7 @@ import { css, styled, keyframes } from "solid-styled-components";
 const SvgView = styled("svg")({});
 
 export default (context) => (props) => {
-  const visibility = props.visibilty || true;
+  const visibility = !props.invisible;
   const color = props.color || "black";
   const size = props.size || "36";
   return (

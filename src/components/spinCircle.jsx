@@ -1,18 +1,19 @@
 import { css } from "solid-styled-components";
-
 export default (context) => (props) => {
-  const visibility = props.visibilty || true;
-
+  const visibility = !props.invisible;
+  //   const color = props.color || "midnightblue";
+  const size = props.size || "200";
+  //   console.log("color", color);
+  //   "#3f51b5"
   return (
     <svg
       class={css`
         visibility: ${visibility ? "visible" : "hidden"};
       `}
       {...props}
-      width="200"
-      height="200"
+      width={size}
+      height={size}
       viewBox="0 0 200 200"
-      color="#3f51b5"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -55,3 +56,5 @@ export default (context) => (props) => {
     </svg>
   );
 };
+
+// {color}
