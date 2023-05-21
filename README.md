@@ -20,6 +20,8 @@ const ContextedComp = comp(someContext);
 
 This allows to pass a "static" theme without using `ThemeProvider` via `createContext`, as described [in the doc "context" example](https://www.solidjs.com/examples/context).
 
+:exclamation: **do NOT destructure the props**. See the example below.
+
 ## "Traditional" CSS file
 
 We define a component:

@@ -30,6 +30,11 @@ export default (context) => {
   return (
     <section id="drawer">
       <Title>{tr.t("Drawer")}</Title>
+      <p>
+        The logic of this component is to toggle a state via a button, and pass
+        it as a prop. The CSS of the component will change, in particular its{" "}
+        <code> opacity </code> and <code> z-index </code>.
+      </p>
       <br />
       <Button ripple onClick={toggleDrawer}>
         OPEN DRAWER

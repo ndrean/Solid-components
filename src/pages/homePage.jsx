@@ -44,30 +44,7 @@ function home(context) {
 
   const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
 
-  // const extendedTitle = (context) => (props) => {
-  //   const {
-  //     classes: { base },
-  //   } = context;
-  //   return (
-  //     <h4
-  //       class={css`
-  //         ${props?.newClass ? props.newClass : base}
-  //       `}
-  //     >
-  //       {props.children}
-  //     </h4>
-  //   );
-  // };
-
   const ExtendTitle = extendedTitle(cont);
-
-  // const styledTitle = (context) =>
-  //   styled("h4")((props) => {
-  //     const {
-  //       classes: { base },
-  //     } = context;
-  //     return props?.newClass ? base + props.newClass : base;
-  //   });
 
   const StyledTitle = styledTitle(cont);
 
@@ -97,15 +74,20 @@ function home(context) {
           &lt/ContextedComp&gt;
         </code>
         <br />
-        <p>
-          This allows to pass a "static" theme without using ThemeProvider via
-          createContext, as described in the{" "}
-          <Link href=" https://www.solidjs.com/examples/context" target="#">
-            doc "context" example
-          </Link>
-          .
-        </p>
       </Pre>
+      <p>
+        This allows to pass a "static" theme without using ThemeProvider via
+        createContext, as described in the{" "}
+        <Link href=" https://www.solidjs.com/examples/context" target="#">
+          doc "context" example
+        </Link>
+        .
+      </p>
+      <p>
+        \u2757 do <strong>NOT</strong> destructure the props. See the example
+        below.
+      </p>
+
       <h2>"Traditional" CSS file</h2>
       <p>We define a component:</p>
       <Pre>

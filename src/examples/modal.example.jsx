@@ -5,13 +5,11 @@ import title from "../components/title";
 
 export default (context) => {
   const { tr } = context;
-  console.log("modal-ex", context);
 
   const [modalOpen, setModalOpen] = createSignal(false);
 
   const toggleModal = () => setModalOpen((val) => !val);
 
-  createEffect(() => console.log("state", modalOpen()));
   const Modal = modal(context);
   const Button = button(context);
   const Title = title(context);

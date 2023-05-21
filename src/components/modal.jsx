@@ -67,14 +67,14 @@ export default (context) => {
     }
   `;
 
-  return function Modal(props) {
+  return (props) => {
     createEffect(() => console.log("Modal", props.open));
     return (
       <div class={base(props.open)}>
         <div
           class={overlay(props.open)}
           onClick={() => {
-            console.log("click on overlay");
+            // console.log("click away on overlay");
             props.onClose();
           }}
         />
