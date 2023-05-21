@@ -162,7 +162,8 @@ function home(context) {
       </Pre>
       <p>
         We can now define customized components that use the context object. We
-        use css from the package "solid-styled-components"
+        use <code>css</code> from the package{" "}
+        <strong>"solid-styled-components"</strong>.
       </p>
       <Pre>
         <code>import \u007B css \u007D from "solid-styled-components";</code>
@@ -180,7 +181,7 @@ function home(context) {
         <code>&nbsp return (</code>
         <br />
         <code>
-          &nbsp &nbsp &lth4 class=\u007Bcss`$\U007Bnewclass\u007D`\u007D&gt
+          &nbsp &nbsp &lth4 class=\u007Bcss`$\u007Bnewclass\u007D`\u007D&gt
         </code>
         <br />
         <code>&nbsp &nbsp &nbsp \u007Bprops.children\u007D</code>
@@ -208,15 +209,16 @@ function home(context) {
           &lt/ContextedTitle&gt
         </code>
       </Pre>
-      <ExtendTitle>A red doted title</ExtendTitle>
+      <ExtendTitle>Default title is red-dotted</ExtendTitle>
       <ExtendTitle newClass={cont.classes.blueSolid}>
-        A blue solid title
+        Blue solid title
       </ExtendTitle>
       <h2>Override classes</h2>
       <p>
         We have a base component with class base and we want to override the
         CSS. When we want to override classes, we simply add "oldClass +
-        newClass" (in this order).
+        newClass" (in this order). We used <code>styled</code> from{" "}
+        <strong>"solid-styled-components"</strong>.
       </p>
       <Pre>
         <code>const styledTitle = (context) =&gt</code>
@@ -244,14 +246,14 @@ function home(context) {
         <br />
         <code>
           <code>
-            &ltStyledTitle newClass=\u007BblueSolid\u007D&gtA red dotted
-            title&lt/StyledTitle&gt
+            &ltStyledTitle newClass=\u007BblueSolid\u007D&gtA new blue solid
+            titlee&lt/StyledTitle&gt
           </code>
         </code>
       </Pre>
       <StyledTitle>A red dotted title</StyledTitle>
       <StyledTitle newClass={cont.classes.blueSolid}>
-        A blue solid title
+        A new blue solid title
       </StyledTitle>
     </div>
   );
