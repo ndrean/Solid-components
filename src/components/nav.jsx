@@ -10,8 +10,10 @@ const link = css`
   margin: 5px 10px;
   display: inline-block;
   font-weight: bold;
+  color: midnightblue;
   text-decoration: none;
 `;
+// color: #49535f;
 
 const bgBisque = css`
   background-color: bisque;
@@ -21,6 +23,7 @@ const navCss = css`
   width: var(--width);
   height: 100vh;
   background-color: #f1f1f1;
+  color: #49535f;
   overflow-y: scroll;
   @media (max-width: var(--mobile)) ) {
     display: none;

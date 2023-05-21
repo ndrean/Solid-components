@@ -44,7 +44,7 @@ const App = () => {
           when={isMobile()}
           fallback={
             <Container>
-              <Nav override={false} />
+              <Nav />
               <Pages />
             </Container>
           }

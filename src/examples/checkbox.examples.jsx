@@ -1,5 +1,5 @@
 import { styled, css } from "solid-styled-components";
-import { createSignal } from "solid-js";
+import { For, createSignal } from "solid-js";
 import checkbox from "../components/checkbox";
 import title from "../components/title";
 
@@ -7,12 +7,14 @@ export default (context) => {
   const {
     tr,
     classes: { stdTitle },
+    shadows,
   } = context;
+
   const Title = title(stdTitle);
   const Checkbox = checkbox(context);
 
   const [state, setState] = createSignal({});
-  const [group, setGroup] = createSignal(undefined);
+  const [radioGroup, setRadioGroup] = createSignal({});
 
   const CheckboxContainer = styled("div")`
     display: flex;
@@ -22,7 +24,31 @@ export default (context) => {
     }
   `;
 
+  const Span = styled("span")`
+    padding-right: 15px;
+  `;
+
+  const Fieldset = styled("fieldset")`
+    border-color: #c4dfff;
+    margin-right: 20px;
+    box-shadow: ${shadows[2]};
+  `;
+
+  // color: #49535f;
+  const Legend = styled("legend")`
+    background-color: bisque;
+    color: midnightblue;
+    padding: 5px;
+    border-radius: 5px;
+  `;
   return function CheckBoxExamples() {
+    function handleRadioGroup(evt) {
+      setRadioGroup({
+        ...radioGroup(),
+        [evt.target.name]: evt.target.value,
+      });
+    }
+
     return (
       <section id="checkbox">
         <Title>{tr.t("Checkbox")}</Title>
@@ -69,7 +95,7 @@ export default (context) => {
         <p>My checkbox is: {state()["myCheckbox"] ? "true" : "false"}</p>
         <p>Autoplay is: {state()["autoplay"] ? "true" : "false"}</p>
 
-        <Title>{tr.t("Grouped checkboxes")}</Title>
+        <Title>{tr.t("Groups of radio buttons")}</Title>
         <form
           class={css`
             > div {
@@ -77,36 +103,71 @@ export default (context) => {
             }
           `}
         >
-          <CheckboxContainer>
-            <Checkbox
-              type="radio"
-              name="group"
-              value="option-1"
-              id="1"
-              onChange={(evt) => {
-                setGroup(evt.target.value);
-              }}
-            >
-              Option 1
-            </Checkbox>
-            <label for="1">Radio 1</label>
-          </CheckboxContainer>
-          <CheckboxContainer>
-            <Checkbox
-              type="radio"
-              name="group"
-              id="2"
-              value="option-2"
-              onChange={(evt) => {
-                setGroup(evt.target.value);
-              }}
-            >
-              Option 2
-            </Checkbox>
-            <label for="2">Radio 2</label>
-          </CheckboxContainer>
+          <div style={{ display: "flex" }}>
+            <Fieldset style={{ borderColor: "bisque" }} id="group1">
+              <Legend>IAC tools</Legend>
+              <CheckboxContainer>
+                <Checkbox
+                  type="radio"
+                  name="group1"
+                  value={"GruCloud"}
+                  id="grucloud"
+                  onChange={handleRadioGroup}
+                />
+                <label for="grucloud">GruCloud</label>
+              </CheckboxContainer>
+              <CheckboxContainer>
+                <Checkbox
+                  type="radio"
+                  name="group1"
+                  id="terraform"
+                  value={"Terraform"}
+                  onChange={handleRadioGroup}
+                />
+                <label for="terraform">Terraform</label>
+              </CheckboxContainer>
+              <CheckboxContainer>
+                <Checkbox
+                  type="radio"
+                  name="group1"
+                  id="pulumi"
+                  value={"Pulumi"}
+                  onChange={handleRadioGroup}
+                />
+                <label for="pulumi">Pulumi</label>
+              </CheckboxContainer>
+            </Fieldset>
+            <Fieldset id="group2">
+              <Legend>Language</Legend>
+              <CheckboxContainer>
+                <Checkbox
+                  type="radio"
+                  name="group2"
+                  value={"Rust"}
+                  id="rust"
+                  onChange={handleRadioGroup}
+                />
+                <label for="rust">Rust</label>
+              </CheckboxContainer>
+              <CheckboxContainer>
+                <Checkbox
+                  type="radio"
+                  name="group2"
+                  id="nodejs"
+                  value={"NodeJS"}
+                  onChange={handleRadioGroup}
+                />
+                <label for="nodejs">NodeJS</label>
+              </CheckboxContainer>
+            </Fieldset>
+          </div>
+          <p>
+            <Span>You selected: </Span>
+            <For each={Object.values(radioGroup())}>
+              {(val) => <Span>{val},</Span>}
+            </For>
+          </p>
         </form>
-        <p>Your selection: {group()}</p>
       </section>
     );
   };

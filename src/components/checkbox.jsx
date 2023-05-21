@@ -46,7 +46,6 @@ export default (context) => {
   };
 
   return function Checkbox(props) {
-    const { styles, ...otherProps } = props;
     return (
       <input
         class={css`
@@ -54,7 +53,7 @@ export default (context) => {
         `}
         type="checkbox"
         required="required"
-        {...otherProps}
+        {...props}
       />
     );
   };

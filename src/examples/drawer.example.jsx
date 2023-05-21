@@ -17,6 +17,7 @@ export default (context) => {
 
   const [drawerOpen, setDrawOpen] = createSignal(false);
 
+  const toggleDrawer = () => setDrawOpen((val) => !val);
   const navChange = (newItem) => {
     window.alert("going to..." + newItem.text);
     setTimeout(() => setDrawOpen(false), 400);
@@ -30,7 +31,7 @@ export default (context) => {
     <section id="drawer">
       <Title>{tr.t("Drawer")}</Title>
       <br />
-      <Button ripple onClick={() => setDrawOpen((val) => !val)}>
+      <Button ripple onClick={toggleDrawer}>
         OPEN DRAWER
       </Button>
       <Drawer open={drawerOpen()} onClose={() => setDrawOpen(false)}>

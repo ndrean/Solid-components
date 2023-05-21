@@ -8,18 +8,21 @@ const stdContainer = `
   padding-right: 5px;
 `;
 
+const shadows = {
+  1: "6px 6px 2px 1px rgba(0, 0, 255, .2);",
+  2: "2px 2px 5px rgba(0, 0, 0, 0.2)",
+  3: "3px 3px 2px 1px rgba(0, 0, 255, .2)",
+  10: "rgba(0, 0, 0, 0.2) 0px 6px 6px -3px, rgba(0, 0, 0, 0.14) 0px 10px 14px 1px, rgba(0, 0, 0, 0.12) 0px 4px 18px 3px;",
+};
+
 const stdTitle = `
   border: none; 
   text-align: left;
+  color: #0D2E46;
   padding-left: 12px;
-  background-color: ${orange[50]};
-  box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
+  background-color: bisque;
+  box-shadow: ${shadows[2]};
   `;
-
-const shadows = {
-  1: "6px 6px 2px 1px rgba(0, 0, 255, .2);",
-  10: "rgba(0, 0, 0, 0.2) 0px 6px 6px -3px, rgba(0, 0, 0, 0.14) 0px 10px 14px 1px, rgba(0, 0, 0, 0.12) 0px 4px 18px 3px;",
-};
 
 const testCss = `
 font-size: 1em;
