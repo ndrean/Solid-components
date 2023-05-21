@@ -41,6 +41,11 @@ const routes = [
     title: "Modal",
     component: lazy(() => import("./pages/modalPage")),
   },
+  {
+    href: "/spinner",
+    title: "Spinner",
+    component: lazy(() => import("./pages/spinnerPage")),
+  },
 ];
 
 export default routes;
