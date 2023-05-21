@@ -37,6 +37,11 @@ export default (context) => {
   return (
     <section id="modal">
       <Title>{tr.t("Modal")}</Title>
+      <p>
+        The logic of this component is the same as the drawer. You toggle a
+        state via a button, and pass it as a prop. The component is a child of
+        an overlay div that covers the full screen with an opacity of 80%.
+      </p>
       <Button onClick={toggleModal}>OPEN MODAL</Button>
       <Modal open={modalOpen()} onClose={() => setModalOpen(false)}>
         <div class="header">My modal</div>
