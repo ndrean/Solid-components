@@ -30,10 +30,10 @@ We define a component:
 const TitleV0 = (props) => <h1 {...props}>{props.children}</h1>;
 ```
 
-We can use the `style` prop to define in-line CSS and pass a JS object:
+We can use the `style` prop to define in-line CSS and pass a JS object with keys in dash-form with explicit units.
 
 ```jsx
-<TitleV0 style={{ color: "red" }}>Color is "red"</TitleV0>
+<TitleV0 style={{ color: "red", "font-size": "2em" }}>Color is "red"</TitleV0>
 ```
 
 SolidJS provides the prop `class`to pass a CSS class name. Suppose we define CSS classe "center-blue" in the file "index.css".
@@ -69,7 +69,9 @@ const blueSolid = `
   border: solid 1px;
 `;
 
-export default { classes: { base, blueSolid } };
+const solid = `border: solid 2px;`;
+
+export default { classes: { base, blueSolid, solid } };
 ```
 
 We can now define customized components that use the `context` object. We use `css` from the package "solid-styled-components".
@@ -81,14 +83,16 @@ const title = (context) => (props) => {
   const {
     classes: { base },
   } = context;
-  const newclass = props?.newClass ? props.newClass : base;
+  const newclass = props?.newClass ? base + props.newClass : base;
+  const label = props?.label || props.children;
   return (
     <h4
       class={css`
         ${newclass}
       `}
+      {...props}
     >
-      {props.children}
+      {label}
     </h4>
   );
 };
@@ -98,45 +102,14 @@ and use it:
 
 ```jsx
 import context from "./context.js";
-const {classes: {blueSolid}} = context;
+const {classes: {blueSolid, solid}} = context;
 
 [...]
 const ContextedTitle = title(context);
 
 <ContextedTitle>Default title is red-dotted</ContextedTitle>
-<ContextedTitle newClass={blueSolid}>Blue solid title</ContextedTitle>
-```
-
-## Override classes
-
-We have a base component with class `base` and we want to override the CSS. When we want to override classes, we simply add "oldClass + newClass" (in this order).
-
-```jsx
-const title = (context) => (props) => {
-  const {
-    classes: { base },
-  } = context;
-  const newclass = props?.newClass ? base + props.newClass : base;
-  return (
-    <h1
-      class={css`
-        ${newclass}
-      `}
-    >
-      {props.children}
-    </h1>
-  );
-};
-```
-
-```jsx
-const {
-  classes: { blueSolid },
-} = context;
-const Title = title(context);
-<Title>A red dotted title</Title>;
-
-<Title newClass={blueSolid}> A solid blue title </Title>;
+<ContextedTitle newClass={blueSolid} label="Blue solid title" />
+<ContextedTitle newClass={solid}> Blue solid</ContextedTitle>
 ```
 
 We can also use `styled`from "solid-styled-components". This returned a styled function component.
