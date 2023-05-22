@@ -2,7 +2,7 @@ import { styled, css } from "solid-styled-components";
 import { For, createSignal } from "solid-js";
 import checkbox from "../components/checkbox";
 import title from "../components/title";
-import GrayDiv from "../components/grayDiv";
+import GrayDiv from "../components/GrayDiv";
 
 export default (context) => {
   const {

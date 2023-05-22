@@ -7,6 +7,11 @@ const routes = [
     component: lazy(() => import("./pages/homePage")),
   },
   {
+    href: "/select",
+    title: "Select",
+    component: lazy(() => import("./pages/selectPage")),
+  },
+  {
     href: "/icons",
     title: "Funny",
     component: lazy(() => import("./pages/funnyexamples")),
@@ -45,11 +50,6 @@ const routes = [
     href: "/spinner",
     title: "Spinners",
     component: lazy(() => import("./pages/spinnerPage")),
-  },
-  {
-    href: "/select",
-    title: "Select",
-    component: lazy(() => import("./pages/selectPage")),
   },
 ];
 
