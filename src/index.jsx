@@ -9,6 +9,7 @@ import context from "./pages/context";
 import drawer from "./components/drawer";
 import { Header, menuOpen, setMenuOpen } from "./components/header";
 import spinCircle from "./components/spinCircle";
+import progressBar from "./components/progressBar";
 
 const container = css`
   display: grid;
@@ -35,6 +36,7 @@ const App = () => {
   const Container = (props) => <div class={container}>{props.children}</div>;
   const Drawer = drawer(context);
   const Spin = spinCircle(context);
+  const Prog = progressBar({ max: "500" });
 
   onMount(() => {
     checkMobile();

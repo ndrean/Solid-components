@@ -15,17 +15,20 @@ const extendedTitle = (context) => (props) => {
   const {
     classes: { base },
   } = context;
+  const label = props?.label || props.children;
   return (
     <h4
       class={css`
-        ${props?.newClass ? props.newClass : base}
+        ${props?.newClass ? base + props.newClass : base}
       `}
+      {...props}
     >
-      {props.children}
+      {label}
     </h4>
   );
 };
 
+/*
 const styledTitle = (context) =>
   styled("h4")((props) => {
     const {
@@ -33,5 +36,6 @@ const styledTitle = (context) =>
     } = context;
     return props?.newClass ? base + props.newClass : base;
   });
+*/
 
-export { styledTitle, extendedTitle };
+export { extendedTitle };

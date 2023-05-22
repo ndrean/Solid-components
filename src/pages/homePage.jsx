@@ -1,7 +1,7 @@
 import { styled } from "solid-styled-components";
 
 import context from "./context.js";
-import title, { extendedTitle, styledTitle } from "../components/title.jsx";
+import title, { extendedTitle } from "../components/title.jsx";
 import Link from "../components/Link.jsx";
 import "../index.css";
 
@@ -26,22 +26,25 @@ function home(context) {
     border: dotted 2px;
   `;
 
+  const solid = `
+    border: solid 4px;
+  `;
   const cont = {
     classes: {
       blueSolid,
+      solid,
       base: redClass,
     },
   };
 
   const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
   const ExtendedTitle = extendedTitle(cont);
-  const StyledTitle = styledTitle(cont);
   const Title = title(stdTitle);
 
   return () => (
     <div style={{ width: "100%" }}>
       <Title>Pattern for functional components with SolidJS</Title>
-      <p>{String.fromCodePoint(127467)}</p>
+
       <p>
         This work is 100% based on the{" "}
         <Link href="https://github.com/FredericHeem/mdlean" target="#">
@@ -90,15 +93,17 @@ function home(context) {
       </Pre>
       <p>
         We can use the style prop to define in-line CSS and pass a JS object
-        (with keys in dash-form with explicit units, e.g. "font-size": "2em"):
+        (with keys in dash-form with explicit units):
       </p>
       <Pre>
         <code>
-          &ltTitle style=\u007B\u007B color: "red" \u007D\u007D&gtColor is
-          "red"&gt\Title&gt
+          &ltTitle style=\u007B\u007B color: "red", "font-size": "2em"
+          \u007D\u007D&gtColor is "red"&gt\Title&gt
         </code>
       </Pre>
-      <TitleV0 style={{ color: "red" }}>Color is "red"</TitleV0>
+      <TitleV0 style={{ color: "red", "font-size": "2em" }}>
+        Color is "red"
+      </TitleV0>
       <p>
         SolidJS provides the prop <code> class </code> to pass a CSS class name.
         Suppose we define CSS classe "center-blue" in the file "index.css".
@@ -127,16 +132,23 @@ function home(context) {
       <Pre>
         <code>const base = `color: red; border: dotted 1px;`</code>
         <br />
-        <code>cosnt bludSolid = `color: blue; border: solid 1px;`</code>
+        <code>const blueSolid = `color: blue; border: solid 1px;`</code>
+        <br />
+        <code>const solid = `border: solid 2px;`</code>
         <br />
         <code>
-          export default \u007B classes: \u007B base, blueSolid \u007D\u007D
+          export default \u007B classes: \u007B base, solid, blueSolid
+          \u007D\u007D
         </code>
       </Pre>
       <p>
         We can now define customized components that use the context object. We
         use <code> css </code> from the package{" "}
         <strong>"solid-styled-components"</strong>.
+      </p>
+      <p>
+        When we want to override classes, we simply add "oldClass + newClass"
+        (in this order).
       </p>
       <Pre>
         <code>import \u007B css \u007D from "solid-styled-components";</code>
@@ -148,16 +160,19 @@ function home(context) {
         </code>
         <br />
         <code>
-          &nbsp const newclass = props?.newClass ? props.newClass : base;
+          &nbsp const newclass = props?.newClass ? base + props.newClass : base;
         </code>
+        <br />
+        <code>&nbsp const label = props?.label || props.children;</code>
         <br />
         <code>&nbsp return (</code>
         <br />
         <code>
-          &nbsp &nbsp &lth4 class=\u007Bcss`$\u007Bnewclass\u007D`\u007D&gt
+          &nbsp &nbsp &lth4 class=\u007Bcss`$\u007Bnewclass\u007D`\u007D
+          \u007B...props\u007D&gt
         </code>
         <br />
-        <code>&nbsp &nbsp &nbsp \u007Bprops.children\u007D</code>
+        <code>&nbsp &nbsp &nbsp \u007Blabel\u007D</code>
         <br />
         <code>&nbsp &nbsp &lt/h4&gt</code>
         <br />
@@ -169,63 +184,31 @@ function home(context) {
       <Pre>
         <code>import context from "./context.js";</code>
         <br />
-        <code>const \u007Bclasses: \u007BblueSolid\u007B\u007B = context;</code>
+        <code>
+          const \u007Bclasses: \u007BblueSolid, solid\u007D\u007D = context;
+        </code>
         <br />
+
         <code>const ContextedTitle = title(context);</code>
         <br />
-        <code>
-          &ltContextedTitle&gt Default title is red-dotted &lt/ContextedTitle&gt
-        </code>
+        <code>&ltContextedTitle label="Title is red-dotted" /&gt</code>
         <br />
         <code>
           &ltContextedTitle newClass=\u007BblueSolid\u007D&gt Blue solid title
           &lt/ContextedTitle&gt
         </code>
-      </Pre>
-      <ExtendedTitle>Default title is red-dotted</ExtendedTitle>
-      <ExtendedTitle newClass={cont.classes.blueSolid}>
-        Blue solid title
-      </ExtendedTitle>
-      <h2>Override classes</h2>
-      <p>
-        We have a base component with class base and we want to override the
-        CSS. When we want to override classes, we simply add "oldClass +
-        newClass" (in this order). We used <code> styled </code> from{" "}
-        <strong>"solid-styled-components"</strong> and define a prop{" "}
-        <code> newClass </code> to pass the extended class.
-      </p>
-      <Pre>
-        <code>const styledTitle = (context) =&gt</code>
-        <br />
-        <code>&nbsp styled("h4")((props) =&gt \u007B</code>
         <br />
         <code>
-          &nbsp &nbsp const \u007Bclasses: \u007B base \u007D\u007D = context
-        </code>
-        <br />
-        <code>
-          &nbsp &nbsp return props?.newClass ? base + props.newClass : base;
-        </code>
-        <br />
-        <code> &nbsp\u007D;</code>
-        <br />
-        <code>)</code>
-        <br />
-        <code>const StyledTitle = styledTitle(cont);</code>
-        <br />
-        <code>const \u007Bclasses: \u007BblueSolid\u007D\u007D = context;</code>
-        <br />
-        <code>&ltStyledTitle&gtA red dotted title&lt/StyledTitle&gt</code>
-        <br />
-        <code>
-          <code>
-            &ltStyledTitle newClass=\u007BblueSolid\u007D&gtA new blue solid
-            titlee&lt/StyledTitle&gt
-          </code>
+          &ltContextedTitle newClass=\u007Bsolid\u007D&gtRed
+          solid&lt/ContextedTitle&gt
         </code>
       </Pre>
-      <StyledTitle>A red dotted title</StyledTitle>
-      <StyledTitle newClass={blueSolid}>A new blue solid title</StyledTitle>
+      <ExtendedTitle label="Title is red-dotted" />
+      <ExtendedTitle
+        newClass={cont.classes.blueSolid}
+        label="Blue solid title"
+      />
+      <ExtendedTitle newClass={cont.classes.solid}>Red solid</ExtendedTitle>
     </div>
   );
 }

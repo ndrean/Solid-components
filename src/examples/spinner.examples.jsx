@@ -2,7 +2,7 @@ import { createSignal } from "solid-js";
 import spinRect from "../components/spinRect";
 import spinCircle from "../components/spinCircle";
 import title from "../components/title";
-import progressBar from "../components/ProgressBar";
+import progressBar from "../components/progressBar";
 
 export default (context) => {
   const {
