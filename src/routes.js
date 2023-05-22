@@ -43,8 +43,13 @@ const routes = [
   },
   {
     href: "/spinner",
-    title: "Spinner",
+    title: "Spinners",
     component: lazy(() => import("./pages/spinnerPage")),
+  },
+  {
+    href: "/select",
+    title: "Select",
+    component: lazy(() => import("./pages/selectPage")),
   },
 ];
 

@@ -1,10 +1,9 @@
 import { css } from "solid-styled-components";
 export default (context) => (props) => {
   const visibility = !props.invisible;
-  //   const color = props.color || "midnightblue";
   const size = props.size || "200";
-  //   console.log("color", color);
-  //   "#3f51b5"
+  const duration = props.duration || "1300ms";
+
   return (
     <svg
       class={css`
@@ -51,7 +50,7 @@ export default (context) => (props) => {
         attributeName="transform"
         type="rotate"
         repeatCount="indefinite"
-        dur="1300ms"
+        dur={duration}
       />
     </svg>
   );

@@ -1,5 +1,5 @@
 /* @jsxImportSource @emotion/react */
-import { css, styled, keyframes } from "solid-styled-components";
+import { css, styled } from "solid-styled-components";
 
 const SvgView = styled("svg")({});
 

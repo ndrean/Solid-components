@@ -1,4 +1,3 @@
-import { createEffect } from "solid-js";
 import { css, styled } from "solid-styled-components";
 
 export default (context) => {
@@ -68,7 +67,7 @@ export default (context) => {
   `;
 
   return (props) => {
-    createEffect(() => console.log("Modal", props.open));
+    // createEffect(() => console.log("Modal", props.open));
     return (
       <div class={base(props.open)}>
         <div

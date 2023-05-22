@@ -1,7 +1,8 @@
-import { lazy } from "solid-js";
-import { styled, css } from "solid-styled-components";
+import { styled } from "solid-styled-components";
+
 import context from "./context.js";
-import { extendedTitle, styledTitle } from "../components/title.jsx";
+import title, { extendedTitle, styledTitle } from "../components/title.jsx";
+import Link from "../components/Link.jsx";
 import "../index.css";
 
 const Pre = styled("pre")`
@@ -9,21 +10,11 @@ const Pre = styled("pre")`
   padding: 5px;
 `;
 
-const link = css`
-  text-decoration: none;
-  background-color: beige;
-  padding: 3px;
-  border-radius: 5px;
-`;
-
 function home(context) {
-  const { colors } = context;
-
-  const Link = (props) => (
-    <a class={link} href={props.href} target="#">
-      {props.children}
-    </a>
-  );
+  const {
+    colors,
+    classes: { stdTitle },
+  } = context;
 
   const blueSolid = `
     color: blue;
@@ -43,14 +34,14 @@ function home(context) {
   };
 
   const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
-
-  const ExtendTitle = extendedTitle(cont);
-
+  const ExtendedTitle = extendedTitle(cont);
   const StyledTitle = styledTitle(cont);
+  const Title = title(stdTitle);
 
   return () => (
-    <div style={{ width: "100%", paddingRight: "10px" }}>
-      <h1>Pattern for customized functional components with SolidJS</h1>
+    <div style={{ width: "100%" }}>
+      <Title>Pattern for functional components with SolidJS</Title>
+      <p>{String.fromCodePoint(127467)}</p>
       <p>
         This work is 100% based on the{" "}
         <Link href="https://github.com/FredericHeem/mdlean" target="#">
@@ -84,8 +75,7 @@ function home(context) {
         .
       </p>
       <p>
-        \u2757 do <strong>NOT</strong> destructure the props. See the example
-        below.
+        \u2757 do <strong>NOT</strong> destructure the props.
       </p>
 
       <h2>"Traditional" CSS file</h2>
@@ -99,7 +89,8 @@ function home(context) {
         </code>
       </Pre>
       <p>
-        We can use the style prop to define in-line CSS and pass a JS object:
+        We can use the style prop to define in-line CSS and pass a JS object
+        (with keys in dash-form with explicit units, e.g. "font-size": "2em"):
       </p>
       <Pre>
         <code>
@@ -109,7 +100,7 @@ function home(context) {
       </Pre>
       <TitleV0 style={{ color: "red" }}>Color is "red"</TitleV0>
       <p>
-        SolidJS provides the prop <code>class</code> to pass a CSS class name.
+        SolidJS provides the prop <code> class </code> to pass a CSS class name.
         Suppose we define CSS classe "center-blue" in the file "index.css".
       </p>
       <Pre>
@@ -144,7 +135,7 @@ function home(context) {
       </Pre>
       <p>
         We can now define customized components that use the context object. We
-        use <code>css</code> from the package{" "}
+        use <code> css </code> from the package{" "}
         <strong>"solid-styled-components"</strong>.
       </p>
       <Pre>
@@ -191,38 +182,38 @@ function home(context) {
           &lt/ContextedTitle&gt
         </code>
       </Pre>
-      <ExtendTitle>Default title is red-dotted</ExtendTitle>
-      <ExtendTitle newClass={cont.classes.blueSolid}>
+      <ExtendedTitle>Default title is red-dotted</ExtendedTitle>
+      <ExtendedTitle newClass={cont.classes.blueSolid}>
         Blue solid title
-      </ExtendTitle>
+      </ExtendedTitle>
       <h2>Override classes</h2>
       <p>
         We have a base component with class base and we want to override the
         CSS. When we want to override classes, we simply add "oldClass +
-        newClass" (in this order). We used <code>styled</code> from{" "}
-        <strong>"solid-styled-components"</strong>.
+        newClass" (in this order). We used <code> styled </code> from{" "}
+        <strong>"solid-styled-components"</strong> and define a prop{" "}
+        <code> newClass </code> to pass the extended class.
       </p>
       <Pre>
         <code>const styledTitle = (context) =&gt</code>
         <br />
-        <code>styled("h4")((props) =&gt \u007B</code>
+        <code>&nbsp styled("h4")((props) =&gt \u007B</code>
         <br />
         <code>
-          &nbsp const \u007Bclasses: \u007B base \u007D\u007D = context
+          &nbsp &nbsp const \u007Bclasses: \u007B base \u007D\u007D = context
         </code>
         <br />
         <code>
-          &nbsp return props?.newClass ? base + props.newClass : base;
+          &nbsp &nbsp return props?.newClass ? base + props.newClass : base;
         </code>
         <br />
-        <code> \u007D);</code>
+        <code> &nbsp\u007D;</code>
         <br />
-
+        <code>)</code>
+        <br />
         <code>const StyledTitle = styledTitle(cont);</code>
         <br />
         <code>const \u007Bclasses: \u007BblueSolid\u007D\u007D = context;</code>
-        <br />
-        <code>const StyledTitle = styledTitle(context);</code>
         <br />
         <code>&ltStyledTitle&gtA red dotted title&lt/StyledTitle&gt</code>
         <br />
@@ -234,9 +225,7 @@ function home(context) {
         </code>
       </Pre>
       <StyledTitle>A red dotted title</StyledTitle>
-      <StyledTitle newClass={cont.classes.blueSolid}>
-        A new blue solid title
-      </StyledTitle>
+      <StyledTitle newClass={blueSolid}>A new blue solid title</StyledTitle>
     </div>
   );
 }
