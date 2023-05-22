@@ -19,19 +19,6 @@ const countries = {
   "United States": "🇺🇸",
 };
 
-const buildList = () => {
-  const options = {};
-  for (const country in countries) {
-    options[country] = () => (
-      <div>
-        {countries[country]}
-        <Span>{country}</Span>
-      </div>
-    );
-  }
-  return [options, Object.keys(options)];
-};
-
 export default (context) => (props) => {
   const [options, keys] = createMemo(() => buildList())();
   // const data = createMemo(() => buildList());
@@ -63,7 +50,6 @@ export default (context) => (props) => {
         <br />
         <code>\u007D</code>
       </pre>
-
       <p>
         Note: the <code> createSignal </code> hook is placed outside of the
         component function body to keep the state during navigation (file
@@ -103,6 +89,7 @@ export default (context) => (props) => {
         input (<code> onInput </code> with SolidJS), and one for the selection
         (if you want to submit the input).
       </p>
+
       <form
         autocomplete="off"
         id="autocomp"
@@ -136,7 +123,6 @@ export default (context) => (props) => {
       <GrayDiv>
         <output>{options[selected2()]}</output>
       </GrayDiv>
-
       <br />
     </>
   );
@@ -150,4 +136,17 @@ function updateKeyList(input, keyList) {
 
 function updateOptionList(keyList, optionList) {
   return keyList.reduce((acc, key) => ({ ...acc, [key]: optionList[key] }), {});
+}
+
+function buildList() {
+  const options = {};
+  for (const country in countries) {
+    options[country] = () => (
+      <div>
+        {countries[country]}
+        <Span>{country}</Span>
+      </div>
+    );
+  }
+  return [options, Object.keys(options)];
 }
