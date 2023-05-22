@@ -30,20 +30,17 @@ const buildList = () => {
       </div>
     );
   }
-  // const loweredKeys = Object.keys(options).map((key) => key.toLowerCase());
-  const values = Object.values(options);
-  return [options, Object.keys(options), values];
+  return [options, Object.keys(options)];
 };
 
 export default (context) => (props) => {
-  const [options, keys, values] = createMemo(() => buildList())();
+  const [options, keys] = createMemo(() => buildList())();
   // const data = createMemo(() => buildList());
   // const [options, keys, values] = data();
   const [optionList, setOptionList] = createSignal(options);
   const [keyList, setKeyList] = createSignal(keys);
   const [selected2, setSelected2] = createSignal(null);
   const [selected, setSelected] = createSignal(null);
-  const [openDialog, setOpenDialog] = createSignal(false);
   const HRLine = title(context.classes.hrLine);
   const Title = title();
 
@@ -147,7 +144,9 @@ export default (context) => (props) => {
 };
 
 function updateKeyList(input, keyList) {
-  return keyList.filter((option) => option.includes(input));
+  return keyList.filter((option) =>
+    option.toLowerCase().includes(input.toLowerCase())
+  );
 }
 
 function updateOptionList(keyList, optionList) {
