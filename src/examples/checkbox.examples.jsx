@@ -2,6 +2,7 @@ import { styled, css } from "solid-styled-components";
 import { For, createSignal } from "solid-js";
 import checkbox from "../components/checkbox";
 import title from "../components/title";
+import GrayDiv from "../components/grayDiv";
 
 export default (context) => {
   const {
@@ -33,6 +34,10 @@ export default (context) => {
     margin-right: 20px;
     box-shadow: ${shadows[2]};
   `;
+
+  // const GrayDiv = styled("div")`
+  //   background-color: #f1f1f1;
+  // `;
 
   // color: #49535f;
   const Legend = styled("legend")`
@@ -92,8 +97,10 @@ export default (context) => {
             <label for="disabled">Disabled</label>
           </CheckboxContainer>
         </form>
-        <p>My checkbox is: {state()["myCheckbox"] ? "true" : "false"}</p>
-        <p>Autoplay is: {state()["autoplay"] ? "true" : "false"}</p>
+        <GrayDiv>
+          <p>My checkbox is: {state()["myCheckbox"] ? "true" : "false"}</p>
+          <p>Autoplay is: {state()["autoplay"] ? "true" : "false"}</p>
+        </GrayDiv>
 
         <Title>{tr.t("Groups of radio buttons")}</Title>
         <form
@@ -162,10 +169,12 @@ export default (context) => {
             </Fieldset>
           </div>
           <p>
-            <Span>You selected: </Span>
-            <For each={Object.values(radioGroup())}>
-              {(val) => <Span>{val},</Span>}
-            </For>
+            <GrayDiv>
+              <Span>You selected: </Span>
+              <For each={Object.values(radioGroup())}>
+                {(val) => <Span>{val},</Span>}
+              </For>
+            </GrayDiv>
           </p>
         </form>
       </section>
