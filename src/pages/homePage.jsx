@@ -51,8 +51,20 @@ function home(context) {
       <p>
         This work is 100% based on the{" "}
         <Link href="https://github.com/FredericHeem/mdlean" target="#">
-          following repo
+          MDLean
+        </Link>{" "}
+        repo adapted for SolidJS. It uses{" "}
+        <Link href="https://github.com/solidjs/solid-router" target="#">
+          Solid-Router
         </Link>
+        and{" "}
+        <Link
+          href="https://github.com/solidjs/solid-styled-components"
+          target="#"
+        >
+          Solid-Styled-Components
+        </Link>{" "}
+        to produce a fast and very light-weight bundle.
       </p>
       <Title>The pattern</Title>
       <p>
