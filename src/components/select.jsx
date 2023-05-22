@@ -45,12 +45,13 @@ export default (context) => (props) => {
   const [selected, setSelected] = createSignal(null);
   const [openDialog, setOpenDialog] = createSignal(false);
   const HRLine = title(context.classes.hrLine);
+  const Title = title();
 
   return (
     <>
-      <HRLine>
+      <Title>
         A simple <code> SELECT </code> example
-      </HRLine>
+      </Title>
       <p>
         We vave a list of countries and want to render a <code> SELECT </code>{" "}
         list.
@@ -95,9 +96,9 @@ export default (context) => (props) => {
         <p>{options[selected()]}</p>
       </GrayDiv>
       <br />
-      <HRLine>
+      <Title>
         An <code> AUTOCOMPLETE </code> example with <code> DATALIST </code>
-      </HRLine>
+      </Title>
       <p>
         One key point is to set the <code> LIST </code> attribute on the input
         equal to the <code> ID </code>

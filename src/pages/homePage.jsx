@@ -40,12 +40,13 @@ function home(context) {
 
   const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
   const ContextedTitle = contextedTitle(cont);
-  const Title = title(stdTitle);
+  const Title1 = title(stdTitle);
+  const Title = title();
   const HRLine = title(hrLine);
 
   return () => (
     <div style={{ width: "100%" }}>
-      <Title>Pattern for functional components with SolidJS</Title>
+      <Title1>Pattern for functional components with SolidJS</Title1>
 
       <p>
         This work is 100% based on the{" "}
@@ -53,7 +54,7 @@ function home(context) {
           following repo
         </Link>
       </p>
-      <HRLine>The pattern</HRLine>
+      <Title>The pattern</Title>
       <p>
         You define a closure that takes an argument - the context - and renders
         a function component.
@@ -83,7 +84,7 @@ function home(context) {
         \u2757 do <strong>NOT</strong> destructure the props.
       </p>
 
-      <HRLine>"Traditional" CSS</HRLine>
+      <Title>Traditional CSS</Title>
       <p>We define a component:</p>
       <Pre>
         <code>const Title = (props) =&gt</code>
@@ -103,7 +104,7 @@ function home(context) {
           \u007D\u007D&gtColor is "red"&gt\Title&gt
         </code>
       </Pre>
-      <TitleV0 style={{ color: "red", "font-size": "2em" }}>
+      <TitleV0 style={{ color: "red", "font-size": "1.5em" }}>
         Color is "red"
       </TitleV0>
       <p>
@@ -126,7 +127,7 @@ function home(context) {
         </code>
       </Pre>
       <TitleV0 class="center-blue">Blue and solid title</TitleV0>
-      <HRLine>Using the pattern with CSS-in-JS</HRLine>
+      <Title>Using the pattern with CSS-in-JS</Title>
       <p>
         We can use CSS-in-JS with the library{" "}
         <Link
