@@ -1,9 +1,8 @@
-import { createSignal, For, createMemo, batch, createEffect } from "solid-js";
+import { createSignal, For, createMemo } from "solid-js";
 import { styled } from "solid-styled-components";
 
 import title from "./title";
 import GrayDiv from "../components/GrayDiv";
-import { clearDelegatedEvents } from "solid-js/web";
 
 const Span = styled("span")`
   padding-left: 20px;
