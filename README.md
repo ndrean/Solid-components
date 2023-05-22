@@ -2,7 +2,7 @@
 
 This work is 100% based on [the following repo](https://github.com/FredericHeem/mdlean) adapted for SolidJS.
 
-It uses [Solid Router]("https://github.com/solidjs/solid-router") and [Solid styled components]("https://github.com/solidjs/solid-styled-components") to produce a fast and very light-weight bundle.
+It uses [Solid Router](https://github.com/solidjs/solid-router) and [Solid styled components](https://github.com/solidjs/solid-styled-components) to produce a fast and very light-weight bundle.
 
 ## Status
 
