@@ -1,4 +1,4 @@
-import { css, styled } from "solid-styled-components";
+import { css } from "solid-styled-components";
 
 export default (myclass) => (props) =>
   (
@@ -11,7 +11,7 @@ export default (myclass) => (props) =>
     </h1>
   );
 
-const extendedTitle = (context) => (props) => {
+const contextedTitle = (context) => (props) => {
   const {
     classes: { base },
   } = context;
@@ -28,14 +28,4 @@ const extendedTitle = (context) => (props) => {
   );
 };
 
-/*
-const styledTitle = (context) =>
-  styled("h4")((props) => {
-    const {
-      classes: { base },
-    } = context;
-    return props?.newClass ? base + props.newClass : base;
-  });
-*/
-
-export { extendedTitle };
+export { contextedTitle };

@@ -108,11 +108,11 @@ const {classes: {blueSolid, solid}} = context;
 const ContextedTitle = title(context);
 
 <ContextedTitle>Default title is red-dotted</ContextedTitle>
-<ContextedTitle newClass={blueSolid} label="Blue solid title" />
-<ContextedTitle newClass={solid}> Blue solid</ContextedTitle>
+<ContextedTitle newClass={blueSolid} label="Blue solid title"/>
+<ContextedTitle newClass={solid}>Blue solid</ContextedTitle>
 ```
 
-We can also use `styled`from "solid-styled-components". This returned a styled function component.
+We can also use `styled`from "solid-styled-components". This returns a styled function component.
 
 ```jsx
 import { styled } from "solid-styled-components";

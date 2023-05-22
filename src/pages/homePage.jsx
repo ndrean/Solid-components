@@ -1,19 +1,20 @@
 import { styled } from "solid-styled-components";
 
 import context from "./context.js";
-import title, { extendedTitle } from "../components/title.jsx";
+import title, { contextedTitle } from "../components/title.jsx";
 import Link from "../components/Link.jsx";
 import "../index.css";
 
 const Pre = styled("pre")`
   margin-left: 10px;
   padding: 5px;
+  background-color: #f1f1f1;
 `;
 
 function home(context) {
   const {
     colors,
-    classes: { stdTitle },
+    classes: { stdTitle, hrLine },
   } = context;
 
   const blueSolid = `
@@ -38,8 +39,9 @@ function home(context) {
   };
 
   const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
-  const ExtendedTitle = extendedTitle(cont);
+  const ContextedTitle = contextedTitle(cont);
   const Title = title(stdTitle);
+  const HRLine = title(hrLine);
 
   return () => (
     <div style={{ width: "100%" }}>
@@ -51,7 +53,7 @@ function home(context) {
           following repo
         </Link>
       </p>
-      <h2>The pattern</h2>
+      <HRLine>The pattern</HRLine>
       <p>
         You define a closure that takes an argument - the context - and renders
         a function component.
@@ -81,7 +83,7 @@ function home(context) {
         \u2757 do <strong>NOT</strong> destructure the props.
       </p>
 
-      <h2>"Traditional" CSS file</h2>
+      <HRLine>"Traditional" CSS</HRLine>
       <p>We define a component:</p>
       <Pre>
         <code>const Title = (props) =&gt</code>
@@ -117,19 +119,27 @@ function home(context) {
         <br />
         <code>\u007D</code>
       </Pre>
-      <p>We can simply use the class name:</p>
+      <p>We use the class prop:</p>
       <Pre>
         <code>
           &ltTitleV0 class="center-blue"&gtBlue and solid title&lt/TitleV0&gt
         </code>
       </Pre>
       <TitleV0 class="center-blue">Blue and solid title</TitleV0>
-      <h2>Using the pattern with CSS-in-JS</h2>
+      <HRLine>Using the pattern with CSS-in-JS</HRLine>
       <p>
-        We can use CSS-in-JS with the library solid-styled-components. Lets
-        copy-paste CSS into JS and create a "context" object:
+        We can use CSS-in-JS with the library{" "}
+        <Link
+          href="https://github.com/solidjs/solid-styled-components"
+          target="#"
+        >
+          "solid-styled-components"
+        </Link>
+        . Lets copy-paste CSS into JS and create a "context" object:
       </p>
       <Pre>
+        <code>//context.js</code>
+        <br />
         <code>const base = `color: red; border: dotted 1px;`</code>
         <br />
         <code>const blueSolid = `color: blue; border: solid 1px;`</code>
@@ -203,12 +213,12 @@ function home(context) {
           solid&lt/ContextedTitle&gt
         </code>
       </Pre>
-      <ExtendedTitle label="Title is red-dotted" />
-      <ExtendedTitle
+      <ContextedTitle label="Title is red-dotted" />
+      <ContextedTitle
         newClass={cont.classes.blueSolid}
         label="Blue solid title"
       />
-      <ExtendedTitle newClass={cont.classes.solid}>Red solid</ExtendedTitle>
+      <ContextedTitle newClass={cont.classes.solid}>Red solid</ContextedTitle>
     </div>
   );
 }
