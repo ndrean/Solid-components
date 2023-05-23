@@ -85,6 +85,7 @@ export default (context) => {
         the app navigation.
       </p>
       <p>A DIALOG is closed by clicking on it, not outisde as in a MODAL.</p>
+
       <div style={{ "text-align": "center" }}>
         <Button ripple onClick={toggleDiag}>
           Check terms and conditions

@@ -1,4 +1,4 @@
-import { styled } from "solid-styled-components";
+import { styled, css } from "solid-styled-components";
 import context from "../pages/context";
 
 //   z-index: 2;
@@ -41,9 +41,15 @@ const ModalClass = styled("div")`
   }
 `;
 
+const dialogCSS = css`
+  border: none;
+  position: absolute;
+  top: 20%;
+  left: 0;
+`;
 export default (context) => (props) => {
   return (
-    <dialog {...props} style={{ border: "none" }}>
+    <dialog {...props} class={dialogCSS}>
       <ModalClass>{props.children}</ModalClass>
     </dialog>
   );
