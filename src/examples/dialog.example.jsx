@@ -84,7 +84,13 @@ export default (context) => {
         outisde of the function component, then the state is persisted through
         the app navigation.
       </p>
-      <p>A DIALOG is closed by clicking on it, not outisde as in a MODAL.</p>
+      <p>
+        By default, a DIALOG is closed by clicking on it, not outisde as in a
+        MODAL. You can decide where the user can click in the dialog box to
+        close the box. For example, we have a checkbox inside the box so we
+        capture the "onClick" and forbid the box to close when you target the
+        checkbox zone.
+      </p>
 
       <div style={{ "text-align": "center" }}>
         <Button ripple onClick={toggleDiag}>

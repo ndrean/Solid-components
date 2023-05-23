@@ -39,14 +39,15 @@ const countries = {
   "United States": "🇺🇸",
 };
 
+const [selectedAuto, setSelectedAuto] = createSignal(null);
+
 export default (context) => (props) => {
+  const [selected, setSelected] = createSignal(null);
   const [options, keys] = createMemo(() => buildList())();
   // const data = createMemo(() => buildList());
   // const [options, keys, values] = data();
   const [optionList, setOptionList] = createSignal(options);
   const [keyList, setKeyList] = createSignal(keys);
-  const [selected, setSelected] = createSignal(null);
-  const [selectedAuto, setSelectedAuto] = createSignal(null);
 
   const HRLine = title(context.classes.hrLine);
   const Title = title();
@@ -58,7 +59,7 @@ export default (context) => (props) => {
       <details>
         <summary>
           We have a list of countries and want to render a <code> SELECT </code>{" "}
-          list.
+          list. Click to visit.
         </summary>
         <pre>
           <code>const countries = \u007B</code>
@@ -74,7 +75,9 @@ export default (context) => (props) => {
       </details>
       <p>
         We use the <code> createSignal </code> hook. You can place it outside of
-        the component function body to keep the state during navigation.
+        the component function body to keep the state during navigation, or
+        inside to get the state reset on every visit. The first selection is
+        reset whilst not the second in the demo below.
       </p>
       <Title>
         A simple <code> SELECT </code> example
