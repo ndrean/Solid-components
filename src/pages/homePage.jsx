@@ -30,7 +30,8 @@ function home(context) {
   const solid = `
     border: solid 4px;
   `;
-  const cont = {
+
+  const contextDemo = {
     classes: {
       blueSolid,
       solid,
@@ -39,10 +40,10 @@ function home(context) {
   };
 
   const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
-  const ContextedTitle = contextedTitle(cont);
+  const ContextedTitle = contextedTitle(contextDemo);
   const Title1 = title(stdTitle);
   const Title = title();
-  const HRLine = title(hrLine);
+  // const HRLine = title(hrLine);
 
   return () => (
     <div style={{ width: "100%" }}>
@@ -229,10 +230,12 @@ function home(context) {
       </Pre>
       <ContextedTitle label="Title is red-dotted" />
       <ContextedTitle
-        newClass={cont.classes.blueSolid}
+        newClass={contextDemo.classes.blueSolid}
         label="Blue solid title"
       />
-      <ContextedTitle newClass={cont.classes.solid}>Red solid</ContextedTitle>
+      <ContextedTitle newClass={contextDemo.classes.solid}>
+        Red solid
+      </ContextedTitle>
     </div>
   );
 }

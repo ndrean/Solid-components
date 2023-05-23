@@ -21,13 +21,13 @@ const selectClass = css`
   height: 3em;
 `;
 
-const btnCss = css`
-  border: none;
-  display: inline-block;
-  cursor: pointer;
-  background: none;
-  padding-left: 1%;
-`;
+// const btnCss = css`
+//   border: none;
+//   display: inline-block;
+//   cursor: pointer;
+//   background: none;
+//   padding-left: 1%;
+// `;
 
 const countries = {
   Estonia: "🇪🇪",
@@ -48,7 +48,7 @@ export default (context) => (props) => {
   const [optionList, setOptionList] = createSignal(options);
   const [keyList, setKeyList] = createSignal(keys);
 
-  const HRLine = title(context.classes.hrLine);
+  // const HRLine = title(context.classes.hrLine);
   const GrayDiv = grayDiv(context);
   const Title = title();
   const Button = button(context);

@@ -3,13 +3,12 @@ import { render } from "solid-js/web";
 import { css, styled } from "solid-styled-components";
 import { Router } from "@solidjs/router";
 
-import Nav from "./components/nav";
+import nav from "./components/nav";
 import Pages from "./pages/pages.jsx";
 import context from "./pages/context";
 import drawer from "./components/drawer";
 import { Header, menuOpen, setMenuOpen } from "./components/header";
 import spinCircle from "./components/spinCircle";
-import progressBar from "./components/progressBar";
 
 const container = css`
   display: grid;
@@ -31,12 +30,12 @@ const CenterSpin = styled("div")`
 const App = () => {
   const [isMobile, setIsMobile] = createSignal(false);
   const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-  const navChange = () => setTimeout(() => setMenuOpen(false), 400);
+  const navChange = () => setTimeout(() => setMenuOpen(false), 100);
 
+  const Nav = nav(context);
   const Container = (props) => <div class={container}>{props.children}</div>;
   const Drawer = drawer(context);
   const Spin = spinCircle(context);
-  const Prog = progressBar({ max: "500" });
 
   onMount(() => {
     checkMobile();
@@ -69,7 +68,7 @@ const App = () => {
             }
           >
             <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
-              <Nav override={isMobile()} navChange={() => navChange()} />
+              <Nav override={isMobile()} navChange={(e) => navChange(e)} />
             </Drawer>
             <Container>
               <Pages />

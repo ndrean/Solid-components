@@ -1,5 +1,4 @@
 :root {
-  --primary-text-color: blue;
   --width: 130px;
   --mobile: 768px;
 }
@@ -10,7 +9,6 @@ body {
   font-family: sans-serif;
   scroll-behavior: smooth;
   color: midnightblue;
-  /* color: #49535f; */
 }
 
 .center-blue {

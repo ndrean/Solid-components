@@ -2,39 +2,38 @@ import { A } from "@solidjs/router";
 import { css } from "solid-styled-components";
 import "../index.css";
 import routes from "../routes";
-// import { menuOpen, setMenuOpen } from "./header";
-
-// flex-direction: row;
-const link = css`
-  padding: 10px;
-  margin: 5px 10px;
-  display: inline-block;
-  font-weight: bold;
-  color: midnightblue;
-  text-decoration: none;
-`;
-// color: #49535f;
-
-const bgBisque = css`
-  background-color: bisque;
-`;
-
-const navCss = css`
-  width: var(--width);
-  height: 100vh;
-  background-color: #f1f1f1;
-  color: #49535f;
-  overflow-y: scroll;
-  @media (max-width: var(--mobile)) ) {
-    display: none;
-  }
-`;
 
 const display = css`
   display: block;
 `;
 
-export default (props) => {
+export default (context) => (props) => {
+  const {
+    theme: { palette },
+  } = context;
+
+  const bgBisque = css`
+    background-color: ${palette.secondary.background};
+  `;
+  const navCss = css`
+    width: var(--width);
+    height: 100vh;
+    background-color: ${palette.primary.background};
+    overflow-y: scroll;
+    @media (max-width: var(--mobile)) ) {
+      display: none;
+    }
+  `;
+
+  const link = css`
+    padding: 10px;
+    margin: 5px 10px;
+    display: inline-block;
+    font-weight: bold;
+    color: ${palette.primary.text};
+    text-decoration: none;
+  `;
+
   return (
     <nav class={props?.override ? navCss + display : navCss}>
       <For each={routes}>
