@@ -135,3 +135,57 @@ const StyledTitle = styledTitle(context);
 <StyledTitle> A red dotted title</StyledTitle>
 <StyledTitle newClass={blueSolid}>Blue solid title</StyledTitle>
 ```
+
+## Examples of theme
+
+The "context" object is (based on Material UI colors and HTML color codes):
+
+```js
+import { red, orange, teal, blue, grey } from "material-ui-colors";
+
+const context = {
+  colors: { red, teal, orange, blue, grey },
+  theme: {
+    shadows,
+    palette: {
+      primary: {
+        text: "midnightblue",
+        background: "#f1f1f1",
+        border: "#c4dfff",
+      },
+      secondary: {
+        background: "bisque",
+      },
+    },
+  },
+  tr: {
+    t: (v) => v,
+  },
+  classes: {},
+};
+```
+
+When we see that we use frequently a CSS classe, we add it to the context, and the other local CSS class definitions can be defined locally in the componenent.
+
+```js
+context.classes.stdTitle = `
+  border: none; 
+  text-align: left;
+  color: #0D2E46;
+  padding-left: 12px;
+  background-color: ${context.theme.palette.secondary.background};
+  color: ${grey[800]};
+  box-shadow: ${context.theme.shadows[2]};
+  `;
+```
+
+We also define shadows as so:
+
+```js
+const shadows = {
+  1: "6px 6px 2px 1px rgba(0, 0, 255, .2);",
+  2: "2px 2px 5px rgba(0, 0, 0, 0.2)",
+  3: "3px 3px 2px 1px rgba(0, 0, 255, .2)",
+  10: "rgba(0, 0, 0, 0.2) 0px 6px 6px -3px, rgba(0, 0, 0, 0.14) 0px 10px 14px 1px, rgba(0, 0, 0, 0.12) 0px 4px 18px 3px;",
+};
+```
