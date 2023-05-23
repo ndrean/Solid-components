@@ -88,7 +88,7 @@ export default (context) => {
   };
 
   onMount(() => myDialog.addEventListener("click", resetIfOut));
-  onCleanup(() => myDialog.addEventListener("click", resetIfOut));
+  onCleanup(() => myDialog.removeEventListener("click", resetIfOut));
 
   return (
     <section id="dialog">
