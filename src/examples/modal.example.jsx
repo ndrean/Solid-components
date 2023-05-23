@@ -34,8 +34,8 @@ export default (context) => {
       <CheckboxContainer>
         <Checkbox
           id="myModalCheckbox"
-          name="myCheckbox"
-          value={conditions()}
+          name="myModalCheckbox"
+          // value={conditions()}
           checked={conditions()}
           onChange={() => setConditions((v) => !v)}
         ></Checkbox>
@@ -82,7 +82,9 @@ export default (context) => {
         of it (into the overlay).
       </p>
       <div style={{ "text-align": "center" }}>
-        <Button onClick={toggleModal}>OPEN MODAL</Button>
+        <Button ripple fullWidth onClick={toggleModal}>
+          Check terms and conditions
+        </Button>
       </div>
       <Modal open={modalOpen()} onClose={() => setModalOpen(false)}>
         <div class="header">My modal</div>

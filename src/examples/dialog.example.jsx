@@ -7,7 +7,7 @@ import mydialog from "../components/Mydialog.jsx";
 import checkbox from "../components/checkbox";
 import GrayDiv from "../components/GrayDiv";
 
-const [conditions, setConditions] = createSignal(false);
+const [diagConditions, setDiagConditions] = createSignal(false);
 
 export default (context) => {
   const {
@@ -31,13 +31,12 @@ export default (context) => {
     <div class="main">
       <CheckboxContainer>
         <Checkbox
-          id="myModalCheckbox"
-          name="myCheckbox"
-          value={conditions()}
-          checked={conditions()}
-          onChange={() => setConditions((v) => !v)}
+          id="myDialogCheckbox"
+          name="myDialogCheckbox"
+          value={diagConditions()}
+          onChange={() => setDiagConditions((v) => !v)}
         ></Checkbox>
-        <label for="myModalCheckbox">
+        <label for="myDialogCheckbox">
           I agree with the terms and conditions
         </label>
       </CheckboxContainer>
@@ -63,14 +62,14 @@ export default (context) => {
 
   const [openDialog, setOpenDialog] = createSignal(false);
 
-  const toggleConditions = () => setConditions((v) => !v);
+  const toggleDiagConditions = () => setDiagConditions((v) => !v);
   const closeDialog = () => setOpenDialog(false);
 
   const close = (e) => {
     const targetIsConditions =
       e.target.tagName === "LABEL" || e.target.tagName === "INPUT";
     if (targetIsConditions) {
-      toggleConditions();
+      toggleDiagConditions();
     } else {
       closeDialog();
     }
@@ -89,14 +88,14 @@ export default (context) => {
       <div style={{ "text-align": "center" }}>
         <Button onClick={() => setOpenDialog((v) => !v)}>Toggle Dialog</Button>
       </div>
-      <Dialog id="mydialog" open={openDialog()} onClick={close}>
+      <Dialog open={openDialog()} onClick={close}>
         <div class="header">My dialog</div>
         <Content />
       </Dialog>
       <br />
       <GrayDiv>
         <h5>
-          {conditions() && "\u2705 I agreed with the terms and conditions"}
+          {diagConditions() && "\u2705 I agreed with the terms and conditions"}
         </h5>
       </GrayDiv>
     </section>

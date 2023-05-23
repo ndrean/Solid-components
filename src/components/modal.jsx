@@ -67,7 +67,6 @@ export default (context) => {
   `;
 
   return (props) => {
-    // createEffect(() => console.log("Modal", props.open));
     return (
       <div class={base(props.open)}>
         <div

@@ -44,7 +44,7 @@ const ModalClass = styled("div")`
 
 export default (context) => (props) => {
   return (
-    <dialog {...props} style={{ border: "none", width: "100%" }}>
+    <dialog {...props} style={{ border: "none" }}>
       <ModalClass>{props.children}</ModalClass>
     </dialog>
   );
