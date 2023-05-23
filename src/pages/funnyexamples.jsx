@@ -8,6 +8,7 @@ import drawCodePoint from "../components/drawCodePoint.jsx";
 import Link from "../components/Link";
 import github from "../components/github";
 import hamburger from "../components/hamburger";
+import tick from "../components/tick";
 // import progres from "../components/Progres";
 const Burger = hamburger("orange", "40");
 export { Burger };
@@ -18,6 +19,7 @@ export default () => {
   const Emoji = drawEmoji("🍔", 50, "hamburger");
   const Ham = imgSVG(ham, 50, "ham");
   const Cheers = imgSVG(cheers, 56, "cheers");
+  const Tick = tick("bisque");
   // const Progres = progres({ width: "100vw", height: "10px" });
 
   const [size, setSize] = createSignal(20);
@@ -46,18 +48,22 @@ export default () => {
         🍔
       </span>
       <h2>Some SVGs:</h2>
+      <p>Sources: https://www.svgrepo.com, https://solid-icons.vercel.app/ </p>
       <p>
         An image: <Cheers />
       </p>
+
       <p>
-        Another (source: https://www.svgrepo.com): <Ham />
+        Another (source: ): <Ham />
       </p>
 
       <h2>Inline SVGs:</h2>
       <p>
         <Burger />
       </p>
-      <p> (Source: https://solid-icons.vercel.app/) </p>
+      <p>
+        <Tick />
+      </p>
       <p>
         <Github />
       </p>

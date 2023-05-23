@@ -1,13 +1,33 @@
 import { createSignal, For, createMemo } from "solid-js";
-import { styled } from "solid-styled-components";
+import { styled, css } from "solid-styled-components";
 
 import title from "./title";
+import button from "./button";
 import GrayDiv from "../components/GrayDiv";
+import tick from "./tick";
 
 const Span = styled("span")`
   padding-left: 20px;
 `;
 
+const centerDiv = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+const selectClass = css`
+  width: 40%;
+  height: 3em;
+`;
+
+const btnCss = css`
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  background: none;
+  padding-left: 1%;
+`;
 const countries = {
   Estonia: "🇪🇪",
   "European Union": "🇪🇺",
@@ -27,8 +47,11 @@ export default (context) => (props) => {
   const [keyList, setKeyList] = createSignal(keys);
   const [selected2, setSelected2] = createSignal(null);
   const [selected, setSelected] = createSignal(null);
+
   const HRLine = title(context.classes.hrLine);
   const Title = title();
+  const Button = button(context);
+  const Tick = tick("bisque", "4em");
 
   return (
     <>
@@ -59,8 +82,10 @@ export default (context) => (props) => {
         <label for="country" style={{ "padding-right": "10px" }}>
           Choose a country:
         </label>
+
         <select
           id="country"
+          class={selectClass}
           value={selected()}
           onInput={(e) => setSelected(e.currentTarget.value)}
         >
@@ -98,26 +123,29 @@ export default (context) => (props) => {
           setSelected2(Object.keys(optionList())[0]);
         }}
       >
-        <label for="choice">Type a few letters: </label>
-        <input
-          list="countries"
-          id="choice"
-          onInput={(e) => {
-            setKeyList(updateKeyList(e.currentTarget.value, keys));
-            setOptionList(updateOptionList(keyList(), options));
-          }}
-        />
+        {/* <label for="choice">Type a few letters: </label> */}
+        <div class={centerDiv}>
+          <input
+            list="countries"
+            id="choice"
+            class={selectClass}
+            onInput={(e) => {
+              setKeyList(updateKeyList(e.currentTarget.value, keys));
+              setOptionList(updateOptionList(keyList(), options));
+            }}
+          />
 
-        <datalist id="countries">
-          <For each={keyList()}>
-            {(country) => (
-              <option value={country}>{optionList()[country]}</option>
-            )}
-          </For>
-        </datalist>
-        <button form="autocomp" type="submit">
-          Submit
-        </button>
+          <datalist id="countries">
+            <For each={keyList()}>
+              {(country) => (
+                <option value={country}>{optionList()[country]}</option>
+              )}
+            </For>
+          </datalist>
+          <button class={btnCss}>
+            <Tick />
+          </button>
+        </div>
       </form>
       <br />
       <GrayDiv>
