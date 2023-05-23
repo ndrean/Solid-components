@@ -23,7 +23,7 @@ export default (context) => {
 
   const toggleConditions = () => setConditions((v) => !v);
 
-  const saveContext = () => {
+  const saveContext = async () => {
     context.signals.dialogConditions = conditions();
   };
 
@@ -37,8 +37,10 @@ export default (context) => {
       return reset();
     }
     if (type === "ok") {
-      setDialogOpen(false);
-      saveContext();
+      batch(() => {
+        setDialogOpen(false);
+        saveContext();
+      });
     }
   };
 

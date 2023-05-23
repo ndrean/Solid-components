@@ -26,7 +26,7 @@ export default (context) => {
   const GrayDiv = grayDiv(context);
   const Checkbox = checkbox(context);
 
-  const saveContext = () => {
+  const saveContext = async () => {
     context.signals.modalConditions = conditions();
   };
 
@@ -102,8 +102,10 @@ export default (context) => {
           <Button
             primary
             onClick={() => {
-              saveContext();
-              setModalOpen(false);
+              batch(() => {
+                saveContext();
+                setModalOpen(false);
+              });
             }}
           >
             {"\u2705"}
