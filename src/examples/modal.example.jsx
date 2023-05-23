@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, batch } from "solid-js";
 
 import modal from "../components/modal";
 import button from "../components/button";
@@ -23,6 +23,12 @@ export default (context) => {
   const Title = title(stdTitle);
   const GrayDiv = grayDiv(context);
   const Checkbox = checkbox(context);
+
+  const reset = () =>
+    batch(() => {
+      setConditions(false);
+      setModalOpen(false);
+    });
 
   const Content = () => (
     <div class="main">
@@ -81,18 +87,11 @@ export default (context) => {
           Check terms and conditions
         </Button>
       </div>
-      <Modal open={modalOpen()} onClose={() => setModalOpen(false)}>
+      <Modal open={modalOpen()} onClose={reset}>
         <div class="header">My modal</div>
         <Content />
         <div class="footer">
-          <Button
-            onClick={() => {
-              setConditions(false);
-              setModalOpen(false);
-            }}
-          >
-            {"\u274C"}
-          </Button>
+          <Button onClick={reset}>{"\u274C"}</Button>
           <Button primary onClick={() => setModalOpen(false)}>
             {"\u2705"}
           </Button>

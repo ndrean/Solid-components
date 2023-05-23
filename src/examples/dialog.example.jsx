@@ -1,8 +1,8 @@
-import { createSignal } from "solid-js";
+import { createSignal, batch } from "solid-js";
 
 import button from "../components/button";
 import title from "../components/title";
-import mydialog from "../components/Mydialog.jsx";
+import dialogComponent from "../components/dialogComponent.jsx";
 import checkbox from "../components/checkbox";
 import grayDiv from "../components/grayDiv";
 import CheckboxContainer from "../components/CheckboxContainer";
@@ -18,10 +18,30 @@ export default (context) => {
   const Checkbox = checkbox(context);
   const Button = button(context);
   const Title = title(stdTitle);
-  const Dialog = mydialog(context);
+  const Dialog = dialogComponent(context);
   const GrayDiv = grayDiv(context);
 
   const toggleDiagConditions = () => setDiagConditions((v) => !v);
+
+  const [dialogOpen, setDialogOpen] = createSignal(false);
+
+  const toggleDiag = () => setDialogOpen((v) => !v);
+
+  const closeDialog = (e) => {
+    const type = e.target.dataset.type;
+    if (type === "cancel") {
+      return reset();
+    }
+    if (type === "ok") {
+      setDialogOpen(false);
+    }
+  };
+
+  const reset = () =>
+    batch(() => {
+      setDiagConditions(false);
+      setDialogOpen(false);
+    });
 
   const Content = () => (
     <div class="main">
@@ -54,20 +74,16 @@ export default (context) => {
         bundled the text with their software. Today it's seen all around the
         web; on templates, websites, and stock designs.
       </p>
+      <div class="footer">
+        <Button onClick={reset} data-type="cancel">
+          {"\u274C"}
+        </Button>
+        <Button primary data-type="ok" onClick={() => setDialogOpen(false)}>
+          {"\u2705"}
+        </Button>
+      </div>
     </div>
   );
-
-  const [openDialog, setOpenDialog] = createSignal(false);
-
-  const toggleDiag = () => setOpenDialog((v) => !v);
-
-  const closeDialog = (e) => {
-    const targetIsConditions =
-      e.target.tagName === "LABEL" || e.target.tagName === "INPUT";
-    if (!targetIsConditions) {
-      setOpenDialog(false);
-    }
-  };
 
   return (
     <section id="dialog">
@@ -91,7 +107,7 @@ export default (context) => {
           Check terms and conditions
         </Button>
       </div>
-      <Dialog open={openDialog()} onClick={closeDialog}>
+      <Dialog open={dialogOpen()} onClick={closeDialog}>
         <div class="header">My dialog</div>
         <Content />
       </Dialog>
