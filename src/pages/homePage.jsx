@@ -85,8 +85,9 @@ function home(context) {
         <br />
       </Pre>
       <p>
-        This allows to pass a "static" theme without using ThemeProvider via
-        createContext, as described in the{" "}
+        This allows to pass a "static" theme without using{" "}
+        <code> ThemeProvider </code> via
+        <code> createContext </code>. The later is described in the{" "}
         <Link href=" https://www.solidjs.com/examples/context" target="#">
           doc "context" example
         </Link>

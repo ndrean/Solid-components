@@ -45,8 +45,8 @@ export default (context) => (props) => {
   // const [options, keys, values] = data();
   const [optionList, setOptionList] = createSignal(options);
   const [keyList, setKeyList] = createSignal(keys);
-  const [selected2, setSelected2] = createSignal(null);
   const [selected, setSelected] = createSignal(null);
+  const [selectedAuto, setSelectedAuto] = createSignal(null);
 
   const HRLine = title(context.classes.hrLine);
   const Title = title();
@@ -55,29 +55,30 @@ export default (context) => (props) => {
 
   return (
     <>
+      <details>
+        <summary>
+          We have a list of countries and want to render a <code> SELECT </code>{" "}
+          list.
+        </summary>
+        <pre>
+          <code>const countries = \u007B</code>
+          <br />
+          <code>&nbsp France: "🇫🇷",</code>
+          <br />
+          <code>&nbsp "United Kingdom": "🇬🇧",</code>
+          <br />
+          <code>&nbsp ...</code>
+          <br />
+          <code>\u007D</code>
+        </pre>
+      </details>
+      <p>
+        We use the <code> createSignal </code> hook. You can place it outside of
+        the component function body to keep the state during navigation.
+      </p>
       <Title>
         A simple <code> SELECT </code> example
       </Title>
-      <p>
-        We vave a list of countries and want to render a <code> SELECT </code>{" "}
-        list.
-      </p>
-      <pre>
-        <code>const countries = \u007B</code>
-        <br />
-        <code>&nbsp France: "🇫🇷",</code>
-        <br />
-        <code>&nbsp "United Kingdom": "🇬🇧",</code>
-        <br />
-        <code>&nbsp ...</code>
-        <br />
-        <code>\u007D</code>
-      </pre>
-      <p>
-        Note: the <code> createSignal </code> hook is placed outside of the
-        component function body to keep the state during navigation (file
-        "select.jsx")
-      </p>
       <form>
         <label for="country" style={{ "padding-right": "10px" }}>
           Choose a country:
@@ -106,21 +107,24 @@ export default (context) => (props) => {
       <Title>
         An <code> AUTOCOMPLETE </code> example with <code> DATALIST </code>
       </Title>
-      <p>
+      <details>
+        <summary>
+          Key points on <code> DATALIST </code>
+        </summary>
         One key point is to set the <code> LIST </code> attribute on the input
         equal to the <code> ID </code>
         of the <code> DATALIST </code>. Then you need to create several signals,
         one for the list of options who will be updated dynamically on each
         input (<code> onInput </code> with SolidJS), and one for the selection
         (if you want to submit the input).
-      </p>
+      </details>
 
       <form
         autocomplete="off"
         id="autocomp"
         onSubmit={(e) => {
           e.preventDefault();
-          setSelected2(Object.keys(optionList())[0]);
+          setSelectedAuto(Object.keys(optionList())[0]);
         }}
       >
         {/* <label for="choice">Type a few letters: </label> */}
@@ -142,14 +146,14 @@ export default (context) => (props) => {
               )}
             </For>
           </datalist>
-          <button class={btnCss}>
+          <Button>
             <Tick />
-          </button>
+          </Button>
         </div>
       </form>
       <br />
       <GrayDiv>
-        <output>{options[selected2()]}</output>
+        <output>{options[selectedAuto()]}</output>
       </GrayDiv>
       <br />
     </>

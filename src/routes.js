@@ -42,6 +42,11 @@ const routes = [
     component: lazy(() => import("./pages/drawerPage")),
   },
   {
+    href: "/dialog",
+    title: "Dialog",
+    component: lazy(() => import("./pages/dialogPage")),
+  },
+  {
     href: "/modal",
     title: "Modal",
     component: lazy(() => import("./pages/modalPage")),

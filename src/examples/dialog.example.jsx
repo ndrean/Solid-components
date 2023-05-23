@@ -1,8 +1,9 @@
-import { createEffect, createSignal } from "solid-js";
+import { createSignal, onMount, onCleanup, createEffect } from "solid-js";
 import { styled } from "solid-styled-components";
-import modal from "../components/modal";
+
 import button from "../components/button";
 import title from "../components/title";
+import mydialog from "../components/mydialog.jsx";
 import checkbox from "../components/checkbox";
 import GrayDiv from "../components/GrayDiv";
 
@@ -12,13 +13,6 @@ export default (context) => {
     classes: { stdTitle },
   } = context;
 
-  const [modalOpen, setModalOpen] = createSignal(false);
-  const toggleModal = () => setModalOpen((val) => !val);
-  const Modal = modal(context);
-
-  const Button = button(context);
-  const Title = title(stdTitle);
-
   const CheckboxContainer = styled("div")`
     display: flex;
     align-items: center;
@@ -27,9 +21,11 @@ export default (context) => {
     }
   `;
   const Checkbox = checkbox(context);
+  const Button = button(context);
+  const Title = title(stdTitle);
+  const Dialog = mydialog(context);
   const [conditions, setConditions] = createSignal(false);
 
-  createEffect(() => console.log(conditions()));
   const Content = () => (
     <div class="main">
       <CheckboxContainer>
@@ -64,34 +60,32 @@ export default (context) => {
     </div>
   );
 
+  const [openDialog, setOpenDialog] = createSignal(false);
+
+  const toggleConditions = () => setConditions((v) => !v);
+  const closeDialog = () => setOpenDialog(false);
+
+  const close = (e) => {
+    const targetIsConditions =
+      e.target.tagName === "LABEL" || e.target.tagName === "INPUT";
+    if (targetIsConditions) {
+      toggleConditions();
+    } else {
+      closeDialog();
+    }
+  };
+
   return (
-    <section id="modal">
-      <Title>{tr.t("Modal")}</Title>
-      <p>
-        The logic of this component is the same as the drawer. You toggle a
-        state via a button, and pass it as a prop. The component is a child of
-        an overlay div that covers the full screen with an opacity of 80%.
-      </p>
+    <section id="dialog">
+      <Title>{tr.t("Dialog")}</Title>
       <div style={{ "text-align": "center" }}>
-        <Button onClick={toggleModal}>OPEN MODAL</Button>
+        <Button onClick={() => setOpenDialog((v) => !v)}>Toggle Dialog</Button>
       </div>
-      <Modal open={modalOpen()} onClose={() => setModalOpen(false)}>
-        <div class="header">My modal</div>
+      <Dialog id="mydialog" open={openDialog()} onClick={close}>
+        <div class="header">My dialog</div>
         <Content />
-        <div class="footer">
-          <Button
-            onClick={() => {
-              setConditions(false);
-              setModalOpen(false);
-            }}
-          >
-            Cancel
-          </Button>
-          <Button primary onClick={() => setModalOpen(false)}>
-            OK
-          </Button>
-        </div>
-      </Modal>
+      </Dialog>
+      <br />
       <GrayDiv>
         <h5>
           {conditions() && "\u2705 I agreed with the terms and conditions"}

@@ -30,23 +30,25 @@ export default () => {
       <p>An emoji:</p>
       <Emoji />
       <br />
-      <p>
-        An{" "}
-        <Link
-          href="https://www.solidjs.com/tutorial/bindings_style?solved"
-          target="#"
+      <details>
+        <summary>
+          Click me to see an{" "}
+          <Link
+            href="https://www.solidjs.com/tutorial/bindings_style?solved"
+            target="#"
+          >
+            animated
+          </Link>{" "}
+          emoji:
+        </summary>
+        <span
+          style={{ "font-size": `${size()}px` }}
+          role="img"
+          aria-label="burger"
         >
-          animated
-        </Link>{" "}
-        emoji:
-      </p>
-      <span
-        style={{ "font-size": `${size()}px` }}
-        role="img"
-        aria-label="burger"
-      >
-        🍔
-      </span>
+          🍔
+        </span>
+      </details>
       <h2>Some SVGs:</h2>
       <p>Sources: https://www.svgrepo.com, https://solid-icons.vercel.app/ </p>
       <p>

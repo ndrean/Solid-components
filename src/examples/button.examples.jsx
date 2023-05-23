@@ -2,6 +2,7 @@ import { styled } from "solid-styled-components";
 import button from "../components/button";
 import iconSVG from "../components/imgSVG";
 import title from "../components/title";
+import tick from "../components/tick";
 
 export default (context) => {
   const {
@@ -12,6 +13,8 @@ export default (context) => {
   const Icon = () => iconSVG(icon, 20);
   const Title = title(stdTitle);
   const TallIcon = () => iconSVG(icon, 80);
+  const Tick = tick("bisque", "6em");
+
   const Form = styled("form")`
     margin: 12px;
   `;
@@ -59,7 +62,7 @@ export default (context) => {
             <TallIcon /> with tall icon & ripple
           </Button>
           <Button fullWidth ripple onClick={handleClick}>
-            <Icon /> with icon & ripple
+            <Tick /> with icon & ripple & full width
           </Button>
         </p>
       </Form>
