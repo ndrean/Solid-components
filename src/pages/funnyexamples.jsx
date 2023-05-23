@@ -9,6 +9,7 @@ import Link from "../components/Link";
 import github from "../components/github";
 import hamburger from "../components/hamburger";
 import tick from "../components/tick";
+import { checkTick } from "../components/unicodeTick";
 // import progres from "../components/Progres";
 const Burger = hamburger("orange", "40");
 export { Burger };
@@ -20,6 +21,7 @@ export default () => {
   const Ham = imgSVG(ham, 50, "ham");
   const Cheers = imgSVG(cheers, 56, "cheers");
   const Tick = tick("bisque");
+  const CheckTick = checkTick("5em");
   // const Progres = progres({ width: "100vw", height: "10px" });
 
   const [size, setSize] = createSignal(20);
@@ -75,11 +77,15 @@ export default () => {
       <h2>A codepoint:</h2>
       <CodePoint />
       <h2>Unicodes: </h2>
+
       <For each={["\u274C", "\u274E", "\u2757", "\u2713", "\u2705"]}>
         {(unicode) => (
           <span style={{ fontSize: "12px", margin: "12px" }}>{unicode}</span>
         )}
       </For>
+      <br />
+      <p>An easy customize unicode:</p>
+      <CheckTick />
     </>
   );
 };

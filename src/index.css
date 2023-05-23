@@ -3,6 +3,9 @@
   --mobile: 768px;
 }
 
+dialog {
+  padding: 0px;
+}
 body {
   margin: 0;
   padding: 0;

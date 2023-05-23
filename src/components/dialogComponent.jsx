@@ -41,15 +41,16 @@ const ModalClass = styled("div")`
   }
 `;
 
-const dialogCSS = css`
-  border: none;
-  position: absolute;
-  top: 20%;
-  left: 0;
-`;
+// const dialogCSS = css`
+//   border: none;
+//   position: absolute;
+//   top: 20%;
+//   left: 0;
+// `;
+
 export default (context) => (props) => {
   return (
-    <dialog {...props} class={dialogCSS}>
+    <dialog {...props} style={{ padding: "0px", border: "none" }}>
       <ModalClass>{props.children}</ModalClass>
     </dialog>
   );
