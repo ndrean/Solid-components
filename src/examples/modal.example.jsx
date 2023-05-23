@@ -6,15 +6,16 @@ import title from "../components/title";
 import checkbox from "../components/checkbox";
 import grayDiv from "../components/grayDiv";
 import CheckboxContainer from "../components/CheckboxContainer";
+import Unicode from "../components/Unicode";
 
 export default (context) => {
   const {
     tr,
     classes: { stdTitle },
     signals: { modalConditions },
+    codes: { check, cross },
   } = context;
 
-  // console.log("init conditions", modalConditions);
   const [conditions, setConditions] = createSignal(modalConditions);
   const [modalOpen, setModalOpen] = createSignal(false);
 
@@ -98,7 +99,9 @@ export default (context) => {
         <div class="header">My modal</div>
         <Content />
         <div class="footer">
-          <Button onClick={reset}>{"\u274C"}</Button>
+          <Button onClick={reset}>
+            <Unicode size="1.5em" code={cross} />
+          </Button>
           <Button
             primary
             onClick={() => {
@@ -108,7 +111,7 @@ export default (context) => {
               });
             }}
           >
-            {"\u2705"}
+            <Unicode size="1.5em" code={check} />
           </Button>
         </div>
       </Modal>

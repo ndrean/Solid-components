@@ -12,13 +12,14 @@ import dialogComponent from "../components/dialogComponent.jsx";
 import checkbox from "../components/checkbox";
 import grayDiv from "../components/grayDiv";
 import CheckboxContainer from "../components/CheckboxContainer";
-import { checkTick, crossTick } from "../components/unicodeTick";
+import Unicode from "../components/Unicode";
 
 export default (context) => {
   const {
     tr,
     classes: { stdTitle },
     signals: { dialogConditions },
+    codes: { cross, check },
   } = context;
 
   const [conditions, setConditions] = createSignal(dialogConditions);
@@ -27,8 +28,6 @@ export default (context) => {
   const Title = title(stdTitle);
   const Dialog = dialogComponent(context);
   const GrayDiv = grayDiv(context);
-  const CheckTick = checkTick("1.5em");
-  const CrossTick = crossTick("1.5em");
 
   const toggleConditions = () => setConditions((v) => !v);
 
@@ -121,7 +120,7 @@ export default (context) => {
         <Content />
         <div class="footer">
           <Button onClick={reset} data-type="cancel">
-            <CrossTick />
+            <Unicode size="1.5em" code={cross} />
           </Button>
           <Button
             onClick={() =>
@@ -131,13 +130,14 @@ export default (context) => {
               })
             }
           >
-            <CheckTick />
+            <Unicode size="1.5em" code={check} />
           </Button>
         </div>
       </Dialog>
       <br />
       <GrayDiv>
         <h5>
+          {/* {conditions() && "\u2705 I agreed with the terms and conditions"} */}
           {conditions() && "\u2705 I agreed with the terms and conditions"}
         </h5>
       </GrayDiv>

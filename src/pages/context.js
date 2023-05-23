@@ -25,6 +25,7 @@ const context = {
   tr: {
     t: (v) => v,
   },
+  codes: { cross: "\u274C", check: "\u2705" },
   classes: {},
   signals: { modalConditions: false, dialogConditions: false },
 };

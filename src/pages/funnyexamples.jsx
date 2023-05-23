@@ -1,5 +1,6 @@
 import { For, createSignal } from "solid-js";
 
+import context from "./context";
 import cheers from "../assets/cheers.svg";
 import ham from "../assets/ham.svg";
 import imgSVG from "../components/imgSVG";
@@ -9,7 +10,7 @@ import Link from "../components/Link";
 import github from "../components/github";
 import hamburger from "../components/hamburger";
 import tick from "../components/tick";
-import { checkTick } from "../components/unicodeTick";
+import Unicode from "../components/Unicode";
 // import progres from "../components/Progres";
 const Burger = hamburger("orange", "40");
 export { Burger };
@@ -21,8 +22,6 @@ export default () => {
   const Ham = imgSVG(ham, 50, "ham");
   const Cheers = imgSVG(cheers, 56, "cheers");
   const Tick = tick("bisque");
-  const CheckTick = checkTick("5em");
-  // const Progres = progres({ width: "100vw", height: "10px" });
 
   const [size, setSize] = createSignal(20);
   setInterval(() => setSize((s) => (s + 1) % 60), 50);
@@ -85,7 +84,7 @@ export default () => {
       </For>
       <br />
       <p>An easy customize unicode:</p>
-      <CheckTick />
+      <Unicode size="2em" code={context.codes.check} />
     </>
   );
 };
