@@ -7,15 +7,17 @@ import checkbox from "../components/checkbox";
 import grayDiv from "../components/grayDiv";
 import CheckboxContainer from "../components/CheckboxContainer";
 
-const [conditions, setConditions] = createSignal(false);
-
 export default (context) => {
   const {
     tr,
     classes: { stdTitle },
+    signals: { modalConditions },
   } = context;
 
+  // console.log("init conditions", modalConditions);
+  const [conditions, setConditions] = createSignal(modalConditions);
   const [modalOpen, setModalOpen] = createSignal(false);
+
   const toggleModal = () => setModalOpen((val) => !val);
   const Modal = modal(context);
 
@@ -24,10 +26,15 @@ export default (context) => {
   const GrayDiv = grayDiv(context);
   const Checkbox = checkbox(context);
 
+  const saveContext = () => {
+    context.signals.modalConditions = conditions();
+  };
+
   const reset = () =>
     batch(() => {
       setConditions(false);
       setModalOpen(false);
+      saveContext();
     });
 
   const Content = () => (
@@ -92,7 +99,13 @@ export default (context) => {
         <Content />
         <div class="footer">
           <Button onClick={reset}>{"\u274C"}</Button>
-          <Button primary onClick={() => setModalOpen(false)}>
+          <Button
+            primary
+            onClick={() => {
+              saveContext();
+              setModalOpen(false);
+            }}
+          >
             {"\u2705"}
           </Button>
         </div>

@@ -26,6 +26,7 @@ const context = {
     t: (v) => v,
   },
   classes: {},
+  signals: { modalConditions: false, dialogConditions: false },
 };
 
 context.classes.stdTitle = `

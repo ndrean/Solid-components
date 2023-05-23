@@ -7,21 +7,25 @@ import checkbox from "../components/checkbox";
 import grayDiv from "../components/grayDiv";
 import CheckboxContainer from "../components/CheckboxContainer";
 
-const [diagConditions, setDiagConditions] = createSignal(false);
-
 export default (context) => {
   const {
     tr,
     classes: { stdTitle },
+    signals: { dialogConditions },
   } = context;
 
+  const [conditions, setConditions] = createSignal(dialogConditions);
   const Checkbox = checkbox(context);
   const Button = button(context);
   const Title = title(stdTitle);
   const Dialog = dialogComponent(context);
   const GrayDiv = grayDiv(context);
 
-  const toggleDiagConditions = () => setDiagConditions((v) => !v);
+  const toggleConditions = () => setConditions((v) => !v);
+
+  const saveContext = () => {
+    context.signals.dialogConditions = conditions();
+  };
 
   const [dialogOpen, setDialogOpen] = createSignal(false);
 
@@ -34,13 +38,15 @@ export default (context) => {
     }
     if (type === "ok") {
       setDialogOpen(false);
+      saveContext();
     }
   };
 
   const reset = () =>
     batch(() => {
-      setDiagConditions(false);
+      setConditions(false);
       setDialogOpen(false);
+      saveContext();
     });
 
   const Content = () => (
@@ -50,8 +56,8 @@ export default (context) => {
           id="myDialogCheckboxID"
           name="myDialogCheckbox"
           value="accepted"
-          checked={diagConditions()}
-          onInput={toggleDiagConditions}
+          checked={conditions()}
+          onInput={toggleConditions}
         />
         <label for="myDialogCheckboxID">
           I agree with the terms and conditions
@@ -114,7 +120,7 @@ export default (context) => {
       <br />
       <GrayDiv>
         <h5>
-          {diagConditions() && "\u2705 I agreed with the terms and conditions"}
+          {conditions() && "\u2705 I agreed with the terms and conditions"}
         </h5>
       </GrayDiv>
     </section>
