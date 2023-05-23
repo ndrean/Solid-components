@@ -32,9 +32,9 @@ const alertView = (animation) =>
 
 ////////
 const deleteAfterDuration = 5e3;
+const limit = 4;
 
 export default (context) => {
-  const { limit } = context;
   const [msgs, setMsgs] = createStore([]);
 
   function setStatus(id, status) {

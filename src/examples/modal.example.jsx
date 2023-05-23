@@ -1,10 +1,11 @@
 import { createSignal } from "solid-js";
-import { styled } from "solid-styled-components";
+
 import modal from "../components/modal";
 import button from "../components/button";
 import title from "../components/title";
 import checkbox from "../components/checkbox";
-import GrayDiv from "../components/GrayDiv";
+import grayDiv from "../components/grayDiv";
+import CheckboxContainer from "../components/CheckboxContainer";
 
 const [conditions, setConditions] = createSignal(false);
 
@@ -20,14 +21,7 @@ export default (context) => {
 
   const Button = button(context);
   const Title = title(stdTitle);
-
-  const CheckboxContainer = styled("div")`
-    display: flex;
-    align-items: center;
-    label {
-      margin-left: 1rem;
-    }
-  `;
+  const GrayDiv = grayDiv(context);
   const Checkbox = checkbox(context);
 
   const Content = () => (

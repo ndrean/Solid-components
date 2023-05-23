@@ -2,7 +2,7 @@ import { A } from "@solidjs/router";
 import { css } from "solid-styled-components";
 import "../index.css";
 import routes from "../routes";
-import { menuOpen, setMenuOpen } from "./header";
+// import { menuOpen, setMenuOpen } from "./header";
 
 // flex-direction: row;
 const link = css`

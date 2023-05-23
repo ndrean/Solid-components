@@ -1,11 +1,11 @@
 import { createSignal } from "solid-js";
-import { styled } from "solid-styled-components";
 
 import button from "../components/button";
 import title from "../components/title";
 import mydialog from "../components/Mydialog.jsx";
 import checkbox from "../components/checkbox";
-import GrayDiv from "../components/GrayDiv";
+import grayDiv from "../components/grayDiv";
+import CheckboxContainer from "../components/CheckboxContainer";
 
 const [diagConditions, setDiagConditions] = createSignal(false);
 
@@ -15,17 +15,11 @@ export default (context) => {
     classes: { stdTitle },
   } = context;
 
-  const CheckboxContainer = styled("div")`
-    display: flex;
-    align-items: center;
-    label {
-      margin-left: 1rem;
-    }
-  `;
   const Checkbox = checkbox(context);
   const Button = button(context);
   const Title = title(stdTitle);
   const Dialog = mydialog(context);
+  const GrayDiv = grayDiv(context);
 
   const toggleDiagConditions = () => setDiagConditions((v) => !v);
 

@@ -1,8 +1,8 @@
 import { styled } from "solid-styled-components";
 
-const GrayDiv = styled("div")`
-  background-color: #f1f1f1;
+const grayDiv = (context) => styled("div")`
+  background-color: ${context.theme.palette.primary.background};
   padding: 10px 10px;
 `;
 
-export default GrayDiv;
+export default grayDiv;

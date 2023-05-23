@@ -1,18 +1,18 @@
 import { styled } from "solid-styled-components";
 import button from "../components/button";
 import iconSVG from "../components/imgSVG";
+import facebook from "../assets/facebook.svg";
 import title from "../components/title";
 import tick from "../components/tick";
 
 export default (context) => {
   const {
-    icon,
     classes: { stdTitle },
   } = context;
   const Button = button(context);
-  const Icon = () => iconSVG(icon, 20);
   const Title = title(stdTitle);
-  const TallIcon = () => iconSVG(icon, 80);
+  const Icon = () => iconSVG(facebook, 20);
+  const TallIcon = () => iconSVG(facebook, 80);
   const Tick = tick("bisque", "6em");
 
   const Form = styled("form")`

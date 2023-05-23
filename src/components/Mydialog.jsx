@@ -3,7 +3,7 @@ import context from "../pages/context";
 
 //   z-index: 2;
 const ModalClass = styled("div")`
-  box-shadow: ${context.shadows[10]};
+  box-shadow: ${context.theme.shadows[10]};
   background-color: #f1f1f1;
   top: 0;
   left: 0;
@@ -22,14 +22,14 @@ const ModalClass = styled("div")`
     font-size: 1.8rem;
     font-weight: 800;
     text-align: center;
-    background-color: midnightblue;
-    color: bisque;
+    background-color: ${context.theme.palette.primary.text};
+    color: ${context.theme.palette.secondary.background};
   }
   .footer {
     display: flex;
     justify-content: flex-end;
     margin: 0px;
-    box-shadow: ${context.shadows[2]};
+    box-shadow: ${context.theme.shadows[2]};
     > * {
       margin: 10px;
     }

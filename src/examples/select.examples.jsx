@@ -1,10 +1,10 @@
 import { createSignal, For, createMemo } from "solid-js";
 import { styled, css } from "solid-styled-components";
 
-import title from "./title";
-import button from "./button";
-import GrayDiv from "../components/GrayDiv";
-import tick from "./tick";
+import title from "../components/title";
+import button from "../components/button";
+import grayDiv from "../components/grayDiv";
+import tick from "../components/tick";
 
 const Span = styled("span")`
   padding-left: 20px;
@@ -28,6 +28,7 @@ const btnCss = css`
   background: none;
   padding-left: 1%;
 `;
+
 const countries = {
   Estonia: "🇪🇪",
   "European Union": "🇪🇺",
@@ -42,14 +43,13 @@ const countries = {
 const [selectedAuto, setSelectedAuto] = createSignal(null);
 
 export default (context) => (props) => {
-  const [selected, setSelected] = createSignal(null);
   const [options, keys] = createMemo(() => buildList())();
-  // const data = createMemo(() => buildList());
-  // const [options, keys, values] = data();
+  const [selected, setSelected] = createSignal(null);
   const [optionList, setOptionList] = createSignal(options);
   const [keyList, setKeyList] = createSignal(keys);
 
   const HRLine = title(context.classes.hrLine);
+  const GrayDiv = grayDiv(context);
   const Title = title();
   const Button = button(context);
   const Tick = tick("bisque", "4em");
@@ -93,7 +93,7 @@ export default (context) => (props) => {
           value={selected()}
           onInput={(e) => setSelected(e.currentTarget.value)}
         >
-          <option value="null" selected disabled>
+          <option selected disabled>
             Select a country
           </option>
           <For each={keys}>
@@ -136,6 +136,7 @@ export default (context) => (props) => {
             list="countries"
             id="choice"
             class={selectClass}
+            placeholder="type in..."
             onInput={(e) => {
               setKeyList(updateKeyList(e.currentTarget.value, keys));
               setOptionList(updateOptionList(keyList(), options));

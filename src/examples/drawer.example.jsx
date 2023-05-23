@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-// import { css } from "solid-styled-components";
 import { createSignal } from "solid-js";
 
 import drawer from "../components/drawer";
@@ -14,6 +12,9 @@ export default (context) => {
   } = context;
 
   const Title = title(stdTitle);
+  const Menu = menu(context);
+  const Drawer = drawer(context);
+  const Button = button(context);
 
   const [drawerOpen, setDrawOpen] = createSignal(false);
 
@@ -22,10 +23,6 @@ export default (context) => {
     window.alert("going to..." + newItem.text);
     setTimeout(() => setDrawOpen(false), 400);
   };
-
-  const Menu = menu(context);
-  const Drawer = drawer(context);
-  const Button = button(context);
 
   return (
     <section id="drawer">
@@ -36,7 +33,7 @@ export default (context) => {
         <code> opacity </code> and <code> z-index </code>.
       </p>
       <br />
-      <Button ripple onClick={toggleDrawer}>
+      <Button fullWidth ripple onClick={toggleDrawer}>
         OPEN DRAWER
       </Button>
       <Drawer open={drawerOpen()} onClose={() => setDrawOpen(false)}>

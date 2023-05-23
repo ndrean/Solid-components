@@ -3,13 +3,6 @@ import button from "../components/button";
 import alertStack from "../components/alertStack";
 import title from "../components/title";
 
-// const customCss2 = `
-//   border: none;
-//   text-align: left;
-//   padding-left: 12px;
-//   box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
-//   `;
-
 const vert = css`
   margin-top: 40px;
   display: flex;

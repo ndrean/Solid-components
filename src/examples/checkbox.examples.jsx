@@ -2,17 +2,21 @@ import { styled, css } from "solid-styled-components";
 import { For, createSignal } from "solid-js";
 import checkbox from "../components/checkbox";
 import title from "../components/title";
-import GrayDiv from "../components/GrayDiv";
+import grayDiv from "../components/grayDiv";
 
 export default (context) => {
   const {
     tr,
     classes: { stdTitle },
-    shadows,
+    theme: {
+      shadows,
+      palette: { primary, secondary },
+    },
   } = context;
 
   const Title = title(stdTitle);
   const Checkbox = checkbox(context);
+  const GrayDiv = grayDiv(context);
 
   const [state, setState] = createSignal({});
   const [radioGroup, setRadioGroup] = createSignal({});
@@ -30,7 +34,7 @@ export default (context) => {
   `;
 
   const Fieldset = styled("fieldset")`
-    border-color: #c4dfff;
+    border-color: ${primary.border};
     margin-right: 20px;
     box-shadow: ${shadows[2]};
   `;
@@ -41,8 +45,8 @@ export default (context) => {
 
   // color: #49535f;
   const Legend = styled("legend")`
-    background-color: bisque;
-    color: midnightblue;
+    background-color: ${secondary.background};
+    color: primary.text;
     padding: 5px;
     border-radius: 5px;
   `;

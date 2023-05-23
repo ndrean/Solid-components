@@ -2,10 +2,7 @@ import { red, orange, teal, blue, grey } from "material-ui-colors";
 import fbIcon from "../assets/facebook.svg";
 
 const stdContainer = `
-  overflow-y: scroll;
-  width: 100%;
-  padding-left: 5px;
-  padding-right: 5px;
+  
 `;
 
 const shadows = {
@@ -46,31 +43,41 @@ padding: 0px 10px;
 text-align: right;
 `;
 
-export default {
+const context = {
   colors: { red, teal, orange, blue, grey },
-  borderRadius: "4px",
   theme: {
     shadows,
     palette: {
       primary: {
-        main: "#fffff",
-        contrastText: "no se senor",
+        text: "midnightblue",
+        background: "#f1f1f1",
+        border: "#c4dfff",
+      },
+      secondary: {
+        background: "bisque",
       },
     },
   },
-  background: { default: grey },
-  shadows: shadows,
   tr: {
     t: (v) => v,
   },
-  icon: fbIcon,
-  limit: 4,
-  classes: {
-    customCss: stdTitle,
-    stdTitle,
-    testclass: testCss,
-    stdContainer: stdContainer,
-    testCss,
-    hrLine,
-  },
+  classes: {},
 };
+
+context.classes.stdTitle = `
+  border: none; 
+  text-align: left;
+  color: #0D2E46;
+  padding-left: 12px;
+  background-color: ${context.theme.palette.secondary.background};
+  box-shadow: ${context.theme.shadows[2]};
+  `;
+
+context.classes.stdContainer = `
+overflow-y: scroll;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+`;
+
+export default context;

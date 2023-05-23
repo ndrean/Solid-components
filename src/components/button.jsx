@@ -3,7 +3,7 @@ import { styled } from "solid-styled-components";
 export default ({ colors, borderRadius }) => {
   const { red, grey, blue } = colors;
 
-  const rootStyle = (borderRadius) => `
+  const rootStyle = `
     cursor: pointer;
     color: black;
     display: inline-flex;
@@ -15,7 +15,7 @@ export default ({ colors, borderRadius }) => {
     min-height: 2.5rem;
     outline: none;
     border: none;
-    border-radius: ${borderRadius};
+    border-radius: ;
     background: transparent;
     font-size: 1rem;
     font-weight: 500;
@@ -52,7 +52,7 @@ export default ({ colors, borderRadius }) => {
   `;
 
   const styles = {
-    root: rootStyle(borderRadius),
+    root: rootStyle,
     flat: `
       border-width: 0;
     `,
