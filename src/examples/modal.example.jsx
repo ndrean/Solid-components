@@ -1,10 +1,12 @@
-import { createEffect, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 import { styled } from "solid-styled-components";
 import modal from "../components/modal";
 import button from "../components/button";
 import title from "../components/title";
 import checkbox from "../components/checkbox";
 import GrayDiv from "../components/GrayDiv";
+
+const [conditions, setConditions] = createSignal(false);
 
 export default (context) => {
   const {
@@ -27,19 +29,18 @@ export default (context) => {
     }
   `;
   const Checkbox = checkbox(context);
-  const [conditions, setConditions] = createSignal(false);
 
   const Content = () => (
     <div class="main">
       <CheckboxContainer>
         <Checkbox
-          id="myModalCheckbox"
+          id="myModalCheckboxID"
           name="myModalCheckbox"
-          // value={conditions()}
+          value="accepted"
           checked={conditions()}
           onChange={() => setConditions((v) => !v)}
-        ></Checkbox>
-        <label for="myModalCheckbox">
+        />
+        <label for="myModalCheckboxID">
           I agree with the terms and conditions
         </label>
       </CheckboxContainer>
@@ -73,9 +74,9 @@ export default (context) => {
       </p>
       <p>
         You use a state <code> createSignal </code> to save the "terms of terms
-        aggrement" checkbox state. If you place it inside the function
-        component, then the state is NOT persisted through the app navigation.
-        This is case here (the DIALOG example uses this).
+        aggrement" checkbox state placed in the modal. If you place it outisde
+        of the function component, then the state is persisted through the app
+        navigation.
       </p>
       <p>
         A MODAL is closed by clicking on an action button or by clicking outside

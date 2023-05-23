@@ -27,16 +27,19 @@ export default (context) => {
   const Title = title(stdTitle);
   const Dialog = mydialog(context);
 
+  const toggleDiagConditions = () => setDiagConditions((v) => !v);
+
   const Content = () => (
     <div class="main">
       <CheckboxContainer>
         <Checkbox
-          id="myDialogCheckbox"
+          id="myDialogCheckboxID"
           name="myDialogCheckbox"
-          value={diagConditions()}
-          onChange={() => setDiagConditions((v) => !v)}
-        ></Checkbox>
-        <label for="myDialogCheckbox">
+          value="accepted"
+          checked={diagConditions()}
+          onInput={toggleDiagConditions}
+        />
+        <label for="myDialogCheckboxID">
           I agree with the terms and conditions
         </label>
       </CheckboxContainer>
@@ -62,16 +65,13 @@ export default (context) => {
 
   const [openDialog, setOpenDialog] = createSignal(false);
 
-  const toggleDiagConditions = () => setDiagConditions((v) => !v);
-  const closeDialog = () => setOpenDialog(false);
+  const toggleDiag = () => setOpenDialog((v) => !v);
 
-  const close = (e) => {
+  const closeDialog = (e) => {
     const targetIsConditions =
       e.target.tagName === "LABEL" || e.target.tagName === "INPUT";
-    if (targetIsConditions) {
-      toggleDiagConditions();
-    } else {
-      closeDialog();
+    if (!targetIsConditions) {
+      setOpenDialog(false);
     }
   };
 
@@ -80,15 +80,17 @@ export default (context) => {
       <Title>{tr.t("Dialog")}</Title>
       <p>
         You use a state <code> createSignal </code> to save the "terms of terms
-        aggrement" checkbox state. If you place it before the function
-        component, then the state is persisted through the app navigation. This
-        is case here (the MODAL example does not but oucld in the same way).
+        aggrement" checkbox state placed in the dialog box. If you place it
+        outisde of the function component, then the state is persisted through
+        the app navigation.
       </p>
       <p>A DIALOG is closed by clicking on it, not outisde as in a MODAL.</p>
       <div style={{ "text-align": "center" }}>
-        <Button onClick={() => setOpenDialog((v) => !v)}>Toggle Dialog</Button>
+        <Button ripple onClick={toggleDiag}>
+          Check terms and conditions
+        </Button>
       </div>
-      <Dialog open={openDialog()} onClick={close}>
+      <Dialog open={openDialog()} onClick={closeDialog}>
         <div class="header">My dialog</div>
         <Content />
       </Dialog>
