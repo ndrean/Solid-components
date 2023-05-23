@@ -82,14 +82,6 @@ export default (context) => {
         bundled the text with their software. Today it's seen all around the
         web; on templates, websites, and stock designs.
       </p>
-      <div class="footer">
-        <Button onClick={reset} data-type="cancel">
-          {"\u274C"}
-        </Button>
-        <Button primary data-type="ok" onClick={() => setDialogOpen(false)}>
-          {"\u2705"}
-        </Button>
-      </div>
     </div>
   );
 
@@ -118,6 +110,14 @@ export default (context) => {
       <Dialog open={dialogOpen()} onClick={closeDialog}>
         <div class="header">My dialog</div>
         <Content />
+        <div class="footer">
+          <Button onClick={reset} data-type="cancel">
+            {"\u274C"}
+          </Button>
+          <Button primary data-type="ok" onClick={() => setDialogOpen(false)}>
+            {"\u2705"}
+          </Button>
+        </div>
       </Dialog>
       <br />
       <GrayDiv>
