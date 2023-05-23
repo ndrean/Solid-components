@@ -16,7 +16,6 @@ const ModalClass = styled("div")`
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  min-width: 400px;
 
   .header {
     padding: 1rem;

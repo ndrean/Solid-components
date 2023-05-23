@@ -40,7 +40,7 @@ export default (context) => {
     display: flex;
     flex-direction: column;
     align-content: space-between;
-    min-width: 400px;
+    min-width: 90%;
 
     .header {
       padding: 1rem;
