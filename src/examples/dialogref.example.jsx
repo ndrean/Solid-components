@@ -1,10 +1,4 @@
-import {
-  createSignal,
-  batch,
-  //   createEffect,
-  onMount,
-  onCleanup,
-} from "solid-js";
+import { createSignal, batch, onMount, onCleanup } from "solid-js";
 
 import button from "../components/button";
 import title from "../components/title";
@@ -35,6 +29,7 @@ export default (context) => {
     context.signals.dialogConditions = conditions();
   };
 
+  // This component is a child of ContentContainer and knows the classes "main", "header", "footer"
   const Content = () => (
     <div class="main">
       <CheckboxContainer>
@@ -79,6 +74,7 @@ export default (context) => {
     });
   };
 
+  //   close when click out of the box
   const resetIfOut = (e) => {
     const { left, right, bottom, top } = myDialog.getBoundingClientRect();
     if (
@@ -93,7 +89,6 @@ export default (context) => {
 
   onMount(() => myDialog.addEventListener("click", resetIfOut));
   onCleanup(() => myDialog.addEventListener("click", resetIfOut));
-  //   createEffect(() =>removeEventListener("click", resetIfOut));
 
   return (
     <section id="dialog">
@@ -137,7 +132,6 @@ export default (context) => {
       <br />
       <GrayDiv>
         <h5>
-          {/* {conditions() && "\u2705 I agreed with the terms and conditions"} */}
           {conditions() && "\u2705 I agreed with the terms and conditions"}
         </h5>
       </GrayDiv>

@@ -7,7 +7,7 @@ import nav from "./components/nav";
 import Pages from "./pages/pages.jsx";
 import context from "./pages/context";
 import drawer from "./components/drawer";
-import { Header, menuOpen, setMenuOpen } from "./components/header";
+import header from "./components/header";
 import spinCircle from "./components/spinCircle";
 
 const container = css`
@@ -28,14 +28,18 @@ const CenterSpin = styled("div")`
 `;
 
 const App = () => {
+  const [menuOpen, setMenuOpen] = createSignal(false);
   const [isMobile, setIsMobile] = createSignal(false);
   const checkMobile = () => setIsMobile(window.innerWidth <= 768);
   const navChange = () => setTimeout(() => setMenuOpen(false), 100);
+  const toggleMenu = () => setMenuOpen((v) => !v);
 
   const Nav = nav(context);
-  const Container = (props) => <div class={container}>{props.children}</div>;
   const Drawer = drawer(context);
   const Spin = spinCircle(context);
+  const Header = header(context);
+
+  const Container = (props) => <div class={container}>{props.children}</div>;
 
   onMount(() => {
     checkMobile();
@@ -49,7 +53,7 @@ const App = () => {
   return (
     <>
       <Router>
-        <Header />
+        <Header toggle={toggleMenu} />
         <Suspense
           fallback={
             <CenterSpin>
