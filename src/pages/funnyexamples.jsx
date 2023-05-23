@@ -75,7 +75,7 @@ export default () => {
       <h2>A codepoint:</h2>
       <CodePoint />
       <h2>Unicodes: </h2>
-      <For each={["\u274C", "\u274E", "\u2757", "\u2713"]}>
+      <For each={["\u274C", "\u274E", "\u2757", "\u2713", "\u2705"]}>
         {(unicode) => (
           <span style={{ fontSize: "12px", margin: "12px" }}>{unicode}</span>
         )}

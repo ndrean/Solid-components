@@ -29,7 +29,6 @@ export default (context) => {
   const Checkbox = checkbox(context);
   const [conditions, setConditions] = createSignal(false);
 
-  createEffect(() => console.log(conditions()));
   const Content = () => (
     <div class="main">
       <CheckboxContainer>
@@ -72,6 +71,16 @@ export default (context) => {
         state via a button, and pass it as a prop. The component is a child of
         an overlay div that covers the full screen with an opacity of 80%.
       </p>
+      <p>
+        You use a state <code> createSignal </code> to save the "terms of terms
+        aggrement" checkbox state. If you place it inside the function
+        component, then the state is NOT persisted through the app navigation.
+        This is case here (the DIALOG example uses this).
+      </p>
+      <p>
+        A MODAL is closed by clicking on an action button or by clicking outside
+        of it (into the overlay).
+      </p>
       <div style={{ "text-align": "center" }}>
         <Button onClick={toggleModal}>OPEN MODAL</Button>
       </div>
@@ -85,10 +94,10 @@ export default (context) => {
               setModalOpen(false);
             }}
           >
-            Cancel
+            {"\u274C"}
           </Button>
           <Button primary onClick={() => setModalOpen(false)}>
-            OK
+            {"\u2705"}
           </Button>
         </div>
       </Modal>

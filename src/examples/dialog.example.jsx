@@ -1,11 +1,13 @@
-import { createSignal, onMount, onCleanup, createEffect } from "solid-js";
+import { createSignal } from "solid-js";
 import { styled } from "solid-styled-components";
 
 import button from "../components/button";
 import title from "../components/title";
-import mydialog from "../components/mydialog.jsx";
+import mydialog from "../components/Mydialog.jsx";
 import checkbox from "../components/checkbox";
 import GrayDiv from "../components/GrayDiv";
+
+const [conditions, setConditions] = createSignal(false);
 
 export default (context) => {
   const {
@@ -24,7 +26,6 @@ export default (context) => {
   const Button = button(context);
   const Title = title(stdTitle);
   const Dialog = mydialog(context);
-  const [conditions, setConditions] = createSignal(false);
 
   const Content = () => (
     <div class="main">
@@ -78,6 +79,13 @@ export default (context) => {
   return (
     <section id="dialog">
       <Title>{tr.t("Dialog")}</Title>
+      <p>
+        You use a state <code> createSignal </code> to save the "terms of terms
+        aggrement" checkbox state. If you place it before the function
+        component, then the state is persisted through the app navigation. This
+        is case here (the MODAL example does not but oucld in the same way).
+      </p>
+      <p>A DIALOG is closed by clicking on it, not outisde as in a MODAL.</p>
       <div style={{ "text-align": "center" }}>
         <Button onClick={() => setOpenDialog((v) => !v)}>Toggle Dialog</Button>
       </div>
