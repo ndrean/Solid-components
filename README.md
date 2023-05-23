@@ -4,7 +4,7 @@ This work is 100% based on [the following repo](https://github.com/FredericHeem/
 
 It uses [Solid Router](https://github.com/solidjs/solid-router) and [Solid styled components](https://github.com/solidjs/solid-styled-components) to produce a fast and very light-weight bundle.
 
-We don't use `THEMEPROVIDER` via `createContext` but use the pattern below and build custom components such as `DAILOG`, `MODAL`, `SELECT`, `AUTOCOMPLETE SELECT` with `DATALIST`, `ALERT-STACK`, `DRAWER`, `CHECKBOX`, `BUTTON`, `SPINNERS`...
+We don't use `THEMEPROVIDER` via `createContext` but use the pattern below and build custom components such as: `DAILOG`, `MODAL`, `SELECT`, `AUTOCOMPLETE SELECT` with `DATALIST`, `ALERT-STACK`, `DRAWER`, `CHECKBOX`, `BUTTON`, `SPINNERS`...
 
 An example of how to use `ThemeProvider` is shown [in the docs](https://www.solidjs.com/examples/contex).
 
