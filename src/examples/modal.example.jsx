@@ -2,7 +2,7 @@ import { createSignal, batch } from "solid-js";
 
 import modal from "../components/modal";
 import button from "../components/button";
-import title from "../components/title";
+import { dynTitle } from "../components/title";
 import grayDiv from "../components/grayDiv";
 import Unicode from "../components/Unicode";
 import ContentExample from "./ContentExample";
@@ -24,7 +24,7 @@ export default (context) => {
   const Modal = modal(context);
 
   const Button = button(context);
-  const Title = title(stdTitle);
+  const Title = dynTitle(stdTitle, "h1");
   const GrayDiv = grayDiv(context);
 
   const saveContext = async () => {

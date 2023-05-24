@@ -1,6 +1,6 @@
-import { css } from "solid-styled-components";
+import { css, styled } from "solid-styled-components";
 
-export default (myclass) => (props) =>
+const title = (myclass) => (props) =>
   (
     <h1
       class={css`
@@ -11,7 +11,7 @@ export default (myclass) => (props) =>
     </h1>
   );
 
-const contextedTitle = (context) => (props) => {
+const propsTitle = (context) => (props) => {
   const {
     classes: { base },
   } = context;
@@ -28,4 +28,19 @@ const contextedTitle = (context) => (props) => {
   );
 };
 
-export { contextedTitle };
+const dynTitle = (myclass, tag = "h4") =>
+  styled(tag)`
+    ${myclass}
+  `;
+
+export { propsTitle, dynTitle, title };
+
+/*
+Examples:
+
+ <CTitle newClass={context.classes.stdTitle} label="hi ho"/>
+
+ const Title = title(context.classes.stdTitle)
+ <Title>Hi ho</Title>
+
+ */

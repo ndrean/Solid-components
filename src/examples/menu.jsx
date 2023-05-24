@@ -15,6 +15,10 @@ export default (context) => {
     ];
   }
 
+  const MenuView = styled("div")({
+    padding: 0,
+  });
+
   const MenuItemView = styled("div")({
     minWidth: 150,
   });
@@ -29,10 +33,6 @@ export default (context) => {
       </MenuItemView>
     );
   }
-
-  const MenuView = styled("div")({
-    padding: 0,
-  });
 
   function Menu({ navChange }) {
     return (

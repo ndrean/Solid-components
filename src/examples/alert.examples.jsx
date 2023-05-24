@@ -1,5 +1,5 @@
 import alert from "../components/alert";
-import title from "../components/title";
+import { dynTitle } from "../components/title";
 
 export default (context) => {
   const {
@@ -7,7 +7,7 @@ export default (context) => {
     classes: { stdTitle },
   } = context;
   const Alert = alert(context);
-  const Title = title(stdTitle);
+  const Title = dynTitle(stdTitle, "h1");
 
   return (
     <section id="alert">

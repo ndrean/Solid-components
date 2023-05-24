@@ -2,7 +2,7 @@ import { createSignal } from "solid-js";
 
 import drawer from "../components/drawer";
 import button from "../components/button";
-import title from "../components/title";
+import { dynTitle } from "../components/title";
 import menu from "./menu";
 
 export default (context) => {
@@ -11,7 +11,7 @@ export default (context) => {
     classes: { stdTitle },
   } = context;
 
-  const Title = title(stdTitle);
+  const Title = dynTitle(stdTitle, "h1");
   const Menu = menu(context);
   const Drawer = drawer(context);
   const Button = button(context);
@@ -19,7 +19,8 @@ export default (context) => {
   const [drawerOpen, setDrawOpen] = createSignal(false);
 
   const toggleDrawer = () => setDrawOpen((val) => !val);
-  const navChange = (newItem) => {
+
+  const navChangeExample = (newItem) => {
     window.alert("going to..." + newItem.text);
     setTimeout(() => setDrawOpen(false), 400);
   };
@@ -37,7 +38,7 @@ export default (context) => {
         OPEN DRAWER
       </Button>
       <Drawer open={drawerOpen()} onClose={() => setDrawOpen(false)}>
-        <Menu navChange={(item) => navChange(item)} />
+        <Menu navChange={(item) => navChangeExample(item)} />
       </Drawer>
     </section>
   );

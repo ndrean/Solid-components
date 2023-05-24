@@ -1,4 +1,5 @@
 import { css } from "solid-styled-components";
+
 export default (context) => (props) => {
   const visibility = !props.invisible;
   const size = props.size || "200";
@@ -55,5 +56,3 @@ export default (context) => (props) => {
     </svg>
   );
 };
-
-// {color}

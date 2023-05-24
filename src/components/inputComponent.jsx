@@ -20,16 +20,17 @@ export default (context) => (props) => {
     }
   `;
 
-  const Output = styled("output")`
+  const ErrorOutput = styled("output")`
     color: red;
     margin-left: 4px;
     font-size: 0.8em;
   `;
+
   const [msg, setMsg] = createSignal(null);
 
   const handleInput = ({ target: { value, name } }) => {
+    const { invalid, msg } = props.isInvalid(value);
     batch(() => {
-      const { invalid, msg } = props.isInvalid(value);
       setMsg(msg);
       props.setEntry(value);
       props.setValidations({ ...props.validations, [name]: invalid });
@@ -39,7 +40,9 @@ export default (context) => (props) => {
 
   const checkDisabled = () => {
     const object = Object.entries(props.validations) || [];
+    // early disable if not all inputs filled
     if (object.length < props.nb) return true;
+    // if one of the inputs has invalid state true, then disable
     return object.reduce((acc, [k, v]) => acc || v, false);
   };
 
@@ -57,7 +60,7 @@ export default (context) => (props) => {
         onInput={handleInput}
         autocomplete={props?.autocomplete}
       />
-      <Output>{msg()}</Output>
+      <ErrorOutput>{msg()}</ErrorOutput>
     </div>
   );
 };

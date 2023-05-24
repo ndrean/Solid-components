@@ -1,7 +1,7 @@
-import dialogrefExample from "../examples/dialogref.example";
-import context from "./context";
+import dialogExample from "../examples/dialog.example";
+import context from "../context";
 
 export default function DialogPage() {
-  const DialogExample = () => dialogrefExample(context);
+  const DialogExample = () => dialogExample(context);
   return <DialogExample />;
 }

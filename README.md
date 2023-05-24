@@ -10,7 +10,7 @@ An example of how to use `ThemeProvider` is shown [in the docs](https://www.soli
 
 ## Status
 
-Still building... <https://test-solid.surge.sh>
+Still building... <https://solid-components.surge.sh>
 
 ## The pattern
 

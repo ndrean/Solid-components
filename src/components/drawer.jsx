@@ -1,4 +1,5 @@
 import { css } from "solid-styled-components";
+// import { createEffect } from "solid-js";
 
 export default (context) => {
   const {
@@ -8,6 +9,7 @@ export default (context) => {
 
   //   DO NOT DESTRUCTURE THE PROPS !!!
   return function Drawer(props) {
+    // we firstly define a function to return an object of styles
     const style = (open) => ({
       base: `
         position: fixed;
@@ -37,6 +39,8 @@ export default (context) => {
         transition: transform 0.3s ease-out;
         `,
     });
+
+    // createEffect(() => console.log("drawer", props.open));
 
     return (
       <div

@@ -7,29 +7,9 @@ const routes = [
     component: lazy(() => import("./pages/homePage")),
   },
   {
-    href: "/select",
-    title: "Select",
-    component: lazy(() => import("./pages/selectPage")),
-  },
-  {
-    href: "/icons",
-    title: "Funny",
-    component: lazy(() => import("./pages/funnyexamples")),
-  },
-  {
-    href: "/buttons",
-    title: "Buttons",
-    component: lazy(() => import("./pages/buttons")),
-  },
-  {
     href: "/alerts",
     title: "Alerts",
     component: lazy(() => import("./pages/alerts")),
-  },
-  {
-    href: "/form",
-    title: "Form",
-    component: lazy(() => import("./pages/formPage")),
   },
   {
     href: "/alertstack",
@@ -37,14 +17,14 @@ const routes = [
     component: lazy(() => import("./pages/alertStackPage")),
   },
   {
+    href: "/buttons",
+    title: "Buttons",
+    component: lazy(() => import("./pages/buttons")),
+  },
+  {
     href: "/checkbox",
     title: "Checkboxes",
     component: lazy(() => import("./pages/checkboxes")),
-  },
-  {
-    href: "/drawer",
-    title: "Drawer",
-    component: lazy(() => import("./pages/drawerPage")),
   },
   {
     href: "/dialog",
@@ -52,14 +32,39 @@ const routes = [
     component: lazy(() => import("./pages/dialogPage")),
   },
   {
+    href: "/drawer",
+    title: "Drawer",
+    component: lazy(() => import("./pages/drawerPage")),
+  },
+  {
+    href: "/form",
+    title: "Form",
+    component: lazy(() => import("./pages/formPage")),
+  },
+  {
+    href: "/icons",
+    title: "Funny",
+    component: lazy(() => import("./pages/funnyexamples")),
+  },
+  {
     href: "/modal",
     title: "Modal",
     component: lazy(() => import("./pages/modalPage")),
   },
   {
+    href: "/select",
+    title: "Select",
+    component: lazy(() => import("./pages/selectPage")),
+  },
+  {
     href: "/spinner",
     title: "Spinners",
     component: lazy(() => import("./pages/spinnerPage")),
+  },
+  {
+    href: "/titles",
+    title: "Titles",
+    component: lazy(() => import("./pages/titlesPage")),
   },
 ];
 

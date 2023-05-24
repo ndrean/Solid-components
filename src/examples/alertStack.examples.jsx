@@ -1,7 +1,7 @@
 import { css } from "solid-styled-components";
 import button from "../components/button";
 import alertStack from "../components/alertStack";
-import title from "../components/title";
+import { dynTitle } from "../components/title";
 
 const vert = css`
   margin-top: 40px;
@@ -15,7 +15,7 @@ export default (context) => {
     classes: { stdContainer, stdTitle },
   } = context;
   const Button = button(context);
-  const Title = title(stdTitle);
+  const Title = dynTitle(stdTitle, "h1");
 
   const { AlertStack, msgs, add } = alertStack(context);
 

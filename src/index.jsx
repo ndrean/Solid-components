@@ -5,7 +5,7 @@ import { Router } from "@solidjs/router";
 
 import nav from "./components/nav";
 import Pages from "./pages/pages.jsx";
-import context from "./pages/context";
+import context from "./context";
 import drawer from "./components/drawer";
 import header from "./components/header";
 import spinCircle from "./components/spinCircle";

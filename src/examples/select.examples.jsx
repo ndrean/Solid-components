@@ -1,7 +1,7 @@
 import { createSignal, For, createMemo } from "solid-js";
 import { styled, css } from "solid-styled-components";
 
-import title from "../components/title";
+import { dynTitle } from "../components/title";
 import button from "../components/button";
 import grayDiv from "../components/grayDiv";
 import tick from "../components/tick";
@@ -43,6 +43,10 @@ const countries = {
 const [selectedAuto, setSelectedAuto] = createSignal(null);
 
 export default (context) => (props) => {
+  const {
+    classes: { stdTitle },
+  } = context;
+
   const [options, keys] = createMemo(() => buildList())();
   const [selected, setSelected] = createSignal(null);
   const [optionList, setOptionList] = createSignal(options);
@@ -50,7 +54,7 @@ export default (context) => (props) => {
 
   // const HRLine = title(context.classes.hrLine);
   const GrayDiv = grayDiv(context);
-  const Title = title();
+  const Title = dynTitle("", "h3");
   const Button = button(context);
   const Tick = tick("bisque", "4em");
 

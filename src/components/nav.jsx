@@ -3,14 +3,14 @@ import { css } from "solid-styled-components";
 import "../index.css";
 import routes from "../routes";
 
-const display = css`
-  display: block;
-`;
-
 export default (context) => (props) => {
   const {
     theme: { palette },
   } = context;
+
+  const display = css`
+    display: block;
+  `;
 
   const bgBisque = css`
     background-color: ${palette.secondary.background};

@@ -1,5 +1,5 @@
 import drawerExample from "../examples/drawer.example";
-import context from "./context";
+import context from "../context";
 
 const DrawerExample = () => drawerExample(context);
 

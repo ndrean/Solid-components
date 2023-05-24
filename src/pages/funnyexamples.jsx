@@ -1,6 +1,6 @@
 import { For, createSignal } from "solid-js";
 
-import context from "./context";
+import context from "../context";
 import cheers from "../assets/cheers.svg";
 import ham from "../assets/ham.svg";
 import imgSVG from "../components/imgSVG";

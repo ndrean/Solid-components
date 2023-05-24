@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import spinRect from "../components/spinRect";
 import spinCircle from "../components/spinCircle";
-import title from "../components/title";
+import { dynTitle } from "../components/title";
 import progressBar from "../components/progressBar";
 
 export default (context) => {
@@ -11,7 +11,7 @@ export default (context) => {
   } = context;
   const SpinRect = spinRect(context);
   const SpinCircle = spinCircle(context);
-  const Title = title(stdTitle);
+  const Title = dynTitle(stdTitle, "h1");
 
   const Prog = progressBar({ max: 500 });
 

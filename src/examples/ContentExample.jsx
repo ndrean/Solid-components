@@ -1,6 +1,6 @@
 import CheckboxContainer from "../components/CheckboxContainer";
 import checkbox from "../components/checkbox";
-import context from "../pages/context";
+import context from "../context";
 
 const Checkbox = checkbox(context);
 
@@ -11,7 +11,6 @@ export default (props) => {
         <Checkbox
           id="myDialogCheckboxID"
           name="myDialogCheckbox"
-          value="accepted"
           checked={props.conditions}
           onInput={props.toggleConditions}
         />

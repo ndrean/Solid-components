@@ -2,7 +2,7 @@ import { styled } from "solid-styled-components";
 import button from "../components/button";
 import iconSVG from "../components/imgSVG";
 import facebook from "../assets/facebook.svg";
-import title from "../components/title";
+import { dynTitle } from "../components/title";
 import tick from "../components/tick";
 
 export default (context) => {
@@ -10,7 +10,7 @@ export default (context) => {
     classes: { stdTitle },
   } = context;
   const Button = button(context);
-  const Title = title(stdTitle);
+  const Title = dynTitle(stdTitle, "h1");
   const Icon = () => iconSVG(facebook, 20);
   const TallIcon = () => iconSVG(facebook, 80);
   const Tick = tick("bisque", "6em");

@@ -12,10 +12,13 @@ export default (context) => (props) => {
   let output;
 
   const [disabled, setDisabled] = createSignal(true);
+
+  // object where the keys are the name of the input and values are validity of the input
+  //  in the form {name: false, email: false, password,...}
   const [validations, setValidations] = createSignal({});
 
   //   Create an entry per input
-  const [text, setText] = createSignal(null);
+  const [name, setName] = createSignal(null);
   const [email, setEmail] = createSignal(null);
   const [password, setPassword] = createSignal(null);
 
@@ -23,8 +26,9 @@ export default (context) => (props) => {
   const Button = button(context);
   const GrayDiv = grayDiv(context);
 
-  //----- Define the validations for each input
+  //<----- Define the validations functions for each input
 
+  // we can pass the corresponding input validation per input name
   const constraints = {
     name: isInvalidLength,
     email: isInvalidEmail,
@@ -63,8 +67,8 @@ export default (context) => (props) => {
       return { invalid: false, msg: null };
     }
   }
+  // end of constraints--->
 
-  // end of constraintes--->
   const computeLen = createMemo(() => Object.entries(constraints).length);
 
   const handleSubmit = (e) => {
@@ -82,8 +86,8 @@ export default (context) => (props) => {
           label="name"
           name="name"
           type="text"
-          entry={text()}
-          setEntry={setText}
+          entry={name()}
+          setEntry={setName}
           nb={computeLen()}
           isInvalid={constraints["name"]}
           setDisabled={setDisabled}
@@ -117,7 +121,6 @@ export default (context) => (props) => {
           validations={validations()}
           setValidations={setValidations}
         />
-        <br />
       </form>
       <p>
         This form is submitted with a <code> FORMDATA </code>

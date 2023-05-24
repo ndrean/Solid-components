@@ -1,7 +1,7 @@
 import { styled } from "solid-styled-components";
 
-import context from "./context.js";
-import title, { contextedTitle } from "../components/title.jsx";
+import context from "../context.js";
+import { dynTitle, propsTitle } from "../components/title.jsx";
 import Link from "../components/Link.jsx";
 import "../index.css";
 
@@ -40,9 +40,9 @@ function home(context) {
   };
 
   const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
-  const ContextedTitle = contextedTitle(contextDemo);
-  const Title1 = title(stdTitle);
-  const Title = title();
+  const PropsTitle = propsTitle(contextDemo);
+  const Title1 = dynTitle(stdTitle, "h1");
+  const Title = dynTitle("", "h2");
   // const HRLine = title(hrLine);
 
   return () => (
@@ -214,28 +214,25 @@ function home(context) {
         </code>
         <br />
 
-        <code>const ContextedTitle = title(context);</code>
+        <code>const PropsTitle = title(context);</code>
         <br />
-        <code>&ltContextedTitle label="Title is red-dotted" /&gt</code>
+        <code>&ltPropsTitle label="Title is red-dotted" /&gt</code>
         <br />
         <code>
-          &ltContextedTitle newClass=\u007BblueSolid\u007D&gt Blue solid title
-          &lt/ContextedTitle&gt
+          &ltPropsTitle newClass=\u007BblueSolid\u007D&gt Blue solid title
+          &lt/PropsTitle&gt
         </code>
         <br />
         <code>
-          &ltContextedTitle newClass=\u007Bsolid\u007D&gtRed
-          solid&lt/ContextedTitle&gt
+          &ltPropsTitle newClass=\u007Bsolid\u007D&gtRed solid&lt/PropsTitle&gt
         </code>
       </Pre>
-      <ContextedTitle label="Title is red-dotted" />
-      <ContextedTitle
+      <PropsTitle label="Title is red-dotted" />
+      <PropsTitle
         newClass={contextDemo.classes.blueSolid}
         label="Blue solid title"
       />
-      <ContextedTitle newClass={contextDemo.classes.solid}>
-        Red solid
-      </ContextedTitle>
+      <PropsTitle newClass={contextDemo.classes.solid}>Red solid</PropsTitle>
     </div>
   );
 }
