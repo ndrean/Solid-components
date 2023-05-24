@@ -1,44 +1,77 @@
-import { createSignal } from "solid-js";
+import { createSignal, createEffect, createMemo } from "solid-js";
 import inputComponent from "../components/inputComponent";
 import button from "../components/button";
+import grayDiv from "../components/grayDiv";
 
 export default (context) => (props) => {
   let output;
 
   const [text, setText] = createSignal(null);
   const [email, setEmail] = createSignal(null);
+  const [password, setPassword] = createSignal(null);
   const [disabled, setDisabled] = createSignal(true);
+  const [validations, setValidations] = createSignal({});
 
   const Input = inputComponent(context);
   const Button = button(context);
-  //
-  const isInvalidLength = (data) => {
-    if (data.length < 3) {
+  const GrayDiv = grayDiv(context);
+
+  //----- Define the validations for each input
+
+  const constraints = {
+    name: isInvalidLength,
+    email: isInvalidEmail,
+    password: isInvalidPassword,
+  };
+
+  function isInvalidLength(data) {
+    if (data.length < 4) {
       return {
         invalid: true,
-        msg: () => <span style={{ color: "red" }}>"Too short"</span>,
+        msg: () => (
+          <span style={{ color: "red" }}>"At least 4 characters "</span>
+        ),
       };
     } else {
       return { invalid: false, msg: null };
     }
-  };
+  }
 
-  const isInvalidEmail = (data) => {
-    console.log(data, /^[\w]+@[\w]+.[\w]{2,4}$/.test(data));
+  function isInvalidEmail(data) {
     if (/^[\w]+@[\w]+.[\w]{2,4}$/.test(data)) {
       return { invalid: false, msg: null };
     } else {
       return {
         invalid: true,
-        msg: () => <span style={{ color: "red" }}>Not a valid email</span>,
+        msg: () => (
+          <span style={{ color: "red" }}>Not a valid email xx@xx.xx</span>
+        ),
       };
     }
-  };
+  }
+
+  function isInvalidPassword(data) {
+    if (data.length < 5) {
+      return {
+        invalid: true,
+        msg: () => (
+          <span style={{ color: "red" }}>"At least 5 characters "</span>
+        ),
+      };
+    } else {
+      return { invalid: false, msg: null };
+    }
+  }
+
+  // end of constraintes--->
+  const computeLen = createMemo(() => Object.entries(constraints).length);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    output.value = JSON.stringify(Object.fromEntries(formData));
+    const object = Object.fromEntries(formData);
+    // do something.... we print it out.
+    output.value = JSON.stringify(object);
   };
 
   return (
@@ -50,18 +83,38 @@ export default (context) => (props) => {
           type="text"
           entry={text()}
           setEntry={setText}
-          isInvalid={isInvalidLength}
+          nb={computeLen()}
+          isInvalid={constraints["name"]}
           setDisabled={setDisabled}
+          validations={validations()}
+          setValidations={setValidations}
         />
         <br />
         <Input
           label="email"
           name="email"
           type="email"
-          isInvalid={isInvalidEmail}
           entry={email()}
           setEntry={setEmail}
+          nb={computeLen()}
+          isInvalid={constraints["email"]}
           setDisabled={setDisabled}
+          validations={validations()}
+          setValidations={setValidations}
+        />
+        <br />
+        <Input
+          label="password"
+          name="password"
+          type="password"
+          entry={password()}
+          setEntry={setPassword}
+          nb={computeLen()}
+          autocomplete="off"
+          isInvalid={constraints["password"]}
+          setDisabled={setDisabled}
+          validations={validations()}
+          setValidations={setValidations}
         />
         <br />
       </form>
@@ -71,9 +124,9 @@ export default (context) => (props) => {
       <Button form="forms" disabled={disabled()} fullWidth ripple>
         Submit the form
       </Button>
-      <p>
+      <GrayDiv>
         Result: <output ref={output}> </output>
-      </p>
+      </GrayDiv>
     </>
   );
 };
