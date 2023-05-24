@@ -65,9 +65,11 @@ export default (context) => (props) => {
         />
         <br />
       </form>
-      <p>You can submit this form:</p>
-      <Button form="forms" disabled={disabled()} ripple>
-        Submit
+      <p>
+        This form is submitted with a <code> FORMDATA </code>
+      </p>
+      <Button form="forms" disabled={disabled()} fullWidth ripple>
+        Submit the form
       </Button>
       <p>
         Result: <output ref={output}> </output>
