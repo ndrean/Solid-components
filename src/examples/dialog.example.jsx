@@ -84,16 +84,6 @@
 //       </p>
 //     </div>
 //   );
-
-//   let myDialog, openButton, closeButton;
-
-//   createEffect(() => {
-//     openButton.addEventListener("click", () => {
-//       myDialog.showModal();
-//     });
-//     closeButton.addEventListener("click", () => myDialog.close());
-//   });
-
 //   return (
 //     <section id="dialog">
 //       <Title>{tr.t("Dialog")}</Title>
@@ -117,16 +107,14 @@
 //           Check terms and conditions
 //         </Button>
 //       </div>
-//       {/* <Dialog ref={mydialog} open={dialogOpen()} onClick={closeDialog}> */}
-//       <Dialog ref={myDialog}>
+//       <Dialog open={dialogOpen()} onClick={closeDialog}>
 //         <div class="header">My dialog</div>
 //         <Content />
 //         <div class="footer">
 //           <Button onClick={reset} data-type="cancel">
 //             {"\u274C"}
 //           </Button>
-//           {/* <Button } primary data-type="ok" onClick={() => setDialogOpen(false)}> */}
-//           <Button ref={closeButton}>{"\u2705"}</Button>
+//           <Button } primary data-type="ok" onClick={() => setDialogOpen(false)}>
 //         </div>
 //       </Dialog>
 //       <br />

@@ -27,6 +27,11 @@ const routes = [
     component: lazy(() => import("./pages/alerts")),
   },
   {
+    href: "/form",
+    title: "Form",
+    component: lazy(() => import("./pages/formPage")),
+  },
+  {
     href: "/alertstack",
     title: "AlertStack",
     component: lazy(() => import("./pages/alertStackPage")),

@@ -29,6 +29,7 @@ export default (context) => {
     context.signals.dialogConditions = conditions();
   };
 
+  let dialog;
   // This component is a child of ContentContainer and knows the classes "main", "header", "footer"
   const Content = () => (
     <div class="main">
@@ -64,19 +65,17 @@ export default (context) => {
     </div>
   );
 
-  let myDialog;
-
   const reset = () => {
     batch(() => {
       setConditions(false);
       saveContext();
-      myDialog.close();
+      dialog.close();
     });
   };
 
   //   close when click out of the box
   const resetIfOut = (e) => {
-    const { left, right, bottom, top } = myDialog.getBoundingClientRect();
+    const { left, right, bottom, top } = dialog.getBoundingClientRect();
     if (
       e.clientX < left ||
       e.clientX > right ||
@@ -87,8 +86,8 @@ export default (context) => {
     }
   };
 
-  onMount(() => myDialog.addEventListener("click", resetIfOut));
-  onCleanup(() => myDialog.removeEventListener("click", resetIfOut));
+  onMount(() => dialog.addEventListener("click", resetIfOut));
+  onCleanup(() => dialog.removeEventListener("click", resetIfOut));
 
   return (
     <section id="dialog">
@@ -106,24 +105,25 @@ export default (context) => {
       </p>
 
       <div style={{ "text-align": "center" }}>
-        <Button ripple onClick={() => myDialog.showModal()}>
+        <Button ripple onClick={() => dialog.showModal()}>
           Check terms and conditions
         </Button>
       </div>
-      <Dialog ref={myDialog}>
+      <Dialog ref={dialog}>
         <div class="header">My dialog</div>
         <Content />
         <div class="footer">
-          <Button onClick={reset} data-type="cancel">
+          <Button onClick={reset}>
             <Unicode size="1.5em" code={cross} />
           </Button>
           <Button
-            onClick={() =>
+            onClick={(e) => {
+              e.preventDefault();
               batch(() => {
                 saveContext();
-                myDialog.close();
-              })
-            }
+                dialog.close();
+              });
+            }}
           >
             <Unicode size="1.5em" code={check} />
           </Button>
