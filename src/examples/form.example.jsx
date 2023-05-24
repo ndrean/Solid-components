@@ -1,16 +1,23 @@
 import { createSignal, createEffect, createMemo } from "solid-js";
+import { styled } from "solid-styled-components";
 import inputComponent from "../components/inputComponent";
 import button from "../components/button";
 import grayDiv from "../components/grayDiv";
 
+const Span = styled("span")`
+  color: red;
+  margin-left: 10px;
+`;
 export default (context) => (props) => {
   let output;
 
+  const [disabled, setDisabled] = createSignal(true);
+  const [validations, setValidations] = createSignal({});
+
+  //   Create an entry per input
   const [text, setText] = createSignal(null);
   const [email, setEmail] = createSignal(null);
   const [password, setPassword] = createSignal(null);
-  const [disabled, setDisabled] = createSignal(true);
-  const [validations, setValidations] = createSignal({});
 
   const Input = inputComponent(context);
   const Button = button(context);
@@ -28,9 +35,7 @@ export default (context) => (props) => {
     if (data.length < 4) {
       return {
         invalid: true,
-        msg: () => (
-          <span style={{ color: "red" }}>"At least 4 characters "</span>
-        ),
+        msg: "Min 4 characters",
       };
     } else {
       return { invalid: false, msg: null };
@@ -43,9 +48,7 @@ export default (context) => (props) => {
     } else {
       return {
         invalid: true,
-        msg: () => (
-          <span style={{ color: "red" }}>Not a valid email xx@xx.xx</span>
-        ),
+        msg: "Valid email format: xx@xx.xx",
       };
     }
   }
@@ -54,9 +57,7 @@ export default (context) => (props) => {
     if (data.length < 5) {
       return {
         invalid: true,
-        msg: () => (
-          <span style={{ color: "red" }}>"At least 5 characters "</span>
-        ),
+        msg: "Min 5 characters ",
       };
     } else {
       return { invalid: false, msg: null };
@@ -125,7 +126,7 @@ export default (context) => (props) => {
         Submit the form
       </Button>
       <GrayDiv>
-        Result: <output ref={output}> </output>
+        You submitted to the server: <output ref={output}> </output>
       </GrayDiv>
     </>
   );

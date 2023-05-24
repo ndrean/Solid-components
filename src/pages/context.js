@@ -2,8 +2,9 @@ import { red, orange, teal, blue, grey } from "material-ui-colors";
 
 const shadows = {
   1: "6px 6px 2px 1px rgba(0, 0, 255, .2);",
-  2: "2px 2px 5px rgba(0, 0, 0, 0.2)",
+  2: "0px 3px 1px -2px rgba(0, 0, 0, 0.2)",
   3: "3px 3px 2px 1px rgba(0, 0, 255, .2)",
+  4: "0px 3px 3px 0px rgba(0,0,0,0.14)",
   10: "rgba(0, 0, 0, 0.2) 0px 6px 6px -3px, rgba(0, 0, 0, 0.14) 0px 10px 14px 1px, rgba(0, 0, 0, 0.12) 0px 4px 18px 3px;",
 };
 
