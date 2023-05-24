@@ -3,10 +3,9 @@ import { createSignal, batch } from "solid-js";
 import modal from "../components/modal";
 import button from "../components/button";
 import title from "../components/title";
-import checkbox from "../components/checkbox";
 import grayDiv from "../components/grayDiv";
-import CheckboxContainer from "../components/CheckboxContainer";
 import Unicode from "../components/Unicode";
+import ContentExample from "./ContentExample";
 
 export default (context) => {
   const {
@@ -20,12 +19,13 @@ export default (context) => {
   const [modalOpen, setModalOpen] = createSignal(false);
 
   const toggleModal = () => setModalOpen((val) => !val);
+  const toggleConditions = () => setConditions((v) => !v);
+
   const Modal = modal(context);
 
   const Button = button(context);
   const Title = title(stdTitle);
   const GrayDiv = grayDiv(context);
-  const Checkbox = checkbox(context);
 
   const saveContext = async () => {
     context.signals.modalConditions = conditions();
@@ -37,40 +37,6 @@ export default (context) => {
       setModalOpen(false);
       saveContext();
     });
-
-  const Content = () => (
-    <div class="main">
-      <CheckboxContainer>
-        <Checkbox
-          id="myModalCheckboxID"
-          name="myModalCheckbox"
-          value="accepted"
-          checked={conditions()}
-          onChange={() => setConditions((v) => !v)}
-        />
-        <label for="myModalCheckboxID">
-          I agree with the terms and conditions
-        </label>
-      </CheckboxContainer>
-      <p>
-        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in
-        laying out print, graphic or web designs. The passage is attributed to
-        an unknown typesetter in the 15th century who is thought to have
-        scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a
-        type specimen book. It usually begins with: “Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua.” The purpose of lorem ipsum is to create a
-        natural looking block of text (sentence, paragraph, page, etc.) that
-        doesn't distract from the layout. A practice not without controversy,
-        laying out pages with meaningless filler text can be very useful when
-        the focus is meant to be on design, not content. The passage experienced
-        a surge in popularity during the 1960s when Letraset used it on their
-        dry-transfer sheets, and again during the 90s as desktop publishers
-        bundled the text with their software. Today it's seen all around the
-        web; on templates, websites, and stock designs.
-      </p>
-    </div>
-  );
 
   return (
     <section id="modal">
@@ -97,7 +63,10 @@ export default (context) => {
       </div>
       <Modal open={modalOpen()} onClose={reset}>
         <div class="header">My modal</div>
-        <Content />
+        <ContentExample
+          conditions={conditions()}
+          toggleConditions={() => toggleConditions()}
+        />
         <div class="footer">
           <Button onClick={reset}>
             <Unicode size="1.5em" code={cross} />
