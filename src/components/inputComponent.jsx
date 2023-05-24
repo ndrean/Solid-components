@@ -1,5 +1,5 @@
 import { createSignal, batch } from "solid-js";
-import { css } from "solid-styled-components";
+import { css, styled } from "solid-styled-components";
 
 export default (context) => (props) => {
   const {
@@ -18,6 +18,12 @@ export default (context) => (props) => {
     &:hover {
       box-shadow: ${shadows[4]};
     }
+  `;
+
+  const Output = styled("output")`
+    color: red;
+    margin-left: 4px;
+    font-size: 0.8em;
   `;
   const [msg, setMsg] = createSignal(null);
 
@@ -51,11 +57,7 @@ export default (context) => (props) => {
         onInput={handleInput}
         autocomplete={props?.autocomplete}
       />
-      <output
-        style={{ color: "red", "margin-left": "4px", "font-size": "0.8em" }}
-      >
-        {msg()}
-      </output>
+      <Output>{msg()}</Output>
     </div>
   );
 };

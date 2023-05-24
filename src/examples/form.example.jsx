@@ -125,8 +125,11 @@ export default (context) => (props) => {
       <Button form="forms" disabled={disabled()} fullWidth ripple>
         Submit the form
       </Button>
+      <br />
+
+      <p>You submitted to the server the data below:</p>
       <GrayDiv>
-        You submitted to the server: <output ref={output}> </output>
+        <output ref={output}> </output>
       </GrayDiv>
     </>
   );
