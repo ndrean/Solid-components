@@ -79,10 +79,11 @@ function home(context) {
         <br />
         <code>const ContextedComp = comp(someContext);</code>
         <br />
-        <code>
-          &ltContextedComp \u007B...props\u007D&gt\u007Bprops.children\u007D
-          &lt/ContextedComp&gt;
-        </code>
+        <code>&ltContextedComp \u007B...props\u007D&gt</code>
+        <br />
+        <code>&nbsp \u007Bprops.children\u007D</code>
+        <br />
+        <code> &lt/ContextedComp&gt;</code>
         <br />
       </Pre>
       <p>
@@ -95,7 +96,8 @@ function home(context) {
         .
       </p>
       <p>
-        \u2757 do <strong>NOT</strong> destructure the props.
+        \u2757 do <strong>NOT</strong> destructure the props. Take a look at
+        "Funny/Dynamic Components".
       </p>
 
       <Title>Traditional CSS</Title>
@@ -115,8 +117,12 @@ function home(context) {
       <Pre>
         <code>
           &ltTitle style=\u007B\u007B color: "red", "font-size": "2em"
-          \u007D\u007D&gtColor is "red"&gt\Title&gt
+          \u007D\u007D&gt
         </code>
+        <br />
+        <code>&nbsp Color is "red</code>
+        <br />
+        <code>&lt/Title&gt</code>
       </Pre>
       <details>
         <summary>Show!</summary>
@@ -139,9 +145,11 @@ function home(context) {
       </Pre>
       <p>We use the class prop:</p>
       <Pre>
-        <code>
-          &ltTitleV0 class="center-blue"&gtBlue and solid title&lt/TitleV0&gt
-        </code>
+        <code>&ltTitleV0 class="center-blue"&gt</code>
+        <br />
+        <code>&nbsp Blue and solid title</code>
+        <br />
+        <code>&lt/TitleV0&gt</code>
       </Pre>
       <details>
         <summary>Show!</summary>
@@ -190,9 +198,13 @@ function home(context) {
           &nbsp const \u007B classes: \u007B base \u007D\u007D = context;
         </code>
         <br />
-        <code>
-          &nbsp const newclass = props?.newClass ? base + props.newClass : base;
-        </code>
+        <code>&nbsp const newclass = </code>
+        <br />
+        <code>&nbsp &nbsp props?.newClass ? </code>
+        <br />
+        <code>&nbsp &nbsp&nbsp base + props.newClass : </code>
+        <br />
+        <code>&nbsp &nbsp&nbsp base;</code>
         <br />
         <code>&nbsp const label = props?.label || props.children;</code>
         <br />
@@ -225,12 +237,11 @@ function home(context) {
         <code>&ltPropsTitle label="Title is red-dotted" /&gt</code>
         <br />
         <code>
-          &ltPropsTitle newClass=\u007BblueSolid\u007D&gt Blue solid title
-          &lt/PropsTitle&gt
+          &ltPropsTitle newClass=\u007BblueSolid\u007D label="Blue solid" /&gt
         </code>
         <br />
         <code>
-          &ltPropsTitle newClass=\u007Bsolid\u007D&gtRed solid&lt/PropsTitle&gt
+          &ltPropsTitle newClass=\u007Bsolid\u007D label="Red solid" /&gt
         </code>
       </Pre>
       <details>

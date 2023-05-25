@@ -16,3 +16,7 @@ body {
   color: blue;
   padding: 2px;
 }
+
+code {
+  font-size: 1.3em;
+}

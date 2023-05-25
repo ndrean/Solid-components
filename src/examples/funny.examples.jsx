@@ -1,4 +1,5 @@
-import { For, createSignal, lazy } from "solid-js";
+import { For, createSignal, lazy, onCleanup, onMount } from "solid-js";
+import { styled } from "solid-styled-components";
 
 import imgSVG from "../components/imgSVG";
 import drawEmoji from "../components/drawEmoji.jsx";
@@ -10,6 +11,12 @@ import { dynTitle } from "../components/title";
 
 import ham from "../assets/ham.svg";
 import cheers from "../assets/cheers.svg";
+
+const Pre = styled("pre")`
+  margin-left: 5px;
+  padding: 5px;
+  background-color: #f1f1f1;
+`;
 
 export default (context) => () => {
   const {
@@ -26,7 +33,11 @@ export default (context) => () => {
   const Hamburger = hamburgerSVG(context);
 
   const [size, setSize] = createSignal(20);
-  setInterval(() => setSize((s) => (s + 1) % 60), 50);
+  let interval;
+  onMount(
+    () => (interval = setInterval(() => setSize((s) => (s + 1) % 200), 10))
+  );
+  onCleanup(() => clearInterval(interval));
 
   return (
     <>
@@ -58,12 +69,20 @@ export default (context) => () => {
       <p>
         ❗ In the animation above, you change the size of component with a
         function (located in this page). If you want it to be reactive, you
-        cannot do - destructure - <code> const mysize = props.size || 48 </code>{" "}
-        . If you use it as{" "}
-        <code> style=\u007B\u007B "font-size=mysize"\u007D\u007D </code> then
-        the component is not reactive. Instead define a function{" "}
-        <code> const mysize = ()=&gt props.size || 48 </code> and use it:{" "}
-        <code> style=\u007B\u007B"font-size"=mysize()\u007D\u007D"</code>.
+        should not do as below:
+      </p>
+      <Pre>
+        <code> const mysize = props.size || 48 </code>
+        <br />
+        <code>style= \u007B\u007B "font-size=mysize"\u007D\u007D</code>
+      </Pre>
+      <p>
+        Instead define a function:
+        <Pre>
+          <code> const mysize = ()=&gt props.size || 48 </code>
+          <br />
+          <code> style=\u007B\u007B"font-size"=mysize()\u007D\u007D"</code>.
+        </Pre>
       </p>
       <h2>Some SVGs as images</h2>
       <p>
