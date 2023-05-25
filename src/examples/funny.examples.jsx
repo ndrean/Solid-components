@@ -15,7 +15,7 @@ import cheers from "../assets/cheers.svg";
 const Pre = styled("pre")`
   margin-left: 5px;
   padding: 5px;
-  background-color: #f1f1f1;
+  background-color: aliceblue;
 `;
 
 export default (context) => () => {

@@ -8,7 +8,7 @@ import "../index.css";
 const Pre = styled("pre")`
   margin-left: 10px;
   padding: 5px;
-  background-color: #f1f1f1;
+  background-color: aliceblue;
 `;
 
 function home(context) {
@@ -106,8 +106,7 @@ function home(context) {
         <code>const Title = (props) =&gt</code>
         <br />
         <code>
-          &nbsp &lt h1
-          \u007B...props\u007D&gt\u007Bprops.children\u007D&lt/h1&gt
+          &nbsp &lth1 \u007B...props\u007D&gt\u007Bprops.children\u007D&lt/h1&gt
         </code>
       </Pre>
       <p>

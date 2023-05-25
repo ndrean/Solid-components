@@ -117,7 +117,7 @@ export default (context) => (props) => {
         input (<code> onInput </code> with SolidJS), and one for the selection
         (if you want to submit the input).
       </details>
-
+      <br />
       <form
         autocomplete="off"
         id="autocomp"
