@@ -82,8 +82,9 @@ export default (context) => (props) => {
 
   return (
     <>
-      <form id="forms" onSubmit={handleSubmit}>
+      <form id="form-ex" onSubmit={handleSubmit}>
         <Input
+          required
           label="name"
           name="name"
           type="text"
@@ -97,6 +98,7 @@ export default (context) => (props) => {
         />
         <br />
         <Input
+          required
           label="email"
           name="email"
           type="email"
@@ -110,6 +112,7 @@ export default (context) => (props) => {
         />
         <br />
         <Input
+          required
           label="password"
           name="password"
           type="password"
@@ -126,7 +129,7 @@ export default (context) => (props) => {
       <p>
         This form is submitted with a <code> FORMDATA </code>
       </p>
-      <Button form="forms" disabled={disabled()} fullWidth ripple>
+      <Button form="form-ex" disabled={disabled()} fullWidth ripple>
         Submit the form
       </Button>
       <br />

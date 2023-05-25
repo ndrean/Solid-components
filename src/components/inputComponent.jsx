@@ -6,7 +6,7 @@ export default (context) => (props) => {
     theme: { shadows, palette },
   } = context;
 
-  const inputCSS = css`
+  const inputCSS = `
     box-shadow: ${shadows[2]};
     border-radius: 4px;
     border: 2px solid transparent;
@@ -50,15 +50,17 @@ export default (context) => (props) => {
     <div style={{ display: "inline-block" }}>
       {/* <label style={{ "padding-right": "10px" }}>{props.label}</label> */}
       <input
-        class={inputCSS}
+        class={css`
+          ${props?.newClass ? inputCSS + props.newClass : inputCSS}
+        `}
         autofocus
-        required
         name={props.name}
         placeholder={props.name}
         type={props.type}
         value={props.entry}
         onInput={handleInput}
         autocomplete={props?.autocomplete}
+        {...props}
       />
       <ErrorOutput>{msg()}</ErrorOutput>
     </div>
