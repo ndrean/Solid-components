@@ -37,14 +37,14 @@ const routes = [
     component: lazy(() => import("./pages/drawerPage")),
   },
   {
+    href: "/dynamic",
+    title: "Dynamic",
+    component: lazy(() => import("./pages/dynamicPage")),
+  },
+  {
     href: "/form",
     title: "Form",
     component: lazy(() => import("./pages/formPage")),
-  },
-  {
-    href: "/funny",
-    title: "Funny",
-    component: lazy(() => import("./pages/funnyPage")),
   },
   {
     href: "/modal",

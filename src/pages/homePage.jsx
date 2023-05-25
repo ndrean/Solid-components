@@ -1,4 +1,5 @@
-import { styled } from "solid-styled-components";
+import { styled, css } from "solid-styled-components";
+import { A } from "@solidjs/router";
 
 import context from "../context.js";
 import { dynTitle, propsTitle } from "../components/title.jsx";
@@ -9,6 +10,13 @@ const Pre = styled("pre")`
   margin-left: 10px;
   padding: 5px;
   background-color: aliceblue;
+`;
+
+const link = css`
+  text-decoration: none;
+  background-color: beige;
+  padding: 3px;
+  border-radius: 5px;
 `;
 
 function home(context) {
@@ -96,8 +104,10 @@ function home(context) {
         .
       </p>
       <p>
-        \u2757 do <strong>NOT</strong> destructure the props. Take a look at
-        "Funny/Dynamic Components".
+        \u2757 do <strong>NOT</strong> destructure the props. Take a look at{" "}
+        <A class={link} href="/dynamic">
+          Dynamic Components
+        </A>
       </p>
 
       <Title>Traditional CSS</Title>
