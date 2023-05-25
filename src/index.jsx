@@ -8,7 +8,7 @@ import Pages from "./pages/pages.jsx";
 import context from "./context";
 import drawer from "./components/drawer";
 import header from "./components/header";
-import spinCircle from "./components/spinCircle";
+import { spinCircle } from "./components/loaders";
 
 const container = css`
   display: grid;

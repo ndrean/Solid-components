@@ -4,7 +4,7 @@ import { styled, css } from "solid-styled-components";
 import { dynTitle } from "../components/title";
 import button from "../components/button";
 import grayDiv from "../components/grayDiv";
-import tick from "../components/tick";
+import { tickSVG } from "../components/svgs";
 
 const Span = styled("span")`
   padding-left: 20px;
@@ -20,14 +20,6 @@ const selectClass = css`
   width: 40%;
   height: 3em;
 `;
-
-// const btnCss = css`
-//   border: none;
-//   display: inline-block;
-//   cursor: pointer;
-//   background: none;
-//   padding-left: 1%;
-// `;
 
 const countries = {
   Estonia: "🇪🇪",
@@ -56,7 +48,7 @@ export default (context) => (props) => {
   const GrayDiv = grayDiv(context);
   const Title = dynTitle("", "h3");
   const Button = button(context);
-  const Tick = tick("bisque", "4em");
+  const Tick = tickSVG("bisque", "4em");
 
   return (
     <>

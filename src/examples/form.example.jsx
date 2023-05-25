@@ -8,6 +8,7 @@ const Span = styled("span")`
   color: red;
   margin-left: 10px;
 `;
+
 export default (context) => (props) => {
   let output;
 

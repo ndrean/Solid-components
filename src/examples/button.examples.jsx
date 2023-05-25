@@ -1,9 +1,9 @@
 import { styled } from "solid-styled-components";
 import button from "../components/button";
-import iconSVG from "../components/imgSVG";
+import imgSVG from "../components/imgSVG";
 import facebook from "../assets/facebook.svg";
 import { dynTitle } from "../components/title";
-import tick from "../components/tick";
+import { tickSVG } from "../components/svgs";
 
 export default (context) => {
   const {
@@ -11,9 +11,8 @@ export default (context) => {
   } = context;
   const Button = button(context);
   const Title = dynTitle(stdTitle, "h1");
-  const Icon = () => iconSVG(facebook, 20);
-  const TallIcon = () => iconSVG(facebook, 80);
-  const Tick = tick("bisque", "6em");
+  const ImgSVG = imgSVG();
+  const Tick = tickSVG(context);
 
   const Form = styled("form")`
     margin: 12px;
@@ -56,13 +55,15 @@ export default (context) => {
         <Title>Icons</Title>
         <p>
           <Button onClick={handleClick}>
-            <Icon /> with icon
+            <ImgSVG src={facebook} /> with Img SVG icon
           </Button>
+          <br />
           <Button ripple onClick={handleClick}>
-            <TallIcon /> with tall icon & ripple
+            <ImgSVG src={facebook} width={80} /> with resized Img SVG & ripple
           </Button>
+          <br />
           <Button fullWidth ripple onClick={handleClick}>
-            <Tick /> with icon & ripple & full width
+            <Tick size={60} /> with SVG icon & ripple & full width
           </Button>
         </p>
       </Form>

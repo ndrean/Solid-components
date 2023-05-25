@@ -1,7 +1,7 @@
 import { css } from "solid-styled-components";
 import { createSignal } from "solid-js";
 
-import { Burger } from "../pages/funnyexamples";
+import { hamburgerSVG } from "./svgs";
 import button from "./button";
 
 export default (context) => (props) => {
@@ -22,11 +22,12 @@ export default (context) => (props) => {
   `;
 
   const Button = button(context);
+  const HamburgerSVG = hamburgerSVG(context);
 
   return (
     <div class={headerCss}>
       <Button onClick={props.toggle} aria-label="btn">
-        <Burger />
+        <HamburgerSVG color={"orange"} />
       </Button>
       <p class={headerTitle}>Components & CSS with SolidJS</p>
     </div>

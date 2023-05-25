@@ -118,9 +118,12 @@ function home(context) {
           \u007D\u007D&gtColor is "red"&gt\Title&gt
         </code>
       </Pre>
-      <TitleV0 style={{ color: "red", "font-size": "1.5em" }}>
-        Color is "red"
-      </TitleV0>
+      <details>
+        <summary>Show!</summary>
+        <TitleV0 style={{ color: "red", "font-size": "1.5em" }}>
+          Color is "red"
+        </TitleV0>
+      </details>
       <p>
         SolidJS provides the prop <code> class </code> to pass a CSS class name.
         Suppose we define CSS classe "center-blue" in the file "index.css".
@@ -140,7 +143,10 @@ function home(context) {
           &ltTitleV0 class="center-blue"&gtBlue and solid title&lt/TitleV0&gt
         </code>
       </Pre>
-      <TitleV0 class="center-blue">Blue and solid title</TitleV0>
+      <details>
+        <summary>Show!</summary>
+        <TitleV0 class="center-blue">Blue and solid title</TitleV0>
+      </details>
       <Title>Using the pattern with CSS-in-JS</Title>
       <p>
         We can use CSS-in-JS with the library{" "}
@@ -227,12 +233,15 @@ function home(context) {
           &ltPropsTitle newClass=\u007Bsolid\u007D&gtRed solid&lt/PropsTitle&gt
         </code>
       </Pre>
-      <PropsTitle label="Title is red-dotted" />
-      <PropsTitle
-        newClass={contextDemo.classes.blueSolid}
-        label="Blue solid title"
-      />
-      <PropsTitle newClass={contextDemo.classes.solid}>Red solid</PropsTitle>
+      <details>
+        <summary>Show!</summary>
+        <PropsTitle label="Title is red-dotted" />
+        <PropsTitle
+          newClass={contextDemo.classes.blueSolid}
+          label="Blue solid title"
+        />
+        <PropsTitle newClass={contextDemo.classes.solid}>Red solid</PropsTitle>
+      </details>
     </div>
   );
 }

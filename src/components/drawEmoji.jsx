@@ -1,9 +1,10 @@
-// import { css } from "solid-styled-components";
-
-export default (emoji, size = 48, name = "hamburger") =>
-  () =>
-    (
-      <span style={{ "font-size": `${size}px` }} role="img" aria-label={name}>
-        {emoji}
-      </span>
-    );
+export default () => (props) => {
+  const name = props.name || "emoji";
+  const label = props.label || "emoji";
+  const size = () => props.size || 48;
+  return (
+    <span style={{ "font-size": `${size()}px` }} role="img" aria-label={name}>
+      {props.children || label}
+    </span>
+  );
+};

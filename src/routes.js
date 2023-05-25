@@ -42,9 +42,9 @@ const routes = [
     component: lazy(() => import("./pages/formPage")),
   },
   {
-    href: "/icons",
+    href: "/funny",
     title: "Funny",
-    component: lazy(() => import("./pages/funnyexamples")),
+    component: lazy(() => import("./pages/funnyPage")),
   },
   {
     href: "/modal",
