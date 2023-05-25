@@ -116,8 +116,8 @@ function home(context) {
       </p>
       <Pre>
         <code>
-          &ltTitle style=\u007B\u007B color: "red", "font-size": "2em"
-          \u007D\u007D&gt
+          &ltTitle
+          style=\u007B\u007Bcolor:"red","font-size":"2em"\u007D\u007D&gt
         </code>
         <br />
         <code>&nbsp Color is "red</code>
@@ -169,15 +169,16 @@ function home(context) {
       <Pre>
         <code>//context.js</code>
         <br />
-        <code>const base = `color: red; border: dotted 1px;`</code>
+        <code>const base = `color:red; border:dotted 1px;`</code>
         <br />
-        <code>const blueSolid = `color: blue; border: solid 1px;`</code>
+        <code>const blueSolid = `</code>
         <br />
-        <code>const solid = `border: solid 2px;`</code>
+        <code>&nbsp color:blue; border:solid 1px;`</code>
+        <br />
+        <code>const solid = `border:solid 2px;`</code>
         <br />
         <code>
-          export default \u007B classes: \u007B base, solid, blueSolid
-          \u007D\u007D
+          export default \u007Bclasses:\u007Bbase,solid,blueSolid\u007D\u007D
         </code>
       </Pre>
       <p>
@@ -232,24 +233,22 @@ function home(context) {
         </code>
         <br />
 
-        <code>const PropsTitle = title(context);</code>
+        <code>const PTitle = title(context);</code>
         <br />
-        <code>&ltPropsTitle label="Title is red-dotted" /&gt</code>
-        <br />
-        <code>
-          &ltPropsTitle newClass=\u007BblueSolid\u007D label="Blue solid" /&gt
-        </code>
+        <code>&ltPTitle label="Red dotted"/&gt</code>
         <br />
         <code>
-          &ltPropsTitle newClass=\u007Bsolid\u007D label="Red solid" /&gt
+          &ltPTitle newClass=\u007BblueSolid\u007D label="Blue solid"/&gt
         </code>
+        <br />
+        <code>&ltPTitle newClass=\u007Bsolid\u007D label="Red solid"/&gt</code>
       </Pre>
       <details>
         <summary>Show!</summary>
-        <PropsTitle label="Title is red-dotted" />
+        <PropsTitle label="Red-dotted" />
         <PropsTitle
           newClass={contextDemo.classes.blueSolid}
-          label="Blue solid title"
+          label="Blue solid"
         />
         <PropsTitle newClass={contextDemo.classes.solid}>Red solid</PropsTitle>
       </details>
