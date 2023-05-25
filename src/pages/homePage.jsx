@@ -115,20 +115,15 @@ function home(context) {
         (with keys in dash-form with explicit units):
       </p>
       <Pre>
-        <code>
-          &ltTitle
-          style=\u007B\u007Bcolor:"red","font-size":"2em"\u007D\u007D&gt
-        </code>
+        <code>&ltTitle style=\u007B\u007B"font-size":"2em"\u007D\u007D&gt</code>
         <br />
-        <code>&nbsp Color is "red</code>
+        <code>&nbsp Big title</code>
         <br />
         <code>&lt/Title&gt</code>
       </Pre>
       <details>
         <summary>Show!</summary>
-        <TitleV0 style={{ color: "red", "font-size": "1.5em" }}>
-          Color is "red"
-        </TitleV0>
+        <TitleV0 style={{ "font-size": "2em" }}>Big title</TitleV0>
       </details>
       <p>
         SolidJS provides the prop <code> class </code> to pass a CSS class name.
@@ -169,7 +164,9 @@ function home(context) {
       <Pre>
         <code>//context.js</code>
         <br />
-        <code>const base = `color:red; border:dotted 1px;`</code>
+        <code>const base = `</code>
+        <br />
+        <code>&nbsp color:red; border:dotted 1px;`</code>
         <br />
         <code>const blueSolid = `</code>
         <br />
@@ -177,9 +174,6 @@ function home(context) {
         <br />
         <code>const solid = `border:solid 2px;`</code>
         <br />
-        <code>
-          export default \u007Bclasses:\u007Bbase,solid,blueSolid\u007D\u007D
-        </code>
       </Pre>
       <p>
         We can now define customized components that use the context object. We
@@ -228,9 +222,9 @@ function home(context) {
       <Pre>
         <code>import context from "./context.js";</code>
         <br />
-        <code>
-          const \u007Bclasses: \u007BblueSolid, solid\u007D\u007D = context;
-        </code>
+        <code>const \u007Bclasses: \u007B</code>
+        <br />
+        <code>&nbsp blueSolid, solid\u007D\u007D = context;</code>
         <br />
 
         <code>const PTitle = title(context);</code>

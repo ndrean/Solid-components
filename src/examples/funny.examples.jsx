@@ -72,16 +72,16 @@ export default (context) => () => {
         should not do as below:
       </p>
       <Pre>
-        <code> const mysize = props.size || 48 </code>
+        <code> const \u007Bsize = 48\u007D = props </code>
         <br />
-        <code>style= \u007B\u007B "font-size=mysize"\u007D\u007D</code>
+        <code>style= \u007B\u007B "font-size=size+"px"\u007D\u007D</code>
       </Pre>
       <p>
         Instead define a function:
         <Pre>
-          <code> const mysize = ()=&gt props.size || 48 </code>
+          <code> const size = ()=&gt props.size || 48 </code>
           <br />
-          <code> style=\u007B\u007B"font-size"=mysize()\u007D\u007D"</code>.
+          <code> style=\u007B\u007B"font-size"=size()+"px"\u007D\u007D"</code>.
         </Pre>
       </p>
       <h2>Some SVGs as images</h2>
