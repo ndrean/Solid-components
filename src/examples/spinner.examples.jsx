@@ -73,10 +73,15 @@ export default (context) => {
         <Arrow />
 
         <p>
-          \u003C SpinCirclePart size=\u007B8\u007D c1="midnightblue" c2="bisque"
-          / \u003E{" "}
+          \u003C SpinCirclePart size=\u007B8\u007D color1="midnightblue"
+          color2="bisque" / \u003E <br />
+          \u003C SpinCirclePart size=\u007B8\u007D color2="midnightblue"
+          color1="bisque" / \u003E
         </p>
-        <SpinCirclePart size={48} c1="midnightblue" c2="bisque" />
+        <div style={{ display: "flex" }}>
+          <SpinCirclePart size={48} color1="midnightblue" color2="bisque" />
+          <SpinCirclePart size={48} color2="midnightblue" color1="bisque" />
+        </div>
         <p>
           \u003C Classic size=\u007B50\u007D color1="midnightblue"
           color2="bisque" /\u003E

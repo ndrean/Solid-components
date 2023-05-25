@@ -181,8 +181,7 @@ const loadingMsg = (context) =>
     const msg = () => props?.msg || "working...";
     const size = () => props?.size || 40;
 
-    const len = () => msg().length;
-    console.log(len());
+    // const len = () => msg().length;
 
     const trail = keyframes`
       to {
@@ -213,8 +212,8 @@ const spinCirclePart = () =>
       width: `${props.size}px`,
       aspectRatio: 1,
       borderRadius: "50%",
-      border: `8px solid ${props.c1}`,
-      borderRightColor: props.c2,
+      border: `8px solid ${props.color1}`,
+      borderRightColor: props.color2,
       animation: `${rotate}  2s infinite linear`,
     };
   });
