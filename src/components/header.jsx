@@ -1,5 +1,4 @@
 import { css } from "solid-styled-components";
-import { createSignal } from "solid-js";
 
 import { hamburgerSVG } from "./svgs";
 import button from "./button";

@@ -149,7 +149,7 @@ const arrow = (context) => {
         calc(100% - 15px) calc(100% - 10px),
         0 calc(100% - 10px)
       )`,
-        animation: `${anim} 1.5s infinite linear`,
+        animation: `${anim} 2.5s infinite linear`,
       },
     };
   });
