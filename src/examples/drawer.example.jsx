@@ -5,7 +5,7 @@ import drawer from "../components/drawer";
 import button from "../components/button";
 import { dynTitle } from "../components/title";
 import menu from "./menu";
-import nav from "../components/nav";
+import { tickSVG } from "../components/svgs";
 
 export default (context) => {
   const {
@@ -19,10 +19,11 @@ export default (context) => {
   const Menu = menu(context);
   const Drawer = drawer(context);
   const Button = button(context);
-  const Nav = nav(context);
+  // const Nav = nav(context);
+  const TickSVG = tickSVG(context);
 
   const [drawerOpen, setDrawOpen] = createSignal(false);
-  const [dialogOpen, setDialogOpen] = createSignal(false);
+  // const [dialogOpen, setDialogOpen] = createSignal(false);
 
   const toggleDrawer = () => setDrawOpen((val) => !val);
 
@@ -44,8 +45,6 @@ export default (context) => {
     top: 60px;
     left: 0;
     background: #f1f1f1;
-    transition: opacity 1s ease-out;
-    margin-bottom: 30px;
   `;
 
   const Blacked = styled("div")`
@@ -70,7 +69,9 @@ export default (context) => {
         <Dialog ref={diagDrawer}>
           <Blacked>
             <h1>Hello from Dailog!</h1>
-            <button onClick={() => diagDrawer.close()}>Close</button>
+            <Button fullWidth ripple onClick={() => diagDrawer.close()}>
+              <TickSVG size={60} /> Bye!
+            </Button>
           </Blacked>
         </Dialog>
       </AbsContainer>
