@@ -55,14 +55,7 @@ export default (context) => {
       <Title>{tr.t("Drawer")}</Title>
 
       <br />
-      <Button
-        fullWidth
-        ripple
-        onClick={() => {
-          diagDrawer.showModal();
-          console.log(diagDrawer);
-        }}
-      >
+      <Button fullWidth ripple onClick={() => diagDrawer.showModal()}>
         OPEN A DIALOG BOX
       </Button>
       <AbsContainer>
