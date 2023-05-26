@@ -1,4 +1,4 @@
-import { createSignal, batch } from "solid-js";
+import { createSignal, batch, createEffect } from "solid-js";
 import { css, styled } from "solid-styled-components";
 
 export default (context) => (props) => {
@@ -20,6 +20,9 @@ export default (context) => (props) => {
     }
   `;
 
+  const newClass = (props) =>
+    props?.height ? `height: ${props?.height}px;` : null;
+
   const ErrorOutput = styled("output")`
     color: red;
     margin-left: 4px;
@@ -28,14 +31,24 @@ export default (context) => (props) => {
 
   const [msg, setMsg] = createSignal(null);
 
-  const handleInput = ({ target: { value, name } }) => {
-    const { invalid, msg } = props.isInvalid(value);
-    batch(() => {
-      setMsg(msg);
-      props.setEntry(value);
-      props.setValidations({ ...props.validations, [name]: invalid });
-      props.setDisabled(checkDisabled());
-    });
+  const handleInput = ({ target }) => {
+    console.log("handleInput");
+    if (target.value) {
+      const { invalid, msg } = props.isInvalid(target.value);
+      batch(() => {
+        setMsg(msg);
+        props.setEntry(target.value);
+        props.setValidations({ ...props.validations, [target.name]: invalid });
+        props.setDisabled(checkDisabled());
+      });
+    }
+    if (target.files) {
+      batch(() => {
+        props.setEntry(target.files);
+        props.setValidations({ ...props.validations, [target.name]: false });
+        props.setDisabled(false);
+      });
+    }
   };
 
   const checkDisabled = () => {
@@ -48,16 +61,15 @@ export default (context) => (props) => {
 
   return (
     <div style={{ display: "inline-block" }}>
-      {/* <label style={{ "padding-right": "10px" }}>{props.label}</label> */}
       <input
         class={css`
-          ${props?.newClass ? inputCSS + props.newClass : inputCSS}
+          ${props?.height ? inputCSS + newClass(props) : inputCSS}
         `}
         autofocus
         name={props.name}
         placeholder={props.name}
         type={props.type}
-        value={props.entry}
+        value={props.type !== "file" ? props.entry : null}
         onInput={handleInput}
         autocomplete={props?.autocomplete}
         {...props}

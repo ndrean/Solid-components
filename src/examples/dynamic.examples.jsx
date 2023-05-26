@@ -40,7 +40,7 @@ export default (context) => () => {
   onCleanup(() => clearInterval(interval));
 
   return (
-    <>
+    <section id="dynamic.examples">
       <H2>Dynamic component</H2>
       <p>
         An illustration of Dynamic components and why not to destructure props
@@ -137,6 +137,6 @@ export default (context) => () => {
         )}
       </For>
       <Unicode size="2em" code={"\u007B"} />
-    </>
+    </section>
   );
 };

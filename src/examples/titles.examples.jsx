@@ -18,7 +18,7 @@ export default (context) => {
   const PropTitle = propsTitle(context);
 
   return (
-    <>
+    <section id="title.examples">
       <p>
         A few different ways to build and use components. Take a look at the
         code. The most versatile is probably <code> dynTitles</code>.
@@ -28,6 +28,6 @@ export default (context) => {
       <H2>Dynamic H2 blueSolid title</H2>
 
       <PropTitle newClass={context.classes.stdTitle} label="Title via props" />
-    </>
+    </section>
   );
 };

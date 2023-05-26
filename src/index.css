@@ -1,5 +1,5 @@
 :root {
-  --width: 130px;
+  --width: 135px;
   --mobile: 768px;
 }
 
@@ -19,4 +19,12 @@ body {
 
 code {
   font-size: 1.2em;
+}
+
+dialog::backdrop {
+  background: none;
+}
+
+section {
+  margin: 5px;
 }

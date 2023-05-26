@@ -8,22 +8,22 @@ export default (context) => (props) => {
     theme: { palette },
   } = context;
 
-  const display = css`
-    display: block;
-  `;
-
   const bgBisque = css`
     background-color: ${palette.secondary.background};
   `;
-  const navCss = css`
-    width: var(--width);
-    height: 100vh;
-    background-color: ${palette.primary.background};
-    overflow-y: scroll;
-    @media (max-width: var(--mobile)) ) {
-      display: none;
-    }
-  `;
+
+  // const display = css`
+  //   display: block;
+  //   overflow-y: scroll;
+  //   height: 90vh;
+  // `;
+
+  // const navCss = css`
+  //   width: var(--width);
+  //   height: 90vh;
+  //   background-color: ${palette.primary.background};
+  //   overflow-y: scroll;
+  // `;
 
   const link = css`
     padding: 10px;
@@ -34,8 +34,9 @@ export default (context) => (props) => {
     text-decoration: none;
   `;
 
+  // props?.mobile ? navCss + display : navCss
   return (
-    <nav class={props?.override ? navCss + display : navCss}>
+    <nav>
       <For each={routes}>
         {({ href, title }) => {
           return (
@@ -44,13 +45,16 @@ export default (context) => (props) => {
               class={link}
               end
               activeClass={bgBisque}
-              onClick={() => (props?.navChange ? props.navChange() : null)}
+              onClick={() => {
+                props?.navChange ? props.navChange() : null;
+              }}
             >
               {title}
             </A>
           );
         }}
       </For>
+      <hr />
     </nav>
   );
 };

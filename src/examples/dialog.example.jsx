@@ -49,6 +49,7 @@ export default (context) => {
 
   //   close when click out of the box
   const resetIfOut = (e) => {
+    console.log(e);
     const { left, right, bottom, top } = dialog.getBoundingClientRect();
     /* to understand what is left, right...and the constraints, just check the picture
     at https://developer.mozilla.org/fr/docs/Web/API/Element/getBoundingClientRect
@@ -59,11 +60,15 @@ export default (context) => {
       e.clientY < top ||
       e.clientY > bottom
     ) {
+      console.log("out");
       reset();
     }
   };
 
-  onMount(() => dialog.addEventListener("click", resetIfOut));
+  onMount(() => {
+    console.log("onmount");
+    dialog.addEventListener("click", resetIfOut);
+  });
   onCleanup(() => dialog.removeEventListener("click", resetIfOut));
 
   return (

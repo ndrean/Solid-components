@@ -23,6 +23,7 @@ const Label = styled("label")`
     margin-left: 1rem;
   }
 `;
+
 export default (context) => (props) => {
   // DOM references
   let output, formEx, passwordInput, passwordConfInput;
@@ -113,7 +114,7 @@ export default (context) => (props) => {
   };
 
   return (
-    <>
+    <section id="form.examples">
       <form id="form-ex" onSubmit={handleSubmit} ref={formEx}>
         <Input
           required
@@ -153,7 +154,7 @@ export default (context) => (props) => {
             entry={password()}
             setEntry={setPassword}
             nb={computeLen()}
-            autocomplete="off"
+            // autocomplete="off"
             isInvalid={constraints["password"]}
             setDisabled={setDisabled}
             validations={validations()}
@@ -208,6 +209,6 @@ export default (context) => (props) => {
       <GrayDiv>
         <output ref={output}></output>
       </GrayDiv>
-    </>
+    </section>
   );
 };

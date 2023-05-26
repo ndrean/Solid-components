@@ -32,7 +32,7 @@ export default (context) => {
 
   return function SpinnerExamples() {
     return (
-      <div>
+      <section id="spinner.examples">
         <Title>{tr.t("Spinners")}</Title>
         <p>
           Progress bar: you can adjust the <code> width </code> and{" "}
@@ -116,7 +116,7 @@ export default (context) => {
         </p>
 
         <SpinCircle size={100} duration={500} />
-      </div>
+      </section>
     );
   };
 };

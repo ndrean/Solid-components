@@ -54,7 +54,7 @@ function home(context) {
   // const HRLine = title(hrLine);
 
   return () => (
-    <div style={{ width: "100%" }}>
+    <section id="homePage">
       <Title1>Pattern for functional components with SolidJS</Title1>
 
       <p>
@@ -255,7 +255,7 @@ function home(context) {
         />
         <PropsTitle newClass={contextDemo.classes.solid}>Red solid</PropsTitle>
       </details>
-    </div>
+    </section>
   );
 }
 

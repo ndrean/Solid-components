@@ -46,12 +46,14 @@ export default (context) => (props) => {
 
   // const HRLine = title(context.classes.hrLine);
   const GrayDiv = grayDiv(context);
-  const Title = dynTitle("", "h3");
+  const Title = dynTitle(stdTitle, "h1");
+  const H3 = dynTitle("", "h3");
   const Button = button(context);
   const Tick = tickSVG("bisque", "4em");
 
   return (
-    <>
+    <section id="select.examples">
+      <Title>Selection</Title>
       <details>
         <summary>
           We have a list of countries and want to render a <code> SELECT </code>{" "}
@@ -75,9 +77,9 @@ export default (context) => (props) => {
         inside to get the state reset on every visit. The first selection is
         reset whilst not the second in the demo below.
       </p>
-      <Title>
+      <H3>
         A simple <code> SELECT </code> example
-      </Title>
+      </H3>
       <form>
         <label for="country" style={{ "padding-right": "10px" }}>
           Choose a country:
@@ -103,9 +105,9 @@ export default (context) => (props) => {
         <p>{options[selected()]}</p>
       </GrayDiv>
       <br />
-      <Title>
+      <H3>
         An <code> AUTOCOMPLETE </code> example with <code> DATALIST </code>
-      </Title>
+      </H3>
       <details>
         <summary>
           Key points on <code> DATALIST </code>
@@ -156,7 +158,7 @@ export default (context) => (props) => {
         <output>{options[selectedAuto()]}</output>
       </GrayDiv>
       <br />
-    </>
+    </section>
   );
 };
 

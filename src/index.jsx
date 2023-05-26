@@ -1,6 +1,13 @@
-import { createSignal, onMount, onCleanup, Show, Suspense } from "solid-js";
+import {
+  createSignal,
+  onMount,
+  onCleanup,
+  Show,
+  Suspense,
+  createEffect,
+} from "solid-js";
 import { render } from "solid-js/web";
-import { css, styled } from "solid-styled-components";
+import { styled, css } from "solid-styled-components";
 import { Router } from "@solidjs/router";
 
 import nav from "./components/nav";
@@ -10,15 +17,28 @@ import drawer from "./components/drawer";
 import header from "./components/header";
 import { spinCircle } from "./components/loaders";
 
-const container = css`
+const GridContainer = styled("div")`
   display: grid;
-  grid-template-columns: var(--width) 1fr;
+  grid-template-columns: var(--width) auto;
   margin-top: 60px;
   overflow-y: scroll;
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
 `;
+
+const Container = styled("div")`
+  display: block;
+  margin-top: 60px;
+  overflow-y: scroll;
+`;
+
+// @media (max-width: var(--mobile)) {
+//   grid-template-columns: 100vw;
+// }
+// const NavContainer = styled("div")`
+//   display: ${(props) => props.hideOnMobile && "none"};
+//   @media (max-width: var(--mobile)) {
+//     display: block;
+//   }
+// `;
 
 const CenterSpin = styled("div")`
   display: flex;
@@ -30,7 +50,7 @@ const CenterSpin = styled("div")`
 const App = () => {
   const [menuOpen, setMenuOpen] = createSignal(false);
   const [isMobile, setIsMobile] = createSignal(false);
-  const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+  const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
   const navChange = () => setTimeout(() => setMenuOpen(false), 100);
   const toggleMenu = () => setMenuOpen((v) => !v);
 
@@ -39,48 +59,43 @@ const App = () => {
   const Spin = spinCircle(context);
   const Header = header(context);
 
-  const Container = (props) => <div class={container}>{props.children}</div>;
-
   onMount(() => {
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
   });
 
   onCleanup(() => {
-    window.removeEventListener("resize", checkMobile);
+    window.removeEventListener("resize", checkIsMobile);
   });
 
   return (
-    <>
-      <Router>
-        <Header toggle={toggleMenu} />
-        <Suspense
+    <Router>
+      <Header toggle={toggleMenu} />
+      <Suspense
+        fallback={
+          <CenterSpin>
+            <Spin />
+          </CenterSpin>
+        }
+      >
+        <Show
+          when={isMobile()}
           fallback={
-            <CenterSpin>
-              <Spin />
-            </CenterSpin>
+            <GridContainer>
+              <Nav navChange={navChange} />
+              <Pages />
+            </GridContainer>
           }
         >
-          <Show
-            when={isMobile()}
-            fallback={
-              <Container>
-                <Nav />
-
-                <Pages />
-              </Container>
-            }
-          >
+          <Container>
             <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
-              <Nav override={isMobile()} navChange={(e) => navChange(e)} />
+              <Nav navChange={navChange} />
             </Drawer>
-            <Container>
-              <Pages />
-            </Container>
-          </Show>
-        </Suspense>
-      </Router>
-    </>
+            <Pages />
+          </Container>
+        </Show>
+      </Suspense>
+    </Router>
   );
 };
 

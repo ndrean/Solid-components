@@ -21,7 +21,7 @@ export default (context) => {
         position: absolute;
         z-index: ${open ? 1 : -1};
         opacity: ${open ? 0.5 : 0};
-        background-color: ${grey};
+        background-color: ${grey[100]};
         top: 0;
         left: 0;
         height: 100%;
@@ -30,13 +30,16 @@ export default (context) => {
       `,
       content: `
         transform: translate(${open ? "0%" : "-100%"}, 0px);
-        z-index: 2;
+        z-index: 20;
         position: absolute;
+        overflow-y: scroll;
         box-shadow: ${shadows[1]};
         background-color: ${grey[100]};
         top: 0;
         left: 0;
         transition: transform 0.3s ease-out;
+        height:90vh;
+        overflow-y: scroll;
         `,
     });
 
