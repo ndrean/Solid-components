@@ -22,9 +22,9 @@ const GridContainer = styled("div")`
   display: grid;
   grid-template-columns: var(--width) auto;
   margin-top: 60px;
+  max-height: 100vh;
   overflow: hidden auto;
   overflow-behavior: contain;
-  max-height: 100vh;
 `;
 // grid: [stack] 1fr / min-content var(--width) [stack] auto;
 // overflow-y: scroll;
@@ -33,9 +33,9 @@ const Container = styled("div")`
   display: block;
   margin-top: 60px;
   overflow: auto;
-  overflow-behavior: contain;
   max-height: 100vh;
 `;
+// overflow-behavior: contain;
 
 // @media (max-width: var(--mobile)) {
 //   grid-template-columns: 100vw;

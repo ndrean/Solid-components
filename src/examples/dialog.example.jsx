@@ -149,7 +149,8 @@ export default (context) => {
           Check terms and conditions
         </Button>
       </div>
-      <Dialog ref={dialog}>
+      <DialogPos ref={dialog}>
+        <h1>Centered Dailog!</h1>
         {/* This container defines the classes that apply to "main", "header", "footer" */}
         <ContentContainerExample>
           <div class="header">My dialog</div>
@@ -166,7 +167,7 @@ export default (context) => {
             </Button>
           </div>
         </ContentContainerExample>
-      </Dialog>
+      </DialogPos>
       <br />
       <GrayDiv>
         <h5>

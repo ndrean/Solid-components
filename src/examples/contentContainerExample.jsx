@@ -5,7 +5,7 @@ export default (context) => {
     theme: { shadows, palette },
   } = context;
 
-  const ContentContainer = styled("div")`
+  return styled("div")`
     box-shadow: ${shadows[10]};
     background-color: #f1f1f1;
     top: 0;
@@ -43,5 +43,4 @@ export default (context) => {
       padding: 10px;
     }
   `;
-  return () => <ContentContainer />;
 };
