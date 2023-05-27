@@ -24,11 +24,11 @@ export default (context) => (props) => {
   const HamburgerSVG = hamburgerSVG(context);
 
   return (
-    <div class={headerCss}>
-      <Button onClick={props.toggle} aria-label="btn">
-        <HamburgerSVG color={"orange"} />
+    <header class={headerCss}>
+      <Button onClick={props.toggle} aria-label="open-nav">
+        <HamburgerSVG color="orange" />
       </Button>
       <p class={headerTitle}>Components & CSS with SolidJS</p>
-    </div>
+    </header>
   );
 };

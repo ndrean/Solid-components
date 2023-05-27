@@ -9,7 +9,7 @@ export default (context) => {
   const Alert = alert(context);
   const Title = dynTitle("h1", stdTitle);
 
-  return (
+  return () => (
     <section id="alert">
       <Title>{tr.t("Alert")}</Title>
       <Alert

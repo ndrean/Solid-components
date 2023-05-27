@@ -38,7 +38,7 @@ export default (context) => {
       saveContext();
     });
 
-  return (
+  return () => (
     <section id="modal">
       <Title>{tr.t("Modal")}</Title>
       <p>

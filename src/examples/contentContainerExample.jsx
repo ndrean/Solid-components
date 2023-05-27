@@ -43,5 +43,5 @@ export default (context) => {
       padding: 10px;
     }
   `;
-  return ContentContainer;
+  return () => <ContentContainer />;
 };

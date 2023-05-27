@@ -22,7 +22,7 @@ export default (context) => {
     // console.log(Object.values(e.target.attributes));
   };
 
-  return (
+  return () => (
     <section id="button">
       <Form onSubmit={(e) => e.preventDefault()}>
         <Title>Flat</Title>

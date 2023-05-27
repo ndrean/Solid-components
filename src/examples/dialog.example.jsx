@@ -84,7 +84,7 @@ export default (context) => {
     font-weight: bold;
   `;
 
-  return (
+  return () => (
     <section id="dialog">
       <Title>{tr.t("Dialog")}</Title>
       <p>

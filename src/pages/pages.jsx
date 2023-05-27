@@ -4,12 +4,13 @@ import { Routes, Route } from "@solidjs/router";
 import routes from "../routes";
 import "../index.css";
 
-export default (context) => (
-  <div>
-    <Routes>
-      <For each={routes}>
-        {({ href, component }) => <Route path={href} element={component} />}
-      </For>
-    </Routes>
-  </div>
-);
+export default (context) => () =>
+  (
+    <main>
+      <Routes>
+        <For each={routes}>
+          {({ href, component }) => <Route path={href} element={component} />}
+        </For>
+      </Routes>
+    </main>
+  );

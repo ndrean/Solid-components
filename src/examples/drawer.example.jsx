@@ -24,7 +24,7 @@ export default (context) => {
     setTimeout(() => setDrawOpen(false), 400);
   };
 
-  return (
+  return () => (
     <section id="drawer">
       <Title>{tr.t("Drawer")}</Title>
 

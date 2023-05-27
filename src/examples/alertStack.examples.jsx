@@ -19,7 +19,7 @@ export default (context) => {
 
   const { AlertStack, msgs, add } = alertStack(context);
 
-  return (
+  return () => (
     <section
       id="alert-stack"
       class={css`

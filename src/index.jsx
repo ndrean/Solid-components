@@ -10,16 +10,17 @@ import { render } from "solid-js/web";
 import { styled, css } from "solid-styled-components";
 import { Router } from "@solidjs/router";
 
-import nav from "./components/nav";
-import Pages from "./pages/pages.jsx";
 import context from "./context";
+
+import nav from "./components/nav";
+import pages from "./pages/pages.jsx";
 import drawer from "./components/drawer";
 import header from "./components/header";
 import { spinCircle } from "./components/loaders";
 
 const GridContainer = styled("div")`
   display: grid;
-  grid-template-columns: var(--width) auto;
+  grid-template-columns: var(--width) 1fr;
   margin-top: 60px;
   overflow-y: scroll;
 `;
@@ -58,6 +59,7 @@ const App = () => {
   const Drawer = drawer(context);
   const Spin = spinCircle(context);
   const Header = header(context);
+  const Pages = pages(context);
 
   onMount(() => {
     checkIsMobile();
@@ -87,7 +89,7 @@ const App = () => {
             </GridContainer>
           }
         >
-          <Container>
+          <Container id="mobile">
             <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
               <Nav navChange={navChange} />
             </Drawer>

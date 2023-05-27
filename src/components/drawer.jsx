@@ -46,7 +46,7 @@ export default (context) => {
     // createEffect(() => console.log("drawer", props.open));
 
     return (
-      <div
+      <aside
         class={css`
           ${style(props.open).base}
         `}
@@ -64,7 +64,7 @@ export default (context) => {
         >
           {props.children}
         </div>
-      </div>
+      </aside>
     );
   };
 };
