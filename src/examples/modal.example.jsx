@@ -24,7 +24,7 @@ export default (context) => {
   const Modal = modal(context);
 
   const Button = button(context);
-  const Title = dynTitle(stdTitle, "h1");
+  const Title = dynTitle("h1", stdTitle);
   const GrayDiv = grayDiv(context);
 
   const saveContext = async () => {

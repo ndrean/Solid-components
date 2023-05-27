@@ -46,8 +46,8 @@ export default (context) => (props) => {
 
   // const HRLine = title(context.classes.hrLine);
   const GrayDiv = grayDiv(context);
-  const Title = dynTitle(stdTitle, "h1");
-  const H3 = dynTitle("", "h3");
+  const Title = dynTitle("h1", stdTitle);
+  const H3 = dynTitle("h3");
   const Button = button(context);
   const Tick = tickSVG("bisque", "4em");
 

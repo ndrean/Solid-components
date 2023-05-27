@@ -10,7 +10,7 @@ export default (context) => {
     classes: { stdTitle },
   } = context;
   const Button = button(context);
-  const Title = dynTitle(stdTitle, "h1");
+  const Title = dynTitle("h1", stdTitle);
   const ImgSVG = imgSVG();
   const Tick = tickSVG(context);
 

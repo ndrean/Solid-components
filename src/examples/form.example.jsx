@@ -6,10 +6,10 @@ import checkbox from "../components/checkbox";
 import button from "../components/button";
 import grayDiv from "../components/grayDiv";
 
-const Span = styled("span")`
-  color: red;
-  margin-left: 10px;
-`;
+// const Span = styled("span")`
+//   color: red;
+//   margin-left: 10px;
+// `;
 
 const PasswordContainer = styled("div")`
   display: flex;

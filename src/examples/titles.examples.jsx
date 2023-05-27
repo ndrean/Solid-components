@@ -10,10 +10,10 @@ export default (context) => {
     border: solid 4px;
   `;
 
-  const Title = title(stdTitle);
+  const Title = title("h1", stdTitle);
 
-  const H4 = dynTitle(stdTitle, "h4");
-  const H2 = dynTitle(blueSolid, "h2");
+  const H4 = dynTitle("h4", stdTitle);
+  const H2 = dynTitle("h2", blueSolid);
 
   const PropTitle = propsTitle(context);
 

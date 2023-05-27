@@ -15,7 +15,7 @@ export default (context) => {
     classes: { stdContainer, stdTitle },
   } = context;
   const Button = button(context);
-  const Title = dynTitle(stdTitle, "h1");
+  const Title = dynTitle("h1", stdTitle);
 
   const { AlertStack, msgs, add } = alertStack(context);
 

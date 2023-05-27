@@ -14,7 +14,7 @@ export default (context) => {
     },
   } = context;
 
-  const Title = dynTitle(stdTitle, "h1");
+  const Title = dynTitle("h1", stdTitle);
   const Checkbox = checkbox(context);
   const GrayDiv = grayDiv(context);
 

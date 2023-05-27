@@ -7,7 +7,7 @@ export default (context) => {
     classes: { stdTitle },
   } = context;
   const Alert = alert(context);
-  const Title = dynTitle(stdTitle, "h1");
+  const Title = dynTitle("h1", stdTitle);
 
   return (
     <section id="alert">

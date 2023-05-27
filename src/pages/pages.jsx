@@ -4,14 +4,6 @@ import { Routes, Route } from "@solidjs/router";
 import routes from "../routes";
 import "../index.css";
 
-// const AppContainer = styled("div")`
-//   padding: 20px;
-//   overflow-y: scroll;
-//   @media (max-width: var(--mobile)) ) {
-//     width: 100%;
-//   }
-// `;
-
 export default (context) => (
   <div>
     <Routes>

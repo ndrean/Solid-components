@@ -23,7 +23,7 @@ export default (context) => () => {
     codes: { check },
   } = context;
 
-  const H2 = dynTitle("", "h2");
+  const H2 = dynTitle("h2");
   const CodePoint = drawCodePoint();
   const Emoji = drawEmoji();
   const ImgSVG = imgSVG();

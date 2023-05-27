@@ -49,8 +49,8 @@ function home(context) {
 
   const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
   const PropsTitle = propsTitle(contextDemo);
-  const Title1 = dynTitle(stdTitle, "h1");
-  const Title = dynTitle("", "h2");
+  const Title1 = dynTitle("h1", stdTitle);
+  const Title = dynTitle("h2");
   // const HRLine = title(hrLine);
 
   return () => (
