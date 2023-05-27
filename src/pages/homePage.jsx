@@ -12,6 +12,14 @@ const Pre = styled("pre")`
   background-color: aliceblue;
 `;
 
+const Code = (props) => (
+  <>
+    <code>{props.children}</code>
+    <br />
+    <br />
+  </>
+);
+
 const link = css`
   text-decoration: none;
   background-color: beige;
@@ -81,23 +89,25 @@ function home(context) {
         a function component.
       </p>
       <Pre>
-        <code>const comp = (context) =&gt</code>
+        <code>const comp = (ctxt) =&gt</code>
         <br />
-        <code> &nbsp(props) =&gt component(context, props);</code>
+        <code> &nbsp(props) =&gt component(ctxt, props);</code>
         <br />
-        <code>const ContextedComp = comp(someContext);</code>
+        <code>const CtxtComp = comp(someCtxt);</code>
         <br />
-        <code>&ltContextedComp \u007B...props\u007D&gt</code>
+        <code>&ltCtxtComp \u007B...props\u007D&gt</code>
         <br />
         <code>&nbsp \u007Bprops.children\u007D</code>
         <br />
-        <code> &lt/ContextedComp&gt;</code>
+        <code> &lt/CtxtComp &gt</code>
         <br />
       </Pre>
       <p>
         This allows to pass a "static" theme without using{" "}
-        <code> ThemeProvider </code> via
-        <code> createContext </code>. The later is described in the{" "}
+        <code> ThemeProvider </code>
+        <br /> via
+        <code> createContext </code>
+        <br />. The later is described in the{" "}
         <Link href=" https://www.solidjs.com/examples/context" target="#">
           doc "context" example
         </Link>
@@ -118,25 +128,30 @@ function home(context) {
         <code>
           &nbsp &lth1 \u007B...props\u007D&gt\u007Bprops.children\u007D&lt/h1&gt
         </code>
+        <br />
       </Pre>
       <p>
         We can use the style prop to define in-line CSS and pass a JS object
         (with keys in dash-form with explicit units):
       </p>
       <Pre>
-        <code>&ltTitle style=\u007B\u007B"font-size":"2em"\u007D\u007D&gt</code>
+        <code>
+          &ltTitle style= \u007B\u007B"font-size":"2em"\u007D\u007D &gt
+        </code>
         <br />
         <code>&nbsp Big title</code>
         <br />
         <code>&lt/Title&gt</code>
+        <br />
       </Pre>
       <details>
         <summary>Show!</summary>
         <TitleV0 style={{ "font-size": "2em" }}>Big title</TitleV0>
       </details>
       <p>
-        SolidJS provides the prop <code> class </code> to pass a CSS class name.
-        Suppose we define CSS classe "center-blue" in the file "index.css".
+        SolidJS provides the prop <code> class </code>
+        <br /> to pass a CSS class name. Suppose we define CSS classe
+        "center-blue" in the file "index.css".
       </p>
       <Pre>
         <code>.center-blue \u007B</code>
@@ -146,6 +161,7 @@ function home(context) {
         <code>&nbsp color: blue;</code>
         <br />
         <code>\u007D</code>
+        <br />
       </Pre>
       <p>We use the class prop:</p>
       <Pre>
@@ -154,6 +170,7 @@ function home(context) {
         <code>&nbsp Blue and solid title</code>
         <br />
         <code>&lt/TitleV0&gt</code>
+        <br />
       </Pre>
       <details>
         <summary>Show!</summary>
@@ -186,38 +203,51 @@ function home(context) {
       </Pre>
       <p>
         We can now define customized components that use the context object. We
-        use <code> css </code> from the package{" "}
-        <strong>"solid-styled-components"</strong>.
+        use <code> css </code>
+        <br /> from the package <strong>"solid-styled-components"</strong>.
       </p>
       <p>
         When we want to override classes, we simply add "oldClass + newClass"
         (in this order).
       </p>
       <Pre>
-        <code>import \u007B css \u007D from "solid-styled-components";</code>
+        <code>import \u007B css \u007D from ...</code>
         <br />
-        <code>const title = (context) =&gt (props) =&gt \u007B</code>
+        <code>const title = (ctxt) =&gt </code>
         <br />
-        <code>
-          &nbsp const \u007B classes: \u007B base \u007D\u007D = context;
-        </code>
+        <code>&nbsp (props) =&gt \u007B</code>
         <br />
-        <code>&nbsp const newclass = </code>
+        <code>&nbsp &nbsp const \u007B </code>
         <br />
-        <code>&nbsp &nbsp props?.newClass ? </code>
+        <code>&nbsp &nbsp &nbsp classes: \u007B base \u007D</code>
         <br />
-        <code>&nbsp &nbsp&nbsp base + props.newClass : </code>
+        <code>&nbsp &nbsp \u007D = context;</code>
         <br />
-        <code>&nbsp &nbsp&nbsp base;</code>
+        <code>&nbsp &nbsp const newclass = </code>
         <br />
-        <code>&nbsp const label = props?.label || props.children;</code>
+        <code>&nbsp &nbsp &nbsp props?.newClass ? </code>
+        <br />
+        <code>&nbsp &nbsp &nbsp &nbsp base + props.newClass : </code>
+        <br />
+        <code>&nbsp &nbsp &nbsp &nbsp base;</code>
+        <br />
+        <code>&nbsp &nbsp const label = </code>
+        <br />
+        <code> &nbsp &nbsp &nbsp props?.label || </code>
+        <br />
+        <code>&nbsp &nbsp &nbsp props.children;</code>
         <br />
         <code>&nbsp return (</code>
         <br />
+        <code>&nbsp &nbsp &lth4</code>
+        <br />
         <code>
-          &nbsp &nbsp &lth4 class=\u007Bcss`$\u007Bnewclass\u007D`\u007D
-          \u007B...props\u007D&gt
+          &nbsp &nbsp &nbsp class=\u007Bcss`$\u007Bnewclass\u007D`\u007D
         </code>
+        <br />
+        <code>&nbsp &nbsp &nbsp\u007B...props\u007D</code>
+        <br />
+        <code>&nbsp &nbsp &gt</code>
         <br />
         <code>&nbsp &nbsp &nbsp \u007Blabel\u007D</code>
         <br />
@@ -226,25 +256,37 @@ function home(context) {
         <code>&nbsp )</code>
         <br />
         <code>\u007D</code>
+        <br />
       </Pre>
 
       <Pre>
-        <code>import context from "./context.js";</code>
+        <code>import ctxt from "./context.js";</code>
         <br />
         <code>const \u007Bclasses: \u007B</code>
         <br />
         <code>&nbsp blueSolid, solid\u007D\u007D = context;</code>
         <br />
 
-        <code>const PTitle = title(context);</code>
+        <code>const PTitle = title(ctxt);</code>
         <br />
         <code>&ltPTitle label="Red dotted"/&gt</code>
         <br />
-        <code>
-          &ltPTitle newClass=\u007BblueSolid\u007D label="Blue solid"/&gt
-        </code>
+        <code>&ltPTitle</code>
         <br />
-        <code>&ltPTitle newClass=\u007Bsolid\u007D label="Red solid"/&gt</code>
+        <code>&nbsp newClass=\u007BblueSolid\u007D</code>
+        <br />
+        <code>&nbsp label="Blue solid"</code>
+        <br />
+        <code>/&gt</code>
+        <br />
+        <code>&ltPTitle</code>
+        <br />
+        <code>&nbsp newClass=\u007Bsolid\u007D</code>
+        <br />
+        <code>&nbsp label="Red solid"</code>
+        <br />
+        <code>/&gt</code>
+        <br />
       </Pre>
       <details>
         <summary>Show!</summary>

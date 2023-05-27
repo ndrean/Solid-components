@@ -20,15 +20,21 @@ import { spinCircle } from "./components/loaders";
 
 const GridContainer = styled("div")`
   display: grid;
-  grid-template-columns: var(--width) 1fr;
+  grid-template-columns: var(--width) auto;
   margin-top: 60px;
-  overflow-y: scroll;
+  overflow: hidden auto;
+  overflow-behavior: contain;
+  max-height: 100vh;
 `;
+// grid: [stack] 1fr / min-content var(--width) [stack] auto;
+// overflow-y: scroll;
 
 const Container = styled("div")`
   display: block;
   margin-top: 60px;
-  overflow-y: scroll;
+  overflow: auto;
+  overflow-behavior: contain;
+  max-height: 100vh;
 `;
 
 // @media (max-width: var(--mobile)) {

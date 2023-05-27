@@ -32,13 +32,12 @@ export default (context) => {
         transform: translate(${open ? "0%" : "-100%"}, 0px);
         z-index: 20;
         position: absolute;
-        overflow-y: scroll;
         box-shadow: ${shadows[1]};
         background-color: ${grey[100]};
         top: 0;
         left: 0;
         transition: transform 0.3s ease-out;
-        height:90vh;
+        max-height:90vh;
         overflow-y: scroll;
         `,
     });
