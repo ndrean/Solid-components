@@ -28,7 +28,7 @@ const propsTitle = (context) => (props) => {
   );
 };
 
-const dynTitle = (myclass, tag = "h4") =>
+const dynTitle = (tag = "h4", myclass = "") =>
   styled(tag)`
     ${myclass}
   `;

@@ -21,9 +21,12 @@ code {
   font-size: 1.2em;
 }
 
+/* 
 dialog::backdrop {
   background: none;
-}
+  backdrop-filter: blur(5px);
+  transition: backdrop-filter 0.5s ease;
+} */
 
 section {
   margin: 5px;
