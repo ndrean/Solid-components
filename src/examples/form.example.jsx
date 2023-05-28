@@ -1,8 +1,8 @@
-import { createSignal, createEffect, createMemo } from "solid-js";
-import { styled, css } from "solid-styled-components";
+import { createSignal, createMemo, onMount, onCleanup } from "solid-js";
+import { styled } from "solid-styled-components";
 import inputComponent from "../components/inputComponent";
 import checkbox from "../components/checkbox";
-import dialogComponent from "../components/dialogComponent";
+import dialogComponent, { resetIfOut } from "../components/dialogComponent";
 import { dTitle } from "../components/title";
 import contentDiv from "./ContentDiv";
 import button from "../components/button";
@@ -21,9 +21,7 @@ const PasswordContainer = styled("div")`
 const Label = styled("label")`
   display: flex;
   align-items: center;
-  label {
-    margin-left: 1rem;
-  }
+  margin-left: 20px;
 `;
 
 export default (context) => (props) => {
@@ -147,6 +145,13 @@ export default (context) => (props) => {
 
   const Dialog = dialogComponent(context)();
 
+  onMount(() => {
+    diag.addEventListener("click", (e) => {
+      if (resetIfOut(e, diag)) formReset();
+    });
+  });
+  onCleanup(() => removeEventListener("click", (e) => resetIfOut(e, diag)));
+
   return (
     <section id="form.examples">
       <Button fullWidth primary raised onClick={openDialog}>
@@ -162,6 +167,8 @@ export default (context) => (props) => {
               svg={personSVG}
               alt="personSVG"
               required
+              autofocus
+              pattern="^(\w+){4,}"
               label="name"
               name="name"
               type="text"
@@ -202,7 +209,7 @@ export default (context) => (props) => {
                 entry={password()}
                 setEntry={setPassword}
                 nb={computeLen()}
-                // autocomplete="off"
+                autocomplete
                 isInvalid={constraints["password"]}
                 setDisabled={setDisabled}
                 validations={validations()}
@@ -221,7 +228,6 @@ export default (context) => (props) => {
                 Show Password
               </Label>
             </PasswordContainer>
-            <br />
             <PasswordContainer>
               <Input
                 svg={keySVG}

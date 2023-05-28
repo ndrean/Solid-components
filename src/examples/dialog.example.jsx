@@ -3,7 +3,7 @@ import { styled } from "solid-styled-components";
 
 import button from "../components/button";
 import { dTitle } from "../components/title";
-import dialogComponent from "../components/dialogComponent.jsx";
+import dialogComponent, { resetIfOut } from "../components/dialogComponent.jsx";
 import grayDiv from "../components/grayDiv";
 import Unicode from "../components/Unicode";
 import { tickSVG } from "../components/svgs";
@@ -58,21 +58,10 @@ export default (context) => {
   };
 
   //  close when click out of the box
-  const resetIfOut = (e) => {
-    const { left, right, bottom, top } = dialog.getBoundingClientRect();
-
-    if (
-      e.clientX < left ||
-      e.clientX > right ||
-      e.clientY < top ||
-      e.clientY > bottom
-    ) {
-      reset();
-    }
-  };
-
   onMount(() => {
-    dialog.addEventListener("click", (e) => resetIfOut(e, dialog));
+    dialog.addEventListener("click", (e) => {
+      if (resetIfOut(e, dialog)) reset();
+    });
   });
   onCleanup(() => removeEventListener("click", (e) => resetIfOut(e, dialog)));
 

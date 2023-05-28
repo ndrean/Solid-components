@@ -199,13 +199,13 @@ function home(context) {
         <br />
       </Pre>
       <p>
-        We can now define customized components that use the context object. We
-        use <code> css </code>
-        <br /> from the package <strong>"solid-styled-components"</strong>.
+        We define a customized component that uses the context object. We use{" "}
+        <code> css </code>
+        from the package <strong>"solid-styled-components"</strong>.
       </p>
       <p>
-        When we want to override classes, we simply add "oldClass + newClass"
-        (in this order).
+        We can read props given to the component. When we want to override
+        classes, we simply add "oldClass + newClass" (in this order).
       </p>
       <Pre>
         <code>import \u007B css \u007D from ...</code>
@@ -275,56 +275,61 @@ function home(context) {
         <code>&nbsp label="Blue solid"</code>
         <br />
         <code>/&gt</code>
-        <br />
-        <code>&ltPT2</code>
-        <br />
-        <code>&nbsp newClass=\u007Bsolid\u007D</code>
-        <br />
-        <code>&nbsp label="Red solid"</code>
-        <br />
-        <code>/&gt</code>
-        <br />
       </Pre>
       <details>
         <summary>Show!</summary>
         <PropsT2 label="Red-dotted" />
         <PropsT2 newClass={contextDemo.classes.blueSolid} label="Blue solid" />
-        <PropsT2 newClass={contextDemo.classes.solid}>Red solid</PropsT2>
       </details>
       <p>
-        We can also use <code> styled </code> from the library. For example, we
-        can use a base style for different <code> H </code> tags and add some
-        more styling:
+        When we only want to modify the CSS, we can also use{" "}
+        <code> styled </code> from the library. For example, we can use a base
+        style for different <code> H </code> tags and add some more styling:
       </p>
       <Pre>
         <code>const title = (ctx)=&gt (tag, css, optCss="") =&gt </code>
         <br />
         <code>&nbsp styled(tag)`</code>
         <br />
-        <code>&nbsp $\u007Bcss\u007D; with CTX dependencies</code>
+        <code>&nbsp $\u007Bcss\u007D;</code>
         <br />
 
         <code>&nbsp $\u007BOptCss\u007D;</code>
         <br />
         <code>`</code>
       </Pre>
+      <p>Alternatively:</p>
+      <Pre>
+        <code>const sTitle = (context) =&gt(tag, base) =&gt</code>
+        <br />
+        <code>&nbsp styled(tag)((props) =&gt \u007B</code>
+        <br />
+        <code>&nbsp return props.newClass ?</code>
+        <br />
+        <code>&nbsp &nbsp base + props.newClass : base;</code>
+        <br />
+        <code>\u007D);</code>
+      </Pre>
       <p>We can use it:</p>
       <Pre>
         <code>const center = `text-align: center;`</code>
       </Pre>
       <Pre>
+        <code>const T3C = title(ctx)("h3", blueSolid, center)</code>
+        <br />
+        <code>&ltT3C&gt H3 blueSolid centered&lt/T3C&gt</code>
+        <br />
+      </Pre>
+      <p>or with the second version:</p>
+      <Pre>
+        <br />
         <code>const T3 = title(context)("h3", blueSolid)</code>
         <br />
-        <code>const T3Center = title("h3", blueSolid, center)</code>
-        <br />
-        <code>\u003C T3\u003E H3 blueSolid centered\u003C H3\u003E</code>
+        <code>
+          &ltT3 newClass=\u007Bcenter\u007D&gtBlue solid Centered&ltT3&gt
+        </code>
       </Pre>
-      <p>and use it:</p>
-      <Pre>
-        <code>&ltT3&gtExample&lt/T3&gt</code>
-        <br />
-        <code>&ltT3Center&gtCentered&lt/T3Center&gt</code>
-      </Pre>
+
       <details>
         <summary>Show!</summary>
         <T3>Example</T3>

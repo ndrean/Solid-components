@@ -26,6 +26,7 @@ export function resetIfOut(e, myref) {
     e.clientY < top ||
     e.clientY > bottom
   ) {
-    myref.reset();
+    return true;
   }
+  return false;
 }

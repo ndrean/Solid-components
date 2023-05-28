@@ -23,4 +23,9 @@ const dTitle = (tag = "h4", myclass = "", opt = "") =>
     ${opt}
   `;
 
-export { dTitle, title };
+const sTitle = (context) => (tag, base) =>
+  styled(tag)((props) => {
+    return props.newClass ? base + props.newClass : base;
+  });
+
+export { dTitle, title, sTitle };
