@@ -7,7 +7,7 @@ export default (context) => {
 
   return (optCss) => styled("dialog")`
     border: none;
-    padding: 10px;
+    padding: 0px 10px 0px 10px;
     box-shadow: ${shadows[4]};
     background: ${palette.primary.background};
     margin-left: ${(props) => (props.left ? props.left + "px" : "auto")};

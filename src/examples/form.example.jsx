@@ -24,6 +24,8 @@ const Label = styled("label")`
   margin-left: 20px;
 `;
 
+const dialogCSS = `border-radius: 10px;`;
+
 export default (context) => (props) => {
   const {
     classes: { stdTitle },
@@ -141,9 +143,7 @@ export default (context) => (props) => {
     diag.showModal();
   };
 
-  // createEffect(() => console.log(pwdCheckbox()));
-
-  const Dialog = dialogComponent(context)();
+  const Dialog = dialogComponent(context)(dialogCSS);
 
   onMount(() => {
     diag.addEventListener("click", (e) => {
@@ -160,7 +160,7 @@ export default (context) => (props) => {
       <Dialog ref={diag}>
         <ContentDiv>
           <header class="header">
-            <Title>Credentials</Title>
+            <h1>Credentials</h1>
           </header>
           <form class="main" id="form-ex" onSubmit={handleSubmit} ref={formEx}>
             <Input
