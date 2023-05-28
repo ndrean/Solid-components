@@ -287,28 +287,34 @@ function home(context) {
         style for different <code> H </code> tags and add some more styling:
       </p>
       <Pre>
-        <code>const title = (ctx)=&gt (tag, css, optCss="") =&gt </code>
+        <code>const title = (ctx)=&gt</code>
         <br />
-        <code>&nbsp styled(tag)`</code>
+        <code>&nbsp(tag, css, optCss="") =&gt </code>
         <br />
-        <code>&nbsp $\u007Bcss\u007D;</code>
+        <code>&nbsp &nbsp styled(tag)`</code>
+        <br />
+        <code>&nbsp &nbsp &nbsp $\u007Bcss\u007D;</code>
         <br />
 
-        <code>&nbsp $\u007BOptCss\u007D;</code>
+        <code>&nbsp &nbsp &nbsp $\u007BOptCss\u007D;</code>
         <br />
-        <code>`</code>
+        <code>&nbsp &nbsp &nbsp`</code>
       </Pre>
       <p>Alternatively:</p>
       <Pre>
-        <code>const sTitle = (context) =&gt(tag, base) =&gt</code>
+        <code>const sTitle = (context) =&gt</code>
         <br />
-        <code>&nbsp styled(tag)((props) =&gt \u007B</code>
+        <code>&nbsp (tag, base) =&gt</code>
         <br />
-        <code>&nbsp return props.newClass ?</code>
+        <code>&nbsp &nbsp styled(tag)((props) =&gt \u007B</code>
         <br />
-        <code>&nbsp &nbsp base + props.newClass : base;</code>
+        <code>&nbsp &nbsp &nbsp return props.newClass ?</code>
         <br />
-        <code>\u007D);</code>
+        <code>&nbsp &nbsp &nbsp &nbsp base + props.newClass :</code>
+        <br />
+        <code> &nbsp &nbsp &nbsp &nbspbase;</code>
+        <br />
+        <code>&nbsp&nbsp\u007D);</code>
       </Pre>
       <p>We can use it:</p>
       <Pre>

@@ -120,16 +120,14 @@ const CTitle = title(context);
 
 We can also use `styled`from "solid-styled-components" if we only want to change the CSS. This returns a styled function component.
 
-We can use classes (defined via `css`):
+We can use classes (a CSS class, not transformed by `css`):)
 
 ```jsx
 import { styled } from "solid-styled-components";
 
-const sTitle = (context) =>(tag) =>
+const sTitle = (context) =>
+  (tag, base) =>
     styled(tag)((props) => {
-      const {
-        classes: { base },
-      } = context;
       return props.newClass ? base + props.newClass : base;
     });
 
