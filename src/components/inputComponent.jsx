@@ -31,7 +31,8 @@ export default (context) => (props) => {
 
   const ErrorOutput = styled("output")`
     color: red;
-    margin-left: 4px;
+    margin-left: 20px;
+    margin-top: -10px;
     font-size: 0.8em;
     display: flex; /* place below input*/
   `;
@@ -72,7 +73,12 @@ export default (context) => (props) => {
 
   return (
     <InputBlock>
-      <ImgSVG src={props.svg} width={15} alt={props.alt} />
+      <ImgSVG
+        src={props.svg}
+        width={15}
+        alt={props.alt}
+        style={{ "margin-right": "50px" }}
+      />
       <input
         class={css`
           ${props.height ? inputCSS + newClass(props) : inputCSS}

@@ -35,11 +35,11 @@ export default (context) => {
     context.signals.dialogConditions = conditions();
   };
 
-  let diagPos, diagPos2;
+  // refs to DOM dialogs refs
+  let diagPos, diagPos2, dialog;
   const [left, setLeft] = createSignal(10);
 
-  let dialog;
-  const Dialog = dialogComponent(context);
+  const Dialog = dialogComponent(context)();
 
   const reset = () => {
     batch(() => {

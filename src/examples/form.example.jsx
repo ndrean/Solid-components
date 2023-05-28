@@ -4,7 +4,7 @@ import inputComponent from "../components/inputComponent";
 import checkbox from "../components/checkbox";
 import dialogComponent from "../components/dialogComponent";
 import { dTitle } from "../components/title";
-
+import contentDiv from "./ContentDiv";
 import button from "../components/button";
 import grayDiv from "../components/grayDiv";
 import Unicode from "../components/Unicode";
@@ -24,10 +24,6 @@ const Label = styled("label")`
   label {
     margin-left: 1rem;
   }
-`;
-
-const InputDiv = styled("div")`
-  display: inline-block;
 `;
 
 export default (context) => (props) => {
@@ -55,16 +51,12 @@ export default (context) => (props) => {
   const [pwdConfCheckbox, setPwdConfCheckbox] = createSignal(false);
 
   const Input = inputComponent(context);
-
+  const ContentDiv = contentDiv(context);
   const Button = button(context);
   const GrayDiv = grayDiv(context);
   const Checkbox = checkbox(context);
 
-  const centered = `
-    text-align: center;
-  `;
-
-  const Title = dTitle("h1", stdTitle, centered);
+  const Title = dTitle("h1", stdTitle);
 
   //<----- Define the validations functions for each input
 
@@ -126,6 +118,7 @@ export default (context) => (props) => {
     passwordConfInput.type = "password";
     diag.close();
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password() !== passwordConf())
@@ -152,74 +145,69 @@ export default (context) => (props) => {
 
   // createEffect(() => console.log(pwdCheckbox()));
 
-  const optCssDialog = `padding: 0px 5px 0px 5px;`;
-  const Dialog = dialogComponent(context)(optCssDialog);
+  const Dialog = dialogComponent(context)();
 
   return (
     <section id="form.examples">
-      <button onClick={openDialog}>open</button>
+      <Button fullWidth primary raised onClick={openDialog}>
+        Open Login form
+      </Button>
       <Dialog ref={diag}>
-        <header>
-          <Title>Credentials</Title>
-        </header>
-        <main>
-          <form id="form-ex" onSubmit={handleSubmit} ref={formEx}>
-            <InputDiv>
-              <Input
-                svg={personSVG}
-                alt="personSVG"
-                required
-                label="name"
-                name="name"
-                type="text"
-                entry={name()}
-                setEntry={setName}
-                nb={computeLen()}
-                isInvalid={constraints["name"]}
-                setDisabled={setDisabled}
-                validations={validations()}
-                setValidations={setValidations}
-              />
-            </InputDiv>
+        <ContentDiv>
+          <header class="header">
+            <Title>Credentials</Title>
+          </header>
+          <form class="main" id="form-ex" onSubmit={handleSubmit} ref={formEx}>
+            <Input
+              svg={personSVG}
+              alt="personSVG"
+              required
+              label="name"
+              name="name"
+              type="text"
+              entry={name()}
+              setEntry={setName}
+              nb={computeLen()}
+              isInvalid={constraints["name"]}
+              setDisabled={setDisabled}
+              validations={validations()}
+              setValidations={setValidations}
+            />
             <br />
-            <InputDiv>
-              <Input
-                svg={emailSVG}
-                alt="emailSVG"
-                required
-                label="email"
-                name="email"
-                type="email"
-                entry={email()}
-                setEntry={setEmail}
-                nb={computeLen()}
-                isInvalid={constraints["email"]}
-                setDisabled={setDisabled}
-                validations={validations()}
-                setValidations={setValidations}
-              />
-            </InputDiv>
+            <Input
+              svg={emailSVG}
+              alt="emailSVG"
+              required
+              label="email"
+              name="email"
+              type="email"
+              entry={email()}
+              setEntry={setEmail}
+              nb={computeLen()}
+              isInvalid={constraints["email"]}
+              setDisabled={setDisabled}
+              validations={validations()}
+              setValidations={setValidations}
+            />
             <br />
             <PasswordContainer>
-              <InputDiv>
-                <Input
-                  svg={keySVG}
-                  alt="keySVG"
-                  required
-                  ref={passwordInput}
-                  label="password"
-                  name="password"
-                  type="password"
-                  entry={password()}
-                  setEntry={setPassword}
-                  nb={computeLen()}
-                  // autocomplete="off"
-                  isInvalid={constraints["password"]}
-                  setDisabled={setDisabled}
-                  validations={validations()}
-                  setValidations={setValidations}
-                />
-              </InputDiv>
+              <Input
+                svg={keySVG}
+                alt="keySVG"
+                required
+                ref={passwordInput}
+                label="password"
+                name="password"
+                type="password"
+                entry={password()}
+                setEntry={setPassword}
+                nb={computeLen()}
+                // autocomplete="off"
+                isInvalid={constraints["password"]}
+                setDisabled={setDisabled}
+                validations={validations()}
+                setValidations={setValidations}
+              />
               <Label>
                 <Checkbox
                   id="pwdCheckbox"
@@ -267,15 +255,15 @@ export default (context) => (props) => {
               </Label>
             </PasswordContainer>
           </form>
-        </main>
-        <footer>
-          <Button onClick={formReset} autofocus>
-            <Unicode size="1.5em" code={cross} />
-          </Button>
-          <Button form="form-ex" disabled={disabled()} raised ripple>
-            Submit the form
-          </Button>
-        </footer>
+          <footer class="footer">
+            <Button onClick={formReset} autofocus>
+              <Unicode size="1.5em" code={cross} />
+            </Button>
+            <Button form="form-ex" disabled={disabled()} raised ripple>
+              Submit the form
+            </Button>
+          </footer>
+        </ContentDiv>
       </Dialog>
       <p>You submitted to the server the data below:</p>
       <GrayDiv>
