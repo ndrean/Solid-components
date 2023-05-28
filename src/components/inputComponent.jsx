@@ -1,6 +1,7 @@
 import { createSignal, batch, createEffect } from "solid-js";
 import { css, styled } from "solid-styled-components";
 import imgSVG from "../components/imgSVG";
+import drawEmoji from "./drawEmoji";
 
 export default (context) => (props) => {
   const {
@@ -15,6 +16,7 @@ export default (context) => (props) => {
     box-sizing: border-box;
     padding: 1em 10px 1em 0.5em;
     margin-bottom: 1em;
+    overflow-x: scroll;
     outline: none;
     &:hover {
       box-shadow: ${shadows[8]};
@@ -22,12 +24,18 @@ export default (context) => (props) => {
     &:not(:focus):not(:placeholder-shown):invalid {
       border-color: red;
     }
+    input[type="date"] {size: 40px;}
   `;
 
   const ImgSVG = imgSVG(context);
 
-  const newClass = (props) =>
-    props.height ? `height: ${props.height}px;` : null;
+  const newClass = (props) => {
+    if (props.height || props.width)
+      return `
+    height: ${props.height + "em"};
+    width: ${props.width + "em"};
+    `;
+  };
 
   const ErrorOutput = styled("output")`
     color: red;
@@ -73,12 +81,15 @@ export default (context) => (props) => {
 
   return (
     <InputBlock>
-      <ImgSVG
-        src={props.svg}
-        width={15}
-        alt={props.alt}
-        style={{ "margin-right": "50px" }}
-      />
+      {props.svg && (
+        <ImgSVG
+          src={props.svg}
+          width={15}
+          alt={props.alt}
+          style={{ "margin-right": "50px" }}
+        />
+      )}
+
       <input
         class={css`
           ${props.height ? inputCSS + newClass(props) : inputCSS}

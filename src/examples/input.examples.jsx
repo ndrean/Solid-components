@@ -6,9 +6,8 @@ import imgSVG from "../components/imgSVG";
 import button from "../components/button";
 import grayDiv from "../components/grayDiv";
 import submit from "../assets/submit.webp";
-// import dynamite from "../assets/dynamite.webp";
-// import fileDownload from "../assets/fileDownload.svg";
 import camera from "../assets/camera.svg";
+import drawEmoji from "../components/drawEmoji";
 
 const Label = styled("label")`
   display: flex;
@@ -18,10 +17,15 @@ const Label = styled("label")`
   }
 `;
 
+const CenteredDiv = styled("div")`
+  display: flex;
+`;
+
 export default (context) => {
   const InputComp = inputComponent(context);
   const GrayDiv = grayDiv(context);
   const ImgSVG = imgSVG();
+  const Emoji = drawEmoji(context);
 
   let output, picInput, preview, previewer, formInputs;
 
@@ -106,125 +110,110 @@ export default (context) => {
     <section id="input.examples">
       <StylingDiv color={color()}>
         <form id="form-inputs" onSubmit={handleSubmit} ref={formInputs}>
-          <InputComp
-            id="search"
-            name="search"
-            type="search"
-            entry={search()}
-            setEntry={setSearch}
-            nb={computeLen()}
-            isInvalid={constraints["search"]}
-            setDisabled={setDisabled}
-            validations={validations()}
-            setValidations={setValidations}
-          />
-          <br />
-          <InputComp
-            name="date"
-            id="date"
-            type="date"
-            entry={date()}
-            setEntry={setDate}
-            nb={computeLen()}
-            isInvalid={constraints["date"]}
-            setDisabled={setDisabled}
-            validations={validations()}
-            setValidations={setValidations}
-          />
-          <br />
-          <InputComp
-            name="number"
-            id="number"
-            type="number"
-            entry={number()}
-            setEntry={setNumber}
-            nb={computeLen()}
-            isInvalid={constraints["number"]}
-            setDisabled={setDisabled}
-            validations={validations()}
-            setValidations={setValidations}
-          />
-          <br />
-          <InputComp
-            name="tel"
-            id="tel"
-            type="tel"
-            entry={tel()}
-            setEntry={setTel}
-            nb={computeLen()}
-            isInvalid={constraints["tel"]}
-            setDisabled={setDisabled}
-            validations={validations()}
-            setValidations={setValidations}
-          />
-          <br />
-          <label>
-            Pick up a color:
+          <fieldset>
+            <legend>A collection of inputs</legend>
+            <Emoji label="🔎" size={25} mr={20} />
             <InputComp
-              height={60}
-              width={80}
-              name="color"
-              id="color"
-              type="color"
-              value={color()}
-              entry={color()}
-              setEntry={setColor}
+              id="search"
+              name="search"
+              type="search"
+              entry={search()}
+              setEntry={setSearch}
               nb={computeLen()}
-              isInvalid={constraints["color"]}
+              isInvalid={constraints["search"]}
               setDisabled={setDisabled}
               validations={validations()}
               setValidations={setValidations}
             />
-          </label>
-          <br />
+            <br />
+            <Emoji label="🗓" size={25} mr={20} />
+            <InputComp
+              name="date"
+              id="date"
+              type="date"
+              width={300}
+              entry={date()}
+              setEntry={setDate}
+              nb={computeLen()}
+              isInvalid={constraints["date"]}
+              setDisabled={setDisabled}
+              validations={validations()}
+              setValidations={setValidations}
+            />
+            <br />
+            <Emoji label="🧮" size={25} mr={20} />
+            <InputComp
+              name="number"
+              id="number"
+              type="number"
+              entry={number()}
+              setEntry={setNumber}
+              nb={computeLen()}
+              isInvalid={constraints["number"]}
+              setDisabled={setDisabled}
+              validations={validations()}
+              setValidations={setValidations}
+            />
+            <br />
+            <Emoji label="📞" size={25} mr={20} />
+            <InputComp
+              name="tel"
+              id="tel"
+              type="tel"
+              entry={tel()}
+              setEntry={setTel}
+              nb={computeLen()}
+              isInvalid={constraints["tel"]}
+              setDisabled={setDisabled}
+              validations={validations()}
+              setValidations={setValidations}
+            />
+            <br />
+            <CenteredDiv>
+              <Emoji label="🎨" size={25} mr={20} mt={16} />
+              <label>
+                <InputComp
+                  height={5}
+                  width={5}
+                  name="color"
+                  id="color"
+                  type="color"
+                  value={color()}
+                  entry={color()}
+                  setEntry={setColor}
+                  nb={computeLen()}
+                  isInvalid={constraints["color"]}
+                  setDisabled={setDisabled}
+                  validations={validations()}
+                  setValidations={setValidations}
+                />
+              </label>
+            </CenteredDiv>
 
-          {/* <Label>
-            Take a pic or upload file
-            <ImgSVG
-              src={fileDownload}
-              alt="fileDownload"
-              width={40}
-              height={40}
-            />
-            <InputComp
-              ref={fileInput}
-              hidden
-              label="file"
-              name="file"
-              id="file"
-              type="file"
-              entry={file()}
-              setEntry={setFile}
-              nb={computeLen()}
-              isInvalid={constraints["file"]}
-              setDisabled={setDisabled}
-              validations={validations()}
-              setValidations={setValidations}
-              accept="*.doc, .pdf"
-            />
-          </Label> */}
-          <br />
-          <Label>
-            <span>Select from gallery:</span>
-            <ImgSVG src={camera} alt="fileDownload" width={40} height={40} />
-            <InputComp
-              capture
-              ref={picInput}
-              hidden
-              name="picture"
-              id="picture"
-              type="file"
-              entry={picture()}
-              setEntry={setPicture}
-              nb={computeLen()}
-              isInvalid={constraints["picture"]}
-              setDisabled={setDisabled}
-              validations={validations()}
-              setValidations={setValidations}
-              accept="image/*"
-              onInput={previewPic}
-            />
-          </Label>
+            <br />
+            <Label>
+              <span>Select from gallery:</span>
+              <Emoji label="📸" size={30} ml={20} />
+              {/* <ImgSVG src={camera} alt="fileDownload" width={40} height={40} /> */}
+              <InputComp
+                capture
+                ref={picInput}
+                hidden
+                name="picture"
+                id="picture"
+                type="file"
+                entry={picture()}
+                setEntry={setPicture}
+                nb={computeLen()}
+                isInvalid={constraints["picture"]}
+                setDisabled={setDisabled}
+                validations={validations()}
+                setValidations={setValidations}
+                accept="image/*"
+                onInput={previewPic}
+              />
+            </Label>
+          </fieldset>
         </form>
       </StylingDiv>
       <br />
