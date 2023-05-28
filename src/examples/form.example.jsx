@@ -1,4 +1,10 @@
-import { createSignal, createMemo, onMount, onCleanup } from "solid-js";
+import {
+  createSignal,
+  createMemo,
+  onMount,
+  onCleanup,
+  createEffect,
+} from "solid-js";
 import { styled } from "solid-styled-components";
 import inputComponent from "../components/inputComponent";
 import checkbox from "../components/checkbox";
@@ -24,7 +30,13 @@ const Label = styled("label")`
   margin-left: 20px;
 `;
 
-const dialogCSS = `border-radius: 10px;`;
+const PwdCheckErrorMsg = styled("output")`
+  color: red;
+  margin-left: 20px;
+  margin-top: -10px;
+  font-size: 0.8em;
+  display: flex; /* place below input*/
+`;
 
 export default (context) => (props) => {
   const {
@@ -33,7 +45,7 @@ export default (context) => (props) => {
   } = context;
 
   // DOM references
-  let output, formEx, passwordInput, passwordConfInput, diag, pwdCBx, pwdConfBx;
+  let output, formEx, passwordInput, passwordConfInput, diag, pwdCheck;
 
   // state of form submit button
   const [disabled, setDisabled] = createSignal(true);
@@ -57,6 +69,9 @@ export default (context) => (props) => {
   const Checkbox = checkbox(context);
 
   const Title = dTitle("h1", stdTitle);
+
+  const dialogCSS = `border-radius: 10px;`;
+  const Dialog = dialogComponent(context)(dialogCSS);
 
   //<----- Define the validations functions for each input
 
@@ -98,9 +113,9 @@ export default (context) => (props) => {
         invalid: true,
         msg: "Min 4 characters ",
       };
-    } else {
-      return { invalid: false, msg: null };
     }
+
+    return { invalid: false, msg: null };
   }
   // end of constraints--->
 
@@ -119,10 +134,18 @@ export default (context) => (props) => {
     diag.close();
   };
 
+  createEffect(() => {
+    if (password() !== passwordConf() && passwordConf() !== null) {
+      pwdCheck.value = "Passwords don't match";
+      setDisabled(true);
+    } else {
+      pwdCheck.value = "";
+      setDisabled(false);
+    }
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password() !== passwordConf())
-      return (output.value = "Passwords don't match");
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
     // do something.... we print it out.
@@ -142,8 +165,6 @@ export default (context) => (props) => {
     output.value = "";
     diag.showModal();
   };
-
-  const Dialog = dialogComponent(context)(dialogCSS);
 
   onMount(() => {
     diag.addEventListener("click", (e) => {
@@ -262,10 +283,11 @@ export default (context) => (props) => {
             </PasswordContainer>
           </form>
           <footer class="footer">
+            <PwdCheckErrorMsg ref={pwdCheck}></PwdCheckErrorMsg>
             <Button onClick={formReset} autofocus>
               <Unicode size="1.5em" code={cross} />
             </Button>
-            <Button form="form-ex" disabled={disabled()} raised ripple>
+            <Button flat form="form-ex" disabled={disabled()} raised ripple>
               Submit the form
             </Button>
           </footer>

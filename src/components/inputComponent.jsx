@@ -1,7 +1,7 @@
-import { createSignal, batch, createEffect } from "solid-js";
-import { css, styled } from "solid-styled-components";
+import { createSignal, batch } from "solid-js";
+import { styled, css } from "solid-styled-components";
+
 import imgSVG from "../components/imgSVG";
-import drawEmoji from "./drawEmoji";
 
 export default (context) => (props) => {
   const {
@@ -37,17 +37,17 @@ export default (context) => (props) => {
     `;
   };
 
+  const InputBlock = styled("div")`
+    /* to be able to place an SVG before the input*/
+    display: inline-block;
+  `;
+
   const ErrorOutput = styled("output")`
     color: red;
     margin-left: 20px;
     margin-top: -10px;
     font-size: 0.8em;
     display: flex; /* place below input*/
-  `;
-
-  const InputBlock = styled("div")`
-    /* to be able to place an SVG before the input*/
-    display: inline-block;
   `;
 
   const [msg, setMsg] = createSignal(null);
@@ -89,7 +89,6 @@ export default (context) => (props) => {
           style={{ "margin-right": "50px" }}
         />
       )}
-
       <input
         class={css`
           ${props.height ? inputCSS + newClass(props) : inputCSS}

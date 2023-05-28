@@ -33,7 +33,7 @@ export default (context) => {
   const [search, setSearch] = createSignal(null);
   const [number, setNumber] = createSignal(null);
   const [tel, setTel] = createSignal(null);
-  const [color, setColor] = createSignal(null);
+  const [color, setColor] = createSignal("#7580d7");
   const [picture, setPicture] = createSignal(null);
 
   const [disabled, setDisabled] = createSignal(true);

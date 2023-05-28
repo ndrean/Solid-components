@@ -22,7 +22,6 @@ export default function contentDiv(context) {
     }
 
     .footer {
-      display: flex;
       margin-top: 2em;
     }
   `;

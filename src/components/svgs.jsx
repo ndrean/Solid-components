@@ -52,9 +52,9 @@ export function hamburgerSVG(context) {
 
 export function tickSVG(context) {
   return (props) => {
-    const size = () => props?.size || "40px";
-    const color1 = () => props?.color1 || "black";
-    const color2 = () => props?.color2 || "white";
+    const size = () => props.size || "40px";
+    const color1 = () => props.color1 || "black";
+    const color2 = () => props.color2 || "white";
 
     return (
       <svg
