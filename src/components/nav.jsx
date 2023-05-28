@@ -32,6 +32,10 @@ export default (context) => (props) => {
     font-weight: bold;
     color: ${palette.primary.text};
     text-decoration: none;
+    &:hover {
+      transform: scale(1.1);
+      transition: 0.3s;
+    }
   `;
 
   // props?.mobile ? navCss + display : navCss

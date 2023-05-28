@@ -1,11 +1,15 @@
 import { styled } from "solid-styled-components";
 
-export default ({ colors, borderRadius }) => {
-  const { red, grey, blue } = colors;
+export default (context) => {
+  const {
+    colors: { red, grey, blue },
+    theme: { shadows },
+  } = context;
 
   const rootStyle = `
     cursor: pointer;
     color: black;
+    margin: 5px 5px 5px 5px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -60,25 +64,21 @@ export default ({ colors, borderRadius }) => {
       color: ${blue[400]};
     `,
     flatAccent: `
-      color: ${red[300]};
-    `,
-    // raised: `
-    //   box-shadow: ${shadows[2]};
-    //   transition: ${transitions.create(["box-shadow"], {
-    //     easing: transitions.easing.easeOut,
-    //     duration: transitions.duration.leavingScreen,
-    //   })};
-    //   :active {
-    //     box-shadow: ${shadows[8]};
-    //   };
-    // `,
-    raisedPrimary: `
-      background-color: ${grey[100]};
       color: ${red[400]};
+    `,
+    raised: `
+       box-shadow: ${shadows[4]};
+        &:active {
+          box-shadow: ${shadows[8]};
+        };
+    `,
+    raisedPrimary: `
+      background-color: ${blue[400]};
+      color: white;
     `,
     raisedAccent: `
-      background-color: ${grey[100]};
-      color: ${red[400]};
+      background-color: ${red[400]};
+      color: white;
     `,
     disabled: `
       color: rgba(0, 0, 0, 0.26);
@@ -128,13 +128,16 @@ export default ({ colors, borderRadius }) => {
     (props) =>
       `${
         styles.root +
-        (props.flat ? styles.flat : "") +
-        (props.accent ? styles.flatAccent : "") +
-        (props.primary ? styles.flatPrimary : "") +
-        (props.ripple ? styles.ripple : "") +
-        (props.disabled ? styles.disabled : "") +
-        (props.fullWidth ? styles.fullWidth : "")
+        (props.accent ? styles.flatAccent : styles.flat) +
+        (props.primary ? styles.flatPrimary : styles.flat) +
+        (props.ripple ? styles.ripple : styles.flat) +
+        (props.raised ? styles.raised : styles.flat) +
+        (props.disabled ? styles.disabled : styles.flat) +
+        (props.raised && props.primary ? styles.raisedPrimary : styles.flat) +
+        (props.raised && props.accent ? styles.raisedAccent : styles.flat) +
+        (props.disabled && props.raised ? styles.raisedDisabled : styles.flat) +
+        (props.fullWidth ? styles.fullWidth : styles.flat)
       }
-    `
+      `
   );
 };

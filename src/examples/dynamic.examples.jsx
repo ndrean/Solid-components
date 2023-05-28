@@ -7,7 +7,7 @@ import drawCodePoint from "../components/drawCodePoint.jsx";
 import Link from "../components/Link";
 import { gitHubSVG, tickSVG, hamburgerSVG } from "../components/svgs";
 import Unicode from "../components/Unicode";
-import { dynTitle } from "../components/title";
+import { dTitle } from "../components/title";
 
 import ham from "../assets/ham.svg";
 import cheers from "../assets/cheers.svg";
@@ -23,7 +23,7 @@ export default (context) => {
     codes: { check },
   } = context;
 
-  const H2 = dynTitle("h2");
+  const H2 = dTitle("h2");
   const CodePoint = drawCodePoint();
   const Emoji = drawEmoji();
   const ImgSVG = imgSVG();

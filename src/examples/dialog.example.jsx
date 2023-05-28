@@ -2,7 +2,7 @@ import { createSignal, batch, onMount, onCleanup } from "solid-js";
 import { styled } from "solid-styled-components";
 
 import button from "../components/button";
-import { dynTitle } from "../components/title";
+import { dTitle } from "../components/title";
 import dialogComponent from "../components/dialogComponent.jsx";
 import grayDiv from "../components/grayDiv";
 import Unicode from "../components/Unicode";
@@ -10,7 +10,6 @@ import { tickSVG } from "../components/svgs";
 
 import ContentExample from "./ContentExample";
 import contentContainerExample from "./contentContainerExample";
-import { dialogPositionned, resetIfOut } from "../components/dialogPositioned";
 
 export default (context) => {
   const {
@@ -22,8 +21,9 @@ export default (context) => {
 
   const [conditions, setConditions] = createSignal(dialogConditions);
   const Button = button(context);
-  const Title = dynTitle("h1", stdTitle);
-  const H4 = dynTitle("h4");
+  const Title = dTitle("h1", stdTitle);
+  const H3 = dTitle("h3");
+  const H4 = dTitle("h4");
   const GrayDiv = grayDiv(context);
   const TickSVG = tickSVG(context);
 
@@ -36,8 +36,7 @@ export default (context) => {
   };
 
   let diagPos, diagPos2;
-  const DialogPos = dialogPositionned(context);
-  const [left, setLeft] = createSignal(0);
+  const [left, setLeft] = createSignal(10);
 
   let dialog;
   const Dialog = dialogComponent(context);
@@ -58,12 +57,10 @@ export default (context) => {
     });
   };
 
-  /*
-     close when click out of the box
+  //  close when click out of the box
   const resetIfOut = (e) => {
     const { left, right, bottom, top } = dialog.getBoundingClientRect();
-    //to understand what is left, right...and the constraints, just check the picture
-    //at https://developer.mozilla.org/fr/docs/Web/API/Element/getBoundingClientRect
+
     if (
       e.clientX < left ||
       e.clientX > right ||
@@ -73,7 +70,6 @@ export default (context) => {
       reset();
     }
   };
-  */
 
   onMount(() => {
     dialog.addEventListener("click", (e) => resetIfOut(e, dialog));
@@ -88,60 +84,22 @@ export default (context) => {
     <section id="dialog">
       <Title>{tr.t("Dialog")}</Title>
       <p>
-        An example of a repositionable <code> DIALOG MODAL </code>. We set the
-        props <code> left </code>
-        and <code> top </code>.{" "}
+        A <code>DIALOG MODAL </code> comes with a minimal CSS. It is opened as a
+        MODAL with <code> showModal </code>, not with the attribute{" "}
+        <code> open </code>. It is centered by default, with margin "auto".
       </p>
-      <input
-        type="range"
-        value={left()}
-        min={0}
-        max={300}
-        onInput={(e) => setLeft(e.target.value)}
-      />
-      <span>&nbsp {left()}</span>
       <p>
-        Change the slider above and check the position of the Dailog modal. It
-        defaults to centered modal (with margin "auto").
+        You can also design a positionned DIALOG modal by setting the props{" "}
+        <code> left </code> and <code> top </code> which correspond to the
+        margins.
       </p>
-      <br />
-      <Button fullWidth ripple onClick={() => diagPos.showModal()}>
-        OPEN A POSTIONNABLE DIALOG BOX
-      </Button>
-      {/* <DialogPos ref={diagDrawer} top={60} left={left()}> */}
-      <DialogPos ref={diagPos} left={left()} top={60}>
-        <Bold>
-          <h1>Hello from Dailog!</h1>
-          <Button fullWidth ripple onClick={() => diagPos.close()}>
-            <TickSVG size={60} />
-          </Button>
-        </Bold>
-      </DialogPos>
-      <br />
-      <Button fullWidth ripple onClick={() => diagPos2.showModal()}>
-        OPEN A DEFAULT CENTERED DIALOG BOX
-      </Button>
-      <DialogPos ref={diagPos2} id="diagPos2">
-        <Bold>
-          <h1>Centered Dailog!</h1>
-          {/* <form method="diagPos2">  <-- if form submitted*/}
-          <Button fullWidth ripple onClick={() => diagPos2.close()}>
-            <TickSVG size={60} />
-          </Button>
-          {/* </form> */}
-        </Bold>
-      </DialogPos>
 
       <p>
-        The DIALOG is opened with "showModal", not with the attribute "open".
-        This gives easy centering and control on how to handle its closure.
-      </p>
-      <p>
-        You use a state <code> createSignal </code> to save the "terms of terms
-        aggrement" checkbox state placed in the dialog box. We put the state it
-        instead in the context os it is global. The autofocus is put on the
-        cancel button. There is also a function to close it when clicked outside
-        of it in the example below.
+        In the example below, you use a state <code> createSignal </code> to
+        save the "terms of terms aggrement" checkbox state placed in the dialog
+        box. We put the state in the context to keep global (survives
+        navigation). The autofocus is put on the cancel button. There is also a
+        function to close it when clicked outside of it in the example below.
       </p>
 
       <div style={{ "text-align": "center" }}>
@@ -149,8 +107,7 @@ export default (context) => {
           Check terms and conditions
         </Button>
       </div>
-      <DialogPos ref={dialog}>
-        <h1>Centered Dailog!</h1>
+      <Dialog ref={dialog}>
         {/* This container defines the classes that apply to "main", "header", "footer" */}
         <ContentContainerExample>
           <div class="header">My dialog</div>
@@ -167,13 +124,57 @@ export default (context) => {
             </Button>
           </div>
         </ContentContainerExample>
-      </DialogPos>
+      </Dialog>
       <br />
       <GrayDiv>
         <h5>
           {conditions() && "\u2705 I agreed with the terms and conditions"}
         </h5>
       </GrayDiv>
+      <H3>
+        An example of a repositionable <code> DIALOG MODAL</code>.
+      </H3>
+      <p>
+        We set the props <code> left </code>
+        and <code> top </code>.{" "}
+      </p>
+
+      <input
+        type="range"
+        value={left()}
+        min={0}
+        max={200}
+        onInput={(e) => setLeft(e.target.value)}
+      />
+      <span>&nbsp {left()}</span>
+      <p>
+        Change the slider above and check the position of the Dailog modal. It
+        defaults to centered modal (with margin "auto").
+      </p>
+      <br />
+      <Button fullWidth ripple onClick={() => diagPos.showModal()}>
+        OPEN A POSTIONNABLE DIALOG BOX
+      </Button>
+      <Dialog ref={diagPos} left={left()} top={60}>
+        <Bold>
+          <h1>Hello from Dailog!</h1>
+          <Button fullWidth ripple onClick={() => diagPos.close()}>
+            <TickSVG size={60} />
+          </Button>
+        </Bold>
+      </Dialog>
+      <br />
+      <Button fullWidth ripple onClick={() => diagPos2.showModal()}>
+        OPEN A DEFAULT CENTERED DIALOG BOX
+      </Button>
+      <Dialog ref={diagPos2} id="diagPos2">
+        <Bold>
+          <h1>Centered Dailog!</h1>
+          <Button fullWidth ripple onClick={() => diagPos2.close()}>
+            <TickSVG size={60} />
+          </Button>
+        </Bold>
+      </Dialog>
     </section>
   );
 };

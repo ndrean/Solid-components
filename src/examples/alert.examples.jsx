@@ -1,13 +1,14 @@
 import alert from "../components/alert";
-import { dynTitle } from "../components/title";
+import { dTitle } from "../components/title";
 
 export default (context) => {
   const {
     tr,
     classes: { stdTitle },
   } = context;
+
   const Alert = alert(context);
-  const Title = dynTitle("h1", stdTitle);
+  const Title = dTitle("h1", stdTitle);
 
   return () => (
     <section id="alert">

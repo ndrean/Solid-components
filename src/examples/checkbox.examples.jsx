@@ -1,7 +1,7 @@
 import { styled, css } from "solid-styled-components";
 import { For, createSignal } from "solid-js";
 import checkbox from "../components/checkbox";
-import { dynTitle } from "../components/title";
+import { dTitle } from "../components/title";
 import grayDiv from "../components/grayDiv";
 
 export default (context) => {
@@ -14,7 +14,7 @@ export default (context) => {
     },
   } = context;
 
-  const Title = dynTitle("h1", stdTitle);
+  const Title = dTitle("h1", stdTitle);
   const Checkbox = checkbox(context);
   const GrayDiv = grayDiv(context);
 

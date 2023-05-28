@@ -1,5 +1,6 @@
 import { createSignal, batch, createEffect } from "solid-js";
 import { css, styled } from "solid-styled-components";
+import imgSVG from "../components/imgSVG";
 
 export default (context) => (props) => {
   const {
@@ -7,7 +8,7 @@ export default (context) => (props) => {
   } = context;
 
   const inputCSS = `
-    box-shadow: ${shadows[2]};
+    box-shadow: ${shadows[4]};
     border-radius: 4px;
     border: 2px solid transparent;
     font-size: 1em;
@@ -16,23 +17,33 @@ export default (context) => (props) => {
     margin-bottom: 1em;
     outline: none;
     &:hover {
-      box-shadow: ${shadows[4]};
+      box-shadow: ${shadows[8]};
+    }
+    &:not(:focus):not(:placeholder-shown):invalid {
+      border-color: red;
     }
   `;
 
+  const ImgSVG = imgSVG(context);
+
   const newClass = (props) =>
-    props?.height ? `height: ${props?.height}px;` : null;
+    props.height ? `height: ${props.height}px;` : null;
 
   const ErrorOutput = styled("output")`
     color: red;
     margin-left: 4px;
     font-size: 0.8em;
+    display: flex; /* place below input*/
+  `;
+
+  const InputBlock = styled("div")`
+    /* to be able to place an SVG before the input*/
+    display: inline-block;
   `;
 
   const [msg, setMsg] = createSignal(null);
 
   const handleInput = ({ target }) => {
-    console.log("handleInput");
     if (target.value) {
       const { invalid, msg } = props.isInvalid(target.value);
       batch(() => {
@@ -60,12 +71,12 @@ export default (context) => (props) => {
   };
 
   return (
-    <div style={{ display: "inline-block" }}>
+    <InputBlock>
+      <ImgSVG src={props.svg} width={15} alt={props.alt} />
       <input
         class={css`
-          ${props?.height ? inputCSS + newClass(props) : inputCSS}
+          ${props.height ? inputCSS + newClass(props) : inputCSS}
         `}
-        autofocus
         name={props.name}
         placeholder={props.name}
         type={props.type}
@@ -75,6 +86,6 @@ export default (context) => (props) => {
         {...props}
       />
       <ErrorOutput>{msg()}</ErrorOutput>
-    </div>
+    </InputBlock>
   );
 };

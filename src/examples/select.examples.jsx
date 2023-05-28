@@ -1,7 +1,7 @@
 import { createSignal, For, createMemo } from "solid-js";
 import { styled, css } from "solid-styled-components";
 
-import { dynTitle } from "../components/title";
+import { dTitle } from "../components/title";
 import button from "../components/button";
 import grayDiv from "../components/grayDiv";
 import { tickSVG } from "../components/svgs";
@@ -46,8 +46,8 @@ export default (context) => (props) => {
 
   // const HRLine = title(context.classes.hrLine);
   const GrayDiv = grayDiv(context);
-  const Title = dynTitle("h1", stdTitle);
-  const H3 = dynTitle("h3");
+  const Title = dTitle("h1", stdTitle);
+  const H3 = dTitle("h3");
   const Button = button(context);
   const Tick = tickSVG("bisque", "4em");
 

@@ -1,4 +1,4 @@
-import { title, dynTitle, propsTitle } from "../components/title";
+import { title, dTitle } from "../components/title";
 
 export default (context) => {
   const {
@@ -10,24 +10,25 @@ export default (context) => {
     border: solid 4px;
   `;
 
-  const Title = title("h1", stdTitle);
+  const H1 = dTitle("h1", stdTitle);
+  const H2 = dTitle("h2", blueSolid);
+  const H4 = dTitle("h4", stdTitle);
 
-  const H4 = dynTitle("h4", stdTitle);
-  const H2 = dynTitle("h2", blueSolid);
-
-  const PropTitle = propsTitle(context);
+  const Title = title(context);
 
   return (
     <section id="title.examples">
       <p>
         A few different ways to build and use components. Take a look at the
-        code. The most versatile is probably <code> dynTitles</code>.
+        code.
       </p>
-      <Title>StdTitle class title</Title>
-      <H4>Dynamic H4 stdTitle class</H4>
-      <H2>Dynamic H2 blueSolid title</H2>
+      <Title>1111</Title>
+      <Title label="222" />
+      <H1>StdTitle class title</H1>
+      <H2>H2 blueSolid</H2>
+      <H4>H4 stdTitle class</H4>
 
-      <PropTitle newClass={context.classes.stdTitle} label="Title via props" />
+      <Title newClass={context.classes.stdTitle} label="Title via props" />
     </section>
   );
 };

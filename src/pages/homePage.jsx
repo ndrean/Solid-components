@@ -2,8 +2,8 @@ import { styled, css } from "solid-styled-components";
 import { A } from "@solidjs/router";
 
 import context from "../context.js";
-import { dynTitle, propsTitle } from "../components/title.jsx";
 import Link from "../components/Link.jsx";
+import { title, dTitle } from "../components/title.jsx";
 import "../index.css";
 
 const Pre = styled("pre")`
@@ -11,14 +11,6 @@ const Pre = styled("pre")`
   padding: 5px;
   background-color: aliceblue;
 `;
-
-const Code = (props) => (
-  <>
-    <code>{props.children}</code>
-    <br />
-    <br />
-  </>
-);
 
 const link = css`
   text-decoration: none;
@@ -55,15 +47,19 @@ function home(context) {
     },
   };
 
-  const TitleV0 = (props) => <h4 {...props}>{props.children}</h4>;
-  const PropsTitle = propsTitle(contextDemo);
-  const Title1 = dynTitle("h1", stdTitle);
-  const Title = dynTitle("h2");
-  // const HRLine = title(hrLine);
+  const center = `text-align: center;`;
+
+  const T2V0 = (props) => <h4 {...props}>{props.children}</h4>;
+  const PropsT2 = title(contextDemo);
+  const T1 = dTitle("h1", stdTitle);
+  const T2 = dTitle("h2");
+  const T3 = dTitle("h3", blueSolid);
+  const T3Center = dTitle("h3", blueSolid, center);
+  // const HRLine = T2(hrLine);
 
   return () => (
     <section id="homePage">
-      <Title1>Pattern for functional components with SolidJS</Title1>
+      <T1>Pattern for functional components with SolidJS</T1>
 
       <p>
         This work is 100% based on the{" "}
@@ -83,7 +79,7 @@ function home(context) {
         </Link>{" "}
         to produce a fast and very light-weight bundle.
       </p>
-      <Title>The pattern</Title>
+      <T2>The pattern</T2>
       <p>
         You define a closure that takes an argument - the context - and renders
         a function component.
@@ -105,9 +101,12 @@ function home(context) {
       <p>
         This allows to pass a "static" theme without using{" "}
         <code> ThemeProvider </code>
-        <br /> via
-        <code> createContext </code>
-        <br />. The later is described in the{" "}
+        via
+        <code> createContext</code>.
+      </p>
+      <p>
+        {" "}
+        The later is described in the{" "}
         <Link href=" https://www.solidjs.com/examples/context" target="#">
           doc "context" example
         </Link>
@@ -120,38 +119,36 @@ function home(context) {
         </A>
       </p>
 
-      <Title>Traditional CSS</Title>
+      <T2>Traditional CSS</T2>
       <p>We define a component:</p>
       <Pre>
-        <code>const Title = (props) =&gt</code>
+        <code>const T4 = (props) =&gt</code>
         <br />
         <code>
-          &nbsp &lth1 \u007B...props\u007D&gt\u007Bprops.children\u007D&lt/h1&gt
+          &nbsp &lth4 \u007B...props\u007D&gt\u007Bprops.children\u007D&lt/h4&gt
         </code>
         <br />
       </Pre>
       <p>
-        We can use the style prop to define in-line CSS and pass a JS object
-        (with keys in dash-form with explicit units):
+        We can style it in-line and pass a JS object (with keys in dash-form
+        with explicit units):
       </p>
       <Pre>
-        <code>
-          &ltTitle style= \u007B\u007B"font-size":"2em"\u007D\u007D &gt
-        </code>
+        <code>&ltT4 style= \u007B\u007B"font-size":"2em"\u007D\u007D &gt</code>
         <br />
-        <code>&nbsp Big title</code>
+        <code>&nbsp Big T4</code>
         <br />
-        <code>&lt/Title&gt</code>
+        <code>&lt/T4&gt</code>
         <br />
       </Pre>
       <details>
         <summary>Show!</summary>
-        <TitleV0 style={{ "font-size": "2em" }}>Big title</TitleV0>
+        <T2V0 style={{ "font-size": "2em" }}>Big T2</T2V0>
       </details>
       <p>
         SolidJS provides the prop <code> class </code>
-        <br /> to pass a CSS class name. Suppose we define CSS classe
-        "center-blue" in the file "index.css".
+        to pass a CSS class name. Suppose we have a CSS classe "center-blue"
+        defined in the file "index.css".
       </p>
       <Pre>
         <code>.center-blue \u007B</code>
@@ -165,18 +162,18 @@ function home(context) {
       </Pre>
       <p>We use the class prop:</p>
       <Pre>
-        <code>&ltTitleV0 class="center-blue"&gt</code>
+        <code>&ltT2V0 class="center-blue"&gt</code>
         <br />
-        <code>&nbsp Blue and solid title</code>
+        <code>&nbsp Blue and solid T2</code>
         <br />
-        <code>&lt/TitleV0&gt</code>
+        <code>&lt/T2V0&gt</code>
         <br />
       </Pre>
       <details>
         <summary>Show!</summary>
-        <TitleV0 class="center-blue">Blue and solid title</TitleV0>
+        <T2V0 class="center-blue">Blue and solid T2</T2V0>
       </details>
-      <Title>Using the pattern with CSS-in-JS</Title>
+      <T2>Using the pattern with CSS-in-JS</T2>
       <p>
         We can use CSS-in-JS with the library{" "}
         <Link
@@ -213,7 +210,7 @@ function home(context) {
       <Pre>
         <code>import \u007B css \u007D from ...</code>
         <br />
-        <code>const title = (ctxt) =&gt </code>
+        <code>const T2 = (ctxt) =&gt </code>
         <br />
         <code>&nbsp (props) =&gt \u007B</code>
         <br />
@@ -225,7 +222,7 @@ function home(context) {
         <br />
         <code>&nbsp &nbsp const newclass = </code>
         <br />
-        <code>&nbsp &nbsp &nbsp props?.newClass ? </code>
+        <code>&nbsp &nbsp &nbsp props.newClass ? </code>
         <br />
         <code>&nbsp &nbsp &nbsp &nbsp base + props.newClass : </code>
         <br />
@@ -233,13 +230,13 @@ function home(context) {
         <br />
         <code>&nbsp &nbsp const label = </code>
         <br />
-        <code> &nbsp &nbsp &nbsp props?.label || </code>
+        <code> &nbsp &nbsp &nbsp props.label || </code>
         <br />
         <code>&nbsp &nbsp &nbsp props.children;</code>
         <br />
         <code>&nbsp return (</code>
         <br />
-        <code>&nbsp &nbsp &lth4</code>
+        <code>&nbsp &nbsp &lth2</code>
         <br />
         <code>
           &nbsp &nbsp &nbsp class=\u007Bcss`$\u007Bnewclass\u007D`\u007D
@@ -251,7 +248,7 @@ function home(context) {
         <br />
         <code>&nbsp &nbsp &nbsp \u007Blabel\u007D</code>
         <br />
-        <code>&nbsp &nbsp &lt/h4&gt</code>
+        <code>&nbsp &nbsp &lt/h2&gt</code>
         <br />
         <code>&nbsp )</code>
         <br />
@@ -267,11 +264,11 @@ function home(context) {
         <code>&nbsp blueSolid, solid\u007D\u007D = context;</code>
         <br />
 
-        <code>const PTitle = title(ctxt);</code>
+        <code>const PT2 = T2(ctxt);</code>
         <br />
-        <code>&ltPTitle label="Red dotted"/&gt</code>
+        <code>&ltPT2 label="Red dotted"/&gt</code>
         <br />
-        <code>&ltPTitle</code>
+        <code>&ltPT2</code>
         <br />
         <code>&nbsp newClass=\u007BblueSolid\u007D</code>
         <br />
@@ -279,7 +276,7 @@ function home(context) {
         <br />
         <code>/&gt</code>
         <br />
-        <code>&ltPTitle</code>
+        <code>&ltPT2</code>
         <br />
         <code>&nbsp newClass=\u007Bsolid\u007D</code>
         <br />
@@ -290,12 +287,48 @@ function home(context) {
       </Pre>
       <details>
         <summary>Show!</summary>
-        <PropsTitle label="Red-dotted" />
-        <PropsTitle
-          newClass={contextDemo.classes.blueSolid}
-          label="Blue solid"
-        />
-        <PropsTitle newClass={contextDemo.classes.solid}>Red solid</PropsTitle>
+        <PropsT2 label="Red-dotted" />
+        <PropsT2 newClass={contextDemo.classes.blueSolid} label="Blue solid" />
+        <PropsT2 newClass={contextDemo.classes.solid}>Red solid</PropsT2>
+      </details>
+      <p>
+        We can also use <code> styled </code> from the library. For example, we
+        can use a base style for different <code> H </code> tags and add some
+        more styling:
+      </p>
+      <Pre>
+        <code>const title = (ctx)=&gt (tag, css, optCss="") =&gt </code>
+        <br />
+        <code>&nbsp styled(tag)`</code>
+        <br />
+        <code>&nbsp $\u007Bcss\u007D; with CTX dependencies</code>
+        <br />
+
+        <code>&nbsp $\u007BOptCss\u007D;</code>
+        <br />
+        <code>`</code>
+      </Pre>
+      <p>We can use it:</p>
+      <Pre>
+        <code>const center = `text-align: center;`</code>
+      </Pre>
+      <Pre>
+        <code>const T3 = title(context)("h3", blueSolid)</code>
+        <br />
+        <code>const T3Center = title("h3", blueSolid, center)</code>
+        <br />
+        <code>\u003C T3\u003E H3 blueSolid centered\u003C H3\u003E</code>
+      </Pre>
+      <p>and use it:</p>
+      <Pre>
+        <code>&ltT3&gtExample&lt/T3&gt</code>
+        <br />
+        <code>&ltT3Center&gtCentered&lt/T3Center&gt</code>
+      </Pre>
+      <details>
+        <summary>Show!</summary>
+        <T3>Example</T3>
+        <T3Center>Centered</T3Center>
       </details>
     </section>
   );

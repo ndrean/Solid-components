@@ -1,9 +1,10 @@
 import { createSignal } from "solid-js";
-
+import { css } from "solid-styled-components";
 import drawer from "../components/drawer";
 import button from "../components/button";
-import { dynTitle } from "../components/title";
+import { dTitle } from "../components/title";
 import menu from "./menu";
+import "../index.css";
 
 export default (context) => {
   const {
@@ -15,7 +16,7 @@ export default (context) => {
   const [drawerOpen, setDrawOpen] = createSignal(false);
   const toggleDrawer = () => setDrawOpen((val) => !val);
 
-  const Title = dynTitle("h1", stdTitle);
+  const Title = dTitle("h1", stdTitle);
   const Menu = menu(context);
   const Button = button(context);
 

@@ -2,7 +2,7 @@ import { css } from "solid-styled-components";
 
 export default () => (props) => {
   const size = () => props?.size || 48;
-  const code = String.fromCodePoint(props?.codePoint) || null;
+  const code = props?.codePoint ? String.fromCodePoint(props?.codePoint) : 0;
 
   return (
     <span

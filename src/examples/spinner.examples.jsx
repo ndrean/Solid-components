@@ -7,7 +7,7 @@ import {
   spinRect,
   spinCircle,
 } from "../components/loaders";
-import { dynTitle } from "../components/title";
+import { dTitle } from "../components/title";
 import progressBar from "../components/progressBar";
 import { createEffect, createSignal } from "solid-js";
 
@@ -18,7 +18,7 @@ export default (context) => {
   } = context;
   const SpinRect = spinRect(context);
   const SpinCircle = spinCircle(context);
-  const Title = dynTitle("h1", stdTitle);
+  const Title = dTitle("h1", stdTitle);
   const SpinCirclePart = spinCirclePart(context);
   const LoadingMsg = loadingMsg("30px");
   const Charging = charging("40px", "15px");

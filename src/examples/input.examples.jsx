@@ -6,7 +6,7 @@ import imgSVG from "../components/imgSVG";
 import button from "../components/button";
 import grayDiv from "../components/grayDiv";
 import submit from "../assets/submit.webp";
-import dynamite from "../assets/dynamite.webp";
+// import dynamite from "../assets/dynamite.webp";
 // import fileDownload from "../assets/fileDownload.svg";
 import camera from "../assets/camera.svg";
 
@@ -23,7 +23,7 @@ export default (context) => {
   const GrayDiv = grayDiv(context);
   const ImgSVG = imgSVG();
 
-  let output, picInput, preview, previewer;
+  let output, picInput, preview, previewer, formInputs;
 
   const [date, setDate] = createSignal(null);
   const [search, setSearch] = createSignal(null);
@@ -31,7 +31,6 @@ export default (context) => {
   const [tel, setTel] = createSignal(null);
   const [color, setColor] = createSignal(null);
   const [picture, setPicture] = createSignal(null);
-  const [fun, setFun] = createSignal(true);
 
   const [disabled, setDisabled] = createSignal(true);
   const [validations, setValidations] = createSignal({});
@@ -72,10 +71,6 @@ export default (context) => {
     background: `linear-gradient(white, ${props.color})`,
   }));
 
-  const randomBoolean = () => Math.random() >= 0.5;
-
-  const supported = "mediaDevices" in navigator;
-
   const computeLen = createMemo(() => Object.entries(constraints).length);
 
   createEffect(() => {
@@ -88,12 +83,13 @@ export default (context) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFun(randomBoolean());
-    console.log(fun());
     const formData = new FormData(e.target);
-    const object = Object.fromEntries(formData);
     // do something.... we print it out.
-    output.value = JSON.stringify(object);
+    const name = formData.get("picture").name;
+    formData.append("picture", name);
+    const object = Object.fromEntries(formData);
+    output.value = JSON.stringify(object, null, "\t");
+    formInputs.reset();
   };
 
   const previewPic = ({ target: { files } }) => {
@@ -109,7 +105,7 @@ export default (context) => {
   return () => (
     <section id="input.examples">
       <StylingDiv color={color()}>
-        <form id="form-inputs" onSubmit={handleSubmit}>
+        <form id="form-inputs" onSubmit={handleSubmit} ref={formInputs}>
           <InputComp
             id="search"
             name="search"
@@ -237,7 +233,7 @@ export default (context) => {
           type="image"
           id="submit"
           form="form-inputs"
-          src={fun() ? dynamite : submit}
+          src={submit}
           alt="submit button"
           height={80}
         />

@@ -33,7 +33,6 @@ const context = {
 
 context.classes.stdTitle = `
   border: none; 
-  text-align: left;
   color: #0D2E46;
   padding-left: 12px;
   background-color: ${context.theme.palette.secondary.background};
