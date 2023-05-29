@@ -3,6 +3,14 @@ import { styled, css } from "solid-styled-components";
 
 import imgSVG from "./typo/imgSVG";
 
+const ErrorOutput = styled("div")`
+  color: red;
+  margin-left: 20px;
+  margin-top: -10px;
+  font-size: 0.8em;
+  display: flex; /* place below input*/
+`;
+
 export default (context) => (props) => {
   const {
     theme: { shadows, palette },
@@ -40,14 +48,6 @@ export default (context) => (props) => {
   const InputBlock = styled("div")`
     /* to be able to place an SVG before the input*/
     display: inline-block;
-  `;
-
-  const ErrorOutput = styled("output")`
-    color: red;
-    margin-left: 20px;
-    margin-top: -10px;
-    font-size: 0.8em;
-    display: flex; /* place below input*/
   `;
 
   const [msg, setMsg] = createSignal(null);
@@ -105,3 +105,5 @@ export default (context) => (props) => {
     </InputBlock>
   );
 };
+
+export { ErrorOutput };

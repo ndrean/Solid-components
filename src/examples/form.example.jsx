@@ -6,7 +6,7 @@ import {
   createEffect,
 } from "solid-js";
 import { styled } from "solid-styled-components";
-import inputComponent from "../components/inputComponent";
+import inputComponent, { ErrorOutput } from "../components/inputComponent";
 import checkbox from "../components/checkbox";
 import dialogComponent, { resetIfOut } from "../components/dialogComponent";
 import { dTitle } from "../components/utilities/title";
@@ -28,14 +28,6 @@ const Label = styled("label")`
   display: flex;
   align-items: center;
   margin-left: 20px;
-`;
-
-const PwdCheckErrorMsg = styled("output")`
-  color: red;
-  margin-left: 20px;
-  margin-top: -10px;
-  font-size: 0.8em;
-  display: flex; /* place below input*/
 `;
 
 export default (context) => (props) => {
@@ -136,10 +128,10 @@ export default (context) => (props) => {
 
   createEffect(() => {
     if (password() !== passwordConf() && passwordConf() !== null) {
-      pwdCheck.value = "Passwords don't match";
+      pwdCheck.textContent = "Passwords don't match";
       setDisabled(true);
     } else {
-      pwdCheck.value = "";
+      pwdCheck.textContent = "";
       setDisabled(false);
     }
   });
@@ -176,6 +168,28 @@ export default (context) => (props) => {
 
   return (
     <section id="form.examples">
+      <p>
+        A form with <code> inputComponent </code> is presented in a dialog
+        component.{" "}
+      </p>
+      <p>
+        This component should receive in the <code> entry </code> and{" "}
+        <code> setEntry </code> props the signal "name".
+      </p>
+      <p>
+        You also need to define and append to the "constraints" object a
+        validation function for this input into the <code> isInvalid </code>{" "}
+        prop. This function returns an object \u007B invalid: bool, msg:
+        "text"\u007D to update the "validations" signal, thus we also pass a{" "}
+        <code> validations </code> props. This will be used to disable the
+        "submit" button".
+      </p>
+      <p>
+        {" "}
+        The input component exports an <code> ErorrOutput </code> component; you
+        set a <code> ref </code> and can pass the innerText with the getter{" "}
+        <code> .textContent </code>. exports{" "}
+      </p>
       <Button fullWidth primary raised onClick={openDialog}>
         Open Login form
       </Button>
@@ -286,7 +300,7 @@ export default (context) => (props) => {
             </PasswordContainer>
           </form>
           <footer class="footer">
-            <PwdCheckErrorMsg ref={pwdCheck}></PwdCheckErrorMsg>
+            <ErrorOutput ref={pwdCheck}></ErrorOutput>
             <Button onClick={formReset} autofocus>
               <Unicode size="1.5em" code={cross} />
             </Button>
