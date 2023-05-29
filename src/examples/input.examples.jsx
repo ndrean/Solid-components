@@ -23,8 +23,6 @@ export default (context) => {
   //  define custom state per input
   const [date, setDate] = createSignal(null);
   const [search, setSearch] = createSignal(null);
-  const [number, setNumber] = createSignal(null);
-  const [tel, setTel] = createSignal(null);
   const [color, setColor] = createSignal("#7580d7");
   const [picture, setPicture] = createSignal(null);
 
@@ -54,6 +52,7 @@ export default (context) => {
   }
   // --> end of validations
   const computeLen = createMemo(() => Object.entries(constraints).length);
+  const identity = (t) => t;
 
   // custom code for this page
   const Button = button(context);
@@ -108,8 +107,6 @@ export default (context) => {
     formInputs.reset();
   };
 
-  const identity = (t) => t;
-
   const previewPic = ({ target: { files } }) => {
     if (files) {
       const src = URL.createObjectURL(files[0]);
@@ -125,32 +122,25 @@ export default (context) => {
       <StylingDiv color={color()}>
         <form id="form-inputs" onSubmit={handleSubmit} ref={formInputs}>
           <fieldset>
-            <legend>A collection of inputs</legend>
-            <p>
-              An example of a double validation: browser and component internal.
-              We set a pattern and active the pseudo-class{" "}
-              <code> :invalid </code> accordingly: this triggers the border to
-              become red "onblur" when invalid and focused. If the input hasn't
-              been focused, this validation isn't taken into account.
-            </p>
-            <p>
-              On the other side, we add a validation function against the input
-              and this renders an error message in the input cell. The
-              ErrorOuput cell is already coded with the input.
-            </p>
+            <legend>Inputs and Validations</legend>
+
             <details>
-              <summary>Implementation details</summary>
+              <summary>Details of double validation</summary>
               <p>
-                To implement the browser validation, put the desired regex in
-                the pattern props. The input component has already the CSS
-                implemented.
+                An example of the same double validation: browser and component
+                internal. The pattern is "at least 3 characters and no numbers".
+                We set a pattern in the input and active the pseudo-class{" "}
+                <code> :invalid </code> accordingly: this triggers the border to
+                become red "onblur" when invalid and focused. If the input
+                hasn't been focused, this validation isn't taken into account.
               </p>
               <p>
-                For the component internals, code the validation function, pass
-                it into the "constraints" object. validation only (at least 3
-                letters). You need to code the corresponding validation function
-                and use an ErrorOutput box to display the error message returned
-                by the function.
+                On the other side, we add a validation function against the
+                input and this disables or not the submit button and cn render
+                an error message in the input cell. Code the validation
+                function, pass it into the "constraints" object. The ErrorOuput
+                cell comes from the input component. It displays the error
+                message returned by the function.
               </p>
             </details>
             <br />
@@ -172,14 +162,23 @@ export default (context) => {
               setValidations={setValidations}
             />
             <br />
-            <p>
-              An example with component validation on futur dates. The browser
-              opens a calender and there is no browser validation. You implement
-              a validation fonction (compared current date to selected date).
-              The result disables or not the submit button and a message is sent
-              to the ErrorOuput cell. To render the red border, we pass a prop{" "}
-              <code> border </code> set to true.
-            </p>
+            <details>
+              <summary>
+                Only component input validation: the prop{" "}
+                <code> borderError</code>
+              </summary>
+              <p>
+                An example with component validation but no browser validation
+                on dates. It only opens a calender. You implement a normal
+                validation fonction (compared current date to selected date).
+                The result disables or not the submit button and a message is
+                sent to the ErrorOuput cell. To render the red border, we pass a
+                prop{" "}
+                <strong>
+                  <code> borderError. </code>
+                </strong>
+              </p>
+            </details>
             <Emoji label="🗓" size={25} mr={20} />
             <InputComp
               name="date"
@@ -187,7 +186,7 @@ export default (context) => {
               type="date"
               width={300}
               entry={date()}
-              border={true}
+              borderError
               setEntry={setDate}
               nb={computeLen()}
               isInvalid={constraints["date"]}
@@ -196,39 +195,21 @@ export default (context) => {
               setValidations={setValidations}
             />
             <br />
-            <p>
-              We don't use validations on this input. We set the props{" "}
-              <code> isInvalid </code>
-              to the "identity" function (<code> t =&gt t </code>).
-            </p>
-            <Emoji label="🧮" size={25} mr={20} />
-            <InputComp
-              name="number"
-              id="number"
-              type="number"
-              entry={number()}
-              setEntry={setNumber}
-              nb={computeLen()}
-              isInvalid={identity}
-              setDisabled={setDisabled}
-              validations={validations()}
-              setValidations={setValidations}
-            />
-            <br />
-            <Emoji label="📞" size={25} mr={20} />
-            <InputComp
-              name="tel"
-              id="tel"
-              type="tel"
-              entry={tel()}
-              setEntry={setTel}
-              nb={computeLen()}
-              isInvalid={identity}
-              setDisabled={setDisabled}
-              validations={validations()}
-              setValidations={setValidations}
-            />
-            <br />
+            <details>
+              <summary>
+                No validation: set prop{" "}
+                <code>
+                  isInvalid=\u007Bidentity\u007D and nothing in "constraints".
+                </code>
+              </summary>
+              <p>
+                When we don't use validations on inputs but are located in the
+                same form, we set the props <code> isInvalid </code> to be the
+                "identity" function (<code> t =&gt t </code>) and not in the
+                "constraints" object. This is needed to keep the count of the
+                total validations to enable the submit button.
+              </p>
+            </details>
 
             <CenteredDiv>
               <Emoji label="🎨" size={25} mr={20} mt={16} />

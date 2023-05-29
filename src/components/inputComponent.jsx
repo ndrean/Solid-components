@@ -48,7 +48,6 @@ export default (context) => (props) => {
 
   const [msg, setMsg] = createSignal(null);
   const [onError, setOnError] = createSignal(false);
-  createEffect(() => console.log(onError()));
 
   const handleInput = ({ target }) => {
     if (target.value) {
@@ -58,8 +57,7 @@ export default (context) => (props) => {
         props.setEntry(target.value);
         props.setValidations({ ...props.validations, [target.name]: invalid });
         props.setDisabled(checkDisabled());
-        if (props.border) {
-          console.log("border");
+        if (props.borderError) {
           setOnError((v) => !v);
         }
       });
