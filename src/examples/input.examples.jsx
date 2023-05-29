@@ -168,12 +168,11 @@ export default (context) => {
                 <code> borderError</code>
               </summary>
               <p>
-                An example with component validation but no browser validation
-                on dates. It only opens a calender. You implement a normal
-                validation fonction (compared current date to selected date).
-                The result disables or not the submit button and a message is
-                sent to the ErrorOuput cell. To render the red border, we pass a
-                prop{" "}
+                An example with component validation but no browser validation.
+                You implement a normal validation fonction (compared current
+                date to selected date). The result disables or not the submit
+                button and a message is sent to the ErrorOuput cell. To render
+                the red border, we pass a prop{" "}
                 <strong>
                   <code> borderError. </code>
                 </strong>

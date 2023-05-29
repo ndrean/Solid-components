@@ -206,11 +206,12 @@ export default (context) => (props) => {
       </p>
       <p>
         {" "}
-        The input component exports an <code> ErrorOutput </code> component; you
-        set a <code> ref </code> and can pass a string in the innerText with the
-        getter <code> .textContent </code>. You can exploit both the browser
-        validations (via CSS) and your own validations: the later disables the
-        SUBMIT button and returns a message displayed in the ErrorOutput box.
+        The input component exports an <code> ErrorOutput </code> component. You
+        can exploit both the browser validations (via CSS) and your own
+        validations: the first highlights the cell in red and the later disables
+        the SUBMIT button and returns a message displayed in the ErrorOutput
+        box. Besides the browser validation, you can still pass in the computed
+        validations by setting a prop <code> borderError </code> in the input.
       </p>
       <Button fullWidth primary raised onClick={openDialog}>
         Open Login form
