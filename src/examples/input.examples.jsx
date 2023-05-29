@@ -19,7 +19,7 @@ export default (context) => {
   const Dialog = dialogComponent(context);
 
   // define DOM refs
-  let output, picInput, preview, previewer, formInputs, dateError;
+  let output, picInput, preview, previewer, formInputs;
   //  define custom state per input
   const [date, setDate] = createSignal(null);
   const [search, setSearch] = createSignal(null);
@@ -173,10 +173,12 @@ export default (context) => {
             />
             <br />
             <p>
-              An example with validation on futur dates The browser opens a
-              calender and you implement a validation fontion (compared current
-              date to selected date). The result disables or not the submit
-              button and a message is sent to the ErrorOuput cell.
+              An example with component validation on futur dates. The browser
+              opens a calender and there is no browser validation. You implement
+              a validation fonction (compared current date to selected date).
+              The result disables or not the submit button and a message is sent
+              to the ErrorOuput cell. To render the red border, we pass a prop{" "}
+              <code> border </code> set to true.
             </p>
             <Emoji label="🗓" size={25} mr={20} />
             <InputComp
@@ -185,6 +187,7 @@ export default (context) => {
               type="date"
               width={300}
               entry={date()}
+              border={true}
               setEntry={setDate}
               nb={computeLen()}
               isInvalid={constraints["date"]}

@@ -1,4 +1,4 @@
-import { createSignal, batch } from "solid-js";
+import { createSignal, batch, createEffect } from "solid-js";
 import { styled, css } from "solid-styled-components";
 
 const ErrorOutput = styled("div")`
@@ -14,7 +14,7 @@ export default (context) => (props) => {
     theme: { shadows, palette },
   } = context;
 
-  const inputCSS = `
+  const inputCSS = (p) => `
     box-shadow: ${shadows[4]};
     border-radius: 4px;
     border: 2px solid transparent;
@@ -30,9 +30,7 @@ export default (context) => (props) => {
     &:not(:focus):not(:placeholder-shown):invalid {
       border-color: red;
     }
-    &:[type="date"]:invalid {
-      border-color: red;
-    }
+    border-color: ${onError() && "red"};
     `;
 
   const newClass = (props) => {
@@ -49,6 +47,8 @@ export default (context) => (props) => {
   `;
 
   const [msg, setMsg] = createSignal(null);
+  const [onError, setOnError] = createSignal(false);
+  createEffect(() => console.log(onError()));
 
   const handleInput = ({ target }) => {
     if (target.value) {
@@ -58,6 +58,10 @@ export default (context) => (props) => {
         props.setEntry(target.value);
         props.setValidations({ ...props.validations, [target.name]: invalid });
         props.setDisabled(checkDisabled());
+        if (props.border) {
+          console.log("border");
+          setOnError((v) => !v);
+        }
       });
     }
     if (target.files) {
@@ -77,11 +81,12 @@ export default (context) => (props) => {
     return object.reduce((acc, [k, v]) => acc || v, false);
   };
 
+  console.log(props.onError);
   return (
     <InputBlock>
       <input
         class={css`
-          ${props.height ? inputCSS + newClass(props) : inputCSS}
+          ${props.height ? inputCSS(props) + newClass(props) : inputCSS(props)}
         `}
         name={props.name}
         placeholder={props.name}
