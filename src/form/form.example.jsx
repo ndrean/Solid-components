@@ -61,7 +61,7 @@ export default (context) => (props) => {
   const GrayDiv = grayDiv(context);
   const Checkbox = checkbox(context);
 
-  const Title = dTitle("h1", stdTitle);
+  // const Title = dTitle("h1", stdTitle);
 
   const dialogCSS = `border-radius: 10px;`;
   const Dialog = dialogComponent(context);
@@ -226,11 +226,11 @@ export default (context) => (props) => {
               svg={personSVG}
               alt="personSVG"
               required
-              autofocus
               pattern="^(\w+){4,}"
               label="name"
               name="name"
               type="text"
+              entry={name()}
               setEntry={setName}
               nb={computeLen()}
               isInvalid={constraints["name"]}
@@ -246,6 +246,7 @@ export default (context) => (props) => {
               label="email"
               name="email"
               type="email"
+              entry={email()}
               setEntry={setEmail}
               nb={computeLen()}
               isInvalid={constraints["email"]}
@@ -263,6 +264,7 @@ export default (context) => (props) => {
                 label="password"
                 name="password"
                 type="password"
+                entry={password()}
                 setEntry={setPassword}
                 nb={computeLen()}
                 autocomplete
@@ -295,6 +297,7 @@ export default (context) => (props) => {
                 name="passwordConf"
                 type="password"
                 disabled={isInvalidPassword(password())?.invalid}
+                entry={passwordConf()}
                 setEntry={setPasswordConf}
                 nb={computeLen()}
                 autocomplete="off"

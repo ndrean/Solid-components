@@ -147,10 +147,11 @@ export default (context) => {
             <Emoji label="🔎" size={25} mr={20} />
             <InputComp
               required
-              autofocus
+              autoocus
               id="search"
               name="search"
               type="search"
+              entry={search()}
               setEntry={setSearch}
               pattern="\D{4,}"
               title="at least 4 letters, no numbers"
@@ -185,6 +186,7 @@ export default (context) => {
               type="date"
               width={300}
               borderError
+              entry={date()}
               setEntry={setDate}
               nb={computeLen()}
               isInvalid={constraints["date"]}
