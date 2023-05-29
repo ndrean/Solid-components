@@ -108,6 +108,8 @@ export default (context) => {
     formInputs.reset();
   };
 
+  const identity = (t) => t;
+
   const previewPic = ({ target: { files } }) => {
     if (files) {
       const src = URL.createObjectURL(files[0]);
@@ -178,7 +180,6 @@ export default (context) => {
             </p>
             <Emoji label="🗓" size={25} mr={20} />
             <InputComp
-              required
               name="date"
               id="date"
               type="date"
@@ -192,6 +193,11 @@ export default (context) => {
               setValidations={setValidations}
             />
             <br />
+            <p>
+              We don't use validations on this input. We set the props{" "}
+              <code> isInvalid </code>
+              to the "identity" function (<code> t =&gt t </code>).
+            </p>
             <Emoji label="🧮" size={25} mr={20} />
             <InputComp
               name="number"
@@ -200,7 +206,7 @@ export default (context) => {
               entry={number()}
               setEntry={setNumber}
               nb={computeLen()}
-              isInvalid={constraints["number"]}
+              isInvalid={identity}
               setDisabled={setDisabled}
               validations={validations()}
               setValidations={setValidations}
@@ -214,12 +220,13 @@ export default (context) => {
               entry={tel()}
               setEntry={setTel}
               nb={computeLen()}
-              isInvalid={constraints["tel"]}
+              isInvalid={identity}
               setDisabled={setDisabled}
               validations={validations()}
               setValidations={setValidations}
             />
             <br />
+
             <CenteredDiv>
               <Emoji label="🎨" size={25} mr={20} mt={16} />
               <label>
@@ -233,7 +240,7 @@ export default (context) => {
                   entry={color()}
                   setEntry={setColor}
                   nb={computeLen()}
-                  isInvalid={constraints["color"]}
+                  isInvalid={identity}
                   setDisabled={setDisabled}
                   validations={validations()}
                   setValidations={setValidations}
@@ -256,7 +263,7 @@ export default (context) => {
                 entry={picture()}
                 setEntry={setPicture}
                 nb={computeLen()}
-                isInvalid={constraints["picture"]}
+                isInvalid={identity}
                 setDisabled={setDisabled}
                 validations={validations()}
                 setValidations={setValidations}

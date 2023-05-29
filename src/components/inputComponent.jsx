@@ -6,8 +6,8 @@ const ErrorOutput = styled("div")`
   margin-left: 20px;
   margin-top: -10px;
   font-size: 0.8em;
-  display: flex; /* place below input*/
 `;
+export { ErrorOutput };
 
 export default (context) => (props) => {
   const {
@@ -30,6 +30,9 @@ export default (context) => (props) => {
     &:not(:focus):not(:placeholder-shown):invalid {
       border-color: red;
     }
+    &:[type="date"]:invalid {
+      border-color: red;
+    }
     `;
 
   const newClass = (props) => {
@@ -40,8 +43,8 @@ export default (context) => (props) => {
     `;
   };
 
+  /* to be able to place an SVG before the input*/
   const InputBlock = styled("div")`
-    /* to be able to place an SVG before the input*/
     display: inline-block;
   `;
 
@@ -54,7 +57,6 @@ export default (context) => (props) => {
         setMsg(msg);
         props.setEntry(target.value);
         props.setValidations({ ...props.validations, [target.name]: invalid });
-        console.log(checkDisabled());
         props.setDisabled(checkDisabled());
       });
     }
@@ -93,5 +95,3 @@ export default (context) => (props) => {
     </InputBlock>
   );
 };
-
-export { ErrorOutput };
