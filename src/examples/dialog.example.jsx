@@ -78,18 +78,24 @@ export default (context) => {
         MODAL with <code> showModal </code> and not with the attribute{" "}
         <code> open </code>. It is centered by default, with margin "auto".
       </p>
-
+      <p>
+        If you want to extend the style, pass a CSS-in-JS (with ticks `) to the
+        prop <code> optCSS.</code>
+      </p>
       <p>
         There is a checkbox on "terms of terms aggrement" in the dialog box. We
         put the state in the context to keep it global: it survives to
         navigation.
       </p>
       <p>
+        You interact with the Dailog component via a <code> ref.</code>
+      </p>
+      <p>
         A function <code>resetIfOut </code> is also exported: you can close the
-        modal when you click outside of it (only in the first example below).
-        You need to put a <code> ref </code> on the dialog component and set up
-        listeners on the "click" event to enable this function. The listener is
-        wrapped within a <code> onMount </code> (and <code> onCleanup </code>).
+        modal when you click outside of it (showed in the first example below).
+        You need to set up a listener on the "click" event to enable this
+        function. The listener should be wrapped within a <code> onMount </code>{" "}
+        (and <code> onCleanup </code>).
       </p>
 
       <div style={{ "text-align": "center" }}>
