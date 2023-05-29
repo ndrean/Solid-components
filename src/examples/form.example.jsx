@@ -18,6 +18,7 @@ import Unicode from "../components/typo/Unicode";
 import keySVG from "../assets/keySVG.svg";
 import personSVG from "../assets/personSVG.svg";
 import emailSVG from "../assets/emailSVG.svg";
+import imgSVG from "../components/typo/imgSVG";
 
 const PasswordContainer = styled("div")`
   display: flex;
@@ -63,10 +64,30 @@ export default (context) => (props) => {
   const Title = dTitle("h1", stdTitle);
 
   const dialogCSS = `border-radius: 10px;`;
-  const Dialog = dialogComponent(context)(dialogCSS);
+  const Dialog = dialogComponent(context);
 
+  const ImgSVG = imgSVG(context);
+
+  /* to be able to place an SVG before the input*/
+  const InputBlock = styled("div")`
+    display: flex;
+    align-items: center;
+  `;
+
+  const CustomInput = (props) => (
+    <InputBlock>
+      {props.svg && (
+        <ImgSVG
+          src={props.svg}
+          width={15}
+          alt={props.alt}
+          style={{ "margin-right": "50px" }}
+        />
+      )}
+      <Input {...props} />
+    </InputBlock>
+  );
   //<----- Define the validations functions for each input
-
   // we can pass the corresponding input validation per input name
   const constraints = {
     name: isInvalidLength,
@@ -106,7 +127,6 @@ export default (context) => (props) => {
         msg: "Min 4 characters ",
       };
     }
-
     return { invalid: false, msg: null };
   }
   // end of constraints--->
@@ -186,20 +206,22 @@ export default (context) => (props) => {
       </p>
       <p>
         {" "}
-        The input component exports an <code> ErorrOutput </code> component; you
-        set a <code> ref </code> and can pass the innerText with the getter{" "}
-        <code> .textContent </code>. exports{" "}
+        The input component exports an <code> ErrorOutput </code> component; you
+        set a <code> ref </code> and can pass a string in the innerText with the
+        getter <code> .textContent </code>. You can exploit both the browser
+        validations (via CSS) and your own validations: the later disables the
+        SUBMIT button and returns a message displayed in the ErrorOutput box.
       </p>
       <Button fullWidth primary raised onClick={openDialog}>
         Open Login form
       </Button>
-      <Dialog ref={diag}>
+      <Dialog ref={diag} optCss={dialogCSS}>
         <ContentDiv>
           <header class="header">
             <h1>Credentials</h1>
           </header>
           <form class="main" id="form-ex" onSubmit={handleSubmit} ref={formEx}>
-            <Input
+            <CustomInput
               svg={personSVG}
               alt="personSVG"
               required
@@ -217,7 +239,7 @@ export default (context) => (props) => {
               setValidations={setValidations}
             />
             <br />
-            <Input
+            <CustomInput
               svg={emailSVG}
               alt="emailSVG"
               required
@@ -234,7 +256,7 @@ export default (context) => (props) => {
             />
             <br />
             <PasswordContainer>
-              <Input
+              <CustomInput
                 svg={keySVG}
                 alt="keySVG"
                 required
@@ -266,7 +288,7 @@ export default (context) => (props) => {
               </Label>
             </PasswordContainer>
             <PasswordContainer>
-              <Input
+              <CustomInput
                 svg={keySVG}
                 alt="keySVG"
                 required

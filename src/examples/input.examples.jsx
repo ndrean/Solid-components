@@ -1,6 +1,7 @@
 import { createSignal, createMemo, createEffect } from "solid-js";
 import { styled } from "solid-styled-components";
 
+import dialogComponent from "../components/dialogComponent";
 import inputComponent from "../components/inputComponent";
 import imgSVG from "../components/typo/imgSVG";
 import button from "../components/button";
@@ -11,26 +12,15 @@ import Unicode from "../components/typo/Unicode";
 
 import drawEmoji from "../components/typo/drawEmoji";
 
-const Label = styled("label")`
-  display: flex;
-  align-items: center;
-  label {
-    margin-left: 1rem;
-  }
-`;
-
-const CenteredDiv = styled("div")`
-  display: flex;
-`;
-
 export default (context) => {
   const InputComp = inputComponent(context);
   const GrayDiv = grayDiv(context);
-  const ImgSVG = imgSVG();
   const Emoji = drawEmoji(context);
+  const Dialog = dialogComponent(context);
 
-  let output, picInput, preview, previewer, formInputs;
-
+  // define DOM refs
+  let output, picInput, preview, previewer, formInputs, dateError;
+  //  define custom state per input
   const [date, setDate] = createSignal(null);
   const [search, setSearch] = createSignal(null);
   const [number, setNumber] = createSignal(null);
@@ -38,22 +28,39 @@ export default (context) => {
   const [color, setColor] = createSignal("#7580d7");
   const [picture, setPicture] = createSignal(null);
 
+  // shared state of the form for the submit button
   const [disabled, setDisabled] = createSignal(true);
   const [validations, setValidations] = createSignal({});
 
+  // <-- constraints and validations
   const constraints = {
-    date: (t) => t,
-    search: (t) => t,
-    number: (t) => t,
-    tel: (t) => t,
-    color: (t) => t,
-    picture: (t) => t,
+    date: (t) => isInvalidDate(t),
+    search: (t) => isInvalidSearch(t),
   };
 
+  function isInvalidSearch(data) {
+    if (/\D{3,}/.test(data)) {
+      return { msg: "", invalid: false };
+    }
+    return { msg: "min 3 letters, no number", invalid: true };
+  }
+
+  function isInvalidDate(data) {
+    const now = new Date().toISOString().split("T")[0];
+    if (data < now) {
+      return { msg: "only futur dates", invalid: true };
+    }
+    return { msg: "", invalid: false };
+  }
+  // --> end of validations
+  const computeLen = createMemo(() => Object.entries(constraints).length);
+
+  // custom code for this page
+  const Button = button(context);
+
   const PreviewerDialog = (props) => {
-    const Button = button(context);
     return (
-      <dialog ref={previewer}>
+      <Dialog ref={previewer}>
         <img
           ref={preview}
           alt="preview"
@@ -63,16 +70,26 @@ export default (context) => {
         <Button type="submit" onClick={() => previewer.close()}>
           <Unicode size="2em" code={"\u274E"} />
         </Button>
-      </dialog>
+      </Dialog>
     );
   };
+
+  const Label = styled("label")`
+    display: flex;
+    align-items: center;
+    label {
+      margin-left: 1rem;
+    }
+  `;
+
+  const CenteredDiv = styled("div")`
+    display: flex;
+  `;
 
   const StylingDiv = styled("div")((props) => ({
     padding: "2em",
     background: `linear-gradient(white, ${props.color})`,
   }));
-
-  const computeLen = createMemo(() => Object.entries(constraints).length);
 
   createEffect(() => {
     picInput.style.opacity = 0;
@@ -107,12 +124,44 @@ export default (context) => {
         <form id="form-inputs" onSubmit={handleSubmit} ref={formInputs}>
           <fieldset>
             <legend>A collection of inputs</legend>
+            <p>
+              An example of a double validation: browser and component internal.
+              We set a pattern and active the pseudo-class{" "}
+              <code> :invalid </code> accordingly: this triggers the border to
+              become red "onblur" when invalid and focused. If the input hasn't
+              been focused, this validation isn't taken into account.
+            </p>
+            <p>
+              On the other side, we add a validation function against the input
+              and this renders an error message in the input cell. The
+              ErrorOuput cell is already coded with the input.
+            </p>
+            <details>
+              <summary>Implementation details</summary>
+              <p>
+                To implement the browser validation, put the desired regex in
+                the pattern props. The input component has already the CSS
+                implemented.
+              </p>
+              <p>
+                For the component internals, code the validation function, pass
+                it into the "constraints" object. validation only (at least 3
+                letters). You need to code the corresponding validation function
+                and use an ErrorOutput box to display the error message returned
+                by the function.
+              </p>
+            </details>
+            <br />
             <Emoji label="🔎" size={25} mr={20} />
             <InputComp
+              required
+              autofocus
               id="search"
               name="search"
               type="search"
               entry={search()}
+              pattern="\D{3,}"
+              title="at least 3 letters, no numbers"
               setEntry={setSearch}
               nb={computeLen()}
               isInvalid={constraints["search"]}
@@ -121,8 +170,15 @@ export default (context) => {
               setValidations={setValidations}
             />
             <br />
+            <p>
+              An example with validation on futur dates The browser opens a
+              calender and you implement a validation fontion (compared current
+              date to selected date). The result disables or not the submit
+              button and a message is sent to the ErrorOuput cell.
+            </p>
             <Emoji label="🗓" size={25} mr={20} />
             <InputComp
+              required
               name="date"
               id="date"
               type="date"
@@ -214,6 +270,7 @@ export default (context) => {
       <br />
       <div style={{ "text-align": "center" }}>
         <input
+          disabled={disabled()}
           type="image"
           id="submit"
           form="form-inputs"
@@ -222,6 +279,7 @@ export default (context) => {
           height={80}
         />
       </div>
+
       <PreviewerDialog height={300} />
       <GrayDiv>
         <output ref={output}></output>

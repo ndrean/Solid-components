@@ -1,19 +1,29 @@
-import { styled } from "solid-styled-components";
+import { css } from "solid-styled-components";
 
 export default (context) => {
   const {
     theme: { palette, shadows },
   } = context;
 
-  return (optCss) => styled("dialog")`
-    border: none;
-    padding: 0px 10px 0px 10px;
-    box-shadow: ${shadows[4]};
-    background: ${palette.primary.background};
-    margin-left: ${(props) => (props.left ? props.left + "px" : "auto")};
-    margin-top: ${(props) => (props.top ? props.top + "px" : "auto")};
-    ${optCss};
+  const baseStyle = (props) => `
+  border: none;
+  padding: 0px 10px 0px 10px;
+  box-shadow: ${shadows[4]};
+  background: ${palette.primary.background};
+  margin-left: ${props.left ? props.left + "px" : "auto"};
+  margin-top: ${props.top ? props.top + "px" : "auto"};
   `;
+
+  return (props) => (
+    <dialog
+      class={css`
+        ${baseStyle(props) + props?.optCss}
+      `}
+      {...props}
+    >
+      {props.children}
+    </dialog>
+  );
 };
 
 //to understand what is left, right...and the constraints, just check the picture

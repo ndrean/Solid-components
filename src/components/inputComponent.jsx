@@ -1,8 +1,6 @@
 import { createSignal, batch } from "solid-js";
 import { styled, css } from "solid-styled-components";
 
-import imgSVG from "./typo/imgSVG";
-
 const ErrorOutput = styled("div")`
   color: red;
   margin-left: 20px;
@@ -27,15 +25,12 @@ export default (context) => (props) => {
     overflow-x: scroll;
     outline: none;
     &:hover {
-      box-shadow: ${shadows[8]};
+      box-shadow: ${shadows[10]};
     }
     &:not(:focus):not(:placeholder-shown):invalid {
       border-color: red;
     }
-    input[type="date"] {size: 40px;}
-  `;
-
-  const ImgSVG = imgSVG(context);
+    `;
 
   const newClass = (props) => {
     if (props.height || props.width)
@@ -59,6 +54,7 @@ export default (context) => (props) => {
         setMsg(msg);
         props.setEntry(target.value);
         props.setValidations({ ...props.validations, [target.name]: invalid });
+        console.log(checkDisabled());
         props.setDisabled(checkDisabled());
       });
     }
@@ -81,14 +77,6 @@ export default (context) => (props) => {
 
   return (
     <InputBlock>
-      {props.svg && (
-        <ImgSVG
-          src={props.svg}
-          width={15}
-          alt={props.alt}
-          style={{ "margin-right": "50px" }}
-        />
-      )}
       <input
         class={css`
           ${props.height ? inputCSS + newClass(props) : inputCSS}

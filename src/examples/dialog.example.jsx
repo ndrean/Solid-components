@@ -40,7 +40,7 @@ export default (context) => {
   const [left, setLeft] = createSignal(10);
   const [top, setTop] = createSignal(60);
 
-  const Dialog = dialogComponent(context)();
+  const Dialog = dialogComponent(context);
 
   const reset = () => {
     batch(() => {

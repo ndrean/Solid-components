@@ -69,7 +69,7 @@ export default (context) => {
     raised: `
        box-shadow: ${shadows[4]};
         &:active {
-          box-shadow: ${shadows[8]};
+          box-shadow: ${shadows[10]};
         };
     `,
     raisedPrimary: `
