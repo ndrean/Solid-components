@@ -12,11 +12,11 @@ import { Router } from "@solidjs/router";
 
 import context from "./context";
 
-import nav from "./components/utilities/nav";
-import pages from "./pages/pages.jsx";
-import drawer from "./components/drawer";
-import header from "./components/utilities/header";
-import { spinCircle } from "./components/utilities/loaders";
+import nav from "./app/nav";
+import pages from "./app/pages/pages";
+import drawer from "./drawer/drawer";
+import header from "./app/header";
+import { spinCircle } from "./spinner/loaders";
 
 const GridContainer = styled("div")`
   display: grid;
