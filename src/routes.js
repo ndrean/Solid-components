@@ -13,8 +13,8 @@ const routes = [
   },
   {
     href: "/alerts",
-    title: "Alerts",
-    component: lazy(() => import("./alert/alerts")),
+    title: "Alert",
+    component: lazy(() => import("./alert/alertPage")),
   },
   {
     href: "/alertstack",
@@ -23,13 +23,13 @@ const routes = [
   },
   {
     href: "/buttons",
-    title: "Buttons",
-    component: lazy(() => import("./button/buttons")),
+    title: "Button",
+    component: lazy(() => import("./button/buttonsPage")),
   },
   {
     href: "/checkbox",
     title: "Checkbox",
-    component: lazy(() => import("./checkbox/checkboxes")),
+    component: lazy(() => import("./checkbox/checkboxesPage")),
   },
   {
     href: "/dialog",
@@ -53,7 +53,7 @@ const routes = [
   },
   {
     href: "/inputs",
-    title: "Inputs",
+    title: "Input",
     component: lazy(() => import("./input/inputsPage")),
   },
   {
@@ -68,12 +68,12 @@ const routes = [
   },
   {
     href: "/spinner",
-    title: "Spinners",
+    title: "Spinner",
     component: lazy(() => import("./spinner/spinnerPage")),
   },
   {
     href: "/titles",
-    title: "Titles",
+    title: "Title",
     component: lazy(() => import("./app/pages/titlesPage")),
   },
 ];
