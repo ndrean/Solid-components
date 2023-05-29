@@ -2,12 +2,14 @@ import { createSignal, createMemo, createEffect } from "solid-js";
 import { styled } from "solid-styled-components";
 
 import inputComponent from "../components/inputComponent";
-import imgSVG from "../components/imgSVG";
+import imgSVG from "../components/typo/imgSVG";
 import button from "../components/button";
-import grayDiv from "../components/grayDiv";
+import grayDiv from "../components/utilities/grayDiv";
 import submit from "../assets/submit.webp";
 import camera from "../assets/camera.svg";
-import drawEmoji from "../components/drawEmoji";
+import Unicode from "../components/typo/Unicode";
+
+import drawEmoji from "../components/typo/drawEmoji";
 
 const Label = styled("label")`
   display: flex;
@@ -58,13 +60,8 @@ export default (context) => {
           role="img"
           height={props.height || 200}
         />
-        <Button
-          type="submit"
-          onClick={() => {
-            previewer.close();
-          }}
-        >
-          close
+        <Button type="submit" onClick={() => previewer.close()}>
+          <Unicode size="2em" code={"\u274E"} />
         </Button>
       </dialog>
     );
@@ -89,10 +86,8 @@ export default (context) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     // do something.... we print it out.
-    const name = formData.get("picture").name;
-    formData.append("picture", name);
-    const object = Object.fromEntries(formData);
-    output.value = JSON.stringify(object, null, "\t");
+    formData.set("picture", formData.get("picture").name);
+    output.value = JSON.stringify(Object.fromEntries(formData), null, "\t");
     formInputs.reset();
   };
 

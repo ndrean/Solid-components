@@ -9,11 +9,11 @@ import { styled } from "solid-styled-components";
 import inputComponent from "../components/inputComponent";
 import checkbox from "../components/checkbox";
 import dialogComponent, { resetIfOut } from "../components/dialogComponent";
-import { dTitle } from "../components/title";
+import { dTitle } from "../components/utilities/title";
 import contentDiv from "./ContentDiv";
 import button from "../components/button";
-import grayDiv from "../components/grayDiv";
-import Unicode from "../components/Unicode";
+import grayDiv from "../components/utilities/grayDiv";
+import Unicode from "../components/typo/Unicode";
 
 import keySVG from "../assets/keySVG.svg";
 import personSVG from "../assets/personSVG.svg";
@@ -166,6 +166,7 @@ export default (context) => (props) => {
     diag.showModal();
   };
 
+  // close dialog if click outside
   onMount(() => {
     diag.addEventListener("click", (e) => {
       if (resetIfOut(e, diag)) formReset();
@@ -238,6 +239,7 @@ export default (context) => (props) => {
               />
               <Label>
                 <Checkbox
+                  size={1}
                   id="pwdCheckbox"
                   required={false}
                   value={pwdCheckbox()}
@@ -270,6 +272,7 @@ export default (context) => (props) => {
               />
               <Label>
                 <Checkbox
+                  size={1}
                   id="pwdConfCheckbox"
                   required={false}
                   value={pwdConfCheckbox()}
@@ -287,7 +290,14 @@ export default (context) => (props) => {
             <Button onClick={formReset} autofocus>
               <Unicode size="1.5em" code={cross} />
             </Button>
-            <Button flat form="form-ex" disabled={disabled()} raised ripple>
+            <Button
+              flat
+              primary
+              form="form-ex"
+              disabled={disabled()}
+              raised
+              ripple
+            >
               Submit the form
             </Button>
           </footer>

@@ -7,6 +7,11 @@ const routes = [
     component: lazy(() => import("./pages/homePage")),
   },
   {
+    href: "/api",
+    title: "Api",
+    component: lazy(() => import("./pages/apiPage")),
+  },
+  {
     href: "/alerts",
     title: "Alerts",
     component: lazy(() => import("./pages/alerts")),
@@ -23,7 +28,7 @@ const routes = [
   },
   {
     href: "/checkbox",
-    title: "Checkboxes",
+    title: "Checkbox",
     component: lazy(() => import("./pages/checkboxes")),
   },
   {

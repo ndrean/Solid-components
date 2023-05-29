@@ -6,9 +6,9 @@ import {
   arrow,
   spinRect,
   spinCircle,
-} from "../components/loaders";
-import { dTitle } from "../components/title";
-import progressBar from "../components/progressBar";
+} from "../components/utilities/loaders";
+import { dTitle } from "../components/utilities/title";
+import progressBar from "../components/utilities/progressBar";
 import { createEffect, createSignal } from "solid-js";
 
 export default (context) => {

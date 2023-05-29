@@ -1,7 +1,7 @@
 import { createSignal, batch } from "solid-js";
 import { styled, css } from "solid-styled-components";
 
-import imgSVG from "../components/imgSVG";
+import imgSVG from "./typo/imgSVG";
 
 export default (context) => (props) => {
   const {

@@ -1,7 +1,7 @@
 import { css } from "solid-styled-components";
 import button from "../components/button";
 import alertStack from "../components/alertStack";
-import { dTitle } from "../components/title";
+import { dTitle } from "../components/utilities/title";
 
 const vert = css`
   margin-top: 40px;

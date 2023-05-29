@@ -32,7 +32,7 @@ export default (context) => {
         transform: translate(${open ? "0%" : "-100%"}, 0px);
         z-index: 20;
         position: absolute;
-        box-shadow: ${shadows[1]};
+        box-shadow: ${shadows[2]};
         background-color: ${grey[100]};
         top: 0;
         left: 0;
@@ -41,8 +41,6 @@ export default (context) => {
         overflow-y: scroll;
         `,
     });
-
-    // createEffect(() => console.log("drawer", props.open));
 
     return (
       <aside

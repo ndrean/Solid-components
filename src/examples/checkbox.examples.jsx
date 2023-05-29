@@ -1,8 +1,8 @@
 import { styled, css } from "solid-styled-components";
 import { For, createSignal } from "solid-js";
 import checkbox from "../components/checkbox";
-import { dTitle } from "../components/title";
-import grayDiv from "../components/grayDiv";
+import { dTitle } from "../components/utilities/title";
+import grayDiv from "../components/utilities/grayDiv";
 
 export default (context) => {
   const {
@@ -12,6 +12,7 @@ export default (context) => {
       shadows,
       palette: { primary, secondary },
     },
+    codes: { cross, tick },
   } = context;
 
   const Title = dTitle("h1", stdTitle);
@@ -39,17 +40,13 @@ export default (context) => {
     box-shadow: ${shadows[2]};
   `;
 
-  // const GrayDiv = styled("div")`
-  //   background-color: #f1f1f1;
-  // `;
-
-  // color: #49535f;
   const Legend = styled("legend")`
     background-color: ${secondary.background};
     color: primary.text;
     padding: 5px;
     border-radius: 5px;
   `;
+
   return function CheckBoxExamples() {
     function handleRadioGroup(evt) {
       setRadioGroup({
@@ -61,6 +58,12 @@ export default (context) => {
     return (
       <section id="checkbox">
         <Title>{tr.t("Checkbox")}</Title>
+        <p>
+          The <code> CHECKBOX </code> component can be resized with a{" "}
+          <code> size </code> prop. You can also change the content of the
+          checkbox with a <code> content </code> prop. The content is a UNICODE
+          defined in the <code> CONTEXT </code> object.
+        </p>
         <form
           class={css`
             > div {
@@ -86,6 +89,8 @@ export default (context) => {
             <Checkbox
               id="autoplay"
               name="autoplay"
+              size={1.5}
+              content={tick}
               value={state()["autoplay"] || false}
               onChange={(evt) => {
                 setState({
@@ -155,6 +160,7 @@ export default (context) => {
                   type="radio"
                   name="group2"
                   value={"Rust"}
+                  content={tick}
                   id="rust"
                   onChange={handleRadioGroup}
                 />
@@ -166,6 +172,7 @@ export default (context) => {
                   name="group2"
                   id="nodejs"
                   value={"NodeJS"}
+                  content={tick}
                   onChange={handleRadioGroup}
                 />
                 <label for="nodejs">NodeJS</label>

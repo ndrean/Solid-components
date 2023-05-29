@@ -2,11 +2,11 @@ import { createSignal, batch, onMount, onCleanup } from "solid-js";
 import { styled } from "solid-styled-components";
 
 import button from "../components/button";
-import { dTitle } from "../components/title";
+import { dTitle } from "../components/utilities/title";
 import dialogComponent, { resetIfOut } from "../components/dialogComponent.jsx";
-import grayDiv from "../components/grayDiv";
-import Unicode from "../components/Unicode";
-import { tickSVG } from "../components/svgs";
+import grayDiv from "../components/utilities/grayDiv";
+import Unicode from "../components/typo/Unicode";
+import { tickSVG } from "../components/typo/svgs";
 
 import ContentExample from "./ContentExample";
 import contentContainerExample from "./contentContainerExample";
@@ -38,6 +38,7 @@ export default (context) => {
   // refs to DOM dialogs refs
   let diagPos, diagPos2, dialog;
   const [left, setLeft] = createSignal(10);
+  const [top, setTop] = createSignal(60);
 
   const Dialog = dialogComponent(context)();
 
@@ -74,21 +75,21 @@ export default (context) => {
       <Title>{tr.t("Dialog")}</Title>
       <p>
         A <code>DIALOG MODAL </code> comes with a minimal CSS. It is opened as a
-        MODAL with <code> showModal </code>, not with the attribute{" "}
+        MODAL with <code> showModal </code> and not with the attribute{" "}
         <code> open </code>. It is centered by default, with margin "auto".
-      </p>
-      <p>
-        You can also design a positionned DIALOG modal by setting the props{" "}
-        <code> left </code> and <code> top </code> which correspond to the
-        margins.
       </p>
 
       <p>
-        In the example below, you use a state <code> createSignal </code> to
-        save the "terms of terms aggrement" checkbox state placed in the dialog
-        box. We put the state in the context to keep global (survives
-        navigation). The autofocus is put on the cancel button. There is also a
-        function to close it when clicked outside of it in the example below.
+        There is a checkbox on "terms of terms aggrement" in the dialog box. We
+        put the state in the context to keep it global: it survives to
+        navigation.
+      </p>
+      <p>
+        A function <code>resetIfOut </code> is also exported: you can close the
+        modal when you click outside of it (only in the first example below).
+        You need to put a <code> ref </code> on the dialog component and set up
+        listeners on the "click" event to enable this function. The listener is
+        wrapped within a <code> onMount </code> (and <code> onCleanup </code>).
       </p>
 
       <div style={{ "text-align": "center" }}>
@@ -124,8 +125,9 @@ export default (context) => {
         An example of a repositionable <code> DIALOG MODAL</code>.
       </H3>
       <p>
-        We set the props <code> left </code>
-        and <code> top </code>.{" "}
+        You can also design a positionned DIALOG modal by setting the props{" "}
+        <code> left </code> and <code> top </code> which correspond to the
+        margins.
       </p>
 
       <input
@@ -136,6 +138,14 @@ export default (context) => {
         onInput={(e) => setLeft(e.target.value)}
       />
       <span>&nbsp {left()}</span>
+      <input
+        type="range"
+        value={top()}
+        min={60}
+        max={200}
+        onInput={(e) => setTop(e.target.value)}
+      />
+      <span>&nbsp {top()}</span>
       <p>
         Change the slider above and check the position of the Dailog modal. It
         defaults to centered modal (with margin "auto").
@@ -144,7 +154,7 @@ export default (context) => {
       <Button fullWidth ripple onClick={() => diagPos.showModal()}>
         OPEN A POSTIONNABLE DIALOG BOX
       </Button>
-      <Dialog ref={diagPos} left={left()} top={60}>
+      <Dialog ref={diagPos} left={left()} top={top()}>
         <Bold>
           <h1>Hello from Dailog!</h1>
           <Button fullWidth ripple onClick={() => diagPos.close()}>

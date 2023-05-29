@@ -1,9 +1,9 @@
 import { styled } from "solid-styled-components";
 import button from "../components/button";
-import imgSVG from "../components/imgSVG";
+import imgSVG from "../components/typo/imgSVG";
 import facebook from "../assets/facebook.svg";
-import { dTitle } from "../components/title";
-import { tickSVG } from "../components/svgs";
+import { dTitle } from "../components/utilities/title";
+import { tickSVG } from "../components/typo/svgs";
 
 export default (context) => {
   const {

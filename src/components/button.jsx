@@ -19,7 +19,7 @@ export default (context) => {
     min-height: 2.5rem;
     outline: none;
     border: none;
-    border-radius: 2px;
+    border-radius: 4px;
     background: transparent;
     font-size: 1rem;
     font-weight: 500;

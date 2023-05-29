@@ -1,4 +1,4 @@
-import { title, dTitle, sTitle } from "../components/title";
+import { title, dTitle, sTitle } from "../components/utilities/title";
 
 export default (context) => {
   const {

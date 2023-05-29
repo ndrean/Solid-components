@@ -2,7 +2,7 @@ import { createSignal } from "solid-js";
 import { css } from "solid-styled-components";
 import drawer from "../components/drawer";
 import button from "../components/button";
-import { dTitle } from "../components/title";
+import { dTitle } from "../components/utilities/title";
 import menu from "./menu";
 import "../index.css";
 

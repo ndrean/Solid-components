@@ -1,13 +1,13 @@
 import { For, createSignal, lazy, onCleanup, onMount } from "solid-js";
 import { styled } from "solid-styled-components";
 
-import imgSVG from "../components/imgSVG";
-import drawEmoji from "../components/drawEmoji.jsx";
-import drawCodePoint from "../components/drawCodePoint.jsx";
-import Link from "../components/Link";
-import { gitHubSVG, tickSVG, hamburgerSVG } from "../components/svgs";
-import Unicode from "../components/Unicode";
-import { dTitle } from "../components/title";
+import imgSVG from "../components/typo/imgSVG";
+import drawEmoji from "../components/typo/drawEmoji.jsx";
+import drawCodePoint from "../components/typo/drawCodePoint.jsx";
+import Link from "../components/utilities/Link";
+import { gitHubSVG, tickSVG, hamburgerSVG } from "../components/typo/svgs";
+import Unicode from "../components/typo/Unicode";
+import { dTitle } from "../components/utilities/title";
 
 import ham from "../assets/ham.svg";
 import cheers from "../assets/cheers.svg";
@@ -129,7 +129,7 @@ export default (context) => {
       <H2>Unicodes: </H2>
       <p>\u003C Unicode size="2em" code= u274C /\u003E </p>
 
-      <For each={["\u274C", "\u274E", "\u2757", "\u2713", check]}>
+      <For each={["\u2718", "\u274C", "\u274E", "\u2757", check]}>
         {(unicode) => (
           <span style={{ margin: "12px" }}>
             <Unicode size="2em" code={unicode} />

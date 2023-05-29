@@ -1,10 +1,10 @@
 import { createSignal, For, createMemo } from "solid-js";
 import { styled, css } from "solid-styled-components";
 
-import { dTitle } from "../components/title";
+import { dTitle } from "../components/utilities/title";
 import button from "../components/button";
-import grayDiv from "../components/grayDiv";
-import { tickSVG } from "../components/svgs";
+import grayDiv from "../components/utilities/grayDiv";
+import { tickSVG } from "../components/typo/svgs";
 
 const Span = styled("span")`
   padding-left: 20px;

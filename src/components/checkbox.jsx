@@ -3,12 +3,13 @@ import { css } from "solid-styled-components";
 export default (context) => {
   const {
     colors: { grey, blue },
+    codes: { chkCross, cross },
   } = context;
 
-  const style = {
+  const style = ({ size, content }) => ({
     base: `
-      width: 2rem;
-      height: 2rem;
+      width: ${size}rem;
+      height: ${size}rem;
       border-radius: 5px;
       appearance: none;
       outline: none;
@@ -28,8 +29,8 @@ export default (context) => {
         background-color: ${blue[800]};
       }
       &:after {
-        content: "\u2718";
-        font-size: 2rem;
+        content: "${content}";
+        font-size: ${size}em;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -39,17 +40,19 @@ export default (context) => {
         opacity: 0;
       }
       &:checked&:after {
-        color: ${grey[500]};
+        color: ${grey[200]};
         opacity: 1;
       }
     `,
-  };
+  });
 
   return function Checkbox(props) {
+    const size = props.size ? props.size : "2";
+    const content = props.content ? props.content : chkCross;
     return (
       <input
         class={css`
-          ${style.base} + ${props.styles}
+          ${style({ size, content }).base} + ${props.styles}
         `}
         type="checkbox"
         required="required"

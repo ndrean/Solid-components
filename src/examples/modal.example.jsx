@@ -2,9 +2,9 @@ import { createSignal, batch } from "solid-js";
 
 import modal from "../components/modal";
 import button from "../components/button";
-import { dTitle } from "../components/title";
-import grayDiv from "../components/grayDiv";
-import Unicode from "../components/Unicode";
+import { dTitle } from "../components/utilities/title";
+import grayDiv from "../components/utilities/grayDiv";
+import Unicode from "../components/typo/Unicode";
 import ContentExample from "./ContentExample";
 
 export default (context) => {

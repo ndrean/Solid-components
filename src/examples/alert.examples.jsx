@@ -1,5 +1,5 @@
 import alert from "../components/alert";
-import { dTitle } from "../components/title";
+import { dTitle } from "../components/utilities/title";
 
 export default (context) => {
   const {

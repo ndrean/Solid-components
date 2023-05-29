@@ -2,8 +2,8 @@ import { styled, css } from "solid-styled-components";
 import { A } from "@solidjs/router";
 
 import context from "../context.js";
-import Link from "../components/Link.jsx";
-import { title, dTitle } from "../components/title.jsx";
+import Link from "../components/utilities/Link.jsx";
+import { title, dTitle } from "../components/utilities/title.jsx";
 import "../index.css";
 
 const Pre = styled("pre")`

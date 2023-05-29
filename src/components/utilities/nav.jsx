@@ -1,7 +1,7 @@
 import { A } from "@solidjs/router";
 import { css } from "solid-styled-components";
-import "../index.css";
-import routes from "../routes";
+// import "../../index.css";
+import routes from "../../routes";
 
 export default (context) => (props) => {
   const {
@@ -11,19 +11,6 @@ export default (context) => (props) => {
   const bgBisque = css`
     background-color: ${palette.secondary.background};
   `;
-
-  // const display = css`
-  //   display: block;
-  //   overflow-y: scroll;
-  //   height: 90vh;
-  // `;
-
-  // const navCss = css`
-  //   width: var(--width);
-  //   height: 90vh;
-  //   background-color: ${palette.primary.background};
-  //   overflow-y: scroll;
-  // `;
 
   const link = css`
     padding: 10px;
@@ -38,7 +25,6 @@ export default (context) => (props) => {
     }
   `;
 
-  // props?.mobile ? navCss + display : navCss
   return (
     <nav>
       <For each={routes}>

@@ -1,4 +1,4 @@
-import CheckboxContainer from "../components/CheckboxContainer";
+import CheckboxContainer from "../components/utilities/CheckboxContainer";
 import checkbox from "../components/checkbox";
 import context from "../context";
 
