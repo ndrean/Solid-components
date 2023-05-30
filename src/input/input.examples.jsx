@@ -23,7 +23,9 @@ export default (context) => {
   let output, picInput, preview, previewer, formInputs;
   //  define custom state per input
   const [date, setDate] = createSignal(now);
+  const [date2, setDate2] = createSignal(null);
   const [search, setSearch] = createSignal(null);
+  const [search2, setSearch2] = createSignal(null);
   const [color, setColor] = createSignal("#887C6D");
   const [picture, setPicture] = createSignal(null);
 
@@ -33,17 +35,17 @@ export default (context) => {
 
   // <-- constraints and validations
   const constraints = {
-    date: (t) => isInvalidDate(t),
+    date: isInvalidDate,
+    date2: isInvalidDate,
+    search2: isInvalidSearch,
   };
 
-  /*
   function isInvalidSearch(data) {
     if (/\D{4,}/.test(data)) {
       return { msg: "", invalid: false };
     }
     return { msg: "min 4 letters, no number", invalid: true };
   }
-  */
 
   function isInvalidDate(data) {
     if (!data) return true;
@@ -148,9 +150,10 @@ export default (context) => {
             <legend>Inputs and Validations</legend>
             <br />
             <p>
-              This input is required and has only browser validation (at least 4
-              letters, no number). No error message appears below, only the red
-              border.
+              This input is required. The first has only browser validation (at
+              least 4 letters, no number). No error message appears below, only
+              the red border. The second has computed validation and the error
+              appears below.
             </p>
             <Emoji label="🔎" size={25} mr={20} />
             <InputComp
@@ -159,7 +162,7 @@ export default (context) => {
               id="search"
               name="search"
               type="search"
-              label="the label"
+              label="Browser validation"
               entry={search()}
               setEntry={setSearch}
               pattern="\D{4,}"
@@ -171,9 +174,29 @@ export default (context) => {
               setValidations={setValidations}
             />
             <br />
+            <Emoji label="🔎" size={25} mr={20} />
+            <InputComp
+              required
+              autoocus
+              id="search2"
+              name="search2"
+              type="search"
+              label="Computed validation"
+              entry={search2()}
+              setEntry={setSearch2}
+              // pattern="\D{4,}"
+              title="at least 4 letters, no numbers"
+              nb={computeLen()}
+              isInvalid={constraints["search2"]}
+              setDisabled={setDisabled}
+              validations={validations()}
+              setValidations={setValidations}
+            />
+
             <p>
-              This input is required and has only a computed validation. The
-              browser will set a red border when invalid (required).
+              This input is required and has computed validation and the default
+              browser validation fo date type: whne required and empty, a red
+              border is set.
             </p>
             <Emoji label="🗓" size={25} mr={20} />
             <InputComp
@@ -181,6 +204,7 @@ export default (context) => {
               name="date"
               id="date"
               type="date"
+              label="with default value"
               width={300}
               entry={date()}
               setEntry={setDate}
@@ -190,6 +214,24 @@ export default (context) => {
               validations={validations()}
               setValidations={setValidations}
             />
+            <br />
+            <Emoji label="🗓" size={25} mr={20} />
+            <InputComp
+              required
+              name="date2"
+              id="date2"
+              type="date"
+              label="without default value"
+              width={300}
+              entry={date2()}
+              setEntry={setDate}
+              nb={computeLen()}
+              isInvalid={constraints["date"]}
+              setDisabled={setDisabled}
+              validations={validations()}
+              setValidations={setValidations}
+            />
+
             <br />
             <p>These inputs have no validations and are not required.</p>
             <br />

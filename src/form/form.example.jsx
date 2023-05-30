@@ -186,21 +186,27 @@ export default (context) => (props) => {
   );
   return (
     <section id="form.examples">
-      <p>A form with input components is presented in a dialog component.</p>
+      <p>
+        A form using <code> inputComponent </code> is presented in a{" "}
+        <code> dialogComponent </code>.
+      </p>
       <p>
         The form should contain the state of each input as a "signal". These are
-        passed down to the <code> inputComponent </code>.
+        passed down to the <code> inputComponent</code>.
       </p>
       <br />
       <details>
         <summary>About the SUBMIT button control</summary>
-        The SUBMIT button is controlled and enabled when all the inputs with
-        validations are validated. You need to code this validation function and
-        append its reference to the "constraints" object. The validation
-        function is passed to the input component via the{" "}
-        <code> isInvalid </code> prop. This function returns an object \u007B
-        invalid: bool, msg: "text"\u007D to update the "validations" signal,
-        thus we also pass a <code> validations </code> props.
+        The SUBMIT button is controlled and enabled when all the validations on
+        the inputs are validated. You need to code this validation function and
+        append its reference to the "constraints" object. This function returns
+        an object \u007Binvalid: bool, msg: "text"\u007D to update the
+        "validations" signal, thus we also pass a <code>
+          {" "}
+          validations{" "}
+        </code>{" "}
+        props. The validation function is passed to the input component via the{" "}
+        <code> isInvalid </code> prop.
       </details>
       <p>
         {" "}
