@@ -1,4 +1,3 @@
-import CheckboxContainer from "../checkbox/CheckboxContainer";
 import checkbox from "../checkbox/checkbox";
 import context from "../context";
 
@@ -6,17 +5,13 @@ const Checkbox = checkbox(context);
 
 export default (props) => (
   <div class="main">
-    <CheckboxContainer>
-      <Checkbox
-        id="myDialogCheckboxID"
-        name="myDialogCheckbox"
-        checked={props.conditions}
-        onInput={props.toggleConditions}
-      />
-      <label for="myDialogCheckboxID">
-        I agree with the terms and conditions
-      </label>
-    </CheckboxContainer>
+    <Checkbox
+      id="myDialogCheckboxID"
+      name="myDialogCheckbox"
+      label="I agree with the terms and conditions"
+      checked={props.conditions}
+      onInput={props.toggleConditions}
+    />
     <p id="terms">
       Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in
       laying out print, graphic or web designs. The passage is attributed to an
