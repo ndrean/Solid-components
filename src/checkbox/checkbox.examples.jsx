@@ -12,23 +12,12 @@ export default (context) => {
       shadows,
       palette: { primary, secondary },
     },
-    codes: { cross, tick },
+    codes: { tick },
   } = context;
 
+  // <-- Styling for this page
   const Title = dTitle("h1", stdTitle);
-  const Checkbox = checkbox(context);
   const GrayDiv = grayDiv(context);
-
-  const [state, setState] = createSignal({});
-  const [radioGroup, setRadioGroup] = createSignal({});
-
-  const CheckboxContainer = styled("div")`
-    display: flex;
-    align-items: center;
-    label {
-      margin-left: 1rem;
-    }
-  `;
 
   const Span = styled("span")`
     padding-right: 15px;
@@ -46,8 +35,17 @@ export default (context) => {
     padding: 5px;
     border-radius: 5px;
   `;
+  // --> end styling page
 
   return function CheckBoxExamples() {
+    const Checkbox = checkbox(context);
+    const [state, setState] = createSignal({});
+    const [radioGroup, setRadioGroup] = createSignal({});
+
+    function handleCheckbox(evt) {
+      setState({ ...state(), [evt.target.name]: evt.target.checked });
+    }
+
     function handleRadioGroup(evt) {
       setRadioGroup({
         ...radioGroup(),
@@ -71,47 +69,32 @@ export default (context) => {
             }
           `}
         >
-          <CheckboxContainer>
-            <Checkbox
-              id="myCheckbox"
-              name="myCheckbox"
-              value={state().myCheckbox || false}
-              onChange={(evt) => {
-                setState({
-                  ...state(),
-                  [evt.target.name]: evt.target.checked,
-                });
-              }}
-            />
-            <label for="myCheckbox">My Checkbox</label>
-          </CheckboxContainer>
-          <CheckboxContainer>
-            <Checkbox
-              id="autoplay"
-              name="autoplay"
-              size={1.5}
-              content={tick}
-              value={state()["autoplay"] || false}
-              onChange={(evt) => {
-                setState({
-                  ...state(),
-                  [evt.target.name]: evt.target.checked,
-                });
-              }}
-            />
-            <label for="autoplay">Autoplay</label>
-          </CheckboxContainer>
-          <CheckboxContainer>
-            <Checkbox id="disabled" disabled name="myCheckbox" />
-            <label for="disabled">Disabled</label>
-          </CheckboxContainer>
+          <Checkbox
+            id="My Checkbox"
+            name="myCheckbox"
+            label="My Checkbox"
+            value="My Checkbox"
+            onChange={handleCheckbox}
+          />
+          <Checkbox
+            id="Autoplay"
+            name="autoplay"
+            label="Autoplay"
+            value="Autoplay"
+            onChange={handleCheckbox}
+            size={1.2}
+            content={tick}
+          />
+          <Checkbox disabled id="disabled" name="disabled" label="Disabled" />
         </form>
+        <br />
         <GrayDiv>
           <p>My checkbox is: {state()["myCheckbox"] ? "true" : "false"}</p>
           <p>Autoplay is: {state()["autoplay"] ? "true" : "false"}</p>
         </GrayDiv>
 
         <Title>{tr.t("Groups of radio buttons")}</Title>
+        <p>Overwrite the type with "radio" as the default is "checkbox".</p>
         <form
           class={css`
             > div {
@@ -122,63 +105,54 @@ export default (context) => {
           <div style={{ display: "flex" }}>
             <Fieldset style={{ borderColor: "bisque" }} id="group1">
               <Legend>IAC tools</Legend>
-              <CheckboxContainer>
-                <Checkbox
-                  type="radio"
-                  name="group1"
-                  value={"GruCloud"}
-                  id="grucloud"
-                  onChange={handleRadioGroup}
-                />
-                <label for="grucloud">GruCloud</label>
-              </CheckboxContainer>
-              <CheckboxContainer>
-                <Checkbox
-                  type="radio"
-                  name="group1"
-                  id="terraform"
-                  value={"Terraform"}
-                  onChange={handleRadioGroup}
-                />
-                <label for="terraform">Terraform</label>
-              </CheckboxContainer>
-              <CheckboxContainer>
-                <Checkbox
-                  type="radio"
-                  name="group1"
-                  id="pulumi"
-                  value={"Pulumi"}
-                  onChange={handleRadioGroup}
-                />
-                <label for="pulumi">Pulumi</label>
-              </CheckboxContainer>
+              <Checkbox
+                type="radio"
+                id="GruCloud"
+                name="group1"
+                label="GruCloud"
+                value="GruCloud"
+                onChange={handleRadioGroup}
+              />
+              <Checkbox
+                type="radio"
+                id="Terraform"
+                name="group1"
+                label="Terraform"
+                value="Terraform"
+                onChange={handleRadioGroup}
+              />
+              <Checkbox
+                type="radio"
+                id="Pulumi"
+                name="group1"
+                label="Pulumi"
+                value="Pulumi"
+                onChange={handleRadioGroup}
+              />
             </Fieldset>
             <Fieldset id="group2">
               <Legend>Language</Legend>
-              <CheckboxContainer>
-                <Checkbox
-                  type="radio"
-                  name="group2"
-                  value={"Rust"}
-                  content={tick}
-                  id="rust"
-                  onChange={handleRadioGroup}
-                />
-                <label for="rust">Rust</label>
-              </CheckboxContainer>
-              <CheckboxContainer>
-                <Checkbox
-                  type="radio"
-                  name="group2"
-                  id="nodejs"
-                  value={"NodeJS"}
-                  content={tick}
-                  onChange={handleRadioGroup}
-                />
-                <label for="nodejs">NodeJS</label>
-              </CheckboxContainer>
+              <Checkbox
+                type="radio"
+                id="Rust"
+                name="group2"
+                content={tick}
+                value="Rust"
+                label="Rust"
+                onChange={handleRadioGroup}
+              />
+              <Checkbox
+                type="radio"
+                id="NodeJS"
+                name="group2"
+                label="NodeJS"
+                value="NodeJS"
+                content={tick}
+                onChange={handleRadioGroup}
+              />
             </Fieldset>
           </div>
+          <br />
           <p>
             <GrayDiv>
               <Span>You selected: </Span>

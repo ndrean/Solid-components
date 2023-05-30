@@ -1,10 +1,18 @@
-import { css } from "solid-styled-components";
+import { css, styled } from "solid-styled-components";
 
 export default (context) => {
   const {
     colors: { grey, blue },
     codes: { chkCross, cross },
   } = context;
+
+  const CheckboxContainer = styled("div")`
+    display: flex;
+    align-items: center;
+    label {
+      margin-left: 1rem;
+    }
+  `;
 
   const style = ({ size, content }) => ({
     base: `
@@ -50,14 +58,16 @@ export default (context) => {
     const size = props.size ? props.size : "2";
     const content = props.content ? props.content : chkCross;
     return (
-      <input
-        class={css`
-          ${style({ size, content }).base} + ${props.styles}
-        `}
-        type="checkbox"
-        required="required"
-        {...props}
-      />
+      <CheckboxContainer>
+        <input
+          class={css`
+            ${style({ size, content }).base} + ${props.styles}
+          `}
+          type="checkbox"
+          {...props}
+        />
+        <label for={props.id}>{props.label}</label>
+      </CheckboxContainer>
     );
   };
 };

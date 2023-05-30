@@ -9,12 +9,11 @@ import { styled } from "solid-styled-components";
 import inputComponent, { ErrorOutput } from "../input/inputComponent";
 import checkbox from "../checkbox/checkbox";
 import dialogComponent, { resetIfOut } from "../dialog/dialogComponent";
-import { dTitle } from "../app/title";
+// additional elements on this page
 import contentDiv from "../dialog/ContentDiv";
 import button from "../button/button";
 import grayDiv from "../app/grayDiv";
 import Unicode from "../typo/Unicode";
-
 import keySVG from "../assets/keySVG.svg";
 import personSVG from "../assets/personSVG.svg";
 import emailSVG from "../assets/emailSVG.svg";
@@ -37,13 +36,26 @@ export default (context) => (props) => {
     codes: { cross },
   } = context;
 
+  // <-- page styling elements
+  const ContentDiv = contentDiv(context);
+  const Button = button(context);
+  const GrayDiv = grayDiv(context);
+  const dialogCSS = `border-radius: 10px;`;
+  const Dialog = dialogComponent(context);
+  const ImgSVG = imgSVG(context);
+
+  const InputBlock = styled("div")`
+    display: flex;
+    align-items: center;
+  `;
+  // -->
+
   // DOM references
   let output, formEx, passwordInput, passwordConfInput, diag, pwdCheck;
-
-  // state of form submit button
+  // state of form SUBMIT button
   const [disabled, setDisabled] = createSignal(true);
 
-  // object where the keys are the name of the input and values are validity of the input
+  // keys are the name of the input, values are boolean validity of the input
   //  in the form {name: false, email: false, password,...}
   const [validations, setValidations] = createSignal({});
 
@@ -55,24 +67,8 @@ export default (context) => (props) => {
   const [pwdCheckbox, setPwdCheckbox] = createSignal(false);
   const [pwdConfCheckbox, setPwdConfCheckbox] = createSignal(false);
 
-  const Input = inputComponent(context);
-  const ContentDiv = contentDiv(context);
-  const Button = button(context);
-  const GrayDiv = grayDiv(context);
+  const InputComponent = inputComponent(context);
   const Checkbox = checkbox(context);
-
-  // const Title = dTitle("h1", stdTitle);
-
-  const dialogCSS = `border-radius: 10px;`;
-  const Dialog = dialogComponent(context);
-
-  const ImgSVG = imgSVG(context);
-
-  /* to be able to place an SVG before the input*/
-  const InputBlock = styled("div")`
-    display: flex;
-    align-items: center;
-  `;
 
   const CustomInput = (props) => (
     <InputBlock>
@@ -84,9 +80,10 @@ export default (context) => (props) => {
           style={{ "margin-right": "50px" }}
         />
       )}
-      <Input {...props} />
+      <InputComponent {...props} />
     </InputBlock>
   );
+
   //<----- Define the validations functions for each input
   // we can pass the corresponding input validation per input name
   const constraints = {
@@ -147,13 +144,11 @@ export default (context) => (props) => {
   };
 
   createEffect(() => {
-    if (password() !== passwordConf() && passwordConf() !== null) {
-      pwdCheck.textContent = "Passwords don't match";
+    if (password() !== passwordConf()) {
       setDisabled(true);
-    } else {
-      pwdCheck.textContent = "";
-      setDisabled(false);
+      return (pwdCheck.textContent = "Passwords don't match");
     }
+    return (pwdCheck.textContent = "");
   });
 
   const handleSubmit = (e) => {
@@ -186,32 +181,35 @@ export default (context) => (props) => {
   });
   onCleanup(() => removeEventListener("click", (e) => resetIfOut(e, diag)));
 
+  createEffect(() =>
+    console.log("validations", validations(), "disabled", disabled())
+  );
   return (
     <section id="form.examples">
+      <p>A form with input components is presented in a dialog component.</p>
       <p>
-        A form with <code> inputComponent </code> is presented in a dialog
-        component.{" "}
+        The form should contain the state of each input as a "signal". These are
+        passed down to the <code> inputComponent </code>.
       </p>
-      <p>
-        This component should receive defined in the form component and passed
-        down to the input component.
-      </p>
-      <p>
-        You also need to define and append to the "constraints" object a
-        validation function for this input into the <code> isInvalid </code>{" "}
-        prop. This function returns an object \u007B invalid: bool, msg:
-        "text"\u007D to update the "validations" signal, thus we also pass a{" "}
-        <code> validations </code> props. This will be used to disable the
-        "submit" button".
-      </p>
+      <br />
+      <details>
+        <summary>About the SUBMIT button control</summary>
+        The SUBMIT button is controlled and enabled when all the inputs with
+        validations are validated. You need to code this validation function and
+        append its reference to the "constraints" object. The validation
+        function is passed to the input component via the{" "}
+        <code> isInvalid </code> prop. This function returns an object \u007B
+        invalid: bool, msg: "text"\u007D to update the "validations" signal,
+        thus we also pass a <code> validations </code> props.
+      </details>
       <p>
         {" "}
-        The input component exports an <code> ErrorOutput </code> component. You
-        can exploit both the browser validations (via CSS) and your own
-        validations: the first highlights the cell in red and the later disables
-        the SUBMIT button and returns a message displayed in the ErrorOutput
-        box. Besides the browser validation, you can still pass in the computed
-        validations by setting a prop <code> borderError </code> in the input.
+        The input component contains an <code> ErrorOutput </code> cell. You can
+        exploit both the browser validations (via CSS) and your own validations.
+        The browser validation highlights the input border in red via the
+        pseudo-class. The computed validation disables the SUBMIT button,
+        returns a message displayed in the ErrorOutput box, and highlights the
+        input border.
       </p>
       <Button fullWidth primary raised onClick={openDialog}>
         Open Login form
@@ -226,10 +224,10 @@ export default (context) => (props) => {
               svg={personSVG}
               alt="personSVG"
               required
-              pattern="^(\w+){4,}"
+              type="text"
               label="name"
               name="name"
-              type="text"
+              pattern="^(\w+){4,}"
               entry={name()}
               setEntry={setName}
               nb={computeLen()}
@@ -261,7 +259,6 @@ export default (context) => (props) => {
                 alt="keySVG"
                 required
                 ref={passwordInput}
-                label="password"
                 name="password"
                 type="password"
                 entry={password()}
@@ -277,8 +274,7 @@ export default (context) => (props) => {
                 <Checkbox
                   size={1}
                   id="pwdCheckbox"
-                  required={false}
-                  value={pwdCheckbox()}
+                  // value={pwdCheckbox()}
                   onChange={(e) => {
                     revealPassword(e, passwordInput);
                     setPwdCheckbox((v) => !v);
@@ -310,11 +306,10 @@ export default (context) => (props) => {
                 <Checkbox
                   size={1}
                   id="pwdConfCheckbox"
-                  required={false}
-                  value={pwdConfCheckbox()}
+                  // value={pwdConfCheckbox()}
                   onChange={(e) => {
                     revealPassword(e, passwordConfInput);
-                    setPwdCheckbox((v) => !v);
+                    setPwdConfCheckbox((v) => !v);
                   }}
                 />
                 Show Password

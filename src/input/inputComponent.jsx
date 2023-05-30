@@ -9,12 +9,20 @@ const ErrorOutput = styled("div")`
 `;
 export { ErrorOutput };
 
+/* to be able to place an SVG before the input*/
+const InputBlock = styled("div")`
+  display: inline-block;
+  label {
+    margin-left: 10px;
+  }
+`;
+
 export default (context) => (props) => {
   const {
     theme: { shadows, palette },
   } = context;
 
-  const inputCSS = (p) => `
+  const inputCSS = () => `
     box-shadow: ${shadows[4]};
     border-radius: 4px;
     border: 2px solid transparent;
@@ -33,18 +41,13 @@ export default (context) => (props) => {
     border-color: ${onError() && "red"};
     `;
 
-  const newClass = (props) => {
+  const sizing = (props) => {
     if (props.height || props.width)
       return `
     height: ${props.height + "em"};
     width: ${props.width + "em"};
     `;
   };
-
-  /* to be able to place an SVG before the input*/
-  const InputBlock = styled("div")`
-    display: inline-block;
-  `;
 
   const [msg, setMsg] = createSignal(null);
   const [onError, setOnError] = createSignal(false);
@@ -57,9 +60,9 @@ export default (context) => (props) => {
         props.setEntry(target.value);
         props.setValidations({ ...props.validations, [target.name]: invalid });
         props.setDisabled(checkDisabled());
-        if (props.borderError) {
-          setOnError((v) => !v);
-        }
+        // if (props.borderError) {
+        setOnError(invalid);
+        // }
       });
     }
     if (target.files) {
@@ -73,6 +76,7 @@ export default (context) => (props) => {
 
   const checkDisabled = () => {
     const object = Object.entries(props.validations) || [];
+
     // early disable if not all inputs filled
     if (object.length < props.nb) return true;
     // if one of the inputs has invalid state true, then disable
@@ -83,16 +87,14 @@ export default (context) => (props) => {
     <InputBlock>
       <input
         class={css`
-          ${props.height ? inputCSS(props) + newClass(props) : inputCSS(props)}
+          ${props.height ? inputCSS() + sizing(props) : inputCSS()}
         `}
-        name={props.name}
         placeholder={props.name}
-        type={props.type}
         value={props.type !== "file" ? props.entry : null}
         onInput={handleInput}
-        autocomplete={props?.autocomplete}
         {...props}
       />
+      <label for={props.id}>{props.label}</label>
       <ErrorOutput>{msg()}</ErrorOutput>
     </InputBlock>
   );
