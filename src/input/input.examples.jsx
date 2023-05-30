@@ -93,7 +93,7 @@ export default (context) => {
   `;
 
   const StylingDiv = styled("div")((props) => ({
-    padding: "2em",
+    padding: "2em 1em 0em 1em",
     background: `linear-gradient(white, ${props.color})`,
   }));
 
@@ -150,19 +150,19 @@ export default (context) => {
             <legend>Inputs and Validations</legend>
             <br />
             <p>
-              This input is required. The first has only browser validation (at
+              The input <Emoji label="🔎" size={25} mr={10} ml={10} /> is
+              <code> REQUIRED </code>. The first has only browser validation (at
               least 4 letters, no number). No error message appears below, only
               the red border. The second has computed validation and the error
               appears below.
             </p>
-            <Emoji label="🔎" size={25} mr={20} />
+            {/* <Emoji label="🔎" size={25} mr={20} /> */}
             <InputComp
               required
               autoocus
               id="search"
-              name="search"
               type="search"
-              label="Browser validation"
+              label="Browser"
               entry={search()}
               setEntry={setSearch}
               pattern="\D{4,}"
@@ -174,14 +174,13 @@ export default (context) => {
               setValidations={setValidations}
             />
             <br />
-            <Emoji label="🔎" size={25} mr={20} />
+            {/* <Emoji label="🔎" size={25} mr={20} /> */}
             <InputComp
               required
               autoocus
               id="search2"
-              name="search2"
               type="search"
-              label="Computed validation"
+              label="Computed"
               entry={search2()}
               setEntry={setSearch2}
               // pattern="\D{4,}"
@@ -194,17 +193,17 @@ export default (context) => {
             />
 
             <p>
-              This input is required and has computed validation and the default
-              browser validation fo date type: whne required and empty, a red
-              border is set.
+              The input <Emoji label="🗓" size={25} ml={10} mr={10} />
+              is <code> REQUIRED </code>. They have a computed validation and
+              the default browser validation fo date type: when required and
+              empty, a red border is set.
             </p>
             <Emoji label="🗓" size={25} mr={20} />
             <InputComp
               required
-              name="date"
               id="date"
               type="date"
-              label="with default value"
+              label="default value"
               width={300}
               entry={date()}
               setEntry={setDate}
@@ -218,10 +217,9 @@ export default (context) => {
             <Emoji label="🗓" size={25} mr={20} />
             <InputComp
               required
-              name="date2"
               id="date2"
               type="date"
-              label="without default value"
+              label="no default"
               width={300}
               entry={date2()}
               setEntry={setDate}
@@ -233,14 +231,13 @@ export default (context) => {
             />
 
             <br />
-            <p>These inputs have no validations and are not required.</p>
+            <p>None of these inputs below are required nor have validations.</p>
             <br />
             <CenteredDiv>
               <Emoji label="🎨" size={25} mr={20} mt={16} />
               <InputComp
                 id="color"
                 type="color"
-                name="color"
                 value={color()}
                 height={5}
                 width={5}
@@ -264,7 +261,6 @@ export default (context) => {
                 capture="user"
                 ref={picInput}
                 hidden
-                name="picture"
                 id="picture"
                 type="file"
                 setEntry={setPicture}

@@ -59,8 +59,8 @@ export default (context) => {
         <p>
           The <code> CHECKBOX </code> component can be resized with a{" "}
           <code> size </code> prop. You can also change the content of the
-          checkbox with a <code> content </code> prop. The content is a UNICODE
-          defined in the <code> CONTEXT </code> object.
+          checkbox with a <code> content </code> prop. The content is a UNICODE;
+          it can be extracted from the CONTEXT object.
         </p>
         <form
           class={css`
@@ -72,14 +72,14 @@ export default (context) => {
           <Checkbox
             id="My Checkbox"
             name="myCheckbox"
-            label="My Checkbox"
+            label="Default checkbox"
             value="My Checkbox"
             onChange={handleCheckbox}
           />
           <Checkbox
             id="Autoplay"
             name="autoplay"
-            label="Autoplay"
+            label="resized checkbox"
             value="Autoplay"
             onChange={handleCheckbox}
             size={1.2}

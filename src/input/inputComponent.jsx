@@ -89,7 +89,8 @@ export default (context) => (props) => {
         class={css`
           ${props.height ? inputCSS() + sizing(props) : inputCSS()}
         `}
-        placeholder={props.name}
+        placeholder={props.id}
+        name={props.id}
         value={props.type !== "file" ? props.entry : null}
         onInput={handleInput}
         {...props}

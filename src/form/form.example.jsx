@@ -232,7 +232,7 @@ export default (context) => (props) => {
               required
               type="text"
               label="name"
-              name="name"
+              id="name"
               pattern="^(\w+){4,}"
               entry={name()}
               setEntry={setName}
@@ -248,7 +248,7 @@ export default (context) => (props) => {
               alt="emailSVG"
               required
               label="email"
-              name="email"
+              id="email"
               type="email"
               entry={email()}
               setEntry={setEmail}
@@ -265,7 +265,7 @@ export default (context) => (props) => {
                 alt="keySVG"
                 required
                 ref={passwordInput}
-                name="password"
+                id="password"
                 type="password"
                 entry={password()}
                 setEntry={setPassword}
@@ -280,7 +280,6 @@ export default (context) => (props) => {
                 <Checkbox
                   size={1}
                   id="pwdCheckbox"
-                  // value={pwdCheckbox()}
                   onChange={(e) => {
                     revealPassword(e, passwordInput);
                     setPwdCheckbox((v) => !v);
@@ -295,8 +294,7 @@ export default (context) => (props) => {
                 alt="keySVG"
                 required
                 ref={passwordConfInput}
-                label="passwordConf"
-                name="passwordConf"
+                id="passwordConf"
                 type="password"
                 disabled={isInvalidPassword(password())?.invalid}
                 entry={passwordConf()}
@@ -312,7 +310,6 @@ export default (context) => (props) => {
                 <Checkbox
                   size={1}
                   id="pwdConfCheckbox"
-                  // value={pwdConfCheckbox()}
                   onChange={(e) => {
                     revealPassword(e, passwordConfInput);
                     setPwdConfCheckbox((v) => !v);
