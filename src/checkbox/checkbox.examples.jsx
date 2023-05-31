@@ -1,17 +1,16 @@
 import { styled, css } from "solid-styled-components";
 import { For, createSignal } from "solid-js";
+
 import checkbox from "./checkbox";
+import switchBox from "./switchBox";
 import { dTitle } from "../app/title";
 import grayDiv from "../app/grayDiv";
 
 export default (context) => {
   const {
-    tr,
     classes: { stdTitle },
-    theme: {
-      shadows,
-      palette: { primary, secondary },
-    },
+    shadows,
+    theme: { bg },
     codes: { tick },
   } = context;
 
@@ -24,13 +23,13 @@ export default (context) => {
   `;
 
   const Fieldset = styled("fieldset")`
-    border-color: ${primary.border};
+    border-color: ${bg.darkBlie};
     margin-right: 20px;
     box-shadow: ${shadows[2]};
   `;
 
   const Legend = styled("legend")`
-    background-color: ${secondary.background};
+    background-color: ${bg.bisque};
     color: primary.text;
     padding: 5px;
     border-radius: 5px;
@@ -39,6 +38,7 @@ export default (context) => {
 
   return function CheckBoxExamples() {
     const Checkbox = checkbox(context);
+    const Switch = switchBox(context);
     const [state, setState] = createSignal({});
     const [radioGroup, setRadioGroup] = createSignal({});
 
@@ -55,7 +55,10 @@ export default (context) => {
 
     return (
       <section id="checkbox">
-        <Title>{tr.t("Checkbox")}</Title>
+        <Title>Checkbox</Title>
+        <p>
+          <Switch id="switch" height={1} label="A switch of height 1rem" />
+        </p>
         <p>
           The <code> CHECKBOX </code> component can be resized with a{" "}
           <code> size </code> prop. You can also change the content of the
@@ -93,7 +96,7 @@ export default (context) => {
           <p>Autoplay is: {state()["autoplay"] ? "true" : "false"}</p>
         </GrayDiv>
 
-        <Title>{tr.t("Groups of radio buttons")}</Title>
+        <Title>"Groups of radio buttons"</Title>
         <p>Overwrite the type with "radio" as the default is "checkbox".</p>
         <form
           class={css`

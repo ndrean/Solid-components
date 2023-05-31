@@ -18,9 +18,7 @@ const InputBlock = styled("div")`
 `;
 
 export default (context) => (props) => {
-  const {
-    theme: { shadows, palette },
-  } = context;
+  const { shadows } = context;
 
   const inputCSS = () => `
     box-shadow: ${shadows[4]};

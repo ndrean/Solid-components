@@ -2,7 +2,8 @@ import { css, styled } from "solid-styled-components";
 
 export default (context) => {
   const {
-    theme: { shadows, palette },
+    shadows,
+    theme: { bg },
   } = context;
 
   const base = (open) => css`
@@ -33,7 +34,7 @@ export default (context) => {
   const ModalClass = styled("div")`
     z-index: 2;
     box-shadow: ${shadows[10]};
-    background-color: ${palette.primary.background};
+    background-color: ${bg.lightGrey};
     top: 0;
     left: 0;
     max-height: 50vh;

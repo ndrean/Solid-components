@@ -1,6 +1,37 @@
-# Pattern for customized functional components with SolidJS
+# SolidJS components
+
+## Component example
 
 This work is 100% based on [the following repo](https://github.com/FredericHeem/mdlean) adapted for SolidJS.
+
+```jsx
+import dialogComponent from "...";
+import button from "...";
+import Unicode from "...";
+import context from "...";
+
+let dialogRef;
+
+const Dialog = dialogComponenent(context);
+const Button = button(context);
+const TickSVG = tickSVG(context);
+
+return (
+  <>
+    <Button fullWidth primary raised onClick={() => dialogRef.showModal()}>
+      Open Modal
+    </Button>
+    <Dialog ref={dialogRef}>
+      {props.children}
+      <Button primary onClick={() => dialogRef.close()}>
+        <Unicode size="1.5em" code={cross} />
+      </Button>
+    </Dialog>
+  </>
+);
+```
+
+## Pattern for customized functional components with SolidJS
 
 It uses [Solid Router](https://github.com/solidjs/solid-router) and [Solid styled components](https://github.com/solidjs/solid-styled-components) to produce a fast and very light-weight bundle.
 

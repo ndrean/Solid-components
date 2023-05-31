@@ -2,16 +2,22 @@ import { css } from "solid-styled-components";
 
 export default (context) => {
   const {
-    theme: { palette, shadows },
+    shadows,
+    theme: { bg },
   } = context;
 
   const baseStyle = (props) => `
   border: none;
-  padding: 0px 10px 0px 10px;
+  padding: 0;
   box-shadow: ${shadows[4]};
-  background: ${palette.primary.background};
+  background: ${bg.lightGrey};
   margin-left: ${props.left ? props.left + "px" : "auto"};
   margin-top: ${props.top ? props.top + "px" : "auto"};
+  
+  &:backdrop {
+    backdrop-filter: blur(25px);
+    transition: backdrop-filter .5s ease;
+  }
   `;
 
   return (props) => (

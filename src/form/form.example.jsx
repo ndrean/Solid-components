@@ -181,9 +181,6 @@ export default (context) => (props) => {
   });
   onCleanup(() => removeEventListener("click", (e) => resetIfOut(e, diag)));
 
-  createEffect(() =>
-    console.log("validations", validations(), "disabled", disabled())
-  );
   return (
     <section id="form.examples">
       <p>

@@ -2,12 +2,13 @@ import { styled } from "solid-styled-components";
 
 export default (context) => {
   const {
-    theme: { shadows, palette },
+    shadows,
+    theme: { bg, text },
   } = context;
 
   return styled("div")`
     box-shadow: ${shadows[10]};
-    background-color: #f1f1f1;
+    background-color: ${bg.lightGrey};
     top: 0;
     left: 0;
     max-height: 50vh;
@@ -25,8 +26,8 @@ export default (context) => {
       font-size: 1.8rem;
       font-weight: 800;
       text-align: center;
-      background-color: ${palette.primary.text};
-      color: ${palette.secondary.background};
+      background-color: ${text[1]};
+      color: ${bg.bisque};
     }
     .footer {
       display: flex;

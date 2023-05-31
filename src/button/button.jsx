@@ -2,8 +2,9 @@ import { styled } from "solid-styled-components";
 
 export default (context) => {
   const {
-    colors: { red, grey, blue },
-    theme: { shadows },
+    colors: { red, blue, pink },
+    shadows,
+    defColors,
   } = context;
 
   const rootStyle = `
@@ -61,10 +62,10 @@ export default (context) => {
       border-width: 0;
     `,
     flatPrimary: `
-      color: ${blue[400]};
+      color: ${blue[900]};
     `,
     flatAccent: `
-      color: ${red[400]};
+      color: red;
     `,
     raised: `
        box-shadow: ${shadows[4]};
@@ -73,11 +74,11 @@ export default (context) => {
         };
     `,
     raisedPrimary: `
-      background-color: ${blue[400]};
+      background-color: ${blue[900]};
       color: white;
     `,
     raisedAccent: `
-      background-color: ${red[400]};
+      background-color: red;
       color: white;
     `,
     disabled: `

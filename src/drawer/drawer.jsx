@@ -4,7 +4,7 @@ import { css } from "solid-styled-components";
 export default (context) => {
   const {
     colors: { grey },
-    theme: { shadows },
+    shadows,
   } = context;
 
   //   DO NOT DESTRUCTURE THE PROPS !!!

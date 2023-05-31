@@ -91,31 +91,22 @@ export default (context) => {
         <LoadingMsg size={20} msg="working for....">
           you!
         </LoadingMsg>
-        <p>
-          \u003C Charging color="green" width=\u007B50\u007D
-          height=\u007B15\u007D /\u003E
-        </p>
-        <Charging color="green" />
+
         <p>
           You can adjust the <code> size </code> and <code> duration </code> and
           set the prop <code>invisible </code> to hide the spinners below:
         </p>
-        <p>
-          \u003C SpinCircle size=\u007B default is "200" \u007D duration=\u007B
-          default is 1300ms\u007D/\u003E
-        </p>
-        <SpinCircle />
-        <p>
-          Visibilty is toggled every second: \u003C SpinCircle
-          size=\u007B20\u007D invisible=\u007Binvisible()\u007D /\u003E
-        </p>
-        <SpinCircle size={30} invisible={invisible()} />
         <p>
           \u003C SpinCircle size=\u007B100\u007D duration=\u007B500\u007D
           /\u003E
         </p>
 
         <SpinCircle size={100} duration={500} />
+        <p>
+          \u003C Charging color="green" width=\u007B50\u007D
+          height=\u007B15\u007D /\u003E
+        </p>
+        <Charging color="green" />
       </section>
     );
   };

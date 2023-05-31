@@ -1,6 +1,6 @@
 import { styled } from "solid-styled-components";
 
-export default function contentDiv(context) {
+export default function contentDiv({ shadows }) {
   return styled("div")`
     .header {
       > h1 {
@@ -8,7 +8,7 @@ export default function contentDiv(context) {
         margin: 0 -10px 0 -10px;
         background-color: bisque;
         border: none;
-        box-shadow: ${context.theme.shadows[4]};
+        box-shadow: ${shadows[4]};
       }
     }
     .main {

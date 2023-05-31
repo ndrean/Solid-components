@@ -55,6 +55,7 @@ export default (context) => {
   });
 
   return function Checkbox(props) {
+    const { label, id } = props;
     const size = props.size ? props.size : "2";
     const content = props.content ? props.content : chkCross;
     return (
@@ -66,7 +67,7 @@ export default (context) => {
           type="checkbox"
           {...props}
         />
-        <label for={props.id}>{props.label}</label>
+        {label && <label for={id}>{label}</label>}
       </CheckboxContainer>
     );
   };

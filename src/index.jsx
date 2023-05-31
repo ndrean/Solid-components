@@ -16,7 +16,7 @@ import nav from "./app/nav";
 import pages from "./app/pages/pages";
 import drawer from "./drawer/drawer";
 import header from "./app/header";
-import { spinCircle } from "./spinner/loaders";
+import loading from "./app/pages/loading";
 
 const GridContainer = styled("div")`
   display: grid;
@@ -35,35 +35,20 @@ const Container = styled("div")`
   overflow: auto;
   max-height: 100vh;
 `;
-// overflow-behavior: contain;
 
-// @media (max-width: var(--mobile)) {
-//   grid-template-columns: 100vw;
-// }
-// const NavContainer = styled("div")`
-//   display: ${(props) => props.hideOnMobile && "none"};
-//   @media (max-width: var(--mobile)) {
-//     display: block;
-//   }
-// `;
-
-const CenterSpin = styled("div")`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-`;
-
-const App = () => {
+const app = (context) => {
   const [menuOpen, setMenuOpen] = createSignal(false);
   const [isMobile, setIsMobile] = createSignal(false);
   const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
-  const navChange = () => setTimeout(() => setMenuOpen(false), 100);
+  const navChange = () => {
+    console.log("nav");
+    setTimeout(() => setMenuOpen(false), 100);
+  };
   const toggleMenu = () => setMenuOpen((v) => !v);
 
   const Nav = nav(context);
   const Drawer = drawer(context);
-  const Spin = spinCircle(context);
+  const Loading = loading(context);
   const Header = header(context);
   const Pages = pages(context);
 
@@ -79,13 +64,7 @@ const App = () => {
   return (
     <Router>
       <Header toggle={toggleMenu} />
-      <Suspense
-        fallback={
-          <CenterSpin>
-            <Spin />
-          </CenterSpin>
-        }
-      >
+      <Suspense fallback={<Loading />}>
         <Show
           when={isMobile()}
           fallback={
@@ -107,4 +86,5 @@ const App = () => {
   );
 };
 
+const App = () => app(context);
 render(() => <App />, document.getElementById("root"));

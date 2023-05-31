@@ -28,7 +28,7 @@ export default (context) => (props) => {
       <Button onClick={props.toggle} aria-label="open-nav">
         <HamburgerSVG color="orange" />
       </Button>
-      <p class={headerTitle}>Components & CSS with SolidJS</p>
+      <p class={headerTitle}>Components with SolidJS</p>
     </header>
   );
 };

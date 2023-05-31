@@ -5,9 +5,9 @@ const Link = styled("a")`
   background-color: beige;
   padding: 3px;
   border-radius: 5px;
+  transition: transform 0.3s;
   &:hover {
     transform: scale(1.1);
-    transition: 0.3s;
   }
 `;
 

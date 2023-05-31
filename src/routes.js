@@ -1,78 +1,92 @@
 import { lazy } from "solid-js";
+import { UsersData } from "./app/pages/data";
 
 const routes = [
   {
-    href: "/",
+    path: "/",
     title: "Home",
     component: lazy(() => import("./app/pages/homePage")),
   },
   {
-    href: "/api",
+    path: "/api",
     title: "Api",
     component: lazy(() => import("./app/pages/apiPage")),
   },
   {
-    href: "/alerts",
+    path: "/alerts",
     title: "Alert",
     component: lazy(() => import("./alert/alertPage")),
   },
   {
-    href: "/alertstack",
+    path: "/alertstack",
     title: "AlertStack",
     component: lazy(() => import("./alertStack/alertStackPage")),
   },
   {
-    href: "/buttons",
+    path: "/postfetch/:p",
+    title: "Fetch Data",
+    component: lazy(() => import("./app/pages/FetchPage")),
+  },
+  {
+    path: "/prefetch/:p",
+    title: "PreFetch",
+    data: UsersData,
+    component: lazy(() => import("./app/pages/preFetchPage")),
+  },
+
+  {
+    path: "/buttons",
     title: "Button",
     component: lazy(() => import("./button/buttonsPage")),
   },
   {
-    href: "/checkbox",
+    path: "/checkbox",
     title: "Checkbox",
     component: lazy(() => import("./checkbox/checkboxesPage")),
   },
   {
-    href: "/dialog",
+    path: "/dialog",
     title: "Dialog",
     component: lazy(() => import("./dialog/dialogPage")),
   },
   {
-    href: "/drawer",
+    path: "/drawer",
     title: "Drawer",
     component: lazy(() => import("./drawer/drawerPage")),
   },
   {
-    href: "/dynamic",
+    path: "/dynamic",
     title: "Dynamic",
     component: lazy(() => import("./app/pages/dynamicPage")),
   },
   {
-    href: "/form",
+    path: "/form",
     title: "Form",
     component: lazy(() => import("./form/formPage")),
   },
   {
-    href: "/inputs",
+    path: "/inputs",
     title: "Input",
     component: lazy(() => import("./input/inputsPage")),
   },
   {
-    href: "/modal",
+    path: "/modal",
     title: "Modal",
     component: lazy(() => import("./modal/modalPage")),
   },
+
   {
-    href: "/select",
+    path: "/select",
     title: "Select",
     component: lazy(() => import("./select/selectPage")),
   },
   {
-    href: "/spinner",
+    path: "/spinner",
     title: "Spinner",
     component: lazy(() => import("./spinner/spinnerPage")),
   },
   {
-    href: "/titles",
+    path: "/titles",
     title: "Title",
     component: lazy(() => import("./app/pages/titlesPage")),
   },
