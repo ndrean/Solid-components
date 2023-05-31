@@ -1,9 +1,9 @@
 import { createSignal, For, createMemo } from "solid-js";
 import { styled, css } from "solid-styled-components";
 
-import { dTitle } from "../app/title";
+import { dTitle } from "../app/pages/title";
 import button from "../button/button";
-import grayDiv from "../app/grayDiv";
+import grayDiv from "../app/pages/grayDiv";
 import { tickSVG } from "../typo/svgs";
 
 const Span = styled("span")`

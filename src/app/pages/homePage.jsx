@@ -2,8 +2,8 @@ import { styled, css } from "solid-styled-components";
 import { A } from "@solidjs/router";
 
 import context from "../../context.js";
-import Link from "../Link.jsx";
-import { title, dTitle } from "../title.jsx";
+import Link from "./Link.jsx";
+import { title, dTitle } from "./title.jsx";
 import "../../index.css";
 import dialogComponent from "../../dialog/dialogComponent.jsx";
 import usersArticle from "./usersArticle.jsx";

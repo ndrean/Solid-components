@@ -2,7 +2,7 @@ import { styled } from "solid-styled-components";
 import button from "./button";
 import imgSVG from "../typo/imgSVG";
 import facebook from "../assets/facebook.svg";
-import { dTitle } from "../app/title";
+import { dTitle } from "../app/pages/title";
 import { tickSVG } from "../typo/svgs";
 
 export default (context) => {

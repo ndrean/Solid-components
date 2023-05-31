@@ -1,16 +1,16 @@
 import { For, createSignal, lazy, onCleanup, onMount } from "solid-js";
 import { styled } from "solid-styled-components";
 
-import imgSVG from "../typo/imgSVG";
-import drawEmoji from "../typo/drawEmoji.jsx";
-import drawCodePoint from "../typo/drawCodePoint.jsx";
+import imgSVG from "../../typo/imgSVG";
+import drawEmoji from "../../typo/drawEmoji.jsx";
+import drawCodePoint from "../../typo/drawCodePoint.jsx";
 import Link from "./Link";
-import { gitHubSVG, tickSVG, hamburgerSVG } from "../typo/svgs";
-import Unicode from "../typo/Unicode";
+import { gitHubSVG, tickSVG, hamburgerSVG } from "../../typo/svgs";
+import Unicode from "../../typo/Unicode";
 import { dTitle } from "./title";
 
-import ham from "../assets/ham.svg";
-import cheers from "../assets/cheers.svg";
+import ham from "../../assets/ham.svg";
+import cheers from "../../assets/cheers.svg";
 
 const Pre = styled("pre")`
   margin-left: 5px;

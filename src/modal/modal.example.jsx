@@ -2,8 +2,8 @@ import { createSignal, batch } from "solid-js";
 
 import modal from "./modal";
 import button from "../button/button";
-import { dTitle } from "../app/title";
-import grayDiv from "../app/grayDiv";
+import { dTitle } from "../app/pages/title";
+import grayDiv from "../app/pages/grayDiv";
 import Unicode from "../typo/Unicode";
 import ContentExample from "../dialog/ContentExample";
 

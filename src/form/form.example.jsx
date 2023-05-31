@@ -12,7 +12,7 @@ import dialogComponent, { resetIfOut } from "../dialog/dialogComponent";
 // additional elements on this page
 import contentDiv from "../dialog/ContentDiv";
 import button from "../button/button";
-import grayDiv from "../app/grayDiv";
+import grayDiv from "../app/pages/grayDiv";
 import Unicode from "../typo/Unicode";
 import keySVG from "../assets/keySVG.svg";
 import personSVG from "../assets/personSVG.svg";

@@ -1,4 +1,4 @@
-import dynamicExamples from "../dynamic.examples";
+import dynamicExamples from "./dynamic.examples";
 import context from "../../context";
 
 export default function DynamicPage() {

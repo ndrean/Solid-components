@@ -1,7 +1,7 @@
 import { css } from "solid-styled-components";
 
-import { hamburgerSVG } from "../typo/svgs";
-import button from "../button/button";
+import { hamburgerSVG } from "../../typo/svgs";
+import button from "../../button/button";
 
 export default (context) => (props) => {
   const headerCss = css`

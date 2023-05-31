@@ -5,7 +5,7 @@ import dialogComponent from "../dialog/dialogComponent";
 import inputComponent from "./inputComponent";
 // import imgSVG from "../typo/imgSVG";
 import button from "../button/button";
-import grayDiv from "../app/grayDiv";
+import grayDiv from "../app/pages/grayDiv";
 import submit from "../assets/submit.webp";
 // import camera from "../assets/camera.svg";
 import Unicode from "../typo/Unicode";

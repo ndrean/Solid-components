@@ -3,8 +3,8 @@ import { For, createSignal } from "solid-js";
 
 import checkbox from "./checkbox";
 import switchBox from "./switchBox";
-import { dTitle } from "../app/title";
-import grayDiv from "../app/grayDiv";
+import { dTitle } from "../app/pages/title";
+import grayDiv from "../app/pages/grayDiv";
 
 export default (context) => {
   const {

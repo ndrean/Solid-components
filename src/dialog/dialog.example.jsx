@@ -3,8 +3,8 @@ import { styled } from "solid-styled-components";
 
 import dialogComponent, { resetIfOut } from "./dialogComponent.jsx";
 import button from "../button/button";
-import { dTitle } from "../app/title";
-import grayDiv from "../app/grayDiv";
+import { dTitle } from "../app/pages/title.jsx";
+import grayDiv from "../app/pages/grayDiv.jsx";
 import Unicode from "../typo/Unicode";
 import { tickSVG } from "../typo/svgs";
 

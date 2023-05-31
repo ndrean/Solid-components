@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 import { css } from "solid-styled-components";
-import routes from "../routes";
+import routes from "../../routes";
 
 export default ({ theme }) =>
   (props) => {

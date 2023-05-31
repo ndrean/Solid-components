@@ -12,10 +12,10 @@ import { Router } from "@solidjs/router";
 
 import context from "./context";
 
-import nav from "./app/nav";
+import nav from "./app/pages/nav";
 import pages from "./app/pages/pages";
 import drawer from "./drawer/drawer";
-import header from "./app/header";
+import header from "./app/pages/header";
 import loading from "./app/pages/loading";
 
 const GridContainer = styled("div")`

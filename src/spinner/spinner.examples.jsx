@@ -7,7 +7,7 @@ import {
   spinRect,
   spinCircle,
 } from "./loaders";
-import { dTitle } from "../app/title";
+import { dTitle } from "../app/pages/title";
 import progressBar from "../app/progressBar";
 import { createSignal } from "solid-js";
 
