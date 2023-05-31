@@ -14,8 +14,8 @@ function postUsers(context) {
     text-decoration: none;
     background-color: beige;
     padding: 3px;
-    transition: transform 0.3s;
     border-radius: 5px;
+    transition: transform 0.3s;
     &:hover {
       transform: scale(1.1);
     }

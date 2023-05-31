@@ -10,6 +10,7 @@ const routes = [
   {
     path: "/api",
     title: "Api",
+    data: () => "ok",
     component: lazy(() => import("./app/pages/apiPage")),
   },
   {
