@@ -145,8 +145,10 @@ function home(context) {
         <Button raised accent onClick={() => diag.close()}>
           Close
         </Button>
+        <br />
         <details>
-          <summary>The CONTEXT:</summary>
+          <summary>The CONTEXT</summary>
+
           <p>{JSON.stringify(context, null, "\t")}</p>
         </details>
       </Dialog>

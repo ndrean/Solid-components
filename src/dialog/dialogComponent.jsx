@@ -9,7 +9,8 @@ export default (context) => {
   const baseStyle = (props) => `
   border: none;
   padding: 0;
-  max-height: 80vh;
+  max-height: 60svh;
+  overflow-y: scroll;
   box-shadow: ${shadows[4]};
   background: ${bg.lightGrey};
   margin-left: ${props.left ? props.left + "px" : "auto"};
