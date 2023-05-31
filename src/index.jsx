@@ -60,7 +60,7 @@ const app = (context) => {
     window.removeEventListener("resize", checkIsMobile);
   });
 
-  return (
+  return () => (
     <Router>
       <Header toggle={toggleMenu} />
       <Suspense fallback={<Loading />}>
@@ -85,5 +85,5 @@ const app = (context) => {
   );
 };
 
-const App = () => app(context);
+const App = app(context);
 render(() => <App />, document.getElementById("root"));

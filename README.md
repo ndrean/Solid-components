@@ -235,7 +235,23 @@ const routeExample = [
   },
 ];
 
-export function Nav(props) {
+const api = (context)=> {
+  const msg = useRouteData();
+  return (props) =>
+    (
+      <p style={{color: context.colors..}}>
+        Now you can use the data: {msg()}
+      </p>
+    )
+}
+
+import context from "..."
+export default function ApiPage() {
+  const Api = api(context)
+  return <Api/>
+}
+
+const App = () => {
   const Routes = useRoutes(routeExample);
   const { path, data, componenent } = routeExample[0];
   return (
@@ -245,13 +261,9 @@ export function Nav(props) {
       </A>
       <Routes />;
     </>
-  );
+  )
 }
 
-export default function ApiPage() {
-  const msg = useRouteData();
-  return (
-      <p>Now you can use the data: {msg()}</p>
-  );
-}
+
+render(<App/>,...)
 ```
