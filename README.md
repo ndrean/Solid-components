@@ -47,6 +47,53 @@ const MyPage = myPage(context)
 <MyPage />
 ```
 
+## Example with Routing
+
+```jsx
+import { useRouteData, useRoutes, A } from "@solidjs/router";
+
+const routeExample = [
+  {
+    path: "/api",
+    title: "Api",
+    data: () => "ok",
+    component: lazy(() => import("./app/pages/apiPage"),
+  },
+];
+
+const api = (context)=> {
+  const msg = useRouteData();
+  return (props) =>
+    (
+      <p style={{color: context.colors..}}>
+        Now you can use the data: {msg()}
+      </p>
+    )
+}
+
+import context from "..."
+export default function ApiPage() {
+  const Api = api(context)
+  return <Api/>
+}
+
+const App = () => {
+  const Routes = useRoutes(routeExample);
+  const { path, data, componenent } = routeExample[0];
+  return (
+    <>
+      <A href={path} data={data} component={componenent}>
+        Go to example
+      </A>
+      <Routes />;
+    </>
+  )
+}
+
+
+render(<App/>,...)
+```
+
 ## Pattern for customized functional components with SolidJS
 
 It uses [Solid Router](https://github.com/solidjs/solid-router) and [Solid styled components](https://github.com/solidjs/solid-styled-components) to produce a fast and very light-weight bundle.
@@ -219,51 +266,4 @@ context.classes.stdTitle = `
   color: ${grey[800]};
   box-shadow: ${context.shadows[2]};
   `;
-```
-
-## Routing
-
-```jsx
-import { useRouteData, useRoutes, A } from "@solidjs/router";
-
-const routeExample = [
-  {
-    path: "/api",
-    title: "Api",
-    data: () => ok,
-    component: lazy(() => import("./app/pages/apiPage"),
-  },
-];
-
-const api = (context)=> {
-  const msg = useRouteData();
-  return (props) =>
-    (
-      <p style={{color: context.colors..}}>
-        Now you can use the data: {msg()}
-      </p>
-    )
-}
-
-import context from "..."
-export default function ApiPage() {
-  const Api = api(context)
-  return <Api/>
-}
-
-const App = () => {
-  const Routes = useRoutes(routeExample);
-  const { path, data, componenent } = routeExample[0];
-  return (
-    <>
-      <A href={path} data={data} component={componenent}>
-        Go to example
-      </A>
-      <Routes />;
-    </>
-  )
-}
-
-
-render(<App/>,...)
 ```
