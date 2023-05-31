@@ -36,7 +36,13 @@ const Container = styled("div")`
   max-height: 100vh;
 `;
 
-const app = (context) => () => {
+const Nav = nav(context);
+const Drawer = drawer(context);
+const Loading = loading(context);
+const Header = header(context);
+const Pages = pages(context);
+
+const App = () => {
   const [menuOpen, setMenuOpen] = createSignal(false);
   const [isMobile, setIsMobile] = createSignal(false);
   const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -44,12 +50,6 @@ const app = (context) => () => {
     setTimeout(() => setMenuOpen(false), 100);
   };
   const toggleMenu = () => setMenuOpen((v) => !v);
-
-  const Nav = nav(context);
-  const Drawer = drawer(context);
-  const Loading = loading(context);
-  const Header = header(context);
-  const Pages = pages(context);
 
   onMount(() => {
     checkIsMobile();
@@ -63,7 +63,7 @@ const app = (context) => () => {
   return (
     <Router>
       <Header toggle={toggleMenu} />
-      <Suspense fallback={<Loading /> && console.log("<Loading/>")}>
+      <Suspense fallback={<Loading />}>
         <Show
           when={isMobile()}
           fallback={
@@ -85,5 +85,4 @@ const app = (context) => () => {
   );
 };
 
-const App = app(context);
 render(() => <App />, document.getElementById("root"));

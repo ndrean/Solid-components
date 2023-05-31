@@ -1,10 +1,11 @@
 // pages/users/[id].js
 import { useRouteData, A } from "@solidjs/router";
-import { createEffect } from "solid-js";
+import { createEffect, Suspense } from "solid-js";
 import { css } from "solid-styled-components";
 import usersArticle from "./usersArticle";
 import Link from "./Link";
 import context from "../../context";
+import loading from "./loading";
 
 const users = (context) => {
   const usersData = useRouteData();
@@ -62,5 +63,10 @@ const users = (context) => {
 
 export default function PreFetchPage() {
   const Users = users(context);
-  return <Users />;
+  const Loading = loading(context);
+  return (
+    <Suspense fallback={<Loading />}>
+      <Users />
+    </Suspense>
+  );
 }

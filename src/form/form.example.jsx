@@ -8,7 +8,7 @@ import {
 import { styled } from "solid-styled-components";
 import inputComponent, { ErrorOutput } from "../input/inputComponent";
 import checkbox from "../checkbox/checkbox";
-import dialogComponent, { resetIfOut } from "../dialog/dialogComponent";
+import dialogComponent, { clickOut } from "../dialog/dialogComponent";
 // additional elements on this page
 import contentDiv from "../dialog/ContentDiv";
 import button from "../button/button";
@@ -175,10 +175,10 @@ export default (context) => (props) => {
   // close dialog if click outside
   onMount(() => {
     diag.addEventListener("click", (e) => {
-      if (resetIfOut(e, diag)) formReset();
+      if (clickOut(e, diag)) formReset();
     });
   });
-  onCleanup(() => removeEventListener("click", (e) => resetIfOut(e, diag)));
+  onCleanup(() => removeEventListener("click", (e) => clickOut(e, diag)));
 
   return (
     <section id="form.examples">

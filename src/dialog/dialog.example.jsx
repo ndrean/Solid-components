@@ -1,7 +1,7 @@
 import { createSignal, batch, onMount, onCleanup } from "solid-js";
 import { styled } from "solid-styled-components";
 
-import dialogComponent, { resetIfOut } from "./dialogComponent.jsx";
+import dialogComponent, { clickOut } from "./dialogComponent.jsx";
 import button from "../button/button";
 import { dTitle } from "../app/pages/title.jsx";
 import grayDiv from "../app/pages/grayDiv.jsx";
@@ -66,10 +66,10 @@ export default (context) => {
     //  close when click out of the box
     onMount(() =>
       dialog.addEventListener("click", (e) => {
-        if (resetIfOut(e, dialog)) reset();
+        if (clickOut(e, dialog)) reset();
       })
     );
-    onCleanup(() => removeEventListener("click", (e) => resetIfOut(e, dialog)));
+    onCleanup(() => removeEventListener("click", (e) => clickOut(e, dialog)));
 
     return (
       <section id="dialog">
@@ -92,8 +92,8 @@ export default (context) => {
           You interact with the Dailog component via a <code> ref.</code>
         </p>
         <p>
-          A function <code>resetIfOut </code> is also exported: you can close
-          the modal when you click outside of it (showed in the first example
+          A function <code>clickOut </code> is also exported: you can close the
+          modal when you click outside of it (showed in the first example
           below). You need to set up a listener on the "click" event to enable
           this function. The listener should be wrapped within a{" "}
           <code> onMount </code> (and <code> onCleanup </code>).

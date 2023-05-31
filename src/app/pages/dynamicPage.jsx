@@ -1,7 +1,13 @@
 import dynamicExamples from "./dynamic.examples";
+import loading from "./loading";
 import context from "../../context";
 
 export default function DynamicPage() {
   const DynamicExamples = dynamicExamples(context);
-  return <DynamicExamples />;
+  const Loading = loading();
+  return (
+    <Suspense fallback={<Loading />}>
+      <DynamicExamples />
+    </Suspense>
+  );
 }

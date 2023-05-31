@@ -5,28 +5,28 @@
 This work is 100% based on [the following repo](https://github.com/FredericHeem/mdlean) adapted for SolidJS.
 
 ```jsx
-import dialogComponent, {resetIfOut} from "...";
+import dialogComponent, {clickOut} from "...";
 import button from "...";
 import Unicode from "...";
 import context from "...";
 
-const myPage = (context) => (props) => {
+const myPage = (context) => {
   const Dialog = dialogComponenent(context);
   const Button = button(context);
-  const TickSVG = tickSVG(context);
-  let dialogRef;
+  const {codes: {cross}} = context;
 
+  return (props) => {
+    let dialogRef;
     onMount(()=>
-      diagRef.addEventListener('click', (e)=> {
-      if (resetIfOut(e, diagRef)) reset();
-      })
-    )
+    diagRef.addEventListener('click', (e)=> {
+      if (clickOut(e, diagRef)) diagRef.close();
+    })
+  )
 
-    [...]
+  [...]
 
   return (
     <>
-      [...]
       <Button fullWidth primary raised onClick={() => dialogRef.showModal()}>
         Open Modal
       </Button>
@@ -36,9 +36,9 @@ const myPage = (context) => (props) => {
           <Unicode size="1.5em" code={cross} />
         </Button>
       </Dialog>
-      [...]
     </>
   )
+ }
 }
 
 
@@ -51,6 +51,7 @@ const MyPage = myPage(context)
 
 ```jsx
 import { useRouteData, useRoutes, A } from "@solidjs/router";
+import { styled } from "solid-styled-components";
 
 const routeExample = [
   {
@@ -61,14 +62,14 @@ const routeExample = [
   },
 ];
 
-const api = (context)=> {
+const api = (context)=> (props) => {
   const msg = useRouteData();
-  return (props) =>
-    (
-      <p style={{color: context.colors..}}>
-        Now you can use the data: {msg()}
-      </p>
-    )
+  const P = styled("p")`color: context.colors.blue[700];`
+  return (
+    <P>
+      Now you can use the data: {msg()}
+    </P>
+  )
 }
 
 import context from "..."

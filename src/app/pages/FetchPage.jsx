@@ -1,10 +1,13 @@
 import { css } from "solid-styled-components";
 import { createResource } from "solid-js";
 import { A } from "@solidjs/router";
+import { Suspense } from "solid-js";
+
 import usersArticle from "./usersArticle";
 
 import context from "../../context";
 import { fetchUser } from "./data";
+import loading from "./loading";
 
 function postUsers(context) {
   const [usersData] = createResource(fetchUser);
@@ -44,5 +47,10 @@ function postUsers(context) {
 
 export default function FetchPage() {
   const PostUsers = postUsers(context);
-  return <PostUsers />;
+  const Loading = loading();
+  return (
+    <Suspense fallback={<Loading />}>
+      <PostUsers />
+    </Suspense>
+  );
 }

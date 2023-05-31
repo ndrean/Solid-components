@@ -36,7 +36,7 @@ export default (context) => {
 
 //to understand what is left, right...and the constraints, just check the picture
 //at https://developer.mozilla.org/fr/docs/Web/API/Element/getBoundingClientRect
-export function resetIfOut(e, myref) {
+export function clickOut(e, myref) {
   const { left, right, bottom, top } = myref.getBoundingClientRect();
   if (
     e.clientX < left ||
