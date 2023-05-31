@@ -10,15 +10,12 @@ import button from "...";
 import Unicode from "...";
 import context from "...";
 
-const myPage = (context) => {
+const myPage = (context) => (props) => {
   const Dialog = dialogComponenent(context);
   const Button = button(context);
   const TickSVG = tickSVG(context);
   let dialogRef;
 
-
-
-  return (props)=> {
     onMount(()=>
       diagRef.addEventListener('click', (e)=> {
       if (resetIfOut(e, diagRef)) reset();
@@ -26,23 +23,24 @@ const myPage = (context) => {
     )
 
     [...]
-    return (
-      <>
-        [...]
-        <Button fullWidth primary raised onClick={() => dialogRef.showModal()}>
-          Open Modal
+
+  return (
+    <>
+      [...]
+      <Button fullWidth primary raised onClick={() => dialogRef.showModal()}>
+        Open Modal
+      </Button>
+      <Dialog ref={dialogRef}>
+        [...insert content here...]
+        <Button primary onClick={() => dialogRef.close()}>
+          <Unicode size="1.5em" code={cross} />
         </Button>
-        <Dialog ref={dialogRef}>
-          [...insert content here...]
-          <Button primary onClick={() => dialogRef.close()}>
-            <Unicode size="1.5em" code={cross} />
-          </Button>
-        </Dialog>
-        [...]
-      </>
-    )
-  }
+      </Dialog>
+      [...]
+    </>
+  )
 }
+
 
 const MyPage = myPage(context)
 

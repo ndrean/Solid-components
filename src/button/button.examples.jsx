@@ -1,6 +1,6 @@
 import { styled } from "solid-styled-components";
 import button from "./button";
-import imgSVG from "../typo/imgSVG";
+import ImgSVG from "../typo/ImgSVG";
 import facebook from "../assets/facebook.svg";
 import { dTitle } from "../app/pages/title";
 import { tickSVG } from "../typo/svgs";
@@ -11,7 +11,6 @@ export default (context) => {
   } = context;
   const Button = button(context);
   const Title = dTitle("h1", stdTitle);
-  const ImgSVG = imgSVG();
   const Tick = tickSVG(context);
 
   const Form = styled("form")`

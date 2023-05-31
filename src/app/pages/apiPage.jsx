@@ -1,7 +1,7 @@
 import { useRouteData } from "@solidjs/router";
-import loading from "./loading";
+import context from "../../context";
 
-export default function ApiPage(props) {
+const ApiPage = (props) => {
   const routeExample = {
     path: "/api",
     title: "Api",
@@ -27,4 +27,6 @@ export default function ApiPage(props) {
       <p>Now you can use msg(): {msg()}</p>
     </div>
   );
-}
+};
+
+export default ApiPage;

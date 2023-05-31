@@ -3,7 +3,6 @@ import { styled } from "solid-styled-components";
 
 import dialogComponent from "../dialog/dialogComponent";
 import inputComponent from "./inputComponent";
-// import imgSVG from "../typo/imgSVG";
 import button from "../button/button";
 import grayDiv from "../app/pages/grayDiv";
 import submit from "../assets/submit.webp";

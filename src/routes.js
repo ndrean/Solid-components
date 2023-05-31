@@ -28,12 +28,12 @@ const routes = [
     title: "Fetch Data",
     component: lazy(() => import("./app/pages/FetchPage")),
   },
-  {
-    path: "/prefetch/:p",
-    title: "PreFetch",
-    data: UsersData,
-    component: lazy(() => import("./app/pages/preFetchPage")),
-  },
+  // {
+  //   path: "/prefetch/:p",
+  //   title: "PreFetch",
+  //   data: UsersData,
+  //   component: lazy(() => import("./app/pages/preFetchPage")),
+  // },
 
   {
     path: "/buttons",

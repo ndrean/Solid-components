@@ -1,7 +1,7 @@
 import { For, createSignal, lazy, onCleanup, onMount } from "solid-js";
 import { styled } from "solid-styled-components";
 
-import imgSVG from "../../typo/imgSVG";
+import ImgSVG from "../../typo/ImgSVG";
 import drawEmoji from "../../typo/drawEmoji.jsx";
 import drawCodePoint from "../../typo/drawCodePoint.jsx";
 import Link from "./Link";
@@ -26,7 +26,6 @@ export default (context) => (props) => {
   const H2 = dTitle("h2");
   const CodePoint = drawCodePoint();
   const Emoji = drawEmoji();
-  const ImgSVG = imgSVG();
 
   const Tick = tickSVG(context);
   const Github = gitHubSVG(context);

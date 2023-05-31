@@ -17,7 +17,7 @@ import Unicode from "../typo/Unicode";
 import keySVG from "../assets/keySVG.svg";
 import personSVG from "../assets/personSVG.svg";
 import emailSVG from "../assets/emailSVG.svg";
-import imgSVG from "../typo/imgSVG";
+import ImgSVG from "../typo/ImgSVG";
 
 const PasswordContainer = styled("div")`
   display: flex;
@@ -42,7 +42,6 @@ export default (context) => (props) => {
   const GrayDiv = grayDiv(context);
   const dialogCSS = `border-radius: 10px;`;
   const Dialog = dialogComponent(context);
-  const ImgSVG = imgSVG(context);
 
   const InputBlock = styled("div")`
     display: flex;

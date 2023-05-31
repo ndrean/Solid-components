@@ -15,6 +15,7 @@ export function gitHubSVG(width) {
         height={size()}
         width={size()}
         style="overflow: visible;"
+        role="img"
         {...props}
       >
         <path

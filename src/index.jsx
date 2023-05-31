@@ -36,7 +36,7 @@ const Container = styled("div")`
   max-height: 100vh;
 `;
 
-const app = (context) => {
+const app = (context) => () => {
   const [menuOpen, setMenuOpen] = createSignal(false);
   const [isMobile, setIsMobile] = createSignal(false);
   const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -51,40 +51,38 @@ const app = (context) => {
   const Header = header(context);
   const Pages = pages(context);
 
-  return () => {
-    onMount(() => {
-      checkIsMobile();
-      window.addEventListener("resize", checkIsMobile);
-    });
+  onMount(() => {
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+  });
 
-    onCleanup(() => {
-      window.removeEventListener("resize", checkIsMobile);
-    });
+  onCleanup(() => {
+    window.removeEventListener("resize", checkIsMobile);
+  });
 
-    return (
-      <Router>
-        <Header toggle={toggleMenu} />
-        <Suspense fallback={<Loading />}>
-          <Show
-            when={isMobile()}
-            fallback={
-              <GridContainer>
-                <Nav navChange={navChange} />
-                <Pages />
-              </GridContainer>
-            }
-          >
-            <Container id="mobile">
-              <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
-                <Nav navChange={navChange} />
-              </Drawer>
+  return (
+    <Router>
+      <Header toggle={toggleMenu} />
+      <Suspense fallback={<Loading /> && console.log("<Loading/>")}>
+        <Show
+          when={isMobile()}
+          fallback={
+            <GridContainer>
+              <Nav navChange={navChange} />
               <Pages />
-            </Container>
-          </Show>
-        </Suspense>
-      </Router>
-    );
-  };
+            </GridContainer>
+          }
+        >
+          <Container id="mobile">
+            <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
+              <Nav navChange={navChange} />
+            </Drawer>
+            <Pages />
+          </Container>
+        </Show>
+      </Suspense>
+    </Router>
+  );
 };
 
 const App = app(context);
