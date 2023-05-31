@@ -154,60 +154,6 @@ function home(context) {
       </Dialog>
       {/*  */}
 
-      <T2>Traditional CSS</T2>
-      <p>We define a component:</p>
-      <Pre>
-        <code>const T4 = (props) =&gt</code>
-        <br />
-        <code>
-          &nbsp &lth4 \u007B...props\u007D&gt\u007Bprops.children\u007D&lt/h4&gt
-        </code>
-        <br />
-      </Pre>
-      <p>
-        We can style it in-line and pass a JS object (with keys in dash-form
-        with explicit units):
-      </p>
-      <Pre>
-        <code>&ltT4 style= \u007B\u007B"font-size":"2em"\u007D\u007D &gt</code>
-        <br />
-        <code>&nbsp Big T4</code>
-        <br />
-        <code>&lt/T4&gt</code>
-        <br />
-      </Pre>
-      <details>
-        <summary>Show!</summary>
-        <T2V0 style={{ "font-size": "2em" }}>Big T2</T2V0>
-      </details>
-      <p>
-        SolidJS provides the prop <code> class </code>
-        to pass a CSS class name. Suppose we have a CSS classe "center-blue"
-        defined in the file "index.css".
-      </p>
-      <Pre>
-        <code>.center-blue \u007B</code>
-        <br />
-        <code>&nbsp text-align: center;</code>
-        <br />
-        <code>&nbsp color: blue;</code>
-        <br />
-        <code>\u007D</code>
-        <br />
-      </Pre>
-      <p>We use the class prop:</p>
-      <Pre>
-        <code>&ltT2V0 class="center-blue"&gt</code>
-        <br />
-        <code>&nbsp Blue and solid T2</code>
-        <br />
-        <code>&lt/T2V0&gt</code>
-        <br />
-      </Pre>
-      <details>
-        <summary>Show!</summary>
-        <T2V0 class="center-blue">Blue and solid T2</T2V0>
-      </details>
       <T2>Using the pattern with CSS-in-JS</T2>
       <p>
         We can use CSS-in-JS with the library{" "}
