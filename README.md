@@ -5,30 +5,46 @@
 This work is 100% based on [the following repo](https://github.com/FredericHeem/mdlean) adapted for SolidJS.
 
 ```jsx
-import dialogComponent from "...";
+import dialogComponent, {resetIfOut} from "...";
 import button from "...";
 import Unicode from "...";
 import context from "...";
 
-let dialogRef;
+const myPage = (context) => {
+  const Dialog = dialogComponenent(context);
+  const Button = button(context);
+  const TickSVG = tickSVG(context);
+  let dialogRef;
 
-const Dialog = dialogComponenent(context);
-const Button = button(context);
-const TickSVG = tickSVG(context);
+  onMount(()=>
+    diagRef.addEventListener('click', (e)=> {
+    if (resetIfOut(e, diagRef)) reset();
+    })
+  )
 
-return (
-  <>
-    <Button fullWidth primary raised onClick={() => dialogRef.showModal()}>
-      Open Modal
-    </Button>
-    <Dialog ref={dialogRef}>
-      {props.children}
-      <Button primary onClick={() => dialogRef.close()}>
-        <Unicode size="1.5em" code={cross} />
-      </Button>
-    </Dialog>
-  </>
-);
+  return (props)=> {
+    [...]
+    return (
+      <>
+        [...]
+        <Button fullWidth primary raised onClick={() => dialogRef.showModal()}>
+          Open Modal
+        </Button>
+        <Dialog ref={dialogRef}>
+          [...insert content here...]
+          <Button primary onClick={() => dialogRef.close()}>
+            <Unicode size="1.5em" code={cross} />
+          </Button>
+        </Dialog>
+        [...]
+      </>
+    )
+  }
+}
+
+const MyPage = myPage(context)
+
+<MyPage />
 ```
 
 ## Pattern for customized functional components with SolidJS

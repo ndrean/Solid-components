@@ -59,11 +59,11 @@ export default (context) => {
   };
 
   //  close when click out of the box
-  onMount(() => {
+  onMount(() =>
     dialog.addEventListener("click", (e) => {
       if (resetIfOut(e, dialog)) reset();
-    });
-  });
+    })
+  );
   onCleanup(() => removeEventListener("click", (e) => resetIfOut(e, dialog)));
 
   const Bold = styled("div")`
