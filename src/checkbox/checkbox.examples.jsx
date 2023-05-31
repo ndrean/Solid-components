@@ -53,7 +53,7 @@ export default (context) => {
       });
     }
 
-    return (
+    return (props) => (
       <section id="checkbox">
         <Title>Checkbox</Title>
         <p>

@@ -155,7 +155,7 @@ const arrow = (context) => {
   });
 };
 
-const classic = () => {
+const classic = (context) => {
   return styled("div")((props) => {
     const size = () => props?.size || 50;
     const color1 = () => props?.color1 || "midnightblue";
@@ -201,7 +201,7 @@ const loadingMsg = (context) =>
     };
   });
 
-const spinCirclePart = () =>
+const spinCirclePart = (context) =>
   styled("div")((props) => {
     const rotate = keyframes`
     to {

@@ -16,13 +16,15 @@ const myPage = (context) => {
   const TickSVG = tickSVG(context);
   let dialogRef;
 
-  onMount(()=>
-    diagRef.addEventListener('click', (e)=> {
-    if (resetIfOut(e, diagRef)) reset();
-    })
-  )
+
 
   return (props)=> {
+    onMount(()=>
+      diagRef.addEventListener('click', (e)=> {
+      if (resetIfOut(e, diagRef)) reset();
+      })
+    )
+
     [...]
     return (
       <>

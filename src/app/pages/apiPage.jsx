@@ -1,7 +1,7 @@
 import { useRouteData } from "@solidjs/router";
 import loading from "./loading";
 
-export default function ApiPage() {
+export default function ApiPage(props) {
   const routeExample = {
     path: "/api",
     title: "Api",

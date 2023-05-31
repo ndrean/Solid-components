@@ -64,7 +64,7 @@ function home(context) {
   const UsersArticle = usersArticle(context);
   const Button = button(context);
 
-  return () => (
+  return (props) => (
     <section id="homePage">
       <T1>Pattern for functional components with SolidJS</T1>
 

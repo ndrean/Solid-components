@@ -18,7 +18,7 @@ const Pre = styled("pre")`
   background-color: aliceblue;
 `;
 
-export default (context) => {
+export default (context) => (props) => {
   const {
     codes: { check },
   } = context;
@@ -39,7 +39,7 @@ export default (context) => {
   );
   onCleanup(() => clearInterval(interval));
 
-  return () => (
+  return (
     <section id="dynamic.examples">
       <H2>Dynamic component</H2>
       <p>

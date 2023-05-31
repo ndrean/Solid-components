@@ -8,7 +8,7 @@ const Main = styled("main")`
   padding: 0px 5px 0px 5px;
 `;
 
-export default (context) => () => {
+export default (context) => (props) => {
   const Routes = useRoutes(routes);
 
   return (
