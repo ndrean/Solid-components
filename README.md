@@ -112,7 +112,9 @@ Still building... <https://solid-components.surge.sh>
 You define a closure that takes an argument - the context - and renders a function component.
 
 ```jsx
-const comp = (context) => (props) => component(context, props);
+const comp = (context) => {
+  return (props) => component(context, props);
+};
 
 const ContextedComp = comp(someContext);
 
