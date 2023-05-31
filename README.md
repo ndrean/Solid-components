@@ -220,3 +220,38 @@ context.classes.stdTitle = `
   box-shadow: ${context.shadows[2]};
   `;
 ```
+
+## Routing
+
+```jsx
+import { useRouteData, useRoutes, A } from "@solidjs/router";
+
+const routeExample = [
+  {
+    path: "/api",
+    title: "Api",
+    data: () => ok,
+    component: lazy(() => import("./app/pages/apiPage"),
+  },
+];
+
+export function Nav(props) {
+  const Routes = useRoutes(routeExample);
+  const { path, data, componenent } = routeExample[0];
+  return (
+    <>
+      <A href={path} data={data} component={componenent}>
+        Go to example
+      </A>
+      <Routes />;
+    </>
+  );
+}
+
+export default function ApiPage() {
+  const msg = useRouteData();
+  return (
+      <p>Now you can use the data: {msg()}</p>
+  );
+}
+```
