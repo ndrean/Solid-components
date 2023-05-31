@@ -267,3 +267,14 @@ context.classes.stdTitle = `
   box-shadow: ${context.shadows[2]};
   `;
 ```
+
+## Note on mobile
+
+View on mobile (within the same WIFI): build it, server it, open it.
+
+```bash
+npm run build
+http-server ./dist -b 0.0.0.0 -p 8080
+```
+
+and navigate with the mobile to <http://127.0.0.1:8080>
