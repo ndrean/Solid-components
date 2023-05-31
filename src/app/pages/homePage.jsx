@@ -140,13 +140,15 @@ function home(context) {
         show data context
       </Button>
       <Dialog ref={diag}>
-        <p>This will be populated from the context</p>
+        <p>The users'data will be populated from the context.</p>
         <UsersArticle usersData={context.data} />
         <Button raised accent onClick={() => diag.close()}>
-          close
+          Close
         </Button>
-        <p>The CONTEXT:</p>
-        <p>{JSON.stringify(context, null, "\t")}</p>
+        <details>
+          <summary>The CONTEXT:</summary>
+          <p>{JSON.stringify(context, null, "\t")}</p>
+        </details>
       </Dialog>
       {/*  */}
 
