@@ -26,7 +26,7 @@ export default ({ theme }) =>
       <nav>
         <For each={routes}>
           {({ path, title }) =>
-            !title.includes("PreFetch") && (
+            !title.includes("Fetch Data") && (
               <A
                 href={path}
                 class={link}

@@ -1,10 +1,11 @@
-import { useParams } from "@solidjs/router";
 import { createResource } from "solid-js";
 
-export async function fetchUser(p = 1) {
-  const page = p === true ? 1 : p;
+export async function fetchUser(p) {
+  console.log({ p });
+  const page = p === ":p" ? 2 : p;
   const response = await fetch(`https://reqres.in/api/users?page=${page}`);
   const { data } = await response.json();
+
   return data;
 }
 

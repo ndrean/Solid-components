@@ -41,7 +41,6 @@ const app = (context) => {
   const [isMobile, setIsMobile] = createSignal(false);
   const checkIsMobile = () => setIsMobile(window.innerWidth <= 768);
   const navChange = () => {
-    console.log("nav");
     setTimeout(() => setMenuOpen(false), 100);
   };
   const toggleMenu = () => setMenuOpen((v) => !v);

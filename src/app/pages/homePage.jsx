@@ -119,6 +119,11 @@ function home(context) {
         </A>
       </p>
 
+      <T2>
+        Curennt initial <code> CONTEXT </code> of this app
+      </T2>
+      <p>{JSON.stringify(context, null, "\t")}</p>
+
       <T2>Traditional CSS</T2>
       <p>We define a component:</p>
       <Pre>
