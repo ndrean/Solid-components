@@ -5,6 +5,9 @@ import context from "../../context.js";
 import Link from "../Link.jsx";
 import { title, dTitle } from "../title.jsx";
 import "../../index.css";
+import dialogComponent from "../../dialog/dialogComponent.jsx";
+import usersArticle from "./usersArticle.jsx";
+import button from "../../button/button.jsx";
 
 const Pre = styled("pre")`
   margin-left: 10px;
@@ -56,6 +59,10 @@ function home(context) {
   const T3 = dTitle("h3", blueSolid);
   const T3Center = dTitle("h3", blueSolid, center);
   // const HRLine = T2(hrLine);
+  let diag;
+  const Dialog = dialogComponent(context);
+  const UsersArticle = usersArticle(context);
+  const Button = button(context);
 
   return () => (
     <section id="homePage">
@@ -120,9 +127,28 @@ function home(context) {
       </p>
 
       <T2>
-        Curennt initial <code> CONTEXT </code> of this app
+        <code> CONTEXT </code> of this app
       </T2>
-      <p>{JSON.stringify(context, null, "\t")}</p>
+      <p>
+        The CONTEXT is static. The modal below displays the content of the
+        CONTEXT object. The initial render shows that CONTEXT does not contain
+        any field "data". We populate the context with users' data when we
+        navigate to the "PRE FETCH" page. Return here and check that the modal
+        displays the current CONTEXT.
+      </p>
+      <Button raised primary fullWidth onClick={() => diag.showModal()}>
+        show data context
+      </Button>
+      <Dialog ref={diag}>
+        <p>This will be populated from the context</p>
+        <UsersArticle usersData={context.data} />
+        <Button raised accent onClick={() => diag.close()}>
+          close
+        </Button>
+        <p>The CONTEXT:</p>
+        <p>{JSON.stringify(context, null, "\t")}</p>
+      </Dialog>
+      {/*  */}
 
       <T2>Traditional CSS</T2>
       <p>We define a component:</p>
