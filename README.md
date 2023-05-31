@@ -1,4 +1,4 @@
-# SolidJS components
+# SolidJS components, CSS-in-JS and Solid-Router
 
 ## Component example
 
