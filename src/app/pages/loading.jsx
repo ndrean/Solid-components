@@ -10,7 +10,7 @@ export default function loading(context) {
   `;
 
   const Spin = spinCircle(context);
-  return (
+  return () => (
     <CenterSpin>
       <Spin />
     </CenterSpin>

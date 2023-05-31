@@ -51,38 +51,40 @@ const app = (context) => {
   const Header = header(context);
   const Pages = pages(context);
 
-  onMount(() => {
-    checkIsMobile();
-    window.addEventListener("resize", checkIsMobile);
-  });
+  return () => {
+    onMount(() => {
+      checkIsMobile();
+      window.addEventListener("resize", checkIsMobile);
+    });
 
-  onCleanup(() => {
-    window.removeEventListener("resize", checkIsMobile);
-  });
+    onCleanup(() => {
+      window.removeEventListener("resize", checkIsMobile);
+    });
 
-  return () => (
-    <Router>
-      <Header toggle={toggleMenu} />
-      <Suspense fallback={<Loading />}>
-        <Show
-          when={isMobile()}
-          fallback={
-            <GridContainer>
-              <Nav navChange={navChange} />
+    return (
+      <Router>
+        <Header toggle={toggleMenu} />
+        <Suspense fallback={<Loading />}>
+          <Show
+            when={isMobile()}
+            fallback={
+              <GridContainer>
+                <Nav navChange={navChange} />
+                <Pages />
+              </GridContainer>
+            }
+          >
+            <Container id="mobile">
+              <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
+                <Nav navChange={navChange} />
+              </Drawer>
               <Pages />
-            </GridContainer>
-          }
-        >
-          <Container id="mobile">
-            <Drawer open={menuOpen()} onClose={() => setMenuOpen(false)}>
-              <Nav navChange={navChange} />
-            </Drawer>
-            <Pages />
-          </Container>
-        </Show>
-      </Suspense>
-    </Router>
-  );
+            </Container>
+          </Show>
+        </Suspense>
+      </Router>
+    );
+  };
 };
 
 const App = app(context);

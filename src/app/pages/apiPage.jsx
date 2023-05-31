@@ -1,11 +1,12 @@
 import { useRouteData } from "@solidjs/router";
+import loading from "./loading";
 
 export default function ApiPage() {
   const routeExample = {
     path: "/api",
     title: "Api",
-    data: `() => ok`,
-    component: `lazy(() => import("./app/pages/apiPage")`,
+    data: "() => ok",
+    component: "lazy(() => import(./app/pages/apiPage)",
   };
 
   const msg = useRouteData();
