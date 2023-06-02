@@ -69,11 +69,11 @@ const routes = [
     title: "Input",
     component: lazy(() => import("./input/inputsPage")),
   },
-  {
-    path: "/modal",
-    title: "Modal",
-    component: lazy(() => import("./modal/modalPage")),
-  },
+  // {
+  //   path: "/modal",
+  //   title: "Modal",
+  //   component: lazy(() => import("./modal/modalPage")),
+  // },
 
   {
     path: "/select",

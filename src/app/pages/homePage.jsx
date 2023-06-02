@@ -139,7 +139,7 @@ function home(context) {
       <Button raised primary fullWidth onClick={() => diag.showModal()}>
         show data context
       </Button>
-      <Dialog ref={diag}>
+      <Dialog ref={diag} id="usersModal">
         <p>The users'data will be populated from the context.</p>
         <UsersArticle usersData={context.data} />
         <Button raised accent onClick={() => diag.close()}>

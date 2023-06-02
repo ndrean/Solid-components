@@ -8,7 +8,7 @@ import {
 import { styled } from "solid-styled-components";
 import inputComponent, { ErrorOutput } from "../input/inputComponent";
 import checkbox from "../checkbox/checkbox";
-import dialogComponent, { clickOut } from "../dialog/dialogComponent";
+import dialogComponent from "../dialog/dialogComponent";
 // additional elements on this page
 import contentDiv from "../dialog/ContentDiv";
 import button from "../button/button";
@@ -173,12 +173,12 @@ export default (context) => (props) => {
   };
 
   // close dialog if click outside
-  onMount(() => {
-    diag.addEventListener("click", (e) => {
-      if (clickOut(e, diag)) formReset();
-    });
-  });
-  onCleanup(() => removeEventListener("click", (e) => clickOut(e, diag)));
+  // onMount(() => {
+  //   diag.addEventListener("click", (e) => {
+  //     if (clickOut(e, diag)) formReset();
+  //   });
+  // });
+  // onCleanup(() => removeEventListener("click", (e) => clickOut(e, diag)));
 
   return (
     <section id="form.examples">
@@ -216,7 +216,7 @@ export default (context) => (props) => {
       <Button fullWidth primary raised onClick={openDialog}>
         Open Login form
       </Button>
-      <Dialog ref={diag} optCss={dialogCSS}>
+      <Dialog ref={diag} id="formModal" optCss={dialogCSS}>
         <ContentDiv>
           <header class="header">
             <h1>Credentials</h1>

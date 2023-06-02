@@ -1,7 +1,7 @@
 import { createSignal, batch, onMount, onCleanup } from "solid-js";
 import { styled } from "solid-styled-components";
 
-import dialogComponent, { clickOut } from "./dialogComponent.jsx";
+import dialogComponent from "./dialogComponent.jsx";
 import button from "../button/button";
 import { dTitle } from "../app/pages/title.jsx";
 import grayDiv from "../app/pages/grayDiv.jsx";
@@ -36,7 +36,7 @@ export default (context) => {
   };
 
   // refs to DOM dialogs refs
-  let diagPos, diagPos2, dialog;
+  let diagPos1, diagPos2, dialog;
   const [left, setLeft] = createSignal(10);
   const [top, setTop] = createSignal(60);
 
@@ -64,12 +64,12 @@ export default (context) => {
 
   return (props) => {
     //  close when click out of the box
-    onMount(() =>
-      dialog.addEventListener("click", (e) => {
-        if (clickOut(e, dialog)) reset();
-      })
-    );
-    onCleanup(() => removeEventListener("click", (e) => clickOut(e, dialog)));
+    // onMount(() =>
+    //   dialog.addEventListener("click", (e) => {
+    //     if (clickOut(e, dialog)) reset();
+    //   })
+    // );
+    // onCleanup(() => removeEventListener("click", (e) => clickOut(e, dialog)));
 
     return (
       <section id="dialog">
@@ -84,19 +84,9 @@ export default (context) => {
           the prop <code> optCSS.</code>
         </p>
         <p>
-          There is a checkbox on "terms of terms aggrement" in the dialog box.
-          We put the state in the context to keep it global: it survives to
-          navigation.
-        </p>
-        <p>
-          You interact with the Dailog component via a <code> ref.</code>
-        </p>
-        <p>
-          A function <code>clickOut </code> is also exported: you can close the
-          modal when you click outside of it (showed in the first example
-          below). You need to set up a listener on the "click" event to enable
-          this function. The listener should be wrapped within a{" "}
-          <code> onMount </code> (and <code> onCleanup </code>).
+          The Dialog/Modal component needs a <code> ref </code> attribute and an{" "}
+          <code> ID </code> attribute. You interact with the Dialog via the REF
+          (showModal, close). You enable "clickOut" via the ID.
         </p>
 
         <div style={{ "text-align": "center" }}>
@@ -104,7 +94,7 @@ export default (context) => {
             Check terms and conditions
           </Button>
         </div>
-        <Dialog ref={dialog}>
+        <Dialog ref={dialog} id="d1">
           {/* This container defines the classes that apply to "main", "header", "footer" */}
           <ContentContainerExample>
             <div class="header">My dialog</div>
@@ -158,13 +148,13 @@ export default (context) => {
           defaults to centered modal (with margin "auto").
         </p>
         <br />
-        <Button fullWidth ripple onClick={() => diagPos.showModal()}>
+        <Button fullWidth ripple onClick={() => diagPos1.showModal()}>
           OPEN A POSTIONNABLE DIALOG BOX
         </Button>
-        <Dialog ref={diagPos} left={left()} top={top()}>
+        <Dialog ref={diagPos1} left={left()} top={top()} id="d2">
           <Bold>
             <h1>Hello from Dailog!</h1>
-            <Button fullWidth ripple onClick={() => diagPos.close()}>
+            <Button fullWidth ripple onClick={() => diagPos1.close()}>
               <TickSVG size={60} />
             </Button>
           </Bold>
@@ -173,7 +163,7 @@ export default (context) => {
         <Button fullWidth ripple onClick={() => diagPos2.showModal()}>
           OPEN A DEFAULT CENTERED DIALOG BOX
         </Button>
-        <Dialog ref={diagPos2} id="diagPos2">
+        <Dialog ref={diagPos2} id="d3">
           <Bold>
             <h1>Centered Dailog!</h1>
             <Button fullWidth ripple onClick={() => diagPos2.close()}>

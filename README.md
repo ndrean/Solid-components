@@ -1,27 +1,24 @@
 # SolidJS components, CSS-in-JS and Solid-Router
 
-## Component example
-
 This work is 100% based on [the following repo](https://github.com/FredericHeem/mdlean) adapted for SolidJS.
 
+## Some examples
+
+A Dialog/Modal component: it has an integrated "clickOut" function via the ID. You pass a REF reference for the <code> shwoModal()</code> and <code> close()</code> functions.
+
 ```jsx
-import dialogComponent, {clickOut} from "...";
+import dialogComponent from "...";
 import button from "...";
 import Unicode from "...";
 import context from "...";
 
 const myPage = (context) => {
+  const {codes: {cross}} = context;
   const Dialog = dialogComponenent(context);
   const Button = button(context);
-  const {codes: {cross}} = context;
 
   return (props) => {
     let dialogRef;
-    onMount(()=>
-    diagRef.addEventListener('click', (e)=> {
-      if (clickOut(e, diagRef)) diagRef.close();
-    })
-  )
 
   [...]
 
@@ -30,7 +27,7 @@ const myPage = (context) => {
       <Button fullWidth primary raised onClick={() => dialogRef.showModal()}>
         Open Modal
       </Button>
-      <Dialog ref={dialogRef}>
+      <Dialog ref={dialogRef} id="mod1">
         [...insert content here...]
         <Button primary onClick={() => dialogRef.close()}>
           <Unicode size="1.5em" code={cross} />

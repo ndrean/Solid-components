@@ -21,15 +21,17 @@ export default (context) => {
     // console.log(Object.values(e.target.attributes));
   };
 
+  const handleForm = (e) => e;
+
   return () => (
     <section id="button">
-      <Form onSubmit={(e) => e.preventDefault()}>
+      <Form onSubmit={handleForm}>
         <Title>Flat</Title>
         <p>
-          <Button onClick={handleClick} aria-label="btn">
+          <Button onClick={handleClick} aria-label="btn" type="button">
             Flat
           </Button>
-          <Button primary onClick={handleClick} aria-label="btn">
+          <Button primary onClick={handleClick} aria-label="btn" type="button">
             Flat primary
           </Button>
           <Button accent onClick={handleClick} aria-label="btn">
