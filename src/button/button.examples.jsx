@@ -18,10 +18,10 @@ export default (context) => {
   `;
 
   const handleClick = (e) => {
-    // console.log(Object.values(e.target.attributes));
+    console.log(Object.values(e.target.attributes));
   };
 
-  const handleForm = (e) => e;
+  const handleForm = (e) => e.preventDefault();
 
   return () => (
     <section id="button">
@@ -31,7 +31,7 @@ export default (context) => {
           <Button onClick={handleClick} aria-label="btn" type="button">
             Flat
           </Button>
-          <Button primary onClick={handleClick} aria-label="btn" type="button">
+          <Button primary onClick={handleClick} aria-label="btn">
             Flat primary
           </Button>
           <Button accent onClick={handleClick} aria-label="btn">

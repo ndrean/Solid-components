@@ -32,7 +32,7 @@ const Label = styled("label")`
 
 export default (context) => (props) => {
   const {
-    classes: { stdTitle },
+    // classes: { stdTitle },
     codes: { cross },
   } = context;
 
@@ -40,9 +40,9 @@ export default (context) => (props) => {
   const ContentDiv = contentDiv(context);
   const Button = button(context);
   const GrayDiv = grayDiv(context);
-  const dialogCSS = `border-radius: 10px;`;
   const Dialog = dialogComponent(context);
 
+  const dialogCSS = `border-radius: 10px;`;
   const InputBlock = styled("div")`
     display: flex;
     align-items: center;
@@ -171,14 +171,6 @@ export default (context) => (props) => {
     output.value = "";
     diag.showModal();
   };
-
-  // close dialog if click outside
-  // onMount(() => {
-  //   diag.addEventListener("click", (e) => {
-  //     if (clickOut(e, diag)) formReset();
-  //   });
-  // });
-  // onCleanup(() => removeEventListener("click", (e) => clickOut(e, diag)));
 
   return (
     <section id="form.examples">

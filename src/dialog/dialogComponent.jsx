@@ -16,11 +16,11 @@ export default (context) => {
   margin-left: ${props.left ? props.left + "px" : "auto"};
   margin-top: ${props.top ? props.top + "px" : "auto"};
   
-  &:backdrop {
-    backdrop-filter: blur(25px);
-    transition: backdrop-filter .5s ease;
-  }
   `;
+  // &:backdrop {
+  //   backdrop-filter: blur(25px);
+  //   transition: backdrop-filter .5s ease;
+  // }
 
   return (props) => {
     function clickOut(target) {
@@ -40,18 +40,3 @@ export default (context) => {
     );
   };
 };
-
-//to understand what is left, right...and the constraints, just check the picture
-//at https://developer.mozilla.org/fr/docs/Web/API/Element/getBoundingClientRect
-// export function clickOut(e, myref) {
-//   const { left, right, bottom, top } = myref.getBoundingClientRect();
-//   if (
-//     e.clientX < left ||
-//     e.clientX > right ||
-//     e.clientY < top ||
-//     e.clientY > bottom
-//   ) {
-//     return true;
-//   }
-//   return false;
-// }

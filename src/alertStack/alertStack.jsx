@@ -3,6 +3,8 @@ import { createStore } from "solid-js/store";
 import { styled, css, keyframes } from "solid-styled-components";
 
 import alert from "../alert/alert";
+import dialogComponent from "../dialog/dialogComponent";
+import { clearDelegatedEvents } from "solid-js/web";
 
 const animationFadeIn = keyframes`
   0% {  opacity: 0 }
@@ -36,6 +38,7 @@ const limit = 4;
 
 export default (context) => {
   const [msgs, setMsgs] = createStore([]);
+  const Dialog = dialogComponent(context);
 
   function setStatus(id, status) {
     setMsgs((curr) => curr.id === id, "status", status);

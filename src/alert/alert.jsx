@@ -3,13 +3,14 @@ import { css } from "solid-styled-components";
 export default (context) => {
   const {
     colors: { red, teal, orange, blue },
+    codes: { warning, info, success, closed },
   } = context;
 
   const severityMap = {
-    error: { icon: "\u26A0", color: red },
-    warning: { icon: "\u26A0", color: orange },
-    success: { icon: "\u2714", color: teal },
-    info: { icon: "\u2139", color: blue },
+    error: { icon: warning, color: red },
+    warning: { icon: warning, color: orange },
+    success: { icon: success, color: teal },
+    info: { icon: info, color: blue },
   };
 
   const CloseIcon = ({ onClick }) => (
@@ -20,7 +21,7 @@ export default (context) => {
       `}
       onClick={onClick}
     >
-      {"\u2716"}
+      {closed}
     </span>
   );
 

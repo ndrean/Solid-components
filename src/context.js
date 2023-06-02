@@ -43,9 +43,14 @@ const context = {
     chkCross: "\u2718",
     exclam: "\u2757",
     tick: "\u2713",
+    info: "\u2139",
+    success: "\u2714",
+    warning: "\u26A0",
+    closed: "\u2716",
   },
   classes: {},
   signals: { modalConditions: false, dialogConditions: false },
+  data: [],
 };
 
 context.classes.stdTitle = `
@@ -80,3 +85,40 @@ text-align: left;
 `;
 
 export default context;
+
+/*
+function store(data = {}, name = "store") {
+  function emit(type, detail) {
+    let event = new CustomEvent(type, {
+      bubbles: true,
+      cancelable: true,
+      detail: detail,
+    });
+    return document.dispatchEvent(event);
+  }
+
+  return new Proxy(data, {
+    get: function (obj, prop) {
+      return obj[prop];
+    },
+    set: function (obj, prop, value) {
+      if (obj[prop] === value) return true;
+      obj[prop] = value;
+      emit(name, data);
+      return true;
+    },
+    deleteProperty: function (obj, prop) {
+      delete obj[prop];
+      emit(name, data);
+      return true;
+    },
+  });
+}
+
+export { store };
+
+document.addEventListener("store", () => {
+  console.log("emit");
+  output.value = JSON.stringify(context.data, null, "\t");
+});
+*/
