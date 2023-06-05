@@ -14,7 +14,7 @@ import context from "...";
 
 const myPage = (context) => {
   const {codes: {cross}} = context;
-  const Dialog = dialogComponenent(context);
+  const Dialog = dialogComponent(context);
   const Button = button(context);
 
   return (props) => {

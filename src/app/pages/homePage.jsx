@@ -91,6 +91,7 @@ function home(context) {
         You define a closure that takes an argument - the context - and renders
         a function component.
       </p>
+
       <Pre>
         <code>const comp = (ctxt) =&gt</code>
         <br />

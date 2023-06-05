@@ -1,4 +1,5 @@
 import { css } from "solid-styled-components";
+// import { createSignal } from "solid-js";
 
 export default (context) => {
   const {
@@ -9,23 +10,24 @@ export default (context) => {
   const baseStyle = (props) => `
   border: none;
   padding: 0;
-  max-height: 60svh;
+  max-height: 70svh;
   overflow-y: scroll;
   box-shadow: ${shadows[4]};
   background: ${bg.lightGrey};
   margin-left: ${props.left ? props.left + "px" : "auto"};
   margin-top: ${props.top ? props.top + "px" : "auto"};
-  
+  transition: opacity .5s ease-3;
+  &:backdrop {
+    backdrop-filter: blur(25px);
+    transition: backdrop-filter .5s ease;
+  }
   `;
-  // &:backdrop {
-  //   backdrop-filter: blur(25px);
-  //   transition: backdrop-filter .5s ease;
-  // }
 
   return (props) => {
-    function clickOut(target) {
-      if (target.id === props.id) document.getElementById(props.id).close();
-    }
+    const clickOut = ({ target }) => {
+      if (target.nodeName === "DIALOG")
+        document.getElementById(props.id).close();
+    };
 
     return (
       <dialog
@@ -33,7 +35,7 @@ export default (context) => {
         class={css`
           ${baseStyle(props) + props?.optCss}
         `}
-        onClick={({ target }) => clickOut(target)}
+        onClick={clickOut}
       >
         {props.children}
       </dialog>

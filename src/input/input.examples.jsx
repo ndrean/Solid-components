@@ -9,12 +9,11 @@ import submit from "../assets/submit.webp";
 // import camera from "../assets/camera.svg";
 import Unicode from "../typo/Unicode";
 
-import drawEmoji from "../typo/drawEmoji";
+import Emoji from "../typo/Emoji";
 
 export default (context) => {
   const InputComp = inputComponent(context);
   const GrayDiv = grayDiv(context);
-  const Emoji = drawEmoji(context);
   const Dialog = dialogComponent(context);
 
   const now = new Date().toISOString().split("T")[0];

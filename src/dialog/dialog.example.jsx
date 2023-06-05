@@ -174,4 +174,8 @@ export default (context) => {
       </section>
     );
   };
+
+  function one() {
+    new MutationObserver();
+  }
 };

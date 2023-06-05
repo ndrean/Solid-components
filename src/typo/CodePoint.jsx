@@ -1,6 +1,6 @@
 import { css } from "solid-styled-components";
 
-export default () => (props) => {
+export default (props) => {
   const size = () => props?.size || 48;
   const code = props?.codePoint ? String.fromCodePoint(props?.codePoint) : 0;
 

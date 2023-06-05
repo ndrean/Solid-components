@@ -1,4 +1,4 @@
-export default () => (props) => {
+export default (props) => {
   // const { size = 48 } = props;
   const name = props.name || "emoji";
   const label = props.label || "emoji";

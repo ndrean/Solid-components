@@ -21,6 +21,58 @@ code {
   font-size: 1.2em;
 }
 
+@keyframes hide-right {
+  from {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes show-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+details {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
+  max-width: max-content;
+}
+
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+  list-style: none;
+  background-color: midnightblue;
+  color: bisque;
+}
+
+details > div {
+  width: 50vw;
+}
+
+details[open] {
+  padding: 0.5em;
+}
+
+details[open] summary {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 0.5em;
+  color: currentColor;
+  background-color: bisque;
+}
 /* 
 dialog::backdrop {
   background: none;

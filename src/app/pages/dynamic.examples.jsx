@@ -2,8 +2,8 @@ import { For, createSignal, lazy, onCleanup, onMount } from "solid-js";
 import { styled } from "solid-styled-components";
 
 import ImgSVG from "../../typo/ImgSVG";
-import drawEmoji from "../../typo/drawEmoji.jsx";
-import drawCodePoint from "../../typo/drawCodePoint.jsx";
+import Emoji from "../../typo/Emoji.jsx";
+import CodePoint from "../../typo/CodePoint.jsx";
 import Link from "./Link";
 import { gitHubSVG, tickSVG, hamburgerSVG } from "../../typo/svgs";
 import Unicode from "../../typo/Unicode";
@@ -24,8 +24,6 @@ export default (context) => (props) => {
   } = context;
 
   const H2 = dTitle("h2");
-  const CodePoint = drawCodePoint();
-  const Emoji = drawEmoji();
 
   const Tick = tickSVG(context);
   const Github = gitHubSVG(context);
@@ -51,19 +49,12 @@ export default (context) => (props) => {
 
       <br />
       <details>
-        <summary>
-          Click me to see a dynamic emoji, taken from the{" "}
-          <Link
-            href="https://www.solidjs.com/tutorial/bindings_style?solved"
-            target="#"
-          >
-            documentation
-          </Link>
-          .
-        </summary>
-        <Emoji size={size()} name="surfer">
-          🏄
-        </Emoji>
+        <summary>Click me to see a dynamic emoji</summary>
+        <div>
+          <Emoji size={size()} name="surfer">
+            🏄
+          </Emoji>
+        </div>
       </details>
       <p>
         ❗ In the animation above, you change the size of component with a

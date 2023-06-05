@@ -6,7 +6,8 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "bundle-visualizer": "vite-bundle-visualizer"
   },
   "license": "MIT",
   "devDependencies": {
@@ -14,12 +15,14 @@
     "gh-pages": "^5.0.0",
     "postcss": "^8.4.23",
     "vite": "^4.1.1",
+    "vite-bundle-visualizer": "^0.7.0",
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
     "@solidjs/router": "^0.8.2",
     "clsx": "^1.2.1",
     "material-ui-colors": "^1.0.0",
+    "prismjs": "^1.29.0",
     "solid-js": "^1.6.10",
     "solid-styled-components": "^0.28.5"
   }
