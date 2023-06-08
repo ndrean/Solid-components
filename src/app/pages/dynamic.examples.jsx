@@ -11,6 +11,10 @@ import { dTitle } from "./title";
 
 import ham from "../../assets/ham.svg";
 import cheers from "../../assets/cheers.svg";
+import eye from "../../assets/eye.svg";
+import eyeclosed from "../../assets/eyeclosed.svg";
+
+import checkbox from "../../checkbox/checkbox";
 
 const Pre = styled("pre")`
   margin-left: 5px;
@@ -20,7 +24,7 @@ const Pre = styled("pre")`
 
 export default (context) => (props) => {
   const {
-    codes: { check },
+    codes: { check, eyes },
   } = context;
 
   const H2 = dTitle("h2");
@@ -28,6 +32,7 @@ export default (context) => (props) => {
   const Tick = tickSVG(context);
   const Github = gitHubSVG(context);
   const Hamburger = hamburgerSVG(context);
+  const Checkbox = checkbox(context);
 
   const [size, setSize] = createSignal(20);
   let interval;
@@ -88,6 +93,11 @@ export default (context) => (props) => {
       <p>
         <ImgSVG src={ham} width={50} alt="ham" />
       </p>
+      <p>
+        <ImgSVG src={eye} alt="eyes" />
+        <ImgSVG src={eyeclosed} alt="eyes" />
+        <Checkbox content={eyes} label="reveal" />
+      </p>
 
       <h2>Some in-line SVGs:</h2>
       <p>
@@ -115,11 +125,12 @@ export default (context) => (props) => {
       <H2>A codepoint:</H2>
       <p>\u003C CodePoint codePoint="0x26543" size=\u007B96\u007D/\u003E</p>
       <CodePoint codePoint="0x2654" size={96} />
+      <CodePoint codepoint="U+1F440" size={50} />
 
       <H2>Unicodes: </H2>
       <p>\u003C Unicode size="2em" code= u274C /\u003E </p>
 
-      <For each={["\u2718", "\u274C", "\u274E", "\u2757", check]}>
+      <For each={["\u2718", "\u274C", "\u274E", "\u2757", check, eyes]}>
         {(unicode) => (
           <span style={{ margin: "12px" }}>
             <Unicode size="2em" code={unicode} />

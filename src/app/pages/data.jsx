@@ -1,14 +1,21 @@
 import { createResource } from "solid-js";
 
-export async function fetchUser(p) {
-  const page = p === ":p" ? 2 : p;
-  const response = await fetch(`https://reqres.in/api/users?page=${page}`);
-  const { data } = await response.json();
+const fetchUser = (ctx) =>
+  async function (p) {
+    const page = p === ":p" ? 2 : p;
+    const response = await fetch(`https://reqres.in/api/users?page=${page}`);
+    const { data } = await response.json();
+    ctx.setData(data);
 
-  return data;
-}
+    return data;
+  };
 
-export function UsersData({ params, location, navigate, data }) {
-  const [userData] = createResource(() => params.p, fetchUser);
-  return userData;
-}
+const usersData =
+  (ctx) =>
+  ({ params, location, navigate, data }) => {
+    const [userData] = createResource(() => params.p, fetchUser(ctx));
+    ctx.setData(userData());
+    return userData;
+  };
+
+export { fetchUser, usersData };

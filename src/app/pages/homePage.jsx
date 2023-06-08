@@ -24,10 +24,12 @@ const link = css`
 
 function home(context) {
   const {
+    data,
     colors,
     classes: { stdTitle, hrLine },
   } = context;
 
+  console.log(data());
   const blueSolid = `
     color: blue;
     border: solid 4px;
@@ -142,7 +144,7 @@ function home(context) {
       </Button>
       <Dialog ref={diag} id="usersModal">
         <p>The users'data will be populated from the context.</p>
-        <UsersArticle usersData={context.data} />
+        <UsersArticle usersData={data()} />
         <Button raised accent onClick={() => diag.close()}>
           Close
         </Button>

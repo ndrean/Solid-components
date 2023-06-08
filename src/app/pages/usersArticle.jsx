@@ -1,4 +1,4 @@
-import { styled, css } from "solid-styled-components";
+import { styled } from "solid-styled-components";
 
 export default function usersArticle(context) {
   const Div = styled("div")`

@@ -1,5 +1,5 @@
 import { css } from "solid-styled-components";
-import { createEffect, createResource } from "solid-js";
+import { createResource } from "solid-js";
 import { A } from "@solidjs/router";
 import { Suspense } from "solid-js";
 
@@ -9,8 +9,10 @@ import context from "../../context";
 import { fetchUser } from "./data";
 import loading from "./loading";
 
-function postUsers(context) {
-  const [usersData] = createResource(fetchUser);
+function postUsers(ctx) {
+  const FetchUser = fetchUser(ctx);
+
+  const [usersData] = createResource(FetchUser);
   const UsersArticle = usersArticle(context);
 
   const astyle = css`
@@ -25,7 +27,6 @@ function postUsers(context) {
   `;
 
   return (props) => {
-    createEffect(() => (context.data = usersData()));
     return (
       <div>
         <p>

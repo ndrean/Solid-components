@@ -1,5 +1,5 @@
 import { red, orange, teal, blue, grey, pink } from "material-ui-colors";
-
+import { createSignal } from "solid-js";
 const shadows = {
   1: "6px 6px 2px 1px rgba(0, 0, 255, .2);",
   2: "0px 3px 1px -2px rgba(0, 0, 0, 0.2)",
@@ -18,7 +18,11 @@ const defColors = {
   greenTeal: "#008080",
 };
 
+const [data, setData] = createSignal("");
+
 const context = {
+  data,
+  setData,
   colors: { red, teal, orange, blue, grey, pink },
   shadows,
   defColors,
@@ -47,10 +51,10 @@ const context = {
     success: "\u2714",
     warning: "\u26A0",
     closed: "\u2716",
+    eyes: "\u{1F440}",
   },
   classes: {},
   signals: { modalConditions: false, dialogConditions: false },
-  data: [],
 };
 
 context.classes.stdTitle = `

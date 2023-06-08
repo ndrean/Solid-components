@@ -6,6 +6,7 @@ export default (props) => {
   const ml = () => props.ml + "px" || "0px";
   const mt = () => props.mt + "px" || "0px";
   const size = () => props.size || 48;
+
   return (
     <span
       style={{

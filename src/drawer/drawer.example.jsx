@@ -3,7 +3,7 @@ import { createSignal } from "solid-js";
 import drawer from "./drawer";
 import button from "../button/button";
 import { dTitle } from "../app/pages/title";
-import menu from "../app/menu";
+import menu from "./menu";
 import "../index.css";
 
 export default (context) => {

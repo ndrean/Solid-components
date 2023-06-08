@@ -32,8 +32,7 @@ const Label = styled("label")`
 
 export default (context) => (props) => {
   const {
-    // classes: { stdTitle },
-    codes: { cross },
+    codes: { cross, eyes },
   } = context;
 
   // <-- page styling elements
@@ -267,13 +266,14 @@ export default (context) => (props) => {
               <Label>
                 <Checkbox
                   size={1}
+                  content={eyes}
                   id="pwdCheckbox"
                   onChange={(e) => {
                     revealPassword(e, passwordInput);
                     setPwdCheckbox((v) => !v);
                   }}
                 />
-                Show Password
+                Show Password 👀
               </Label>
             </PasswordContainer>
             <PasswordContainer>
@@ -298,6 +298,7 @@ export default (context) => (props) => {
                 <Checkbox
                   size={1}
                   id="pwdConfCheckbox"
+                  content={eyes}
                   onChange={(e) => {
                     revealPassword(e, passwordConfInput);
                     setPwdConfCheckbox((v) => !v);

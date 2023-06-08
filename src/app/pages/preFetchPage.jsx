@@ -1,15 +1,15 @@
 // pages/users/[id].js
 import { useRouteData, A } from "@solidjs/router";
-import { createEffect, createSignal, Suspense } from "solid-js";
+import { Suspense } from "solid-js";
 import { css } from "solid-styled-components";
 import usersArticle from "./usersArticle";
 import Link from "./Link";
 import context from "../../context";
 import loading from "./loading";
 
-const users = (context) => {
+const users = (ctx) => {
   const usersData = useRouteData();
-  const UsersArticle = usersArticle(context);
+  const UsersArticle = usersArticle(ctx);
 
   const astyle = css`
     text-decoration: none;
@@ -23,8 +23,6 @@ const users = (context) => {
   `;
 
   return (props) => {
-    createEffect(() => (context.data = usersData()));
-
     return (
       <div>
         <h4>

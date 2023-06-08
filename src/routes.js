@@ -1,5 +1,9 @@
 import { lazy } from "solid-js";
-import { UsersData } from "./app/pages/data";
+import { usersData } from "./app/pages/data";
+import context from "./context";
+
+// parametrization is done here because useRouteData will use params, so directly the function usersData(context)
+const UsersData = usersData(context);
 
 const routes = [
   {
